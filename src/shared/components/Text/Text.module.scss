@@ -1,0 +1,11 @@
+.text {
+  &--secondary {
+    color: rgb(var(--placeholder-secondary));
+  }
+  &--small {
+    font-size: 14px;
+  }
+  &--medium {
+    font-size: 16px;
+  }
+}

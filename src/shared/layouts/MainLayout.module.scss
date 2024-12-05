@@ -1,0 +1,81 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 500px;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    overflow-x: hidden;
+    .content {
+        padding: 12px;
+    }
+
+    .navbar {
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+
+        padding: 12px 24px 20px 24px;
+        border-radius: 24px 24px 0 0;
+        background-color: rgb(var(--secondary-bg));
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 300;
+        max-width: 500px;
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: end;
+            gap: 4px;
+            background: transparent;
+            padding: 4px;
+            border-radius: 12px;
+            padding: 4px;
+            width: 72px;
+
+            color: rgb(var(--placeholder-secondary));
+
+            .item_title {
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 510;
+                line-height: 13px;
+            }
+
+            svg {
+                color: rgb(var(--placeholder-secondary));
+                transition: all 0.3s ease 0s;
+            }
+            &:active {
+                svg {
+                    transform: scale(0.7);
+                }
+            }
+            &--active-stroke {
+                color: rgb(var(--placeholder-primary));
+                svg  path{
+                    fill: rgb(var(--placeholder-primary));
+                    stroke: rgb(var(--placeholder-primary)) !important;
+                }
+            }
+            &--active {
+                color: rgb(var(--placeholder-primary));
+                svg path {
+                    fill: rgb(var(--placeholder-primary));
+                    stroke: rgba(0,0,0,0) !important;
+                }
+
+            }
+        }
+
+        ~ .content {
+            padding-bottom: 96px;
+        }
+    }
+
+}

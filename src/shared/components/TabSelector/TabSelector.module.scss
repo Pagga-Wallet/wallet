@@ -1,0 +1,50 @@
+.tabs {
+    padding: 4px;
+    border-radius: 12px;
+    background: rgba(var(--opacity-bg-dark));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    gap: 4px;
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &_item {
+        font-family: Inter;
+        padding: 9px 12px;
+        height: auto;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 128%;
+        width: 100%;
+        color: rgba(var(--placeholder-primary), 0.7);
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: center;
+        position: relative;
+        transition: background-color 0.3s ease;
+        &:hover {
+            background-color: rgba(#fff, 0.05) !important;
+        }
+        &Active {
+            color: rgba(var(--placeholder-primary), 1) !important;
+        }
+    }
+
+    .active {
+        inset: 0;
+        position: absolute;
+        background: rgb(var(--accent-brand));
+        border-radius: 12px;
+        mix-blend-mode: lighten;
+        &:hover {
+            background-color: rgba(var(--accent-brand), 0.9) !important;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+.manage {
+    padding: 8px;
+    border-radius: 32px;
+    background: rgba(46, 53, 61, 0.4);
+    backdrop-filter: blur(40px);
+    &Image {
+        max-width: 100%;
+        border-radius: 32px;
+        margin-bottom: 8px;
+    }
+    &Info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        padding: 16px;
+        border-radius: 28px;
+        background: rgba(64, 69, 74, 0.4);
+        backdrop-filter: blur(28px);
+        margin-bottom: 8px;
+        &Chain {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+        &Title {
+            color: var(--Placeholder-Primary, #fff);
+            font-size: 20px;
+            font-weight: 510;
+        }
+    }
+
+    .actions {
+        padding: 10px 8px;
+        border-radius: 28px;
+        background: rgba(64, 69, 74, 0.4);
+        backdrop-filter: blur(28px);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        &Item {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px 16px;
+            border-radius: 16px;
+
+            &:active {
+                background: rgba(var(--placeholder-tertiary), 0.2)
+            }
+
+            &Title {
+                margin-top: 8px;
+                color: var(--Placeholder-Primary, #fff);
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+    }
+    .action {
+        &__icon {
+            display: flex;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgb(var(--accent-brand));
+            padding: 10px;
+        }
+    }
+}

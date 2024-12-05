@@ -1,0 +1,39 @@
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton-wrapper {
+    background: #2e353d;
+    border-radius: 36px;
+    position: fixed;
+    z-index: 9999;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.shimmer-overlay {
+    position: absolute;
+    border-radius: 36px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 8px);
+    background: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+    animation-timing-function: ease-in-out;
+    pointer-events: none;
+}

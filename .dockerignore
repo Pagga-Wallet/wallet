@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.idea/
+.husky/
+.eslintrc.cjs
+.gitignore
+.lintstagedrc
+.prettierrc
+Dockerfile
+README.md

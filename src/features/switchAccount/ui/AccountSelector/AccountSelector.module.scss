@@ -1,0 +1,25 @@
+.addressInner {
+  &:active {
+    outline: 1px solid rgb(var(--placeholder-tertiary));
+  }
+}
+
+.address {
+  width: 100%;
+  border: none;
+  z-index: 5;
+  border-radius: 16px;
+  padding: 5px;
+  background: #40454a;
+  color: rgb(var(--placeholder-primary));
+  cursor: pointer;
+  transition: outline 0.3s ease 0s;
+  word-break: break-all;
+  font-size: 14.5px;
+  width: max-content;
+  display: flex;
+  z-index: 5;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,38 @@
+.name_section {
+    flex-direction: row;
+    height: 52px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 13px 16px;
+    background: rgba(var(--secondary-bg-dark), 0.3);
+    &CloseBtn {
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            svg {
+                path {
+                    fill: #bab2b2;
+                }
+            }
+        }
+    }
+}
+
+.name_input {
+    font-size: 16px;
+    margin-left: 12px;
+    font-weight: 400;
+    display: flex;
+    flex: 1;
+}
+
+.closeBtn {
+  margin-top: 2px;
+}
+
+
+.sectionEmoji {
+  padding: 16px;
+}

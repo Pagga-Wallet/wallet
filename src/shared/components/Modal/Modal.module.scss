@@ -1,0 +1,61 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    align-items: center;
+    z-index: 50001;
+    .content {
+        -webkit-animation-name: fadein;
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadein;
+        animation-duration: 0.4s;
+        background-color: #212325;
+        border-radius: 20px 20px 0px 0px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 20px 20px 20px;
+        overflow-x: hidden;
+        width: 100%;
+        overscroll-behavior: contain;
+        max-width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 30;
+        /* animation: slideIn 0.2s ease-out; */
+        width: 470px;
+        overflow-y: auto !important;
+        max-height: 99vh;
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            .close {
+                color: var(--Brand-Primary, #007aff);
+                font-size: 18px;
+                font-weight: 400;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+                &:hover {
+                    color: var(--Brand-Primary, #258cfb);
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}

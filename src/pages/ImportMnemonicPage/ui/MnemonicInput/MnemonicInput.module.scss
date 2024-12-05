@@ -1,0 +1,31 @@
+.typeSelector {
+  margin-bottom: 24px;
+}
+
+.word {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    min-width: 51px;
+    min-height: 51px;
+    max-width: 51px;
+    max-height: 51px;
+    color: rgb(var(--placeholder-tertiary));
+    background: rgb(var(--secondary-bg));
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}

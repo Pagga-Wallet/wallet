@@ -1,0 +1,38 @@
+.item
+  padding: 17.5px 19px
+  border-radius: 20px
+  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 10px
+  &:not(:last-child)
+    margin-bottom: 12px
+  &Hover
+    cursor: pointer
+    transition: all 0.3s ease 0s
+    &:hover
+      background: var(--background-transparent, rgba(66, 75, 86, 0.40))
+  &Actions
+    svg
+      width: 15px
+      height: 16px
+    path
+      stroke: #A1ACBB
+  &Inner
+    display: flex
+    align-items: center
+    gap: 12px
+  .preview
+    width: 40px
+    height: 40px
+    img
+      border-radius: 50%
+      object-fit: contain
+  &Title
+    font-size: 16px
+    font-weight: 510
+  &Description
+    margin-top: 2px
+    font-family: 'Inter'
+    color: rgba(var(--placeholder-secondary, #A1ACBB))

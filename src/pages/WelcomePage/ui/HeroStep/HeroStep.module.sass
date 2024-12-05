@@ -1,0 +1,45 @@
+.introduction
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  height: 95vh
+  overflow-y: auto
+
+  .hero
+    flex: 1 1 auto
+    &Gif
+      display: block
+      margin: 0 auto
+      width: 180px
+      height: 180px
+      margin-bottom: 24px
+
+    &Title
+      color: var(--Placeholder-Primary, #fff)
+      font-size: 32px
+      font-weight: 510
+      text-align: center
+
+    &Description
+      font-size: 16px
+      text-align: center
+      margin-top: 15px
+
+  .privacyConfirm
+    display: flex
+    align-items: center
+    gap: 10px
+    margin: 15px 0
+    a
+      cursor: pointer
+      text-decoration: underline !important
+      transition: color 0.3s ease 0s
+      color: var(--Placeholder-Primary, #fff)
+      transition: all 0.3s ease 0s
+      &:hover
+        color: var(--Telegram-button_color, #007aff)
+
+  .actions
+    display: flex
+    flex-direction: column
+    gap: 8px

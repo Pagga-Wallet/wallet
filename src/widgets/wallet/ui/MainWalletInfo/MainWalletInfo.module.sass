@@ -1,0 +1,132 @@
+.info
+    background: rgb(var(--secondary-bg))
+    border-radius: 32px
+    padding: 16px 12px 12px 12px
+    position: relative
+    overflow: hidden
+    .icon_button
+        min-width: 44px
+        min-height: 44px
+        max-height: 44px
+        max-width: 44px
+        border-radius: 50%
+        padding: 0
+        background: rgb(var(--accent-brand))
+        display: flex
+        justify-content: center
+        align-items: center
+        border: none
+        box-shadow: none
+        z-index: 2
+        cursor: pointer
+        transition: all 0.3s ease 0s
+        @media (max-width: 330px)
+            min-width: 38px
+            min-height: 38px
+            max-height: 38px
+            max-width: 38px
+        &:active
+            outline: 1px solid rgb(var(--placeholder-tertiary))
+            transform: scale(0.9) !important
+        &:disabled
+            cursor: initial
+            opacity: 0.3
+            &:active
+                outline: none
+                transform: scale(1) !important
+        &Reload
+            background: linear-gradient(0deg, #40454a 0%, #40454a 100%), rgba(64, 69, 74, 0.4)
+            &:hover
+                background: linear-gradient(0deg, #3f474f 0%, #43484d 100%), rgba(46, 49, 53, 0.8)
+    .top
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 3px
+        margin-bottom: 13px
+        .addressInner
+            &:active
+                outline: 1px solid rgb(var(--placeholder-tertiary))
+            &:hover
+                background: #4a4f54 !important
+                .address
+                    background: #4a4f54 !important
+        .address
+            width: 100%
+            border: none
+            z-index: 5
+            border-radius: 16px
+            padding: 5px
+            background: #40454a
+            color: rgb(var(--placeholder-primary))
+            cursor: pointer
+            transition: outline 0.3s ease 0s
+            word-break: break-all
+            font-size: 14.5px
+            width: max-content
+            display: flex
+            z-index: 5
+            position: relative
+            justify-content: center
+            align-items: center
+            &:active
+                background: #4a4f54
+            @media (max-width: 330px)
+                padding: 4px
+    .balance
+        font-size: 50px
+        position: relative
+        z-index: 2
+        color: rgb(var(--placeholder-primary))
+        font-weight: 540
+        text-align: center
+        font-family: SF-PRO
+        margin-bottom: 24px
+        z-index: 2
+    .bottom
+        display: flex
+        align-items: center
+        justify-content: space-between
+        padding: 7px 10px
+        border-radius: 28px
+        background: rgba(64, 69, 74, 0.4)
+        position: relative
+        z-index: 1
+        backdrop-filter: blur(10px)
+        -webkit-backdrop-filter: blur(10px)
+        @media (max-width: 330px)
+            padding: 7px 8px
+        &Disabled
+            opacity: 0.5
+            pointer-events: none
+        .action
+            cursor: pointer
+            display: flex
+            align-items: center
+            justify-content: center
+            flex-direction: column
+            padding: 5px 16px
+            border-radius: 16px
+            gap: 8px
+            color: rgb(var(--placeholder-primary))
+            @media (max-width: 330px)
+                padding: 5px 10px
+            &:active
+                background: rgba(var(--placeholder-tertiary), 0.2)
+            &Disabled
+                opacity: 0.5
+                &:active
+                    background: transparent !important
+    .headerBg
+        position: absolute
+        top: 20px
+        left: 0
+        height: 94%
+        width: 100%
+        z-index: 0
+    .headerBg > svg
+        width: 100%
+        height: 100%
+
+    .title
+        font-size: 14px

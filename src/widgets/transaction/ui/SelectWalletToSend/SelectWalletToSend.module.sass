@@ -1,0 +1,47 @@
+.inner
+  padding: 16px 8px
+  background-color: #2e353d66
+  border-radius: 24px
+  display: flex
+  flex-direction: column
+  gap: 16px
+  .search
+    display: flex
+    align-items: center
+    gap: 8px
+    padding: 16px 35px 16px 14px
+    background-color: #424b564d
+    border-radius: 20px
+    position: relative
+    &Input
+      width: 100%
+      background: none
+      outline: none
+      border: none
+      font-size: 16px
+      text-align: left !important
+      color: #fff !important
+
+    &Clear
+      cursor: pointer
+      position: absolute
+      top: 18px
+      right: 14px
+      transition: fill 0.3s ease 0s
+      background: none
+      outline: none
+      border: none
+      > svg > path
+        fill: rgb(var(--placeholder-primary))
+
+        &:hover > svg > path
+          fill: rgba(var(--placeholder-primary), 0.8)
+
+  .empty
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 30vh
+    font-size: 21px
+    font-weight: 510
+    text-align: center

@@ -1,0 +1,26 @@
+.details {
+    .title {
+        color: var(--Placeholder-Primary, #fff);
+        text-align: center;
+        font-size: 32px;
+        font-weight: 510;
+        margin-bottom: 24px;
+    }
+    .image {
+        margin-bottom: 24px;
+    }
+    .amount {
+        color: var(--Accent-Success, #10b981);
+        text-align: center;
+        font-size: 40px;
+        font-weight: 590;
+        margin-bottom: 12px;
+    }
+    .date {
+        color: var(--Placeholder-Primary, #fff);
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 37px;
+    }
+}

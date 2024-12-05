@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  padding: 16px;
+  border-radius: 20px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  line-height: 133.33%;
+  letter-spacing: -0.24px;
+  box-shadow: none;
+  border: none;
+  background: rgb(var(--secondary-bg));
+  color: rgb(var(--placeholder-primary));
+}
+
+.input::placeholder {
+  color: rgb(var(--placeholder-tertiary));
+}
+
+.list {
+  position: absolute;
+  width: max-content;
+  min-width: 200px;
+  z-index: 15;
+  bottom: -98px;
+
+  border-radius: 10px;
+  overflow-y: auto;
+  height: 96px;
+  max-height: 96px;
+  background: rgb(var(--secondary-bg));
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+}
+
+.list > div {
+  font-size: 17.5px;
+  cursor: pointer;
+  transition: background 0.3s ease 0s;
+  padding: 3px 10px;
+  color: rgb(var(--placeholder-primary));
+  margin-bottom: 3px;
+}
+
+.list > div:hover {
+  background: rgba(var(--placeholder-tertiary), 0.2);
+}

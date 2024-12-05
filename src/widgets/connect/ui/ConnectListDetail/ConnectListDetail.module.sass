@@ -1,0 +1,45 @@
+.title
+  text-align: left
+  color: rgba(var(--placeholder-secondary-dark, #94A3B8))
+  font-size: 16px
+  margin-bottom: 12px
+
+.innerDetail
+  margin: 24px 0
+  border-radius: 28px
+  backdrop-filter: blur(28px)
+  -webkit-backdrop-filter: blur(28px)
+  padding: 16px
+  display: flex
+  justify-content: center
+  flex-direction: column
+  gap: 17px
+  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+  .item
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 10px
+    flex-wrap: wrap
+    &Left
+      color: rgba(var(--placeholder-secondary, #94A3B8))
+      font-size: 14px
+
+.actions
+  margin-top: 24px
+  button
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 10px
+    padding: 19px 16px
+    border-radius: 24px !important
+    background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+    transition: all 0.3s ease 0s
+    &:hover
+      opacity: 0.8
+    svg
+      width: 15px
+      height: 16px
+      path
+        stroke: #A1ACBB

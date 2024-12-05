@@ -1,0 +1,71 @@
+.inputWrapper
+    padding: 16px
+    border-radius: 24px
+    border: 1px solid rgba(65, 69, 79, 0.2)
+    background: rgba(46, 53, 61, 0.4)
+    backdrop-filter: blur(40px)
+    .top
+        display: flex
+        align-items: center
+        gap: 8px
+        margin-bottom: 12px
+        .title
+            color: var(--Placeholder-Secondary, #94a3b8)
+            font-size: 16px
+            font-weight: 400
+        .amount
+            color: var(--Placeholder-Primary, #fff)
+            font-size: 16px
+            font-weight: 400
+    .inputBlock
+        display: flex
+        align-items: center
+        gap: 10px
+        margin-bottom: 16px
+        input
+            background: none
+            outline: none
+            border: none
+            color: var(--Placeholder-Primary, #fff)
+            font-size: 32px
+            font-weight: 510
+            width: auto
+            min-width: 0
+        .token
+            color: var(--Placeholder-Secondary, #94a3b8)
+            font-size: 28px
+            font-weight: 510
+    &Actions
+        display: flex
+        align-items: center
+        justify-content: space-between
+        padding-top: 16px
+        border-top: 1px solid #384452
+        flex-wrap: wrap
+        gap: 10px
+        &Left
+            button:first-child
+                margin-right: 8px
+        .divider
+            height: 100%
+            min-height: 24px
+            width: 1px
+            background: #384452
+    .available
+        display: inline
+        padding: 8px 12px
+        color: var(--Brand-Secondary, #e5f2ff)
+        font-size: 14px
+        font-weight: 400
+        border: none
+
+        border-radius: 28px
+        background: rgba(64, 69, 74, 0.6)
+
+        backdrop-filter: blur(28px)
+        cursor: pointer
+        transition: all 0.3s ease 0s
+        &:hover
+            background: rgba(64, 69, 74, 0.9)
+.amountError
+    color: #ff3b30 !important

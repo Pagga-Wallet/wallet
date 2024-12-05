@@ -1,0 +1,48 @@
+.card {
+  width: 100%;
+  padding: 20px 16px 20px 16px;
+  border-radius: 32px;
+  background: rgba(64, 69, 74, 0.24);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-bottom: 1px solid rgba(54, 74, 93, 1);
+  &__name {
+    text-align: start;
+    display: block;
+    margin-bottom: 16px;
+  }
+  &:first-child {
+    padding-top: 0;
+  }
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.property {
+  display: flex;
+  justify-content: space-between;
+
+  border-bottom: 1px dashed rgba(54, 74, 93, 1);
+  padding: 8px 0 8px 0;
+
+  &__name {
+    color: rgb(var(--placeholder-secondary));
+    font-size: 14px;
+  }
+  &__value {
+    color: rgb(var(--placeholder-primary));
+    font-size: 16px;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

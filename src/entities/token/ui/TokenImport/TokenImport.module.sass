@@ -1,0 +1,52 @@
+.card
+  padding: 12px 16px
+  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+  margin-bottom: 12px
+  border-radius: 20px !important
+  display: flex
+  align-items: center
+  transition: all 0.3s ease 0s
+  &:hover
+    background: var(--background-transparent, rgba(66, 75, 86, 0.50))
+  &Body
+    width: 100%
+  &Description
+    font-size: 14px
+    font-weight: 400
+    line-height: 128%
+    color: rgba(var(--placeholder-secondary, #A1ACBB))
+  &Soon
+    text-align: center
+    padding: 3px 6px
+    border-radius: 112px
+    background: rgba(106, 115, 126, 0.30)
+    line-height: 128%
+    text-transform: uppercase
+    color: rgba(var(--placeholder-secondary, #A1ACBB))
+    font-size: 12px
+    font-weight: 590
+  svg
+    width: 24px
+    height: 24px
+  &Checked
+    opacity: 1
+  &::after
+    display: none
+  &Left
+    display: flex
+    align-items: center
+    gap: 12px
+    width: 100%
+    img
+      border-radius: 50%
+      object-fit: cover
+  &Title
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 5px
+    flex-wrap: wrap
+    p
+      font-size: 16px
+      font-weight: 510

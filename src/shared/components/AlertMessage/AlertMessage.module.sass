@@ -1,0 +1,36 @@
+.inner
+  padding: 18px 16px
+  border-radius: 20px
+  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+  backdrop-filter: blur(40px)
+  -webkit-backdrop-filter: blur(40px)
+  border-radius: 20px
+  &Top
+    display: flex
+    align-items: center
+    gap: 16px
+    margin-bottom: 16px
+    .icon
+      display: flex
+      align-items: center
+      justify-content: center
+      background: #FB923C !important
+      border-radius: 16px
+      width: 40px
+      height: 40px
+      padding: 8px
+      &Warning
+        background: var(--accent-danger, #FF1C45) !important
+    .text
+      font-size: 14px
+      color: rgb(var(--placeholder-primary))
+  .btn
+    border-radius: 12px
+    background: rgba(255, 255, 255, 0.10)
+    padding: 12px
+    font-size: 15px
+    font-weight: 590
+    &:hover
+      background: rgba(255, 255, 255, 0.15)
+    &:active
+      outline: 1px solid rgb(var(--placeholder-tertiary))

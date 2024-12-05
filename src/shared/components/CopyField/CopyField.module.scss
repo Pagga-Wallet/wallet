@@ -1,0 +1,47 @@
+.copyField {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 20px;
+    background: rgba(46, 53, 61, 0.4);
+    backdrop-filter: blur(24.5px);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+    .circle {
+        min-width: 20px;
+        min-height: 20px;
+        border-radius: 100%;
+        background-color: #10b981;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 100%;
+            top: 50%; /* position the top  edge of the element at the middle of the parent */
+            left: 50%; /* position the left edge of the element at the middle of the parent */
+
+            transform: translate(-50%, -50%);
+        }
+    }
+    .text {
+        max-width: 220px;
+        width: 100%;
+        flex-shrink: 1;
+        word-break: break-all;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+.btn {
+    background: transparent;
+    border: none;
+}

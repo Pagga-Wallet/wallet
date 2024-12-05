@@ -1,0 +1,34 @@
+.wrapperImage {
+  margin-top: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__image {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+.containerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperContent {
+  width: 285px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: rgb(var(--placeholder-secondary));
+
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 20px;
+}

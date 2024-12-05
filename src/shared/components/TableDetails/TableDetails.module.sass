@@ -1,0 +1,31 @@
+.details
+    padding: 16px
+    border-radius: 28px
+    background: rgba(46, 53, 61, 0.4)
+    backdrop-filter: blur(28px)
+    &Title
+        color: var(--Placeholder-Secondary---Dark, #94a3b8)
+        font-size: 16px
+        font-weight: 510
+        margin-bottom: 16px
+    .detailRow
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 10px
+        &:not(:last-child)
+            margin-bottom: 10px
+            padding-bottom: 10px
+            border-bottom: 2px dashed #364a5d
+        &Title
+            color: var(--Placeholder-Secondary, #94a3b8)
+            font-size: 14px
+            font-weight: 400
+        &Value
+            color: var(--Placeholder-Primary, #fff)
+            font-size: 16px
+            font-weight: 400
+            text-align: right
+            &_BreakWord
+                word-break: break-all
+                text-align: right

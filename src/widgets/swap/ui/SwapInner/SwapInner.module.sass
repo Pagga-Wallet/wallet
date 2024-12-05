@@ -1,0 +1,38 @@
+.inner
+  .swap
+    position: relative
+    width: 100%
+  .btn
+    position: absolute
+    top: 50%
+    z-index: 2
+    right: 50%
+    transform: translate(50%, -50%)
+  .swapBtn
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: 0 auto
+    cursor: pointer
+    border: 3px solid var(--border-primary, #2E353D)
+    background: var(--brand-primary, #007AFF)
+    &:active
+      border: 3px solid var(--border-primary, #515356)
+  .info
+    font-size: 13px
+    color: rgb(var(--placeholder-secondary))
+    line-height: 133.33%
+    margin: 16px 0
+  .poweredBy
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 5px
+    font-size: 13px
+    font-weight: 410
+    span
+      font-size: 13px
+      font-weight: 590

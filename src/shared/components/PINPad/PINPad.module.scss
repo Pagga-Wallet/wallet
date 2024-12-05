@@ -1,0 +1,116 @@
+.pincode {
+  height: 95vh;
+  max-height: 95vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  .action {
+    display: flex;
+    justify-content: end;
+  }
+
+  .top {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &Title {
+      text-align: center;
+      color: var(--placeholder-primary, #FFFFFF);
+      font-size: 32px;
+      margin-bottom: 24px;
+      font-weight: 510;
+    }
+    .dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      &Item {
+        transition: background ease-in-out 0.5ms;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
+        background-color: grey;
+      }
+      .active {
+        background-color: #fff;
+      }
+      .failure {
+        background: rgba(var(--accent-danger), 1);
+      }
+
+      .success {
+        background: rgba(var(--accent-success), 1);
+      }
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(var(--placeholder-secondary),1);
+    }
+  }
+
+  .pinPad {
+    margin-bottom: 55px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+
+    &--disabled {
+      opacity: 0.4;
+      .pinPadButton {
+        pointer-events: none;
+      }
+    }
+    .pinPadButton {
+      background: rgba(var(--tertiary-bg), 0.4);
+      cursor: pointer;
+      border-radius: 4vw;
+      padding-top: 4vw;
+      padding-bottom: 4vw;
+      border: none;
+      box-shadow: none;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .numSymbol {
+        cursor: pointer;
+        text-align: center;
+        font-size: 22px;
+
+        font-weight: 590;
+
+        color: rgb(var(--placeholder-primary));
+      }
+    }
+
+    .pinPadButton:active {
+      background: rgba(117, 130, 146, 0.4);
+    }
+
+    .delete {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .delete > svg > path {
+      fill: rgb(var(--placeholder-primary));
+    }
+
+    .delete:active > svg > path {
+      fill: rgba(117, 130, 146, 0.4);
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+  grid-row-gap: 12px;
+  &__item {
+    font-size: 30px;
+    background: transparent;
+    border: none;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
+
+.item--active {
+  background-color: rgba(var(--tertiary-bg-dark), 0.8);
+  border-radius: 8px;
+  width: 42px;
+}

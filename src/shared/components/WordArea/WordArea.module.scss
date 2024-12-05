@@ -1,0 +1,73 @@
+.wordArea {
+  margin-top: 15px;
+  min-height: 144px;
+  background-color: rgba(var(--tertiary-bg), 0.3);
+  border-radius: 20px;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: baseline;
+  align-content: start;
+
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+}
+
+.input {
+  position: relative;
+  border: 0;
+  outline: 0;
+  box-sizing: content-box;
+  font-size: inherit;
+  line-height: inherit;
+  background: transparent;
+  color: rgba(var(--placeholder-primary), 1);
+}
+
+.word {
+  background: rgba(64, 69, 74, 0.6);
+  padding: 8px 12px 8px 12px;
+
+  border-radius: 28px;
+}
+
+.button {
+  border: none;
+  border-top: 1px solid rgba(56, 68, 82,1);
+
+  background-color: transparent;
+
+  color: rgba(var(--placeholder-primary), 1);
+  text-align: start;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  padding-top: 16px;
+  font-size: 14px;
+  font-weight: 400;
+
+  &__icon {
+    display: flex;
+    svg {
+      width: 14px;
+    }
+    margin-right: 8px;
+  }
+}
+
+.title {
+  margin-bottom: 12px;
+}

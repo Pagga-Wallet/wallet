@@ -1,0 +1,91 @@
+.info
+    margin-top: 12px
+    padding: 24px 12px 12px 12px
+    border-radius: 32px
+    background: #2e353d
+    position: relative
+    overflow: hidden
+    min-height: 230px
+    .main
+        display: flex
+        align-items: flex-start
+        justify-content: space-between
+        flex-wrap: wrap
+        gap: 10px
+        margin-bottom: 24px
+        position: relative
+        z-index: 20
+        .mainLeft
+            display: flex
+            align-items: center
+            gap: 16px
+            &Top
+                display: flex
+                align-items: center
+                gap: 5px
+                margin-bottom: 4px
+            .mainLogo
+                width: 64px
+                height: 64px
+                border-radius: 100%
+                object-fit: cover
+            .amount
+                .amountCount
+                    font-size: 22px
+                    font-weight: 590
+                .amountPrice
+                    color: var(--Placeholder-Secondary, #94a3b8)
+                    font-size: 16px
+                    font-weight: 400
+    .bottom
+        display: flex
+        align-items: center
+        justify-content: space-between
+        padding: 12px 20px
+        border-radius: 28px
+        border: 1px solid var(--BackGround-Secondary, rgba(66, 75, 86, 0.3))
+        background: rgba(64, 69, 74, 0.4)
+        position: relative
+        z-index: 1
+        backdrop-filter: blur(10px)
+        -webkit-backdrop-filter: blur(10px)
+        .action
+            cursor: pointer
+            display: flex
+            align-items: center
+            justify-content: center
+            flex-direction: column
+            gap: 8px
+            padding: 5px 16px
+
+            border-radius: 16px
+
+            &:active
+                background: rgba(var(--placeholder-tertiary), 0.2)
+
+            .icon_button
+                width: 44px
+                height: 44px
+                border-radius: 50%
+                padding: 0
+                background: rgb(var(--accent-brand))
+                display: flex
+                justify-content: center
+                align-items: center
+                border: none
+                box-shadow: none
+                cursor: pointer
+                z-index: 2
+            .title
+                font-size: 12px
+                font-weight: 400
+    .bg
+        position: absolute
+        top: 50px
+        left: 0
+        height: 94%
+        width: 100%
+        z-index: 0
+        & > svg
+            width: 100%
+            height: 100%

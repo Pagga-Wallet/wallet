@@ -1,0 +1,27 @@
+.container {
+    background-color: rgba(var(--secondary-bg), 1);
+    border-radius: 32px;
+    padding: 20px 16px;
+    position: relative;
+    min-height: 85px;
+}
+
+.info {
+    position: absolute;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 590;
+}
+
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 258px;
+    color: rgba(var(--placeholder-secondary, #a1acbb));
+    text-align: center;
+    font-size: 19px;
+    line-height: 120%
+}

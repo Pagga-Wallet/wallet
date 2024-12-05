@@ -1,0 +1,1 @@
+export { CreateMnemonicPage } from "./CreateMnemonicPage";

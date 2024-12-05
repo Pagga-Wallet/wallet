@@ -1,0 +1,59 @@
+:root {
+    /* light theme */
+
+    /* dark theme tokens */
+    --primary-bg-dark: 33, 35, 37;
+    --secondary-bg-dark: 46, 53, 61;
+    --tertiary-bg-dark: 66, 75, 86;
+    --opacity-bg-dark: 66, 75, 86, 0.3;
+    --button-bg-dark: 86, 95, 106;
+
+    --border-dark: 65, 69, 79;
+
+    --placeholder-primary-dark: 255, 255, 255;
+    --placeholder-secondary-dark: 161, 172, 187;
+    --placeholder-tertiary-dark: 138, 151, 170;
+    --accent-brand-dark: 0, 122, 255;
+    --accent-warning-dark: 251, 146, 60;
+    --accent-danger-dark: 255, 28, 69;
+    --accent-success-dark: 16, 185, 129;
+    --accent-waiting-dark: 37, 99, 235;
+}
+
+[data-theme='light'] {
+    --primary-bg: var(--primary-bg-dark);
+    --secondary-bg: var(--secondary-bg-dark);
+    --tertiary-bg: var(--tertiary-bg-dark);
+
+    --placeholder-primary: var(--placeholder-primary-dark);
+    --placeholder-secondary: var(--placeholder-secondary-dark);
+    --placeholder-tertiary: var(--placeholder-tertiary-dark);
+
+    --accent-brand: var(--accent-brand-dark);
+    --accent-warning: var(--accent-warning-dark);
+    --accent-danger: var(--accent-danger-dark);
+    --accent-success: var(--accent-success-dark);
+    --accent-waiting: var(--accent-waiting-dark);
+
+    --button-bg: var(--button-bg-dark);
+}
+
+[data-theme='dark'] {
+    --primary-bg: var(--primary-bg-dark);
+    --secondary-bg: var(--secondary-bg-dark);
+    --tertiary-bg: var(--tertiary-bg-dark);
+
+    --placeholder-primary: var(--placeholder-primary-dark);
+    --placeholder-secondary: var(--placeholder-secondary-dark);
+    --placeholder-tertiary: var(--placeholder-tertiary-dark);
+
+    --accent-brand: var(--accent-brand-dark);
+    --accent-warning: var(--accent-warning-dark);
+    --accent-danger: var(--accent-danger-dark);
+    --accent-success: var(--accent-success-dark);
+    --accent-waiting: var(--accent-waiting-dark);
+
+    --border: var(--border-dark);
+
+    --button-bg: var(--button-bg-dark);
+}

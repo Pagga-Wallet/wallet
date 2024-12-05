@@ -1,0 +1,43 @@
+.search {
+    display: flex;
+    align-items: center;
+    cursor: text;
+    gap: 8px;
+    padding: 14px 35px 14px 14px;
+    background-color: #424b564d;
+    border-radius: 20px;
+    position: relative;
+    svg path {
+        //stroke: rgb(var(--placeholder-secondary));
+    }
+    &Input {
+        width: 100%;
+        background: none;
+        margin-right: 6px;
+        outline: none;
+        border: none;
+        font-size: 16px;
+        line-height: 16px;
+        color: rgb(var(--placeholder-secondary));
+    }
+    &Clear {
+        cursor: pointer;
+        position: absolute;
+        top: 18px;
+        right: 14px;
+        transition: fill 0.3s ease 0s;
+        background: transparent;
+        outline: none;
+        border: none;
+        > svg > path {
+            fill: rgb(var(--placeholder-secondary));
+        }
+        &:hover > svg > path {
+            fill: rgb(var(--placeholder-secondary));
+        }
+    }
+}
+
+.focused {
+    background-color: #4856674d;
+}

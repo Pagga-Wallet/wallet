@@ -1,0 +1,90 @@
+.nft {
+    width: 160px;
+    height: 160px;
+    max-width: 160px;
+    max-height: 160px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+
+    @media (max-width: 385px) {
+        width: 140px;
+        height: 140px;
+    }
+
+    @media (max-width: 340px) {
+        width: 130px;
+        height: 130px;
+    }
+
+    &Bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    &:hover &Bg {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        -webkit-filter: brightness(1.1);
+        filter: brightness(1.1);
+    }
+    
+    &:active &Bg {
+        -webkit-filter: brightness(1.1);
+        filter: brightness(1.1);
+    }
+    
+    .chain {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 3px 6px;
+        border-radius: 112px;
+        background-color: #3b4047;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--Placeholder-Secondary, #94a3b8);
+        font-size: 12px;
+        font-weight: 590;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        padding: 4px;
+        width: 95%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 16px;
+        background: rgba(64, 69, 74, 0.24);
+        backdrop-filter: blur(18px);
+
+        &Logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+
+        &Name {
+            font-size: 12px;
+            font-weight: 510;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

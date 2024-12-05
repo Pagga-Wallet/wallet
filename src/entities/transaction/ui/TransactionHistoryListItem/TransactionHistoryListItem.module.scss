@@ -1,0 +1,65 @@
+.transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    .left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        .transactionLogo {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .info {
+            .title {
+                font-size: 16px;
+                font-weight: 510;
+                margin-bottom: 4px;
+            }
+            .details {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                &Address {
+                    font-size: 14px;
+                    color: var(--Placeholder-Secondary, #94a3b8);
+                }
+                &Status {
+                    font-size: 14px;
+                    font-weight: 510;
+                    color: var(--Accent-Success, #10b981);
+                }
+            }
+        }
+    }
+    .right {
+        .chain {
+            padding: 3px 6px;
+            border-radius: 112px;
+            background-color: #3b4047;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--Placeholder-Secondary, #94a3b8);
+            font-size: 12px;
+            font-weight: 590;
+            text-transform: uppercase;
+
+            margin-bottom: 7px;
+        }
+        .amount {
+            font-size: 14px;
+            font-weight: 510;
+        }
+    }
+}

@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@font-face {
+    font-family: "SF-PRO";
+    font-display: swap;
+    src: local("SF-PRO"), local("SF-PRO-Medium"),
+        url("../../shared/lib/fonts/SF-Pro-Text-Medium.woff2") format("truetype");
+    font-weight: 540;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF-PRO";
+    font-display: swap;
+    src: local("SF-PRO"), local("SF-PRO-Semibold"),
+        url("../../shared/lib/fonts/SF-Pro-Text-Semibold.woff2") format("truetype");
+    font-weight: 760;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SF-PRO";
+    font-display: swap;
+    src: local("SF-PRO"), local("SF-PRO-Regular"),
+        url("../../shared/lib/fonts/SF-Pro-Text-Regular.woff2") format("truetype");
+    font-weight: 410;
+    font-style: normal;
+}
+
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="text"] {
+    -webkit-appearance: textfield;
+    appearance: textfield;
+}
+
+input {
+    outline: none;
+    -webkit-user-select: initial !important;
+    -khtml-user-select: initial !important;
+    -moz-user-select: initial !important;
+    -ms-user-select: initial !important;
+    user-select: initial !important;
+}
+
+#root::before {
+    content: "";
+    position: fixed;
+    width: 70%;
+    height: 80%;
+    border-radius: 600px;
+    background: rgba(0, 122, 255, 0.25);
+    filter: blur(110px);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+body {
+    font-family: "SF-PRO";
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgb(var(--primary-bg));
+    color: rgb(var(--placeholder-primary));
+    height: 100vh;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+a,
+a * a div,
+a:hover,
+a:hover * a:hover div {
+    text-decoration: none !important;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.rGEH4vI_BZ0SvFXEf6Ea {
+    z-index: 119999 !important;
+}
+
+.swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    width: 16px;
+    border-radius: 4px;
+    height: 6px;
+    border: none;
+    background-color: #fff;
+    opacity: 1;
+}
+
+.Toastify__toast-body {
+    padding: 0;
+}
+
+.Toastify__toast {
+    border-radius: 20px;
+    background-color: transparent;
+    box-shadow: 0 !important;
+    padding: 0px;
+}
+
+.Toastify__toast-container {
+    width: min(400px, 100vw);
+}

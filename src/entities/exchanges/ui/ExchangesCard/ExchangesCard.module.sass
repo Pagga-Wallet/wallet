@@ -1,0 +1,44 @@
+.card
+  background: rgba(46, 53, 61, 0.4)
+  padding: 16px 19px
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 5px
+  // margin-bottom: 12px
+  transition: all 0.3s ease 0s
+  &:hover
+    background: rgba(46, 53, 61, 0.8)
+  &Soon
+    opacity: 0.4
+    &:hover
+      background: rgba(46, 53, 61, 0.4)
+  &::after
+    display: none
+  span
+    display: flex
+    align-items: center
+    svg
+      height: 24px
+  &Info
+    display: flex
+    align-items: center
+    gap: 12px
+    img
+      width: 40px
+      height: 40px
+      border-radius: 50%
+      object-fit: cover
+    &Details
+      .title
+        font-size: 16px
+        font-weight: 510
+        display: flex
+        align-items: center
+        flex-wrap: wrap
+        gap: 3px
+        margin-bottom: 2px
+        span
+          font-weight: 410
+      .description
+        color: rgb(var(--placeholder-secondary))
