@@ -9,7 +9,6 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig(({ mode }) => ({
     plugins: [
         react(),
-        mkcert(),
         nodePolyfills(),
         svgr(),
         replace({
