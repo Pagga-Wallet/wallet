@@ -6,7 +6,7 @@ import mkcert from "vite-plugin-mkcert";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import svgr from "vite-plugin-svgr";
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
     plugins: [
         react(),
         mkcert(),
@@ -20,6 +20,7 @@ export default defineConfig({
                     'if (typeof module === "object" && typeof module.exports === "object" && typeof module.exports.default === "object") {',
             },
         }),
+        ...(mode === "development" ? [mkcert()] : []),
     ],
     resolve: {
         alias: {
@@ -29,11 +30,11 @@ export default defineConfig({
     server: {
         host: "192.168.1.111",
         port: 3000,
-        https: {},
+        https: mode === "development" ? {} : undefined,
     },
     preview: {
         host: "192.168.1.111",
         port: 3000,
-        https: {},
+        https: undefined,
     },
-});
+}));
