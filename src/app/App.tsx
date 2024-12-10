@@ -12,13 +12,6 @@ import "./i18n";
 const App = () => {
     useTMAInit();
     useTheme();
-    // КОСТЫЛЬ ДЛЯ ОБНУЛЕНИЯ КНОПОК С ПРОШЛОГО ОБНОВЛЕНИЯ СТРАНИЦЫ
-
-    // maybe remove
-    useLayoutEffect(() => {
-        backButton.hide();
-        mainButton.unmount();
-    }, []);
 
     return (
         <AppLoader>
