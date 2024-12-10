@@ -1,4 +1,4 @@
-import { initBiometryManager } from "@tma.js/sdk";
+import { biometry } from "@telegram-apps/sdk-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,7 +14,6 @@ export const useFirstCreate = (createPIN: createPINFc, isUseBiometry?: boolean) 
     const [isLoading, setIsLoading] = useState(false);
     const [switchAccount, { isLoading: isLoadingSwitch }] = useLazyLoadAccountQuery();
     const [saveAccount, { isLoading: isLoadingSave }] = useSaveAccountMutation();
-    const [biometryManagerInit] = initBiometryManager();
 
     const firstCreate = useCallback(
         async (walletData: ICreateAccountResult) => {
@@ -24,9 +23,8 @@ export const useFirstCreate = (createPIN: createPINFc, isUseBiometry?: boolean) 
 
             if (isUseBiometry) {
                 try {
-                    const bm = await biometryManagerInit;
-                    await bm.requestAccess({ reason: "Use biometry authenticate" });
-                    await bm.updateToken({ token: pin });
+                    await biometry.requestAccess({ reason: "Use biometry authenticate" });
+                    await biometry.updateToken({ token: pin });
                 } catch (error) {
                     console.log("error Biometry Manager", error);
                 }

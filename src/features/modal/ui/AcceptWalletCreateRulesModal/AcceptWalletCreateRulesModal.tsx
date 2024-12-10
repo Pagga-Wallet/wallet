@@ -1,4 +1,4 @@
-import { useMainButton } from "@tma.js/sdk-react";
+import { mainButton } from "@telegram-apps/sdk-react";
 import { FC, useEffect, useState } from "react";
 import { Modal } from "@/shared/components/Modal/Modal";
 import s from "./AcceptWalletCreateRulesModal.module.scss";
@@ -7,19 +7,18 @@ interface AcceptWalletCreateRulesModal {
     onClose: () => void;
 }
 export const AcceptWalletCreateRulesModal: FC<AcceptWalletCreateRulesModal> = ({ onClose }) => {
-    const acceptButton = useMainButton();
+    const acceptButton = mainButton;
 
     useEffect(() => {
         acceptButton.setParams({
             text: "Продолжить",
             textColor: "#FFFFFF",
-            bgColor: "#007AFF04",
+            backgroundColor: "#007AFF04",
             isEnabled: false,
             isVisible: true,
         });
         return () => {
-            acceptButton.hide();
-            acceptButton.disable();
+            acceptButton.unmount();
         };
     }, []);
 
@@ -33,11 +32,11 @@ export const AcceptWalletCreateRulesModal: FC<AcceptWalletCreateRulesModal> = ({
                 acceptButton.setParams({
                     text: "Продолжить",
                     textColor: "#FFFFFF",
-                    bgColor: "#007AFF",
+                    backgroundColor: "#007AFF",
                     isEnabled: true,
                     isVisible: true,
                 });
-                acceptButton.on("click", () => {
+                acceptButton.onClick(() => {
                     onClose();
                 });
             }

@@ -1,4 +1,4 @@
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import dayjs from "dayjs";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,6 @@ import styles from "./TransactionPage.module.scss";
 
 export const TransactionPage = () => {
     const { t } = useTranslation();
-    const utils = initUtils();
 
     const { hash, memo, amountUSD, direction, chain, timestamp, amount, symbol, from, to, fee } =
         useAppSelector(transactionStore.selectors.selectDetails);
@@ -36,8 +35,8 @@ export const TransactionPage = () => {
             txHash: hash,
             chain,
         });
-        utils.openLink(link);
-    }, [multichainAccount, hash, chain, utils]);
+        openLink(link);
+    }, [multichainAccount, hash, chain]);
 
     useSetupBackButton();
 
@@ -47,7 +46,7 @@ export const TransactionPage = () => {
             text: t("trans-detail.view-btn"),
             textColor: "#FFFFFF",
             isLoaderVisible: false,
-            bgColor: "#007AFF",
+            backgroundColor: "#007AFF",
             isEnabled: true,
             isVisible: true,
         },

@@ -1,15 +1,16 @@
-import { useInitData } from "@tma.js/sdk-react";
+import { initData, useSignal } from "@telegram-apps/sdk-react";
 import { useEffect, useMemo } from "react";
 import { useGetConnectionsQuery } from "@/entities/connection";
 import { useOpenConnect } from "../model/connectService";
 import { parseStartParams } from "./parseStartParams";
 
 export const useConnectEffect = () => {
-    const initData = useInitData();
     const urlSearch = useMemo(() => new URLSearchParams(location.search), [location.search]);
     const { connect } = useOpenConnect();
 
     const { data: connections, isLoading: isLoadingConnections } = useGetConnectionsQuery({});
+
+    const startParam = useSignal(initData.startParam);
 
     useEffect(() => {
         try {
@@ -33,14 +34,14 @@ export const useConnectEffect = () => {
 
     useEffect(() => {
         console.log("connections", connections);
-        if (!initData?.startParam) {
+        if (!startParam) {
             return;
         }
         if (isLoadingConnections) {
             return;
         }
         try {
-            const { strategy, request, version, id } = parseStartParams(initData.startParam);
+            const { strategy, request, version, id } = parseStartParams(startParam);
             console.log("connect with startParam", {
                 id,
                 version,

@@ -1,4 +1,4 @@
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useFetchNFTDetailsQuery } from "@/entities/nft/model/nftAPI";
@@ -18,7 +18,7 @@ export const NftDetailManage = ({ address }: NftDetailManageProps) => {
     const { data: nftDetails, isFetching } = useFetchNFTDetailsQuery({
         address,
     });
-    const utils = initUtils();
+    // const utils = initUtils();
 
     const onSend = () => {
         navigate("/nft/send", {
@@ -29,7 +29,7 @@ export const NftDetailManage = ({ address }: NftDetailManageProps) => {
     };
 
     const onOpen = () => {
-        utils.openLink(`https://tonviewer.com/${address}`);
+        openLink(`https://tonviewer.com/${address}`);
     };
 
     return (

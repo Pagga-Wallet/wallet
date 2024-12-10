@@ -1,5 +1,5 @@
 /* eslint-disable boundaries/element-types */
-import { useInitData } from "@tma.js/sdk-react";
+import { initData, useSignal } from "@telegram-apps/sdk-react";
 import { FC, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line boundaries/element-types
@@ -25,7 +25,8 @@ export const WalletsList: FC<WalletsList> = ({ onClose }) => {
     const [switchAccount] = useLazyLoadAccountQuery();
 
     const currentAccount = useAppSelector(multichainAccountStore.selectors.selectAccount);
-    const tgData = useInitData();
+    const tgData = initData;
+    const user = useSignal(tgData?.user);
     const navigate = useNavigate();
 
     const [isConnectWalletOpen, setIsConnectWalletOpen] = useState<boolean>(false);
@@ -59,12 +60,12 @@ export const WalletsList: FC<WalletsList> = ({ onClose }) => {
             <div className={s.top}>
                 <div className={s.user} onClick={onClose}>
                     <img
-                        src={`https://t.me/i/userpic/320/${tgData?.user?.username}.jpg`}
-                        alt={tgData?.user?.username}
+                        src={`https://t.me/i/userpic/320/${user?.username}.jpg`}
+                        alt={user?.username}
                         className={s.userAvatar}
                     />
                     <div className={s.userName}>
-                        {truncateUsername(tgData?.user?.username ?? "User", 10)}
+                        {truncateUsername(user?.username ?? "User", 10)}
                     </div>
                     <button className={s.arrow}>
                         <SvgSelector id="chevron-top" />
