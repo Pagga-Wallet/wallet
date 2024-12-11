@@ -1,5 +1,15 @@
-import { type MainButtonParams, useMainButton } from "@tma.js/sdk-react";
+import { mainButton, RGB } from "@telegram-apps/sdk-react";
 import { useEffect } from "react";
+
+interface MainButtonParams {
+    backgroundColor?: RGB;
+    hasShineEffect: boolean;
+    isEnabled: boolean;
+    isLoaderVisible: boolean;
+    isVisible: boolean;
+    text: string;
+    textColor?: RGB;
+}
 
 interface Options {
     onClick?: () => void;
@@ -9,12 +19,12 @@ interface Options {
  * Важно! onClick всегда должен быть обёрнут в useCallback()
  */
 export function useSetupMainButton({ onClick, params }: Options) {
-    const mb = useMainButton();
+    const mb = mainButton;
 
     const hideBtn = () => {
         const bgColor = params?.isEnabled ? "#3478F6" : "#255093";
         const textColor = params?.isEnabled ? "#FFFFFF" : "#79889B";
-        mb.hide();
+        mb.unmount();
         window.Telegram.WebApp.MainButton.setParams({
             text: params.text || undefined,
             color: bgColor,
@@ -30,19 +40,19 @@ export function useSetupMainButton({ onClick, params }: Options) {
         mb.setParams({
             ...params,
             textColor: params?.isEnabled ? "#FFFFFF" : "#79889B",
-            bgColor: params?.isEnabled ? "#3478F6" : "#255093",
+            backgroundColor: params?.isEnabled ? "#3478F6" : "#255093",
         });
 
         if (onClick) {
-            mb.on("click", onClick);
+            mb.onClick(onClick);
         }
         if (params.isVisible) {
-            mb.show();
+            mb.mount();
         } else {
             hideBtn();
         }
         return () => {
-            if (onClick) mb.off("click", onClick);
+            if (onClick) mb.offClick(onClick);
         };
     }, [JSON.stringify(params), onClick]);
 

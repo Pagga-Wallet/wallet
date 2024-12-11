@@ -1,4 +1,4 @@
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ import styles from "./ConnectTransactionSuccess.module.scss";
 
 export const ConnectTransactionSuccess = () => {
     const { t } = useTranslation();
-    const utils = initUtils();
     const navigate = useNavigate();
     const account = useAppSelector(multichainAccountStore.selectors.selectAccount);
 
@@ -24,8 +23,8 @@ export const ConnectTransactionSuccess = () => {
     });
 
     const handleClick = useCallback(() => {
-        utils.openLink(`https://tonviewer.com/${account!.multiwallet.TON.address.V4}`);
-    }, [utils, account]);
+        openLink(`https://tonviewer.com/${account!.multiwallet.TON.address.V4}`);
+    }, [account]);
 
     useSetupMainButton({
         params: {

@@ -1,4 +1,4 @@
-import { CloudStorage, postEvent } from "@tma.js/sdk";
+import { cloudStorage } from "@telegram-apps/sdk-react";
 import {
     CHAINS,
     IMultichainAccount,
@@ -27,16 +27,10 @@ import {
 import { getTokensField } from "../lib/helpers";
 
 export class TelegramStorage {
-    private _data: CloudStorage;
-
-    constructor() {
-        this._data = new CloudStorage("6.10", () => Math.random().toString(), postEvent);
-    }
-
     // === BASIC METHODS ===
 
     private async save(key: string, data: string): Promise<boolean> {
-        await this._data.set(key, data);
+        await cloudStorage.setItem(key, data);
         return true;
     }
 
@@ -44,19 +38,19 @@ export class TelegramStorage {
     private async get(keys: string[]): Promise<Record<string, string>>;
     private async get(key: string | string[]) {
         if (Array.isArray(key)) {
-            return await this._data.get(key);
+            return await cloudStorage.getItem(key);
         }
-        return await this._data.get(key);
+        return await cloudStorage.getItem(key);
     }
 
     private async delete(key: string): Promise<boolean> {
-        await this._data.delete(key);
+        await cloudStorage.deleteItem(key);
         return true;
     }
 
     private async getKeys(): Promise<string[]> {
         try {
-            return await this._data.getKeys();
+            return await cloudStorage.getKeys();
         } catch (error) {
             console.error(error);
             return [];

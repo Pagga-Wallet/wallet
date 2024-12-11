@@ -1,4 +1,4 @@
-import { useInitData } from "@tma.js/sdk-react";
+import { initData, useSignal } from "@telegram-apps/sdk-react";
 import clsx, { ClassValue } from "clsx";
 import { FC, useState } from "react";
 
@@ -11,7 +11,7 @@ interface AvatarProps {
 }
 
 export const Avatar: FC<AvatarProps> = ({ className }) => {
-    const tgData = useInitData();
+    const user = useSignal(initData.user);
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isValidImage, setIsValidImage] = useState<boolean>(true);
@@ -31,10 +31,10 @@ export const Avatar: FC<AvatarProps> = ({ className }) => {
                 isLoading && isValidImage
                     ? AvatarImg
                     : isValidImage
-                    ? `https://t.me/i/userpic/320/${tgData?.user?.username}.jpg`
+                    ? `https://t.me/i/userpic/320/${user?.username}.jpg`
                     : AvatarImg
             }
-            alt={tgData?.user?.username}
+            alt={user?.username}
             className={clsx(s.userAvatar, className)}
             onLoad={handleImageLoad}
             onError={() => {

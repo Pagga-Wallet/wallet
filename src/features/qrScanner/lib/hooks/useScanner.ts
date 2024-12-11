@@ -1,4 +1,4 @@
-import { useQRScanner as useTMAQRScanner } from "@tma.js/sdk-react";
+import { qrScanner } from "@telegram-apps/sdk-react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { QueryConnect } from "@/shared/lib/types/connect";
@@ -8,10 +8,9 @@ interface QRScannerProps {
 }
 
 export const useQRScanner = ({ connect }: QRScannerProps) => {
-    const qrScanner = useTMAQRScanner();
     const navigate = useNavigate();
     const scanHandle = useCallback(async () => {
-        let content = await qrScanner.open("Scan QR code");
+        let content = await qrScanner.open({ text: "Scan QR code" });
         if (!content) return qrScanner.close();
 
         const queryString = content.split("?")[1];

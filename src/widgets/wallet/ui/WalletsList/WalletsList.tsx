@@ -1,4 +1,4 @@
-import { useInitData } from "@tma.js/sdk-react";
+import { initData, useSignal } from "@telegram-apps/sdk-react";
 import clsx from "clsx";
 import { FC, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ export const WalletsList: FC<WalletsList> = ({ onClose }) => {
     const { data: accounts } = useFetchAccountsQuery();
     const [switchAccount] = useLazyLoadAccountQuery();
     const currentAccount = useAppSelector(multichainAccountStore.selectors.selectAccount);
-    const tgData = useInitData();
+    const user = useSignal(initData.user);
     const navigate = useNavigate();
     const { t } = useTranslation();
 
@@ -104,7 +104,7 @@ export const WalletsList: FC<WalletsList> = ({ onClose }) => {
                     <div className={s.user} onClick={handleClose}>
                         <Avatar />
                         <div className={s.userName}>
-                            {truncateUsername(tgData?.user?.username ?? "User", 10)}
+                            {truncateUsername(user?.username ?? "User", 10)}
                         </div>
                         <button className={s.arrow}>
                             <SvgSelector id="chevron-top" />

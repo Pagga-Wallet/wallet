@@ -1,4 +1,4 @@
-import { useBackButton } from "@tma.js/sdk-react";
+import { backButton } from "@telegram-apps/sdk-react";
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,6 @@ interface BackButtonOptions {
     Решает проблему двойной инициализации кнопки в рамках одного view
 */
 export const useSetupBackButton = (options?: BackButtonOptions, deps: any[] = []) => {
-    const backButton = useBackButton();
     const navigate = useNavigate();
 
     const onClick = useCallback(() => {
@@ -33,7 +32,7 @@ export const useSetupBackButton = (options?: BackButtonOptions, deps: any[] = []
 
     useEffect(() => {
         if (onClick) {
-            return backButton.on("click", onClick);
+            return backButton.onClick(onClick);
         }
     }, [onClick, JSON.stringify(deps)]);
 };

@@ -1,4 +1,4 @@
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Title } from "@/shared/components";
@@ -13,7 +13,6 @@ interface SuccessTransactionProps {
 
 export const SuccessTransaction: FC<SuccessTransactionProps> = ({ explorerLink }) => {
     const { t } = useTranslation();
-    const utils = initUtils();
 
     const onBack = useCallback(() => {}, []);
 
@@ -23,7 +22,7 @@ export const SuccessTransaction: FC<SuccessTransactionProps> = ({ explorerLink }
 
     const handleClick = useCallback(() => {
         if (!explorerLink) return;
-        utils.openLink(explorerLink);
+        openLink(explorerLink);
     }, []);
 
     useSetupMainButton({

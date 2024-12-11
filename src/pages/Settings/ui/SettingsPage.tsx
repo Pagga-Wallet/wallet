@@ -1,5 +1,4 @@
-import { initBiometryManager } from "@tma.js/sdk";
-import { useHapticFeedback } from "@tma.js/sdk-react";
+import { hapticFeedback, biometry } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useChangePIN, usePINConfirmation } from "@/features/PIN";
@@ -18,18 +17,16 @@ export const SettingsPage = () => {
         t,
         i18n: { changeLanguage, language },
     } = useTranslation();
-    const hapticApi = useHapticFeedback();
     const { confirm } = usePINConfirmation();
     const navigate = useNavigate();
     const { data: isUsedBiometry, isFetching: isFetchingBiometry } = useGetUseBiometryQuery();
     const [setUseBiometry, { isLoading: isSettingBiometry }] = useSetUseBiometryMutation();
-    const [biometryManagerInit] = initBiometryManager();
     const { changePIN } = useChangePIN();
 
     useSetupBackButton();
 
     const onResetData = async () => {
-        hapticApi.impactOccurred("medium");
+        hapticFeedback.impactOccurred("medium");
         if (window.confirm(t("settings.reset-description"))) {
             await confirm({ title: t("settings.reset") });
             await telegramStorage.UNSAFE_resetAllStorage();
@@ -49,9 +46,8 @@ export const SettingsPage = () => {
             const pin = await confirm({
                 title: t("pincode.enter"),
             });
-            const bm = await biometryManagerInit;
-            await bm.requestAccess({ reason: "" });
-            await bm.updateToken({ token: pin });
+            await biometry.requestAccess({ reason: "" });
+            await biometry.updateToken({ token: pin });
         }
         setUseBiometry(value);
     };

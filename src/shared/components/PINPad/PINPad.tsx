@@ -1,4 +1,4 @@
-import { useHapticFeedback } from "@tma.js/sdk-react";
+import { hapticFeedback } from "@telegram-apps/sdk-react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -32,7 +32,7 @@ export const PINPad = ({
     disabled,
 }: PINPadProps) => {
     const [code, setCode] = useState("");
-    const hapticApi = useHapticFeedback();
+    const hapticApi = hapticFeedback;
 
     const lastFilledIndex = code.length - 1;
 
