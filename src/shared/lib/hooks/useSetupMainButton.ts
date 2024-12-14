@@ -22,21 +22,12 @@ export function useSetupMainButton({ onClick, params }: Options) {
     const mb = mainButton;
 
     const hideBtn = () => {
-        const bgColor = params?.isEnabled ? "#3478F6" : "#255093";
-        const textColor = params?.isEnabled ? "#FFFFFF" : "#79889B";
-        mb.unmount();
-        window.Telegram.WebApp.MainButton.setParams({
-            text: params.text || undefined,
-            color: bgColor,
-            text_color: textColor,
-            is_active: params.isEnabled,
-            is_visible: true,
-        });
-        window.Telegram.WebApp.MainButton.setParams({ is_visible: false });
+        mb.setParams({ isVisible: false });
     };
 
     useEffect(() => {
         //FIXME цвет отключенной кнопки
+        mb.mount();
         mb.setParams({
             ...params,
             textColor: params?.isEnabled ? "#FFFFFF" : "#79889B",
@@ -47,7 +38,10 @@ export function useSetupMainButton({ onClick, params }: Options) {
             mb.onClick(onClick);
         }
         if (params.isVisible) {
-            mb.mount();
+            mb.setParams({
+                ...params,
+                isVisible: true
+            });
         } else {
             hideBtn();
         }
@@ -58,6 +52,7 @@ export function useSetupMainButton({ onClick, params }: Options) {
 
     useEffect(() => {
         return () => {
+            console.log('hide button')
             hideBtn();
         };
     }, []);
