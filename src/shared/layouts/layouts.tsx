@@ -17,7 +17,8 @@ export const BaseLayout = ({ children, navbar, className }: BaseLayoutProps) => 
     useTelegramViewportHack();
     return (
         <div className={styles.wrapper} id="mainWrapper">
-            {navbar}
+            <div className={styles.bottom}>{navbar}</div>
+
             <div className={clsx(styles.content, className)} ref={scrollableRef}>
                 {children}
             </div>
