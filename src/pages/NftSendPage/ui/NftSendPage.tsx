@@ -1,4 +1,4 @@
-import { useBackButton } from "@tma.js/sdk-react";
+import { backButton } from "@telegram-apps/sdk-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -106,8 +106,7 @@ export const NftSendPage = () => {
     }, [step, navigate]);
 
     // Так как после ввода пинкода скрывалася кнопка
-    const initButton = useBackButton();
-    initButton.show();
+    backButton.show();
 
     useSetupBackButton({
         onBack,

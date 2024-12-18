@@ -1,4 +1,4 @@
-import { initPopup } from "@tma.js/sdk-react";
+import { popup } from "@telegram-apps/sdk-react";
 import { FC, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -106,9 +106,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
         setStep(ConnectWalletListSteps.connect_list_detail);
     };
 
-    const popup = initPopup();
-
-    const handleRemove = () => {
+    const handleRemove = () => { 
         popup
             .open({
                 title: t("connect-wallet-list.delete-connection"),

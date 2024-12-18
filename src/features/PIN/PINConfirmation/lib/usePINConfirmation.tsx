@@ -1,4 +1,4 @@
-import { initBiometryManager } from "@tma.js/sdk";
+import { biometry } from "@telegram-apps/sdk-react";
 import React from "react";
 import { useLazyVerifyPINQuery } from "@/entities/multichainAccount";
 import { useStrictContext } from "@/shared/lib/react";
@@ -14,15 +14,13 @@ export const usePINConfirmation = () => {
     const { setState, reset, isOpen } = useStrictContext(confirmationContext);
     const [verifyPIN] = useLazyVerifyPINQuery();
     const { data: isUseBiometry } = useGetUseBiometryQuery();
-    const [biometryManagerInit] = initBiometryManager();
 
     const confirmViaBiometry = () =>
-        new Promise<string>((internalResolve, internalReject) => {
-            biometryManagerInit
-                .then(async (bm) => {
+        new Promise<string>(async (internalResolve, internalReject) => {
                     try {
-                        await bm.requestAccess({ reason: "Use biometry authenticate" });
-                        const pin = await bm.authenticate({ reason: "PIN confirmation" });
+                        await biometry.requestAccess({ reason: "Use biometry authenticate" });
+                        const res = await biometry.authenticate({ reason: "PIN confirmation" });
+                        const pin = res.token
                         if (!pin) {
                             return internalReject("Invalid PIN");
                         }
@@ -41,11 +39,7 @@ export const usePINConfirmation = () => {
                     } catch {
                         internalReject();
                     }
-                })
-                .catch(() => {
-                    internalReject();
                 });
-        });
 
     const confirmViaPIN = () =>
         new Promise<string>((internalResolve, internalReject) => {

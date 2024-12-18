@@ -53,7 +53,7 @@ export const TokenIcon: FC<ITokenIconProps> = ({
                     style={{
                         height: size / 2 + "px",
                         width: size / 2 + "px",
-                        border: chain === "TRON" ? "2px solid #262D35" : "none",
+                        border: chain === "TRON" ? "2px solid #1F1F25" : "none",
                     }}
                 />
             )}

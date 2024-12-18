@@ -1,4 +1,4 @@
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import dayjs from "dayjs";
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,13 +34,12 @@ export const TransactionDetailsModal: FC<TransactionDetailsModal> = ({
     userAddress,
     participantAddress,
 }) => {
-    const utils = initUtils();
 
     const { t } = useTranslation();
 
     const handleNavigate = useCallback(() => {
         const link = getExplorerLink({ userAddress, txHash, chain });
-        utils.openLink(link);
+        openLink(link);
     }, [userAddress, txHash, chain]);
 
     useSetupMainButton({
@@ -49,7 +48,7 @@ export const TransactionDetailsModal: FC<TransactionDetailsModal> = ({
             text: t("trans-detail.view-btn"),
             textColor: "#FFFFFF",
             isLoaderVisible: false,
-            bgColor: "#007AFF",
+            backgroundColor: "#007AFF",
             isEnabled: true,
             isVisible: true,
         },
