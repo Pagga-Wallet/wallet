@@ -6,7 +6,7 @@ import { useAppSelector } from "@/shared/lib";
 export const useTMAInit = () => {
     const theme = useAppSelector(themeStore.selectors.selectTheme);
 
-    const backColor = theme === "dark" ? "#212325" : "#212325";
+    const backColor = theme === "dark" ? "#1f1f25" : "#212325";
 
     useLayoutEffect(() => {
         console.log('TMA INIT')

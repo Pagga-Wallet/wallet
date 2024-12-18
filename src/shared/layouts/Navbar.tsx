@@ -21,13 +21,13 @@ const items = [
     //     isStroke: true,
     //     icon: <SvgSelector id="swap-icon" />,
     // },
-    // {
-    //     label: "menu.apps",
-    //     path: "/apps",
-    //     isStroke: false,
-    //     icon: <SvgSelector id="apps-icon" />,
-    //     activeIcon: <AppsActiveIcon />,
-    // },
+    {
+        label: "menu.apps",
+        path: "/settings",
+        isStroke: false,
+        icon: <SvgSelector id="apps-icon" />,
+        activeIcon: <AppsActiveIcon />,
+    },
     {
         label: "menu.settings",
         path: "/settings",
