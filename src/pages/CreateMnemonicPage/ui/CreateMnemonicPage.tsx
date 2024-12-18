@@ -49,7 +49,7 @@ export const CreateMnemonicPage: FC = () => {
         params: {
             text: t("common.i-saved-mnemonic"),
             textColor: "#FFFFFF",
-            bgColor: "#007AFF",
+            backgroundColor: "#007AFF",
             isEnabled: !isLoading,
             isVisible: true,
             isLoaderVisible: isLoading,
