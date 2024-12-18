@@ -89,7 +89,7 @@ export const AccountPage = () => {
         params: {
             text: t("common.save"),
             textColor: "#FFFFFF",
-            bgColor: "#424B56",
+            backgroundColor: "#424B56",
             isLoaderVisible: loading,
             isEnabled: !loading,
             isVisible: !!Object.keys(formData).length,

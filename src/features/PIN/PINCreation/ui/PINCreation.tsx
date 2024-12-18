@@ -32,7 +32,7 @@ export const PINCreation = ({ onSuccess, onBack }: PINCreationProps) => {
         params: {
             text: isConfirmation ? t("pincode.repeat") : t("pincode.create"),
             textColor: "#FFFFFF",
-            bgColor: "#424B56",
+            backgroundColor: "#424B56",
             isLoaderVisible: false,
             isEnabled: false,
             isVisible: true,
