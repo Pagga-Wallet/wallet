@@ -275,7 +275,7 @@ export const Swap: FC = () => {
                 ? t("swap-modal.confirm-swap")
                 : t("swap-modal.insufficient"),
             textColor: "#FFFFFF",
-            bgColor: "#424B56",
+            backgroundColor: "#424B56",
             isLoaderVisible: processing,
             isEnabled: !disableMainBtn,
             isVisible: !!(step === SwapSteps.swap && network && !showTokenList),
