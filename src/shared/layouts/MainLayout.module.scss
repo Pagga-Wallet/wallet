@@ -7,7 +7,7 @@
     overflow: auto;
     overflow-x: hidden;
     .content {
-        padding: 12px;
+        padding: 16px;
     }
 
     .bottom {
@@ -27,7 +27,7 @@
     .navbar {
         width: 100%;
 
-        padding: 16px 8px;
+        padding: 16px 16px;
         border-radius: 32px;
         border: 0.5px solid rgb(var(--border-secondary));
         background-color: rgb(var(--navbar-bg), 0.8);
