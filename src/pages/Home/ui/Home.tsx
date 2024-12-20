@@ -21,8 +21,10 @@ export const Home: FC = () => {
 
     const tabs = ["main.navigation.assets", "main.navigation.nft"];
 
-    const { data: accountBalance, isFetching: accountBalanceFetching } =
-        useFetchTotalBalanceQuery();
+    const {
+        data: accountBalance,
+        isFetching: accountBalanceFetching
+    } = useFetchTotalBalanceQuery();
 
     const navigate = useNavigate();
     const handleTokenSelect = useCallback(
@@ -30,11 +32,11 @@ export const Home: FC = () => {
             const query: TokenDetailQueryObj = {
                 platform: token.platform,
                 tokenContract: token.tokenContract,
-                isNativeToken: token.isNativeToken,
+                isNativeToken: token.isNativeToken
             };
             const url = queryString.stringifyUrl({
                 url: "/token",
-                query: Object(query),
+                query: Object(query)
             });
             navigate(url);
         },
@@ -57,12 +59,12 @@ export const Home: FC = () => {
                     /> */}
 
                 <div className={s.homeContent}>
-                    <TabSelector
+                    {/* <TabSelector
                         disabled={accountBalanceFetching}
                         activeTab={tab}
                         setActiveTab={setActiveTab}
                         tabs={tabs}
-                    />
+                    /> */}
                     {tab === "main.navigation.assets" && (
                         <TokensList
                             search

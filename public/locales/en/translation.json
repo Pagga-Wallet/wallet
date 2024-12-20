@@ -20,7 +20,6 @@
         "recovery-info-title": "Your recovery phrase",
         "wallet-list": "Wallet List",
         "change-password": "Change password",
-        "privacy-policy": "Privacy Policy",
         "account-deletion": "Account deletion",
         "security": "Security",
         "use-biometry": "Use biometry",
@@ -89,9 +88,6 @@
         "recipient": "Recipient",
         "sender": "Sender",
         "network": "Network"
-    },
-    "apps": {
-        "view-all": "View all"
     },
     "send-status": {
         "your-tx": "Your TX has been",
@@ -207,7 +203,6 @@
         "home": "Home",
         "swap": "Swap",
         "nft": "NFT",
-        "apps": "Apps",
         "settings": "Settings"
     },
     "pincode": {
@@ -287,12 +282,10 @@
         "not-found": "Not found.",
         "fee-is-to-high": "Fee is too high",
         "submit": "Submit",
-        "all-apps": "All Apps",
         "24-words": "24 Words",
         "12-words": "12 Words",
         "message": "Message",
         "comment": "Comment",
-        "privacy": "Privacy Policy",
         "version": "Change wallet version",
         "price-impact": "Price impact",
         "trading-fee": "Trading fee",
@@ -324,7 +317,6 @@
         "send": "Send",
         "in-stock": "In stock",
         "all": "All",
-        "apps-error-loading": "Error loading apps. Please try again later.",
         "coming-soon": "Coming soon",
         "select-module": "Select module",
         "import-token": "Import a token",

@@ -14,24 +14,6 @@ export interface WhitelistItem {
 
 export const jettonsWhitelist: WhitelistItem[] = [
     {
-        id: "DFC",
-        contract: "EQD26zcd6Cqpz7WyLKVH8x_cD6D7tBrom6hKcycv8L8hV0GP",
-        chain: CHAINS.TON,
-        order: 2,
-    },
-    {
-        id: "CES",
-        contract: "EQCl0S4xvoeGeFGijTzicSA8j6GiiugmJW5zxQbZTUntre-1",
-        chain: CHAINS.TON,
-        order: 3,
-    },
-    {
-        id: "ARBUZ",
-        contract: "EQAM2KWDp9lN0YvxvfSbI0ryjBXwM70rakpNIHbuETatRWA1",
-        order: 4,
-        chain: CHAINS.TON,
-    },
-    {
         id: "tether",
         contract: "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
         chain: CHAINS.TON,
@@ -39,13 +21,6 @@ export const jettonsWhitelist: WhitelistItem[] = [
     },
 ];
 export const ERC20TokensWhitelist: WhitelistItem[] = [
-    {
-        id: "ARBUZ",
-        contract: "0x10Ba2e5ac2e91d5A89Fe0f89bB625EBCefFf812D",
-        chain: CHAINS.ETH,
-        overrideIcon:
-            "https://cache.tonapi.io/imgproxy/HxPeXiiX4pF3QFOJCnpmcEO8scn3vZsMstfXySfK5oI/rs:fill:200:200:1/g:no/aHR0cHM6Ly9pLnBvc3RpbWcuY2MvWEpnVmY3cGIvYXJiLnBuZw.webp",
-    },
     {
         id: "tether-erc20",
         contract: USDT_ERC20_CONTRACT_CURRENT_NETWORK,

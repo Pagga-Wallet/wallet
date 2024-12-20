@@ -60,7 +60,6 @@ export const SettingsPage = () => {
         <PrivateLayout>
             <Container>
                 <Section title={t("settings.title")} icon={<SvgSelector id="settings-icon" />}>
-                    <Section.Link to="/privacy-policy">{t("settings.privacy-policy")}</Section.Link>
                     <Section.Link to="/ton-version">{t("settings.ton-version")}</Section.Link>
                     <Section.Button onClick={onResetData} danger>
                         {t("settings.reset")}
