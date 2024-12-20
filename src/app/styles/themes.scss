@@ -2,21 +2,23 @@
     /* light theme */
 
     /* dark theme tokens */
-    --primary-bg-dark: 33, 35, 37;
-    --secondary-bg-dark: 46, 53, 61;
-    --tertiary-bg-dark: 66, 75, 86;
+    --primary-bg-dark:  31, 31, 37;
+    --secondary-bg-dark: 40, 40, 47;
+    --tertiary-bg-dark: 55, 55, 64; 
     --opacity-bg-dark: 66, 75, 86, 0.3;
     --button-bg-dark: 86, 95, 106;
+    --navbar-bg-dark: 40, 40, 47;
 
     --border-dark: 65, 69, 79;
+    --border-secondary-dark: 55, 55, 64;
 
-    --placeholder-primary-dark: 255, 255, 255;
-    --placeholder-secondary-dark: 161, 172, 187;
+    --placeholder-primary-dark: 251, 251, 251;
+    --placeholder-secondary-dark: 168, 168, 181;  
     --placeholder-tertiary-dark: 138, 151, 170;
     --accent-brand-dark: 0, 122, 255;
     --accent-warning-dark: 251, 146, 60;
-    --accent-danger-dark: 255, 28, 69;
-    --accent-success-dark: 16, 185, 129;
+    --accent-danger-dark: 255, 59, 59;
+    --accent-success-dark: 84, 255, 144;
     --accent-waiting-dark: 37, 99, 235;
 }
 
@@ -42,6 +44,7 @@
     --primary-bg: var(--primary-bg-dark);
     --secondary-bg: var(--secondary-bg-dark);
     --tertiary-bg: var(--tertiary-bg-dark);
+    --navbar-bg: var(--navbar-bg-dark);
 
     --placeholder-primary: var(--placeholder-primary-dark);
     --placeholder-secondary: var(--placeholder-secondary-dark);
@@ -54,6 +57,7 @@
     --accent-waiting: var(--accent-waiting-dark);
 
     --border: var(--border-dark);
+    --border-secondary: var(--border-secondary-dark);
 
     --button-bg: var(--button-bg-dark);
 }

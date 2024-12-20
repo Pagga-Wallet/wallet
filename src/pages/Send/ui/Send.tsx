@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { initUtils } from "@tma.js/sdk";
+import { openLink } from "@telegram-apps/sdk-react";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -37,7 +37,6 @@ export const Send: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = useTranslation();
-    const utils = initUtils();
     const preselectedToken: TokenBalance | undefined = location.state?.preselectedToken;
     const isPreselectedToken = !!preselectedToken;
     const searchParams = new URLSearchParams(location.search);
@@ -158,7 +157,7 @@ export const Send: FC = () => {
             case SendSteps.confirm:
                 return onConfirm();
             case SendSteps.success:
-                return utils.openLink(
+                return openLink(
                     getExplorerLink({
                         userAddress: multichainAccount?.getAddressInNetwork(CHAINS.TON),
                         txHash: txResponse?.hash,

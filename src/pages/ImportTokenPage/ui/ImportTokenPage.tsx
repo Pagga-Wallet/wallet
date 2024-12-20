@@ -1,5 +1,5 @@
 import { skipToken } from "@reduxjs/toolkit/query";
-import { initBackButton } from "@tma.js/sdk-react";
+import { backButton } from "@telegram-apps/sdk-react";
 import { FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -72,7 +72,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
                     ? isValidToken && !isSavedToken
                     : !!(step === ImportTokenSteps.network && network),
             isLoaderVisible: isFetching,
-            bgColor: "#007AFF",
+            backgroundColor: "#007AFF",
         },
     });
 
@@ -90,7 +90,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, navigate]);
 
-    initBackButton();
+    backButton.mount()
     useSetupBackButton({
         onBack,
     });

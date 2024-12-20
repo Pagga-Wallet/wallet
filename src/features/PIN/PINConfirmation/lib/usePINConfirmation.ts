@@ -1,4 +1,4 @@
-import { initBiometryManager } from "@tma.js/sdk";
+import { biometry } from "@telegram-apps/sdk-react";
 import React from "react";
 // eslint-disable-next-line boundaries/element-types
 import { useGetUseBiometryQuery } from "@/features/PIN/PINConfirmation/model/confirmationService";
@@ -15,37 +15,31 @@ export const usePINConfirmation = () => {
     const { setState, reset, isOpen } = useStrictContext(confirmationContext);
     const [verifyPIN] = useLazyVerifyPINQuery();
     const { data: isUseBiometry } = useGetUseBiometryQuery();
-    const [biometryManagerInit] = initBiometryManager();
 
     const confirmViaBiometry = () =>
-        new Promise<string>((internalResolve, internalReject) => {
-            biometryManagerInit
-                .then(async (bm) => {
-                    try {
-                        await bm.requestAccess({ reason: "Use biometry authenticate" });
-                        const pin = await bm.authenticate({ reason: "PIN confirmation" });
-                        if (!pin) {
-                            return internalReject("Invalid PIN");
-                        }
-                        setState({
-                            pin,
-                        });
-                        const isValidPIN = await verifyPIN(pin).unwrap();
-                        if (!isValidPIN) {
-                            return internalReject("Invalid PIN");
-                        }
-                        setState({
-                            state: "success",
-                            isLoading: true,
-                        });
-                        internalResolve(pin);
-                    } catch {
-                        internalReject();
-                    }
-                })
-                .catch(() => {
-                    internalReject();
+        new Promise<string>(async (internalResolve, internalReject) => {
+            try {
+                await biometry.requestAccess({ reason: "Use biometry authenticate" });
+                const res = await biometry.authenticate({ reason: "PIN confirmation" });
+                const pin = res.token
+                if (!pin) {
+                    return internalReject("Invalid PIN");
+                }
+                setState({
+                    pin
                 });
+                const isValidPIN = await verifyPIN(pin).unwrap();
+                if (!isValidPIN) {
+                    return internalReject("Invalid PIN");
+                }
+                setState({
+                    state: "success",
+                    isLoading: true
+                });
+                internalResolve(pin);
+            } catch {
+                internalReject();
+            }
         });
 
     const confirmViaPIN = () =>
@@ -68,7 +62,7 @@ export const usePINConfirmation = () => {
                         }
                     }
                 },
-                onClose: () => internalReject(new Error("Reject Confirmation")),
+                onClose: () => internalReject(new Error("Reject Confirmation"))
             });
         });
 
@@ -78,11 +72,11 @@ export const usePINConfirmation = () => {
             setState({
                 isOpen: true,
                 title,
-                action,
+                action
             });
             if (isUseBiometry) {
                 confirmViaBiometry()
-                    .then((pin) => {
+                    .then(pin => {
                         setTimeout(() => {
                             resolve(pin);
                             reset();
@@ -90,25 +84,25 @@ export const usePINConfirmation = () => {
                     })
                     .catch(() => {
                         confirmViaPIN()
-                            .then((pin) => {
+                            .then(pin => {
                                 setTimeout(() => {
                                     resolve(pin);
                                     reset();
                                 }, 1000);
                             })
-                            .catch((error) => {
+                            .catch(error => {
                                 reject(error);
                             });
                     });
             } else {
                 confirmViaPIN()
-                    .then((pin) => {
+                    .then(pin => {
                         setTimeout(() => {
                             resolve(pin);
                             reset();
                         }, 1000);
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         reject(error);
                     });
             }
@@ -121,11 +115,11 @@ export const usePINConfirmation = () => {
             setState({
                 isOpen: true,
                 title,
-                action,
+                action
             });
             if (isUseBiometry) {
                 confirmViaBiometry()
-                    .then((pin) => {
+                    .then(pin => {
                         setTimeout(() => {
                             resolve(pin);
                             reset();
@@ -133,25 +127,25 @@ export const usePINConfirmation = () => {
                     })
                     .catch(() => {
                         confirmViaPIN()
-                            .then((pin) => {
+                            .then(pin => {
                                 setTimeout(() => {
                                     resolve(pin);
                                     reset();
                                 }, 1000);
                             })
-                            .catch((error) => {
+                            .catch(error => {
                                 reject(error);
                             });
                     });
             } else {
                 confirmViaPIN()
-                    .then((pin) => {
+                    .then(pin => {
                         setTimeout(() => {
                             resolve(pin);
                             reset();
                         }, 1000);
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         reject(error);
                     });
             }
@@ -160,6 +154,6 @@ export const usePINConfirmation = () => {
 
     return {
         confirm,
-        isOpen,
+        isOpen
     };
 };
