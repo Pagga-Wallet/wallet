@@ -7,7 +7,11 @@
     overflow: auto;
     overflow-x: hidden;
     .content {
-        padding: 16px;
+        padding: 16px 16px 90px 16px;
+        overflow-x: hidden;
+        &Zero {
+            padding-bottom: 20px !important;
+        }
     }
 
     .bottom {
@@ -30,7 +34,7 @@
         padding: 16px 16px;
         border-radius: 32px;
         border: 0.5px solid rgb(var(--border-secondary));
-        background-color: rgb(var(--navbar-bg), 0.8);
+        background: rgba(40, 40, 47, 0.80);
         backdrop-filter: blur(15.5px);
 
         display: flex;
@@ -88,5 +92,35 @@
         ~ .content {
             padding-bottom: 96px;
         }
+    }
+}
+
+.inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+    overflow-y: auto;
+    &Decor {
+        background: url("/blue-back.png") no-repeat center center;
+        background-size: cover;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        position: absolute;
+        z-index: -1;
+    }
+    &Content {
+        position: relative;
+        z-index: 2;
+        background: rgba(var(--foreground-primary), 1);
+        border-radius: 32px 32px 0 0;
+        padding: 40px 16px 120px 16px;
+        margin-top: auto;
     }
 }

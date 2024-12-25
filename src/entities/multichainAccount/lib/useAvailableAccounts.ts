@@ -15,13 +15,14 @@ export const useAvailableAccounts = () => {
                     return navigate("/home");
                 }
                 if (!res) {
-                    const isOnboarded = await telegramStorage.getIsOnboarded();
-                    if (isOnboarded === "true") {
-                        return navigate("/");
-                    }
-                    if (!isOnboarded || isOnboarded === "false") {
-                        return navigate("/introduction");
-                    }
+                    // const isOnboarded = await telegramStorage.getIsOnboarded();
+                    // if (isOnboarded === "true") {
+                    //     return navigate("/");
+                    // }
+                    // if (!isOnboarded || isOnboarded === "false") {
+                    //     return navigate("/introduction");
+                    // }
+                    return navigate("/");
                 }
             })
             .finally(() => {

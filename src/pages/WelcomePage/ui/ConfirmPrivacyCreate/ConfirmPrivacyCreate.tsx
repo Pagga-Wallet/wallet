@@ -1,11 +1,13 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Title } from "@/shared/components";
-import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
-import SecuritySticker from "@/shared/lib/gifs/security.gif";
+import { Checkbox, CustomButton, Title } from "@/shared/components";
+import { useSetupBackButton } from "@/shared/lib";
+import SecuritySticker from "@/shared/lib/images/safety.png";
 import { IntroductionSteps } from "../../types/IntroductionSteps";
 import s from "./ConfirmPrivacyCreate.module.sass";
+import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface ConfirmPrivacyCreateProps {
     setStep: React.Dispatch<React.SetStateAction<IntroductionSteps>>;
@@ -17,37 +19,51 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
 
     const onCreate = () => navigate("/create/mnemonic");
 
-    useSetupMainButton({
-        onClick: onCreate,
-        params: {
-            text: t("registration.create-wallet"),
-            isEnabled: true,
-            isVisible: true,
-        },
-    });
+    const [confirmedStates, setConfirmedStates] = useState<boolean[]>([false, false, false]);
+
+    const handleCheckboxChange = (index: number) => {
+        setConfirmedStates(prev => prev.map((state, i) => (i === index ? !state : state)));
+    };
 
     useSetupBackButton({
-        onBack: () => setStep(IntroductionSteps.hero),
+        onBack: () => setStep(IntroductionSteps.hero)
     });
 
+    const securityItems = [t("security.item-1"), t("security.item-2"), t("security.item-3")];
+
     return (
-        <div className={s.inner}>
-            <div className={s.innerImg}>
-                <img src={SecuritySticker} width={200} height={200} alt="security sticker" />
-            </div>
+        <>
+            <WithDecorLayout>
+                <div className={s.inner}>
+                    <div className={s.innerImg}>
+                        <img src={SecuritySticker} width={80} height={80} alt="security sticker" />
+                    </div>
 
-            <Title className={s.innerTitle} level={2}>
-                {t("security.title")}
-            </Title>
+                    <Title className={s.innerTitle} level={2}>
+                        {t("security.title")}
+                    </Title>
 
-            <ul className={s.innerList}>
-                {[...Array(3)].map((_, index) => (
-                    <li key={index} className={s.innerItem}>
-                        <div className={s.dot} />
-                        <p>{t(`security.item-${index + 1}`)}</p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+                    <ul className={s.innerList}>
+                        {securityItems.map((item, index) => (
+                            <li key={`security-item-${index}`} className={s.innerItem}>
+                                <Checkbox
+                                    isConfirmed={confirmedStates[index]}
+                                    setIsConfirmed={() => handleCheckboxChange(index)}
+                                />
+                                <p className={s.innerItemText}>{item}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    <CustomButton
+                        firstButton={{
+                            children: <>{t("registration.create-wallet")}</>,
+                            type: "purple",
+                            onClick: onCreate,
+                            isDisabled: !confirmedStates.every(state => state)
+                        }}
+                    />
+                </div>
+            </WithDecorLayout>
+        </>
     );
 };

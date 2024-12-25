@@ -1,22 +1,23 @@
 .chooseChain {
-    .title {
-        color: var(--Placeholder-Primary, #fff);
-        text-align: center;
-        font-size: 32px;
-        font-weight: 510;
-        margin-bottom: 8px;
-    }
-    .subtitle {
-        color: var(--Placeholder-Secondary, #94a3b8);
-        text-align: center;
-        font-size: 14px;
-
-        font-weight: 400;
+    padding: 15px 0 60px 0;
+    &Top {
         margin-bottom: 24px;
     }
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+    &Title {
+        text-align: left;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.48px;
+        margin-bottom: 8px;
     }
+    &Description {
+        color: rgb(var(--placeholder-secondary));
+    }
+}
+
+.buttonWithIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }

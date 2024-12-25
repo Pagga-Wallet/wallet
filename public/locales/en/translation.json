@@ -103,14 +103,13 @@
         "pay-invoice-btn": "Pay invoice"
     },
     "registration": {
-        "title-welcome": "Welcome to wallet",
-        "welcome-text1": "Send, buy and store TON",
-        "welcome-text2": "inside Telegram",
+        "title-welcome": "Pagga Wallet",
+        "welcome-text": "The first non-custodial multichain wallet in Telegram",
         "create-wallet": "Create Wallet",
         "import-wallet": "Import Wallet",
-        "import-wallet2": "Import Wallet",
-        "privacy-confirmation": "By continuing you agree to the disclaimer.",
-        "seed": "Enter your seed phrase"
+        "privacy-confirmation": "By continuing you agree to the",
+        "disclaimer": " disclaimer.",
+        "seed": "Enter a seed phrase of 12 or 24 words "
     },
     "receive": {
         "title": "Receive",
@@ -223,9 +222,9 @@
     },
     "security": {
         "title": "Safety",
-        "item-1": "Now the secret words will appear. Write them down in the correct order and keep them in a safe place.",
-        "item-2": "They allow you to access your wallet if you forget your password or lose access to this device.",
-        "item-3": "If anyone sees these words, your funds may be stolen. Make sure no one is nearby!"
+        "item-1": "Now the secret words will appear. Write them down in the correct order and keep them in a safe place.",
+        "item-2": "They allow you to access your wallet if you forget your password or lose access to that device.",
+        "item-3": "If someone sees these words, your funds may be stolen. Make sure no one is around!"
     },
     "exchanges-list": {
         "ton": {
@@ -266,7 +265,7 @@
         "password-dismatches": "Passwords dismatches",
         "password": "Enter password",
         "close": "Close",
-        "copy": "Copy",
+        "copy": "Copy to Clipboard",
         "incorrect-password": "Incorrect password",
         "are-you-sure": "Are you sure?",
         "info": "Info",
@@ -326,7 +325,8 @@
         "search-by-address": "Search by address",
         "title": "Title",
         "enter-recepients-address": "Enter recepient's address",
-        "save-mnemonic": "Save mnemonic",
+        "save-mnemonic": "Save the seed phrase",
+        "save-mnemonic-desc": "Write down 12 words",
         "i-saved-mnemonic": "I saved mnemonic",
         "mnemonics-copied": "Mnemonics copied",
         "continue": "Continue",
@@ -334,12 +334,13 @@
         "go-back": "Go back",
         "memo": "Memo",
         "memo-enter": "Enter memo",
-        "wordsMnemonic": "Enter 12 or 24 words",
+        "wordsMnemonic": "Enter a seed phrase",
         "pasteClipboard": "Paste from clipboard",
         "changing-pin": "Changing the PIN",
         "no-charts-data": "No data on schedule",
         "to-main": "To main page",
-        "save": "Save"
+        "save": "Save",
+        "done": "Done"
     },
     "introduction": {
         "multichain-title": "Wallet is now a multichain",

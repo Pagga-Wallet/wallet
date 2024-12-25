@@ -1,10 +1,16 @@
 .title {
-  margin-bottom: 8px;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.48px;
+    leading-trim: both;
+    text-edge: cap;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-  text-align: center;
-  margin-bottom: 16px;
+    text-align: left;
+    margin-bottom: 24px;
 
-  color: rgba(var(--placeholder-secondary), 1)
+    color: rgba(var(--placeholder-secondary), 1);
 }

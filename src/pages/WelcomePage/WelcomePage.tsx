@@ -9,12 +9,12 @@ export const WelcomePage: FC = () => {
     const [step, setStep] = useState<IntroductionSteps>(IntroductionSteps.hero);
 
     return (
-        <BaseLayout>
+        <>
             {step === IntroductionSteps.hero && <HeroStep setStep={setStep} />}
 
             {step === IntroductionSteps.confirmPrivacyCreate && (
                 <ConfirmPrivacyCreate setStep={setStep} />
             )}
-        </BaseLayout>
+        </>
     );
 };

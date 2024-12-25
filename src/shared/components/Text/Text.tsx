@@ -10,7 +10,7 @@ interface TextProps {
 }
 export const Text = ({ children, type = "primary", size = "medium", className }: TextProps) => {
     return (
-        <span
+        <p
             className={clsx(
                 styles.text,
                 {
@@ -21,6 +21,6 @@ export const Text = ({ children, type = "primary", size = "medium", className }:
             )}
         >
             {children}
-        </span>
+        </p>
     );
 };

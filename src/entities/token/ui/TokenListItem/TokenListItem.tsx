@@ -56,7 +56,7 @@ export const TokenListItem: FC<ITokenListItemProps> = ({
                         )}
                     </div>
                     <div className={s.price}>
-                        <div>
+                        <div className={s.priceInfo}>
                             <span className={s.priceMain}>$</span>
                             <AmountFormat className={s.priceMain} value={tokenPrice ?? 0} />
                         </div>

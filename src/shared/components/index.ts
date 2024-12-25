@@ -27,3 +27,6 @@ export { Toast } from "./Toast/Toast";
 export { Avatar } from "./Avatar/Avatar";
 export { Text } from "./Text/Text";
 export { CardDetails } from "./CardDetails/CardDetails";
+export { CustomButton } from "./CustomButton/CustomButton"
+export { UserInfo } from "./UserInfo/UserInfo";
+export { CreateCard } from "./CreateCard/CreateCard";

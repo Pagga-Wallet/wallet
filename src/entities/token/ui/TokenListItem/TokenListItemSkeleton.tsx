@@ -12,15 +12,15 @@ const Skeleton = (
             speed={2}
             width={"100%"}
             height={40}
-            viewBox="0 0 350 40"
-            backgroundColor={"rgb(var(--secondary-bg))"}
-            foregroundColor={"rgb(var(--tertiary-bg))"}
+            viewBox="0 0 475 40"
+            backgroundColor={"rgba(var(--foreground-secondary), 0.8)"}
+            foregroundColor={"rgb(var(--foreground-secondary))"}
         >
             <circle cx="20" cy="20" r="20" />
-            <rect x="48" y="23" rx="2" ry="2" width="100" height="12" />
-            <rect x="48" y="5" rx="2" ry="2" width="50" height="12" />
-            <rect x="280" y="5" rx="2" ry="2" width="70" height="12" />
-            <rect x="300" y="23" rx="2" ry="2" width="50" height="12" />
+            <rect x="48" y="30" rx="8" ry="2" width="100" height="15" />
+            <rect x="48" y="5" rx="8" ry="2" width="50" height="15" />
+            <rect x="400" y="5" rx="8" ry="2" width="50" height="15" />
+            <rect x="400" y="30" rx="8" ry="2" width="50" height="15" />
         </ContentLoader>
     </div>
 );

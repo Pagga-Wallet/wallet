@@ -7,13 +7,13 @@ import s from "./Checkbox.module.sass";
 
 interface CheckboxProps {
     isConfirmed: boolean;
-    setIsConfirmed: () => void;
+    setIsConfirmed: (value: boolean) => void;
 }
 
 export const Checkbox: FC<CheckboxProps> = ({ isConfirmed, setIsConfirmed }) => (
     <div
         className={clsx(s.checkbox, { [s.checkboxChecked]: isConfirmed })}
-        onClick={setIsConfirmed}
+        onClick={() => setIsConfirmed(!isConfirmed)}
     >
         {isConfirmed && <SvgSelector id="checked" />}
     </div>
