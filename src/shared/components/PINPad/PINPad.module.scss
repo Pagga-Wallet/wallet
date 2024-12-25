@@ -8,7 +8,7 @@
   bottom: 0;
   max-width: 500px;
   margin: 0 auto;
-  padding: 0;
+  padding: 32px 16px 0 16px;
 
   .action {
     display: flex;
@@ -17,7 +17,7 @@
 
   .top {
     flex: 1 1 100%;
-    min-height: 250px;
+    min-height: 210px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,11 +44,11 @@
         background-color: rgba(var(--accent-tertiary));
       }
       .failure {
-        background: rgba(var(--accent-green), 1);
+        background: rgba(var(--accent-red), 1);
       }
 
       .success {
-        background: rgba(var(--accent-red), 1);
+        background: rgba(var(--accent-green), 1);
       }
     }
 
