@@ -1,9 +1,9 @@
 .title {
-  color: var(--placeholder-primary, #FFFFFF);
+  color: rgba(var(--placeholder-primary), 1);
   font-weight: 510;
   text-align: center;
 
   &--1 {
-    font-size: 32px;
+    font-size: 24px;
   }
 }

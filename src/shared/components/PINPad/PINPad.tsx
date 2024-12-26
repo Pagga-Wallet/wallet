@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import styles from "./PINPad.module.scss";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export interface PINPadProps {
     title: string;
@@ -85,7 +86,7 @@ export const PINPad = ({
     }, [state]);
 
     return (
-        <div className={styles.pincode}>
+        <WithDecorLayout className={styles.pincode} withoutPadding>
             {action && <div className={styles.action}>{action}</div>}
             <div className={styles.top}>
                 {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
@@ -134,6 +135,6 @@ export const PINPad = ({
                     <SvgSelector id="pinpud-delete" />
                 </button>
             </div>
-        </div>
+        </WithDecorLayout>
     );
 };

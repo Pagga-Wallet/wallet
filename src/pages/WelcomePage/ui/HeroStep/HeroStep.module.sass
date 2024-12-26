@@ -2,44 +2,62 @@
   display: flex
   flex-direction: column
   justify-content: space-between
-  height: 95vh
+  height: 100%
+  min-height: 100vh
+  max-width: 500px
+  margin: 0 auto
   overflow-y: auto
-
+  &Decor
+    background: url("/blue-back.png") no-repeat center center
+    background-size: cover
+    height: 100%
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    position: absolute
+    z-index: -1
   .hero
-    flex: 1 1 auto
-    &Gif
-      display: block
-      margin: 0 auto
-      width: 180px
-      height: 180px
-      margin-bottom: 24px
-
-    &Title
-      color: var(--Placeholder-Primary, #fff)
-      font-size: 32px
-      font-weight: 510
-      text-align: center
-
-    &Description
-      font-size: 16px
-      text-align: center
-      margin-top: 15px
-
-  .privacyConfirm
-    display: flex
-    align-items: center
-    gap: 10px
-    margin: 15px 0
-    a
-      cursor: pointer
-      text-decoration: underline !important
-      transition: color 0.3s ease 0s
-      color: var(--Placeholder-Primary, #fff)
-      transition: all 0.3s ease 0s
-      &:hover
-        color: var(--Telegram-button_color, #007aff)
-
-  .actions
+    position: relative
+    z-index: 2
+    background: rgba(var(--foreground-primary), 1)
+    border-radius: 32px 32px 0 0
+    padding: 16px 16px 30px 16px
     display: flex
     flex-direction: column
-    gap: 8px
+    gap: 32px
+    margin-top: auto
+    &Info
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-direction: column
+      gap: 16px
+    img
+      animation: levitate 3s ease-in-out infinite
+    &Title
+      font-size: 32px
+      font-weight: 700
+    &Description
+      text-align: center
+    &Actions
+      button:not(:last-child)
+        margin-bottom: 12px
+    &Privacy
+      text-align: center
+      color: rgb(var(--placeholder-secondary))
+      a
+        color: rgb(var(--accent-tertiary))
+        transition: all 0.3s ease 0s
+        &:hover
+          text-decoration: underline !important
+
+@keyframes levitate
+  0%
+    transform: translateY(0)
+
+  50%
+    transform: translateY(-10px)
+
+  100%
+    transform: translateY(0)

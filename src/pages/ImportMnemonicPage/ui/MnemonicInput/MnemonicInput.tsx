@@ -17,8 +17,9 @@ import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 interface MnemonicInputProps {
     onChange(words: string[]): void;
+    isImport?: boolean;
 }
-export const MnemonicInput = ({ onChange }: MnemonicInputProps) => {
+export const MnemonicInput = ({ onChange, isImport }: MnemonicInputProps) => {
     const { t } = useTranslation();
 
     return (
@@ -26,8 +27,9 @@ export const MnemonicInput = ({ onChange }: MnemonicInputProps) => {
             <WordArea
                 onChange={onChange}
                 placeholder={t("common.wordsMnemonic")}
+                isImport={isImport}
                 buttonProps={{
-                    icon: <SvgSelector id="copy" />,
+                    icon: <SvgSelector id="copy-2" />,
                     children: t("common.pasteClipboard"),
                     onClick: async (setWords) => {
                         try {

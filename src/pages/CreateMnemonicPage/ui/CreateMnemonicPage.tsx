@@ -5,12 +5,13 @@ import { useCreateConfirm, useFirstCreate } from "@/features/account/add";
 import { useGetUseBiometryQuery, usePINConfirmation } from "@/features/PIN";
 import { usePINCreation } from "@/features/PIN";
 import { ICreateAccountResult, useCreateAccountMutation } from "@/entities/multichainAccount";
-import { Loader, Title, WordArea } from "@/shared/components";
+import { CustomButton, Loader, Text, Title, WordArea } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib/hooks";
 import s from "./CreateMnemonicPage.module.scss";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const CreateMnemonicPage: FC = () => {
     const [state, setState] = useState<ICreateAccountResult | null>(null);
@@ -31,7 +32,7 @@ export const CreateMnemonicPage: FC = () => {
     useEffect(() => {
         createAccount()
             .unwrap()
-            .then((res) => setState(res));
+            .then(res => setState(res));
     }, []);
 
     const onClick = useCallback(() => {
@@ -44,40 +45,49 @@ export const CreateMnemonicPage: FC = () => {
         }
     }, [state, createConfirm, isLoading, navigate]);
 
-    useSetupMainButton({
-        onClick,
-        params: {
-            text: t("common.i-saved-mnemonic"),
-            textColor: "#FFFFFF",
-            backgroundColor: "#007AFF",
-            isEnabled: !isLoading,
-            isVisible: true,
-            isLoaderVisible: isLoading,
-        },
-    });
+    const handleCopy = () => {
+        if (!state?.mainMnemonic) return;
+        navigator.clipboard.writeText(state?.mainMnemonic);
+        sendNotification(t("common.mnemonics-copied"), "success");
+    };
 
     return (
         <>
             {!state || isLoading ? (
                 <Loader />
             ) : (
-                <BaseLayout>
-                    <div className={s.chooseChain}>
-                        <Title>{t("common.save-mnemonic")}</Title>
-                        <WordArea
-                            disabled
-                            value={state.mainMnemonic.split(" ")}
-                            buttonProps={{
-                                icon: <SvgSelector id="copy" />,
-                                children: t("common.copy"),
-                                onClick: (_, words) => {
-                                    navigator.clipboard.writeText(words.join(" "));
-                                    sendNotification(t("common.mnemonics-copied"), "success");
-                                },
+                <>
+                    <WithDecorLayout>
+                        <div className={s.chooseChain}>
+                            <div className={s.chooseChainTop}>
+                                <Title className={s.chooseChainTitle}>
+                                    {t("common.save-mnemonic")}
+                                </Title>
+                                <Text className={s.chooseChainDescription}>
+                                    {t("common.save-mnemonic-desc")}
+                                </Text>
+                            </div>
+                            <WordArea disabled value={state.mainMnemonic.split(" ")} />
+                        </div>
+                        <CustomButton
+                            secondaryButton={{
+                                children: <>{t("common.done")}</>,
+                                type: "purple",
+                                onClick: onClick,
+                                isDisabled: isLoading
+                            }}
+                            firstButton={{
+                                children: (
+                                    <div className={s.buttonWithIcon}>
+                                        <SvgSelector id="copy" /> {t("common.copy")}
+                                    </div>
+                                ),
+                                onClick: handleCopy,
+                                type: "grey"
                             }}
                         />
-                    </div>
-                </BaseLayout>
+                    </WithDecorLayout>
+                </>
             )}
         </>
     );

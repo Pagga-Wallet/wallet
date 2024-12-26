@@ -302,17 +302,38 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
                     fill="none"
                 >
                     <path
-                        d="M13.0303 13.0302H16.6667V3.33325H6.96969V6.96962M3.33333 6.96962H13.0303V16.6666H3.33333V6.96962Z"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        d="M6.75 10.6875H11.25"
+                        stroke="#FBFBFB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M6.75 8.4375H11.25"
+                        stroke="#FBFBFB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M11.25 2.8125H14.0625C14.2117 2.8125 14.3548 2.87176 14.4602 2.97725C14.5657 3.08274 14.625 3.22582 14.625 3.375V15.1875C14.625 15.3367 14.5657 15.4798 14.4602 15.5852C14.3548 15.6907 14.2117 15.75 14.0625 15.75H3.9375C3.78832 15.75 3.64524 15.6907 3.53975 15.5852C3.43426 15.4798 3.375 15.3367 3.375 15.1875V3.375C3.375 3.22582 3.43426 3.08274 3.53975 2.97725C3.64524 2.87176 3.78832 2.8125 3.9375 2.8125H6.75"
+                        stroke="#FBFBFB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M6.1875 5.0625V4.5C6.1875 3.75408 6.48382 3.03871 7.01126 2.51126C7.53871 1.98382 8.25408 1.6875 9 1.6875C9.74592 1.6875 10.4613 1.98382 10.9887 2.51126C11.5162 3.03871 11.8125 3.75408 11.8125 4.5V5.0625H6.1875Z"
+                        stroke="#FBFBFB"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                     />
                 </svg>
             );
@@ -528,17 +549,17 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="20"
-                    viewBox="0 0 11 20"
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
                     fill="none"
                 >
                     <path
-                        d="M1 19L10 10L1 1"
-                        stroke={isTg ? "var(--tg-theme-button-color)" : "#007AFF"}
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        d="M7.5 4.25L13.75 10.5L7.5 16.75"
+                        stroke="#7F7F91"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                     />
                 </svg>
             );
@@ -565,17 +586,20 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                     fill="none"
                 >
                     <path
-                        d="M5 12.2381L9.8125 17L19 7"
-                        stroke="#F7F8F9"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        d="M0 4C0 1.79086 1.79086 0 4 0H16C18.2091 0 20 1.79086 20 4V16C20 18.2091 18.2091 20 16 20H4C1.79086 20 0 18.2091 0 16V4Z"
+                        fill="#664AF2"
+                    />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15.5 7.52475L9.11561 14.2878C8.84847 14.5707 8.41536 14.5707 8.14823 14.2878L4.5 10.4232L5.46738 9.39844L8.63192 12.7506L14.5326 6.5L15.5 7.52475Z"
+                        fill="white"
                     />
                 </svg>
             );
@@ -1266,6 +1290,24 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                         clip-rule="evenodd"
                         d="M6.95989 3.29289C7.35041 2.90237 7.98357 2.90237 8.3741 3.29289L11.8741 6.79289C12.2646 7.18342 12.2646 7.81658 11.8741 8.20711C11.4836 8.59763 10.8504 8.59763 10.4599 8.20711L8.66699 6.41421V17C8.66699 17.5523 8.21928 18 7.66699 18C7.11471 18 6.66699 17.5523 6.66699 17V6.41421L4.8741 8.20711C4.48357 8.59763 3.85041 8.59763 3.45989 8.20711C3.06936 7.81658 3.06936 7.18342 3.45989 6.79289L6.95989 3.29289ZM17.667 7C18.2193 7 18.667 7.44772 18.667 8V17.5858L20.4599 15.7929C20.8504 15.4024 21.4836 15.4024 21.8741 15.7929C22.2646 16.1834 22.2646 16.8166 21.8741 17.2071L18.3741 20.7071C17.9836 21.0976 17.3504 21.0976 16.9599 20.7071L13.4599 17.2071C13.0694 16.8166 13.0694 16.1834 13.4599 15.7929C13.8504 15.4024 14.4836 15.4024 14.8741 15.7929L16.667 17.5858V8C16.667 7.44772 17.1147 7 17.667 7Z"
                         fill="white"
+                    />
+                </svg>
+            );
+        case "checked-purple":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                >
+                    <path
+                        d="M3.125 11.25L7.5 15.625L17.5 5.625"
+                        stroke="#A999F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                     />
                 </svg>
             );

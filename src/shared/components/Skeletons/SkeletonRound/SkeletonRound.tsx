@@ -25,8 +25,8 @@ export const SkeletonRound: FC<SkeletonRoundProps> = ({
             width={widthValue}
             height={height}
             viewBox={`0 0 ${widthValue} ${height}`}
-            backgroundColor={"rgb(var(--secondary-bg))"}
-            foregroundColor={"rgb(var(--tertiary-bg))"}
+            backgroundColor={"rgba(var(--foreground-primary), 0.8)"}
+            foregroundColor={"rgb(var(--foreground-primary))"}
             {...rest}
         >
             <rect x="0" y="0" rx="10" ry="10" width="100%" height={height} />
