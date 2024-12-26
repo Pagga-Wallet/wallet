@@ -5,7 +5,6 @@ import {
     IMultiwallet,
     TON_ADDRESS_INTERFACES,
 } from "@/shared/lib/types/multichainAccount";
-import Statistics from "@/shared/statistics";
 import {
     ACCOUNT_IDS_ARRAY,
     ADDRESS_FIELD,
@@ -186,7 +185,6 @@ export class TelegramStorage {
             // Обновляем массив аккаунтов
             await this.save(ACCOUNT_IDS_ARRAY, JSON.stringify([...accountIds, account.id]));
             await this.saveAccount(account);
-            Statistics.sendInitStat().then(() => {});
             return true;
         } catch (error) {
             console.error(error);

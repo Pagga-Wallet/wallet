@@ -14,7 +14,6 @@ import { ImportTokenPage } from "./ImportTokenPage";
 import { IntroductionPage } from "./IntroductionPage";
 import { NftDetail } from "./NftDetail/NftDetail";
 import { NftSendPage } from "./NftSendPage/";
-import { PrivacyPage } from "./Privacy";
 import { ReceivePage } from "./ReceivePage";
 import { RecoveryPhrasePage } from "./RecoveryPhrasePage/RecoveryPhrasePage";
 import { RenewPage } from "./RenewPage/RenewPage";
@@ -24,6 +23,7 @@ import { Swap } from "./Swap";
 import { TokenDetail } from "./TokenDetail";
 import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
+import { PrivacyPolicy } from "./PrivacyPolicy/ui";
 
 export const Routing = () => {
     return (
@@ -50,9 +50,9 @@ export const Routing = () => {
                     <Route path="/account/:id" element={<AccountPage />} />
                     <Route path="/account/:id/recovery" element={<RecoveryPhrasePage />} />
 
-                    <Route path="/privacy-policy" element={<PrivacyPage />} />
+                    {/* <Route path="/swap" element={<Swap />} /> */}
 
-                    <Route path="/swap" element={<Swap />} />
+                    <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
                     <Route path="/import/token" element={<ImportTokenPage />} />
 
@@ -65,8 +65,8 @@ export const Routing = () => {
                         element={<ConnectWalletListPage />}
                     />
 
-                    <Route path="/introduction" element={<IntroductionPage />} />
-                    <Route path="/introduction/renew" element={<RenewPage />} />
+                    {/* <Route path="/introduction" element={<IntroductionPage />} />
+                    <Route path="/introduction/renew" element={<RenewPage />} /> */}
 
                     <Route path="/transaction" element={<TransactionPage />} />
                 </Routes>

@@ -10,6 +10,7 @@ interface SettingsRadioProps {
     onSelect?: () => void;
     className?: ClassValue;
     disabled?: boolean;
+    withoutCheckbox?: boolean;
 }
 
 export const SectionRadio = ({
@@ -18,6 +19,7 @@ export const SectionRadio = ({
     onSelect,
     className,
     disabled,
+    withoutCheckbox = false
 }: SettingsRadioProps) => {
     return (
         <Radio
@@ -35,7 +37,7 @@ export const SectionRadio = ({
 
             {checked && (
                 <span className={styles.item__icon}>
-                    <SvgSelector id="checked" />
+                    <SvgSelector id={withoutCheckbox ? "checked-purple" : "checked"} />
                 </span>
             )}
         </Radio>

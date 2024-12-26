@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useCreateConfirm, useFirstCreate } from "@/features/account/add";
 import { useGetUseBiometryQuery, usePINConfirmation, usePINCreation } from "@/features/PIN";
 import { useImportAccountMutation } from "@/entities/multichainAccount";
-import { Loader, Title } from "@/shared/components";
+import { CustomButton, Loader, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
 import styles from "./ImportMnemonicPage.module.scss";
 import { MnemonicInput } from "./MnemonicInput/MnemonicInput";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const ImportMnemonicPage = () => {
     const { t } = useTranslation();
@@ -52,23 +53,23 @@ export const ImportMnemonicPage = () => {
     }, [error]);
 
     useSetupBackButton();
-    useSetupMainButton({
-        onClick,
-        params: {
-            text: t("registration.import-wallet2"),
-            isVisible: true,
-            isEnabled,
-            isLoaderVisible: importAccountLoading || isLoading,
-        },
-    });
 
     return isLoading ? (
         <Loader />
     ) : (
-        <BaseLayout>
-            <Title className={styles.title}>{t("registration.import-wallet2")}</Title>
+        <WithDecorLayout>
+            <Title className={styles.title}>{t("common.import")}</Title>
             <div className={styles.subtitle}>{t("registration.seed")}</div>
-            <MnemonicInput onChange={onChange} />
-        </BaseLayout>
+            <MnemonicInput onChange={onChange} isImport />
+
+            <CustomButton
+                firstButton={{
+                    children: <>{t("common.done")}</>,
+                    type: "purple",
+                    onClick: onClick,
+                    isDisabled: importAccountLoading || isLoading
+                }}
+            />
+        </WithDecorLayout>
     );
 };

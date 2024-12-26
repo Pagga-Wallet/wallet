@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PINPad } from "@/shared/components";
-import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
+import { useSetupBackButton } from "@/shared/lib";
 
 interface PINCreationProps {
     onSuccess: (pin: string) => void;
@@ -25,18 +25,7 @@ export const PINCreation = ({ onSuccess, onBack }: PINCreationProps) => {
     };
 
     useSetupBackButton({
-        onBack,
-    });
-
-    useSetupMainButton({
-        params: {
-            text: isConfirmation ? t("pincode.repeat") : t("pincode.create"),
-            textColor: "#FFFFFF",
-            backgroundColor: "#424B56",
-            isLoaderVisible: false,
-            isEnabled: false,
-            isVisible: true,
-        },
+        onBack
     });
 
     useEffect(() => {

@@ -1,7 +1,5 @@
 .text {
-  &--secondary {
-    color: rgb(var(--placeholder-secondary));
-  }
+  color: rgba(var(--placeholder-secondary), 1); 
   &--small {
     font-size: 14px;
   }

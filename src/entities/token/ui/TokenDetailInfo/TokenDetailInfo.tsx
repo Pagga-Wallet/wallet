@@ -22,8 +22,8 @@ export const TokenDetailInfo: FC<TokenDetailInfoProps> = ({ token }) => {
     const onSendClick = () => {
         navigate("/send", {
             state: {
-                preselectedToken: token,
-            },
+                preselectedToken: token
+            }
         });
     };
 
@@ -53,7 +53,7 @@ export const TokenDetailInfo: FC<TokenDetailInfoProps> = ({ token }) => {
                     </button>
                     <div className={s.title}>{t("main.buy-btn")}</div>
                 </div> */}
-                <div className={s.action}>
+                {/* <div className={s.action}>
                     <button
                         className={s.icon_button}
                         onClick={() =>
@@ -67,7 +67,7 @@ export const TokenDetailInfo: FC<TokenDetailInfoProps> = ({ token }) => {
                         <SvgSelector id="buy" />
                     </button>
                     <div className={s.title}>{t("main.swap-btn")}</div>
-                </div>
+                </div> */}
                 <div className={s.action} onClick={onSendClick}>
                     <button className={s.icon_button}>
                         <SvgSelector id="send" />

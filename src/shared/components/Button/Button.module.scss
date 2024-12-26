@@ -1,28 +1,36 @@
 .button {
-    padding: 14px 0;
+    padding: 12px 0;
+    height: 46px;
     width: 100%;
-    font-size: 17px;
-    font-weight: 590;
-    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 120px;
     cursor: pointer;
     outline: none;
     border: none;
     transition: all 0.3s ease 0s;
+    &:hover {
+        opacity: 0.85;
+    }
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
 }
 
-.primary {
-    background-color: var(--Telegram-button_color, #007aff);
-    color: var(--Telegram-button_text_color, #fff);
+.purple {
+    background-color: rgba(var(--accent-primary));
+    color: rgba(var(--placeholder-primary), 1);
+    &:disabled {
+        background-color: rgba(var(--accent-primary));
+    }
 }
 
-.secondary {
-    color: var(--Telegram-link_color, #007aff);
-    background: rgba(0, 122, 255, 0.1);
+.grey {
+    background-color: rgba(var(--foreground-secondary));
+    color: rgba(var(--placeholder-primary), 1);
+    &:disabled {
+        background-color: rgba(var(--accent-primary));
+    }
 }
 
-button:disabled {
-    opacity: 0.3;
-    color: var(--placeholder-primary);
-    background: var(--Telegram-button_color, #007aff);
-    cursor: not-allowed;
-}

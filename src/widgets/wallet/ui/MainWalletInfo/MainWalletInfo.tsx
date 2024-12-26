@@ -8,7 +8,7 @@ import { useQRScanner } from "@/features/qrScanner";
 import {
     multichainAccountStore,
     useFetchAccountsQuery,
-    useFetchTotalBalanceQuery,
+    useFetchTotalBalanceQuery
 } from "@/entities/multichainAccount";
 import { Emoji } from "@/shared/components";
 import { SkeletonRect } from "@/shared/components/Skeletons";
@@ -36,12 +36,12 @@ export const MainWalletInfo: FC = () => {
 
     const { data: accounts } = useFetchAccountsQuery();
 
-    const currentAccountName = accounts?.find((account) => account?.id === currentAccount?.id);
+    const currentAccountName = accounts?.find(account => account?.id === currentAccount?.id);
 
     const {
         data: accountBalance,
         refetch: refetchBalance,
-        isFetching,
+        isFetching
     } = useFetchTotalBalanceQuery();
 
     const [rotation, setRotation] = useState<number>(0);
@@ -58,7 +58,7 @@ export const MainWalletInfo: FC = () => {
                 <button className={s.icon_button} disabled={isDesktop} onClick={scanHandle}>
                     <SvgSelector id="qr-code-2" />
                 </button>
-                {currentAccount && (
+                {/* {currentAccount && (
                     <div
                         className={clsx(s.address, s.addressInner)}
                         onClick={() => setIsWalletsListOpen(true)}
@@ -72,7 +72,7 @@ export const MainWalletInfo: FC = () => {
                         </div>
                         <SvgSelector id="chevron-bottom-white" />
                     </div>
-                )}
+                )} */}
                 <motion.button
                     className={clsx(s.icon_button, s.icon_buttonReload)}
                     animate={{ rotate: rotation }}
@@ -87,7 +87,7 @@ export const MainWalletInfo: FC = () => {
             <div
                 className={s.balance}
                 style={{
-                    fontSize: getFontSize(formatNumber(String(accountBalance?.totalUSDBalance))),
+                    fontSize: getFontSize(formatNumber(String(accountBalance?.totalUSDBalance)))
                 }}
             >
                 {isFetching ? (
@@ -98,12 +98,12 @@ export const MainWalletInfo: FC = () => {
             </div>
 
             <div className={clsx(s.bottom, { [s["bottomDisabled"]]: isFetching })}>
-                <div className={s.action} onClick={() => navigate("/swap")}>
+                {/* <div className={s.action} onClick={() => navigate("/swap")}>
                     <button className={s.icon_button}>
                         <SvgSelector id="swap-icon-white" />
                     </button>
                     <div className={s.title}>{t("menu.swap")}</div>
-                </div>
+                </div> */}
                 <div className={s.action} onClick={() => navigate("/send")}>
                     <button className={s.icon_button}>
                         <SvgSelector id="send" />

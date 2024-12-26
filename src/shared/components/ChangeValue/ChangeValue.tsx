@@ -11,9 +11,9 @@ interface IChangeValueProps {
 
 export const ChangeValue: FC<IChangeValueProps> = ({ percent, value = 0, className }) => {
     const isNonNegative = value >= 0;
-    const color = `rgb(var(${isNonNegative ? "--accent-success" : "--accent-danger"}))`;
+    const color = `rgb(var(${isNonNegative ? "--accent-green" : "--accent-red"}))`;
     return (
-        <div className={clsx(s.changeValue, className)} style={{ fontWeight: 510, color }}>
+        <div className={clsx(s.changeValue, className)} style={{ fontWeight: 500, color, fontSize: 13 }}>
             {isNonNegative ? "+" : "-"}
             {formatNumber(Math.abs(value))}
             {percent ? "%" : null}

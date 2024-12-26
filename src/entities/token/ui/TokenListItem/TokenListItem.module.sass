@@ -13,10 +13,10 @@
             background: transparent !important
     &:last-child
         border-radius: 0 0 24px 24px
-    &:active
-        background: rgba(var(--placeholder-tertiary), 0.2)
-    &:hover
-        background: rgba(var(--placeholder-tertiary), 0.2)
+    // &:active
+    //     background: rgba(var(--placeholder-tertiary), 0.2)
+    // &:hover
+    //     background: rgba(var(--placeholder-tertiary), 0.2)
     &:not(:last-child)::before
         content: ''
         position: absolute
@@ -40,23 +40,39 @@
                 display: flex
                 align-items: center
                 gap: 4px
+                height: 24px
                 margin-bottom: 2px
                 span
                     font-size: 16px
-                    font-weight: 510
+                    font-weight: 500
+                    letter-spacing: 0.32px
             .price
                 display: flex
                 align-items: center
-                font-size: 13px
                 gap: 5px
+                &Info
+                    display: flex
+                    align-items: center
+                    height: 19px
                 &Main
+                    font-size: 13px
                     color: rgb(var(--placeholder-secondary))
-                    font-weight: 510
+                    font-weight: 500
     .total
         text-align: right
         &Count
-            font-weight: 510
+            font-weight: 500
+            font-size: 15px
+            letter-spacing: 0.3px
+            display: flex
+            align-items: center
+            justify-content: flex-end
+            height: 22px
             margin-bottom: 2px
         &Amount
-            color: var(--Placeholder-Secondary, #94a3b8)
-            font-size: 14px
+            height: 19px
+            display: flex
+            align-items: center
+            font-size: 13px
+            letter-spacing: 0.78px
+            color: rgb(var(--placeholder-secondary))

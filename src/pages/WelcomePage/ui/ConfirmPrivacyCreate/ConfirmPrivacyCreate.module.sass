@@ -3,34 +3,24 @@
   flex-direction: column
   align-items: center
   justify-content: center
+  height: 100%
   padding: 0 16px
 
   &Img
-    margin-bottom: 24px
+    margin-bottom: 32px
 
   &Title
     font-size: 32px
-    font-weight: 540
-    letter-spacing: -0.264px
-    color: rgb(var(--placeholder-primary))
-    margin-bottom: 24px
+    font-weight: 700
+    letter-spacing: 0.64px
+    margin-bottom: 32px
 
   &Item
     display: flex
-    align-items: flex-start
-    gap: 14px
-    margin-bottom: 16px
-    .dot
-      margin-top: 8px
-      min-width: 6px
-      min-height: 6px
-      background: rgba(var(--placeholder-primary), 1)
-      border-radius: 50%
-    > div
-      margin-top: 3px
-
-  &Item > p
-    cursor: pointer
-    font-size: 16px
-    color: rgba(var(--placeholder-primary), 0.8)
-    letter-spacing: -0.5px
+    align-items: center
+    gap: 12px
+    padding: 12px
+    border-radius: 16px
+    background: rgba(var(--foreground-secondary), 1)
+    &:not(:last-child)
+      margin-bottom: 12px

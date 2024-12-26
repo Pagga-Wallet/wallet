@@ -4,18 +4,28 @@ import { useNavigate } from "react-router-dom";
 import { useChangePIN, usePINConfirmation } from "@/features/PIN";
 import {
     useGetUseBiometryQuery,
-    useSetUseBiometryMutation,
+    useSetUseBiometryMutation
 } from "@/features/PIN/PINConfirmation/model/confirmationService";
 import { telegramStorage } from "@/shared/api/telegramStorage";
-import { Section, Container } from "@/shared/components";
+import { Section, Container, Title } from "@/shared/components";
 import { PrivateLayout } from "@/shared/layouts";
 import { useSetupBackButton } from "@/shared/lib";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
+import BIOMETRY from "@/shared/lib/images/icons/biometry.svg?react";
+import NUMPAD from "@/shared/lib/images/icons/numpad.svg?react";
+import WALLET_CONNECT from "@/shared/lib/images/icons/wallet-connect.svg?react";
+import TON_CONNECT from "@/shared/lib/images/icons/ton-connect.svg?react";
+import RU_LANG from "@/shared/lib/images/icons/ru.svg?react";
+import ENG_LANG from "@/shared/lib/images/icons/eng.svg?react";
+import DELETE from "@/shared/lib/images/icons/delete.svg?react";
+
+import s from "./SettingPage.module.sass";
+
 export const SettingsPage = () => {
     const {
         t,
-        i18n: { changeLanguage, language },
+        i18n: { changeLanguage, language }
     } = useTranslation();
     const { confirm } = usePINConfirmation();
     const navigate = useNavigate();
@@ -44,7 +54,7 @@ export const SettingsPage = () => {
     const onChangeUseBiometry = async (value: boolean) => {
         if (value) {
             const pin = await confirm({
-                title: t("pincode.enter"),
+                title: t("pincode.enter")
             });
             await biometry.requestAccess({ reason: "" });
             await biometry.updateToken({ token: pin });
@@ -53,52 +63,78 @@ export const SettingsPage = () => {
     };
 
     return (
-        <PrivateLayout>
-            <Container>
-                <Section title={t("settings.title")} icon={<SvgSelector id="settings-icon" />}>
-                    <Section.Link to="/privacy-policy">{t("settings.privacy-policy")}</Section.Link>
+        <PrivateLayout className={s.inner}>
+            <div className={s.innerDecor}></div>
+            <Title level={1} className={s.innerTitle}>{t("menu.settings")}</Title>
+            <Container className={s.innerContent}>
+                {/* <Section title={t("settings.title")}>
                     <Section.Link to="/ton-version">{t("settings.ton-version")}</Section.Link>
-                    <Section.Button onClick={onResetData} danger>
-                        {t("settings.reset")}
-                    </Section.Button>
-                </Section>
-                <Section title={t("settings.security")} icon={<SvgSelector id="security-icon" />}>
+                </Section> */}
+                <Section title={t("settings.security")}>
                     <Section.Switch
                         disabled={isFetchingBiometry || isSettingBiometry}
                         onChange={onChangeUseBiometry}
                         value={isUsedBiometry}
                     >
-                        {t("settings.use-biometry")}
+                        <div className={s.innerItem}>
+                            <BIOMETRY />
+                            {t("settings.use-biometry")}
+                        </div>
                     </Section.Switch>
                     <Section.Button onClick={changePIN}>
-                        {t("settings.change-password")}
+                        <div className={s.innerItem}>
+                            <NUMPAD />
+                            {t("settings.change-password")}
+                        </div>
                     </Section.Button>
                 </Section>
-                <Section icon={<SvgSelector id="apps-icon" />} title="dApps">
-                    {/* <Section.Link disabled to="">
-                        Wallet Connect
-                    </Section.Link> */}
-                    <Section.Link oneElement to="/connect/wallet-connect-list">
-                        TON Connect
+                <Section title="dApps">
+                    <Section.Link disabled to="">
+                        <div className={s.innerItem}>
+                            <WALLET_CONNECT />
+                            Wallet Connect
+                        </div>
+                    </Section.Link>
+                    <Section.Link to="/connect/wallet-connect-list">
+                        <div className={s.innerItem}>
+                            <TON_CONNECT />
+                            TON Connect
+                        </div>
                     </Section.Link>
                 </Section>
-                <Section icon={<SvgSelector id="language" />} title={t("settings.language")}>
+                <Section title={t("settings.language")}>
                     <Section.Radio
                         checked={language === "ru"}
                         onSelect={() => {
                             onChangeLang("ru");
                         }}
+                        withoutCheckbox
                     >
-                        Русский
+                        <div className={s.innerItem}>
+                            <RU_LANG />
+                            Русский
+                        </div>
                     </Section.Radio>
                     <Section.Radio
                         checked={language === "en"}
                         onSelect={() => {
                             onChangeLang("en");
                         }}
+                        withoutCheckbox
                     >
-                        English
+                        <div className={s.innerItem}>
+                            <ENG_LANG />
+                            English
+                        </div>
                     </Section.Radio>
+                </Section>
+                <Section>
+                    <Section.Button onClick={onResetData} danger isLast>
+                        <div className={s.innerItem}>
+                            <DELETE />
+                            {t("settings.reset")}
+                        </div>
+                    </Section.Button>
                 </Section>
             </Container>
         </PrivateLayout>

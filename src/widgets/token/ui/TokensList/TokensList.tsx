@@ -79,7 +79,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
                     <SearchInput setValue={setSearchValue} value={searchValue} />
                     {includedImportsIcon && (
                         <Button
-                            type="primary"
+                            type="grey"
                             className={s.importBtn}
                             onClick={() => navigate("/import/token")}
                             // isDisabled
