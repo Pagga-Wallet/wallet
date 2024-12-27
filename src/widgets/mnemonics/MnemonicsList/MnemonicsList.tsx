@@ -26,7 +26,7 @@ export const MnemonicsList: FC<MnemonicsList> = ({ mnemonics }) => {
                 ))}
             </div>
 
-            <Button type="secondary" onClick={copyHandler}>
+            <Button type="grey" onClick={copyHandler}>
                 Скопировать
             </Button>
         </div>
