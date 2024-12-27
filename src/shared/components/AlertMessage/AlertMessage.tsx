@@ -28,7 +28,7 @@ export const AlertMessage: FC<AlertMessageProps> = ({
                 <p className={s.text}>{description}</p>
             </div>
 
-            <Button type="primary" className={s.btn} onClick={onClick}>
+            <Button type="grey" className={s.btn} onClick={onClick}>
                 {btnText}
             </Button>
         </div>

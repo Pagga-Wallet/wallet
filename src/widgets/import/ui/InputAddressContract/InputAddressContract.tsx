@@ -37,7 +37,7 @@ export const InputAddressContract: FC<InputAddressContractProps> = ({
                     setValue={setAddressContract}
                     value={addressContract}
                 />
-                <Button type="secondary" className={s.import} onClick={handleImportClick}>
+                <Button type="grey" className={s.import} onClick={handleImportClick}>
                     <SvgSelector id="import" />
                 </Button>
             </div>
