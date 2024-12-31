@@ -1,14 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 132px);
+  &Inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px 10px 16px;
+    border-radius: 32px 32px 0 0;
+    min-height: 80vh;
+    background: rgb(var(--foreground-primary));
+    margin: auto -16px -20px -16px;
+  }
+}
+
 .wrapperImage {
   margin-top: 50px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  &__image {
-    width: 180px;
-    height: 180px;
-  }
 }
 
 .containerContent {
@@ -25,10 +37,13 @@
 .subtitle {
   font-size: 16px;
   color: rgb(var(--placeholder-secondary));
-
   text-align: center;
 }
 
 .title {
-  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 110%;
+  letter-spacing: 0.52px;
+  margin: 24px 0 16px 0;
 }

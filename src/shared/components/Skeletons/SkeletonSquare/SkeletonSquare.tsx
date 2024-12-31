@@ -9,8 +9,8 @@ export const SkeletonSquare: FC<SkeletonSquareProps> = ({ ...props }) => (
         width={40}
         height={40}
         viewBox="0 0 40 40"
-        backgroundColor={"rgba(var(--foreground-primary), 0.8)"}
-        foregroundColor={"rgb(var(--foreground-primary))"}
+        backgroundColor={"rgba(var(--foreground-secondary), 0.8)"}
+        foregroundColor={"rgb(var(--foreground-secondary))"}
         {...props}
     >
         <circle cx="20" cy="20" r="20" />

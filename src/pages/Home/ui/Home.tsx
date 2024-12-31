@@ -97,7 +97,7 @@ export const Home: FC = () => {
                 </div>
 
                 <div className={s.balance}>
-                    <div className={s.balanceLabel}>Total balance</div>
+                    <div className={s.balanceLabel}>{t("common.total-balance")}</div>
                     <div className={s.balanceText}>
                         {accountBalanceFetching ? (
                             <SkeletonRect height={40} width={200} />

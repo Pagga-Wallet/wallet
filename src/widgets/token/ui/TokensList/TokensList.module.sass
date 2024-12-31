@@ -1,18 +1,19 @@
 .tokensList
-    width: calc(100% + 32px)
-    margin-left: -16px
-    background-color: rgba(var(--primary-bg))
+    background-color: rgba(var(--foreground-primary))
+    position: relative
+    z-index: 5
+    margin: 0 -16px -20px -16px
     border-radius: 32px
     display: flex
     flex-direction: column
     gap: 8px
-    // padding-bottom: 32px
     &Top
-        padding: 72px 16px 0 16px
         align-items: center
         display: flex
         justify-content: space-between
         gap: 8px
+        padding: 0 16px
+        margin-bottom: 8px
         div:first-child
             flex: 1
         .importBtn

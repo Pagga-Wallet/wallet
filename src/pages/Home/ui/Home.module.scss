@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding-bottom: 20px;
     &Content {
         background: rgb(var(--foreground-primary));
         display: flex;
@@ -73,7 +74,7 @@
 }
 
 .actions {
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     display: flex;
     align-items: center;
@@ -91,10 +92,15 @@
         align-items: center;
         width: 50%;
         gap: 8px;
-        border-radius: 32px;
+        // border-radius: 32px;
         height: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
         &:active {
-            background: rgba(var(--placeholder-tertiary), 0.2);
+            background: rgba(var(--placeholder-primary), 0.2);
+        }
+        &:hover {
+            background: rgba(var(--placeholder-primary), 0.2);
         }
     }
     &Text {

@@ -13,7 +13,8 @@
     justify-content: start;
     align-items: baseline;
     align-content: start;
-
+    max-height: 309px;
+    overflow: auto;
     gap: 12px 8px;
     flex-wrap: wrap;
 }

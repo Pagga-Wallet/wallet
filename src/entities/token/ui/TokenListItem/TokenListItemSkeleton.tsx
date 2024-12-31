@@ -1,27 +1,36 @@
 import React, { FC } from "react";
 import ContentLoader from "react-content-loader";
 import s from "./TokenListItem.module.sass";
+import { SkeletonRound } from "@/shared/components/Skeletons";
 
 interface TokenListItemSkeletonProps {
     count?: number;
 }
 
 const Skeleton = (
-    <div className={s.tokenSkeleton}>
-        <ContentLoader
-            speed={2}
-            width={"100%"}
-            height={40}
-            viewBox="0 0 475 40"
-            backgroundColor={"rgba(var(--foreground-secondary), 0.8)"}
-            foregroundColor={"rgb(var(--foreground-secondary))"}
-        >
-            <circle cx="20" cy="20" r="20" />
-            <rect x="48" y="30" rx="8" ry="2" width="100" height="15" />
-            <rect x="48" y="5" rx="8" ry="2" width="50" height="15" />
-            <rect x="400" y="5" rx="8" ry="2" width="50" height="15" />
-            <rect x="400" y="30" rx="8" ry="2" width="50" height="15" />
-        </ContentLoader>
+    <div className={s.token}>
+        <div className={s.left}>
+            <SkeletonRound customWidth={40} height={40} style={{ borderRadius: '50%' }} />
+            <div className={s.info}>
+                <div className={s.name}>
+                    <SkeletonRound customWidth={60} height={20} />
+                </div>
+                <div className={s.price}>
+                    <div className={s.priceInfo}>
+                        <SkeletonRound customWidth={40} height={18} />
+                    </div>
+                    <SkeletonRound customWidth={40} height={18} />
+                    {/* <span className={s.priceChange}>+2.3%</span> */}
+                </div>
+            </div>
+        </div>
+        <div className={s.total}>
+            <SkeletonRound customWidth={50} height={19} />
+            <div className={s.totalAmount}>
+                {" "}
+                <SkeletonRound customWidth={50} height={19} />
+            </div>
+        </div>
     </div>
 );
 

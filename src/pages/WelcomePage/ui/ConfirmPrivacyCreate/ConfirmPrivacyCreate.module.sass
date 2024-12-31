@@ -4,7 +4,6 @@
   align-items: center
   justify-content: center
   height: 100%
-  padding: 0 16px
 
   &Img
     margin-bottom: 32px
@@ -22,5 +21,9 @@
     padding: 12px
     border-radius: 16px
     background: rgba(var(--foreground-secondary), 1)
+    cursor: pointer
+    transition: all 0.3s ease 0s
+    &:hover
+      background: rgba(var(--foreground-secondary), 0.8)
     &:not(:last-child)
       margin-bottom: 12px

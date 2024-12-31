@@ -1,10 +1,26 @@
-.title
-  font-size: 16px
-  color: rgb(var(--placeholder-secondary))
-  margin: 0 0 12px 8px
-
-.titleMain
-  font-size: 32px
-  text-align: center
-  margin: 0 0 24px 0
-  color: rgba(var(--placeholder-primary, #FFF))
+.inner
+  height: 100%
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  gap: 24px
+  overflow-y: auto
+  &Top
+    &Subtitle
+      letter-spacing: 0.28px
+      color: rgba(var(--placeholder-secondary))
+      margin-bottom: 6px
+    &Title
+      font-size: 26px
+      font-weight: 700
+      line-height: 110%
+      letter-spacing: 0.52px
+  &Content
+    position: relative
+    z-index: 5
+    height: 100%
+    padding: 0 0 30px 0
+    margin: 0 -16px -20px -16px
+    border-radius: 32px 32px 0 0
+    background: rgb(var(--foreground-primary))

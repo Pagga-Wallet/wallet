@@ -17,19 +17,20 @@ interface InputAmountToSendProps {
 export const InputAmountToSend: FC<InputAmountToSendProps> = ({
     value,
     setValue,
-    tokenSelected,
+    tokenSelected
 }) => {
     const { t } = useTranslation();
 
-    const handleMaxClick = useCallback(() => {
+    const handleQuarterClick = useCallback(() => {
         const balance = tokenSelected?.balance ?? 0;
         if (+scientificToDecimal(balance) < 0.00001) {
             setValue(0);
             return;
         }
-        setValue(+formatTokenAmount(scientificToDecimal(balance)));
+        const quarterValue = +scientificToDecimal(balance) * 0.25;
+        setValue(+formatTokenAmount(String(quarterValue)));
     }, [tokenSelected, setValue]);
-
+    
     const handleHalfClick = useCallback(() => {
         const balance = tokenSelected?.balance ?? 0;
 
@@ -41,7 +42,16 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
         setValue(+formatTokenAmount(scientificToDecimal(halfBalance)));
     }, [tokenSelected, setValue]);
 
-    const dynamicMaxWidth = `${Math.max(value.toString().length * 18, 21)}px`;
+    const handleMaxClick = useCallback(() => {
+        const balance = tokenSelected?.balance ?? 0;
+        if (+scientificToDecimal(balance) < 0.00001) {
+            setValue(0);
+            return;
+        }
+        setValue(+formatTokenAmount(scientificToDecimal(balance)));
+    }, [tokenSelected, setValue]);
+
+    const dynamicMaxWidth = `${Math.max(value.toString().length * 14, 21)}px`;
 
     return (
         <div className={s.inputWrapper}>
@@ -54,7 +64,7 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
             <div className={s.inputBlock}>
                 <NumericInput
                     className={clsx({
-                        [s.amountError]: value > (tokenSelected?.balance ?? 0),
+                        [s.amountError]: value > (tokenSelected?.balance ?? 0)
                     })}
                     value={value.toString()}
                     onChange={setValue}
@@ -62,14 +72,21 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
                 />
                 <div
                     className={clsx(s.token, {
-                        [s.amountError]: value > (tokenSelected?.balance ?? 0),
+                        [s.amountError]: value > (tokenSelected?.balance ?? 0)
                     })}
                 >
                     {tokenSelected?.tokenSymbol}
                 </div>
             </div>
             <div className={s.inputWrapperActions}>
+                <div className={s.title}>
+                    {t("common.in-stock")} <AmountFormat value={tokenSelected?.balance ?? 0} />{" "}
+                    {tokenSelected?.tokenSymbol}
+                </div>
                 <div className={s.inputWrapperActionsLeft}>
+                    <button className={s.available} onClick={handleQuarterClick}>
+                        25%
+                    </button>
                     <button className={s.available} onClick={handleHalfClick}>
                         50%
                     </button>
@@ -77,10 +94,6 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
                         {t("common.all")}
                     </button>
                 </div>
-                <button className={s.available} onClick={handleMaxClick}>
-                    {t("common.in-stock")} <AmountFormat value={tokenSelected?.balance ?? 0} />{" "}
-                    {tokenSelected?.tokenSymbol}
-                </button>
             </div>
         </div>
     );
