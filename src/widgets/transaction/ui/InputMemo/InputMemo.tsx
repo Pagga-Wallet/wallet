@@ -14,9 +14,6 @@ export const InputMemo: FC<InputMemoProps> = ({ value, setValue }) => {
     return (
         <>
             <div className={s.inputWrapper}>
-                <div className={s.top}>
-                    <div className={s.title}>{t("common.memo")}</div>
-                </div>
                 <div className={s.inputBlock}>
                     <BaseInput
                         value={value}

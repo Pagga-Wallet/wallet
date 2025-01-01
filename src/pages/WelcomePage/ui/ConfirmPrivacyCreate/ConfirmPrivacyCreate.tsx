@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Checkbox, CustomButton, Title } from "@/shared/components";
 import { useSetupBackButton } from "@/shared/lib";
-import SecuritySticker from "@/shared/lib/images/safety.png";
+import SecuritySticker from "@/shared/lib/images/safety.svg?react";
 import { IntroductionSteps } from "../../types/IntroductionSteps";
 import s from "./ConfirmPrivacyCreate.module.sass";
 import { BaseLayout } from "@/shared/layouts";
@@ -36,7 +36,7 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
             <WithDecorLayout>
                 <div className={s.inner}>
                     <div className={s.innerImg}>
-                        <img src={SecuritySticker} width={80} height={80} alt="security sticker" />
+                        <SecuritySticker />
                     </div>
 
                     <Title className={s.innerTitle} level={2}>
@@ -45,7 +45,7 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
 
                     <ul className={s.innerList}>
                         {securityItems.map((item, index) => (
-                            <li key={`security-item-${index}`} className={s.innerItem}>
+                            <li key={`security-item-${index}`} className={s.innerItem} onClick={() => handleCheckboxChange(index)}>
                                 <Checkbox
                                     isConfirmed={confirmedStates[index]}
                                     setIsConfirmed={() => handleCheckboxChange(index)}

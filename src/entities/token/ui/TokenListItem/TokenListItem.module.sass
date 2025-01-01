@@ -13,10 +13,12 @@
             background: transparent !important
     &:last-child
         border-radius: 0 0 24px 24px
-    // &:active
-    //     background: rgba(var(--placeholder-tertiary), 0.2)
-    // &:hover
-    //     background: rgba(var(--placeholder-tertiary), 0.2)
+    &:active
+        background: #28282F
+    &:hover
+        background: #28282F
+        &::before
+            display: none
     &:not(:last-child)::before
         content: ''
         position: absolute
@@ -68,11 +70,13 @@
             align-items: center
             justify-content: flex-end
             height: 22px
+            text-align: right
             margin-bottom: 2px
         &Amount
             height: 19px
             display: flex
             align-items: center
+            text-align: right
             font-size: 13px
             letter-spacing: 0.78px
             color: rgb(var(--placeholder-secondary))

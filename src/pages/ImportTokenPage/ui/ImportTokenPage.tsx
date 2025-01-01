@@ -1,6 +1,6 @@
 import { skipToken } from "@reduxjs/toolkit/query";
 import { backButton } from "@telegram-apps/sdk-react";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { InputAddressContract, SelectNetwork } from "@/widgets/import";
@@ -16,6 +16,7 @@ import { CHAINS } from "@/shared/lib/types";
 import { btnText } from "../consts";
 import { ImportTokenSteps } from "../types/ImportTokenSteps";
 import s from "./ImportTokenPage.module.sass";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface ImportTokenPageProps {}
 
@@ -39,7 +40,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         isFetching || (network && savedTokens?.[network].includes(addressContract))
     );
     const isWhitelistedToken = tokensWhitelist.some(
-        (token) => addressContract && token.contract === addressContract
+        token => addressContract && token.contract === addressContract
     );
     const isSavedToken = isWhitelistedToken || isImportedToken;
 
@@ -62,19 +63,24 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, onSaveContractAddress]);
 
-    useSetupMainButton({
-        onClick: onForward,
-        params: {
-            text: isSavedToken ? t("import-token.already-imported") : t(btnText[step]),
-            isVisible: true,
-            isEnabled:
-                step === ImportTokenSteps.address_contract
-                    ? isValidToken && !isSavedToken
-                    : !!(step === ImportTokenSteps.network && network),
-            isLoaderVisible: isFetching,
-            backgroundColor: "#007AFF",
-        },
-    });
+    useEffect(() => {
+        if (!network) return
+        setStep(ImportTokenSteps.address_contract);
+    }, [network]);
+
+    // useSetupMainButton({
+    //     onClick: onForward,
+    //     params: {
+    //         text: isSavedToken ? t("import-token.already-imported") : t(btnText[step]),
+    //         isVisible: true,
+    //         isEnabled:
+    //             step === ImportTokenSteps.address_contract
+    //                 ? isValidToken && !isSavedToken
+    //                 : !!(step === ImportTokenSteps.network && network),
+    //         isLoaderVisible: isFetching,
+    //         backgroundColor: "#007AFF"
+    //     }
+    // });
 
     const onBack = useCallback(() => {
         switch (step) {
@@ -90,41 +96,44 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, navigate]);
 
-    backButton.mount()
+    backButton.mount();
     useSetupBackButton({
-        onBack,
+        onBack
     });
 
     return (
-        <BaseLayout>
-            <Title level={2} className={s.title}>
-                {t("common.import-token")}
-            </Title>
-
-            {step === ImportTokenSteps.network && (
-                <SelectNetwork setNetwork={setNetwork} network={network} />
-            )}
-
-            {step === ImportTokenSteps.address_contract && (
-                <>
-                    <InputAddressContract
-                        addressContract={addressContract}
-                        setAddressContract={setAddressContract}
+        <>
+            <>
+                {step === ImportTokenSteps.network && (
+                    <SelectNetwork
+                        setNetwork={setNetwork}
+                        network={network}
+                        subtitle={t("common.select-network")}
+                        title={t("common.import")}
                     />
-                    {/* Тут отображать найденный токен */}
-                    {isValidAddress && tokenData && !isLoading ? (
-                        <TokenListItem
-                            name={tokenData.tokenName}
-                            balance={tokenData.balance}
-                            balanceUSD={tokenData.balanceUSD}
-                            change24={tokenData.change24h}
-                            tokenPrice={tokenData.price}
-                            icon={tokenData.tokenIcon}
-                            chain={tokenData.platform}
+                )}
+
+                {step === ImportTokenSteps.address_contract && (
+                    <>
+                        <InputAddressContract
+                            addressContract={addressContract}
+                            setAddressContract={setAddressContract}
                         />
-                    ) : null}
-                </>
-            )}
-        </BaseLayout>
+                        {/* Тут отображать найденный токен */}
+                        {isValidAddress && tokenData && !isLoading ? (
+                            <TokenListItem
+                                name={tokenData.tokenName}
+                                balance={tokenData.balance}
+                                balanceUSD={tokenData.balanceUSD}
+                                change24={tokenData.change24h}
+                                tokenPrice={tokenData.price}
+                                icon={tokenData.tokenIcon}
+                                chain={tokenData.platform}
+                            />
+                        ) : null}
+                    </>
+                )}
+            </>
+        </>
     );
 };
