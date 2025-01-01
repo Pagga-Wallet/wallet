@@ -16,8 +16,6 @@ import BIOMETRY from "@/shared/lib/images/icons/biometry.svg?react";
 import NUMPAD from "@/shared/lib/images/icons/numpad.svg?react";
 import WALLET_CONNECT from "@/shared/lib/images/icons/wallet-connect.svg?react";
 import TON_CONNECT from "@/shared/lib/images/icons/ton-connect.svg?react";
-import RU_LANG from "@/shared/lib/images/icons/ru.svg?react";
-import ENG_LANG from "@/shared/lib/images/icons/eng.svg?react";
 import DELETE from "@/shared/lib/images/icons/delete.svg?react";
 
 import s from "./SettingPage.module.sass";
@@ -45,7 +43,7 @@ export const SettingsPage = () => {
         }
     };
 
-    const onChangeLang = (lang: "ru" | "en") => {
+    const onChangeLang = (lang: "ru" | "en" | "ua") => {
         changeLanguage(lang).then(() => {
             localStorage.setItem("lang", lang);
         });
@@ -65,7 +63,9 @@ export const SettingsPage = () => {
     return (
         <PrivateLayout className={s.inner}>
             <div className={s.innerDecor}></div>
-            <Title level={1} className={s.innerTitle}>{t("menu.settings")}</Title>
+            <Title level={1} className={s.innerTitle}>
+                {t("menu.settings")}
+            </Title>
             <Container className={s.innerContent}>
                 {/* <Section title={t("settings.title")}>
                     <Section.Link to="/ton-version">{t("settings.ton-version")}</Section.Link>
@@ -95,7 +95,7 @@ export const SettingsPage = () => {
                             Wallet Connect
                         </div>
                     </Section.Link>
-                    <Section.Link to="/connect/wallet-connect-list">
+                    <Section.Link disabled to="/connect/wallet-connect-list">
                         <div className={s.innerItem}>
                             <TON_CONNECT />
                             TON Connect
@@ -111,7 +111,7 @@ export const SettingsPage = () => {
                         withoutCheckbox
                     >
                         <div className={s.innerItem}>
-                            <RU_LANG />
+                            <SvgSelector id="ru-lang" />
                             Русский
                         </div>
                     </Section.Radio>
@@ -123,10 +123,36 @@ export const SettingsPage = () => {
                         withoutCheckbox
                     >
                         <div className={s.innerItem}>
-                            <ENG_LANG />
+                            <SvgSelector id="eng-lang" />
                             English
                         </div>
                     </Section.Radio>
+                    <Section.Radio
+                        checked={language === "ua"}
+                        onSelect={() => {
+                            onChangeLang("ua");
+                        }}
+                        withoutCheckbox
+                    >
+                        <div className={s.innerItem}>
+                            <SvgSelector id="ua-lang" />
+                            Ukrainian
+                        </div>
+                    </Section.Radio>
+                </Section>
+                <Section title="Pagga Wallet, 2025">
+                    <Section.Link to="">
+                        <div className={s.innerItem}>
+                            <SvgSelector id="telegram" />
+                            Telegram Channel
+                        </div>
+                    </Section.Link>
+                    <Section.Link to="">
+                        <div className={s.innerItem}>
+                            <SvgSelector id="support" />
+                            Support
+                        </div>
+                    </Section.Link>
                 </Section>
                 <Section>
                     <Section.Button onClick={onResetData} danger isLast>

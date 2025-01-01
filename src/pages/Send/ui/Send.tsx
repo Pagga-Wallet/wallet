@@ -10,20 +10,20 @@ import {
     FailedTransaction,
     SuccessTransaction,
     SelectWalletToSend,
-    InputMemo,
+    InputMemo
 } from "@/widgets/transaction";
 import { usePINConfirmation } from "@/features/PIN";
 import {
     MultichainAccount,
     multichainAccountStore,
-    useFetchTotalBalanceQuery,
+    useFetchTotalBalanceQuery
 } from "@/entities/multichainAccount";
 import { BaseLayout } from "@/shared/layouts";
 import {
     cryptographyController,
     useAppSelector,
     useSetupBackButton,
-    useSetupMainButton,
+    useSetupMainButton
 } from "@/shared/lib";
 import { checkAddress, checkAddressFromUnknownChain } from "@/shared/lib/helpers/checkAddress";
 import { getExplorerLink } from "@/shared/lib/helpers/getExplorerLink";
@@ -31,7 +31,8 @@ import { CHAINS, EVM_CHAINS_ARRAY, TokenBalance } from "@/shared/lib/types";
 import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import { btnText, title } from "../lib/consts";
 import { SendSteps } from "../lib/types/SendSteps";
-import s from "./Send.module.scss";
+import s from "./Send.module.sass";
+import { CustomButton } from "@/shared/components";
 
 export const Send: FC = () => {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const Send: FC = () => {
 
     const [step, setStep] = useState<SendSteps>(
         isPreselectedToken ? SendSteps.pickAddress : SendSteps.select
-        // SendSteps.success
+        // SendSteps.failed
     );
     const [tokenSelected, setTokenSelected] = useState<TokenBalance | null>(
         preselectedToken ?? null
@@ -66,8 +67,10 @@ export const Send: FC = () => {
         [account, tonVersion]
     );
 
-    const { data: accountBalance = null, isFetching: accountBalanceFetching } =
-        useFetchTotalBalanceQuery();
+    const {
+        data: accountBalance = null,
+        isFetching: accountBalanceFetching
+    } = useFetchTotalBalanceQuery();
 
     const onTokenSelect = useCallback((token: TokenBalance) => {
         setTokenSelected(token);
@@ -82,7 +85,7 @@ export const Send: FC = () => {
             if (multichainAccount && account) {
                 if (!tokenSelected) throw new Error("Invalid Token");
                 const pin = await confirm({
-                    title,
+                    title
                 });
                 // console.log("onConfirm pin", pin);
                 const mnemonics = cryptographyController.HashToKey(
@@ -100,7 +103,7 @@ export const Send: FC = () => {
                     amount: Number(valueAmount),
                     mnemonics,
                     tokenSelected,
-                    memo,
+                    memo
                 });
                 if (result.isError) {
                     throw new Error(result.errorMessage);
@@ -161,7 +164,7 @@ export const Send: FC = () => {
                     getExplorerLink({
                         userAddress: multichainAccount?.getAddressInNetwork(CHAINS.TON),
                         txHash: txResponse?.hash,
-                        chain: tokenSelected?.platform as CHAINS,
+                        chain: tokenSelected?.platform as CHAINS
                     })
                 );
             case SendSteps.failed:
@@ -223,20 +226,20 @@ export const Send: FC = () => {
 
     useSetupBackButton(
         {
-            onBack,
+            onBack
         },
         [step]
     );
 
-    useSetupMainButton({
-        onClick: onForward,
-        params: {
-            text: errorText || t(btnText[step]),
-            isLoaderVisible: processing,
-            isEnabled: !disableBtn,
-            isVisible: step !== SendSteps.select,
-        },
-    });
+    // useSetupMainButton({
+    //     onClick: onForward,
+    //     params: {
+    //         text: errorText || t(btnText[step]),
+    //         isLoaderVisible: processing,
+    //         isEnabled: !disableBtn,
+    //         isVisible: step !== SendSteps.select
+    //     }
+    // });
 
     const onAddressSelect = useCallback(
         async (receiver: string) => {
@@ -250,61 +253,81 @@ export const Send: FC = () => {
     );
 
     return (
-        <BaseLayout>
-            <div className={s.send}>
-                {step !== SendSteps.success && step !== SendSteps.failed && (
-                    <div className={s.title}>{t(title[step])}</div>
+        <BaseLayout withoutPadding withDecor>
+            <div
+                className={s.send}
+                style={{ paddingBottom: step !== SendSteps.select ? "90px" : "0" }}
+            >
+                {step !== SendSteps.success && step !== SendSteps.failed && step !== SendSteps.confirm && (
+                    <div className={s.sendTop}>
+                        <div className={s.subtitle}>{t("main.send-btn")}</div>
+                        <div className={s.title}>{t(title[step])}</div>
+                    </div>
                 )}
 
-                {step === SendSteps.select && (
-                    <TokensList
-                        search
-                        accountBalance={accountBalance}
-                        isSelectMode
-                        onTokenSelect={onTokenSelect}
-                        isLoading={accountBalanceFetching}
-                        chainFilter={
-                            allowedChain
-                                ? allowedChain === CHAINS.ETH
-                                    ? EVM_CHAINS_ARRAY
-                                    : [allowedChain]
-                                : undefined
-                        }
-                    />
-                )}
-                {step === SendSteps.pickAddress && (
-                    <SelectWalletToSend
-                        tokenSelected={tokenSelected}
-                        value={receiver}
-                        setValue={setReceiver}
-                        onAddressSelect={onAddressSelect}
-                        disabled={!!preselectedReceiver}
-                    />
-                )}
-                {step === SendSteps.input && (
-                    <>
-                        <InputAmountToSend
-                            value={valueAmount}
-                            setValue={setValueAmount}
-                            tokenSelected={tokenSelected}
+                <div className={s.sendContent}>
+                    {step === SendSteps.select && (
+                        <TokensList
+                            search
+                            accountBalance={accountBalance}
+                            isSelectMode
+                            isSend
+                            onTokenSelect={onTokenSelect}
+                            isLoading={accountBalanceFetching}
+                            chainFilter={
+                                allowedChain
+                                    ? allowedChain === CHAINS.ETH
+                                        ? EVM_CHAINS_ARRAY
+                                        : [allowedChain]
+                                    : undefined
+                            }
                         />
-                        {tokenSelected?.platform === CHAINS.TON && (
-                            <InputMemo value={memo} setValue={setMemo} />
-                        )}
-                    </>
-                )}
-                {step === SendSteps.confirm && (
-                    <ConfirmSendTransactionInfo
-                        onConfirm={onConfirm}
-                        tokenSymbol={tokenSelected?.tokenSymbol}
-                        price={tokenSelected?.price}
-                        amount={valueAmount}
-                        receiver={receiver}
-                        memo={memo}
+                    )}
+                    {step === SendSteps.pickAddress && (
+                        <SelectWalletToSend
+                            tokenSelected={tokenSelected}
+                            value={receiver}
+                            setValue={setReceiver}
+                            onAddressSelect={onAddressSelect}
+                            disabled={!!preselectedReceiver}
+                        />
+                    )}
+                    {step === SendSteps.input && (
+                        <>
+                            <InputAmountToSend
+                                value={valueAmount}
+                                setValue={setValueAmount}
+                                tokenSelected={tokenSelected}
+                            />
+                            {tokenSelected?.platform === CHAINS.TON && (
+                                <InputMemo value={memo} setValue={setMemo} />
+                            )}
+                        </>
+                    )}
+                    {step === SendSteps.confirm && (
+                        <ConfirmSendTransactionInfo
+                            onConfirm={onConfirm}
+                            tokenSymbol={tokenSelected?.tokenSymbol}
+                            price={tokenSelected?.price}
+                            amount={valueAmount}
+                            receiver={receiver}
+                            memo={memo}
+                        />
+                    )}
+                    {step === SendSteps.success && <SuccessTransaction />}
+                    {step === SendSteps.failed && <FailedTransaction />}
+                </div>
+                {step !== SendSteps.select && (
+                    <CustomButton
+                        containerClassName={s.mainButton}
+                        firstButton={{
+                            children: errorText || t(btnText[step]),
+                            isDisabled: disableBtn,
+                            type: step !== SendSteps.confirm ? "grey" : "purple",
+                            onClick: onForward
+                        }}
                     />
                 )}
-                {step === SendSteps.success && <SuccessTransaction />}
-                {step === SendSteps.failed && <FailedTransaction />}
             </div>
         </BaseLayout>
     );

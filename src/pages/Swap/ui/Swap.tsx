@@ -312,7 +312,7 @@ export const Swap: FC = () => {
     return (
         <PrivateLayout>
             {/* TON-ONLY */}
-            {step === SwapSteps.selectNetwork && (
+            {/* {step === SwapSteps.selectNetwork && (
                 <SelectNetwork
                     setNetwork={setNetwork}
                     network={network}
@@ -320,7 +320,7 @@ export const Swap: FC = () => {
                     onClick={onSelectNetwork}
                     mainTitle
                 />
-            )}
+            )} */}
             {step === SwapSteps.swap &&
                 (showTokenList && network ? (
                     <TokensList

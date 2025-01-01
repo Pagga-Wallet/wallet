@@ -30,3 +30,4 @@ export { CardDetails } from "./CardDetails/CardDetails";
 export { CustomButton } from "./CustomButton/CustomButton"
 export { UserInfo } from "./UserInfo/UserInfo";
 export { CreateCard } from "./CreateCard/CreateCard";
+export { ReceiveMessage } from "./ReceiveMessage/ReceiveMessage";

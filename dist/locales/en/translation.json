@@ -90,7 +90,7 @@
         "network": "Network"
     },
     "send-status": {
-        "your-tx": "Your TX has been",
+        "your-tx": "Your transaction has been",
         "sent-successfully": "sent successfully!",
         "being-processed": "and now is being processed in the blockchain",
         "check-balance": "check your balance and TX fee",
@@ -120,18 +120,20 @@
         "to-this-address": "to this address. You must send at least",
         "ton-or-jetton": "0.1 TON or 0.1 Jetton",
         "or-more-deposit": "or more to deposit.",
-        "receive-other": "Send to this address only. Other assets such as tokens or NFTs will be permanently lost."
+        "receive-other": "Send to this address only. Other assets such as tokens or NFTs will be permanently lost.",
+        "receive-part1": "Only send",
+        "receive-part2": "assets to this address. Other assets will be lost forever."
     },
     "send": {
-        "select-token": "Select token",
+        "select-token": "Choose token",
         "send-to": "Send to",
-        "enter-amount": "Enter amount",
+        "enter-amount": "Enter the amount",
         "checkout": "Check of amount",
         "checkout2": "Confirmed",
         "unknown": "Unknown",
         "invalid-receiver": "Invalid receiver",
         "confirm-transaction": "Confirm the transaction",
-        "select-recipient": "Select recipient",
+        "select-recipient": "Enter address",
         "transaction-confirm": "Transaction confirmation",
         "transaction-success": "Your transaction has been sent successfully!",
         "transaction-failed": "Transaction not sent!",
@@ -146,7 +148,7 @@
             "no-recent": "No recent transactions."
         },
         "enter-amount-position": {
-            "enter-amount": "Enter amount",
+            "enter-amount": "Enter the amount",
             "insufficient-balance": "Insufficient balance",
             "proceed": "Proceed",
             "available": "Available:",
@@ -314,13 +316,13 @@
         "invalid-amount": "Invalid amount",
         "search-by-name": "Search by name",
         "send": "Send",
-        "in-stock": "In stock",
+        "in-stock": "Remaining:",
         "all": "All",
         "coming-soon": "Coming soon",
         "select-module": "Select module",
         "import-token": "Import a token",
         "import": "Import",
-        "select-network": "Select network",
+        "select-network": "Choose network",
         "enter-contract-address": "Enter contract address",
         "search-by-address": "Search by address",
         "title": "Title",
@@ -340,7 +342,15 @@
         "no-charts-data": "No data on schedule",
         "to-main": "To main page",
         "save": "Save",
-        "done": "Done"
+        "done": "Done",
+        "total-balance": "Total balance",
+        "latest-addresses": "Latest addresses",
+        "confirmation": "Confirmation",
+        "your-sending": "You sending"
+    },
+    "create-card": {
+        "title": "Create card",
+        "description": "Pass KYC to get a card"
     },
     "introduction": {
         "multichain-title": "Wallet is now a multichain",

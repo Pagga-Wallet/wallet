@@ -1,37 +1,49 @@
 .card
-  padding: 12px 16px
-  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
-  margin-bottom: 12px
-  border-radius: 20px !important
+  padding: 15.5px 16px
   display: flex
   align-items: center
   transition: all 0.3s ease 0s
+  background: transparent
+  position: relative
+  list-style-type: none
+  cursor: pointer
   &:hover
-    background: var(--background-transparent, rgba(66, 75, 86, 0.50))
+    opacity: 0.8
+
+  &:not(:last-child)
+    &::after
+      content: ""
+      position: absolute
+      height: 1px
+      width: calc(100% - 84px)
+      background: rgba(var(--border-secondary))
+      right: 16px
+      bottom: 0
+  &:active
+    background: #28282F
+  &:first-child
+    border-radius: 32px 32px 0 0
+  &:hover
+    background: #28282F
+    &::before
+      display: none
   &Body
     width: 100%
   &Description
-    font-size: 14px
-    font-weight: 400
-    line-height: 128%
-    color: rgba(var(--placeholder-secondary, #A1ACBB))
+    font-size: 13px
+    letter-spacing: 0.78px
+    color: rgb(var(--placeholder-secondary))
+  &Disabled
+    opacity: 0.6
   &Soon
-    text-align: center
-    padding: 3px 6px
+    padding: 8px
     border-radius: 112px
-    background: rgba(106, 115, 126, 0.30)
-    line-height: 128%
-    text-transform: uppercase
-    color: rgba(var(--placeholder-secondary, #A1ACBB))
+    background: rgb(var(--foreground-secondary))
     font-size: 12px
-    font-weight: 590
+    min-width: max-content
   svg
     width: 24px
     height: 24px
-  &Checked
-    opacity: 1
-  &::after
-    display: none
   &Left
     display: flex
     align-items: center
@@ -45,8 +57,9 @@
     display: flex
     align-items: center
     justify-content: space-between
+    margin-bottom: 4px
     gap: 5px
     flex-wrap: wrap
     p
       font-size: 16px
-      font-weight: 510
+      font-weight: 500

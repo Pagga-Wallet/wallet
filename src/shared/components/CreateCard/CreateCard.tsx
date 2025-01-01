@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import CardIcon from "@/shared/lib/images/credit-card.svg?react";
 
@@ -14,6 +15,7 @@ interface CreateCardProps {}
 
 export const CreateCard: FC<CreateCardProps> = ({}) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
     return <div className={s.createCard} onClick={() => navigate("")}>
       <div className={s.createCardInner}>
@@ -21,10 +23,10 @@ export const CreateCard: FC<CreateCardProps> = ({}) => {
 
         <div className={s.createCardBody}>
           <Title level={3} className={s.createCardTitle}>
-            Create card
+            {t("create-card.title")}
           </Title>
           <Text className={s.createCardText}>
-            Pass KYC to get a card
+            {t("create-card.description")}
           </Text>
         </div>
       </div> 
