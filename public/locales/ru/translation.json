@@ -196,6 +196,7 @@
     "menu": {
         "home": "Главная",
         "swap": "Обмен",
+        "apps": "Приложения",
         "nft": "NFT",
         "settings": "Настройки"
     },
@@ -339,7 +340,8 @@
         "total-balance": "Общий баланс",
         "latest-addresses": "Последние адреса",
         "confirmation": "Подтверждение",
-        "your-sending": "Вы отправляете"
+        "your-sending": "Вы отправляете",
+        "view-all": "Посмотреть все"
     },
     "create-card": {
         "title": "Создать карту",

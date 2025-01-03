@@ -203,6 +203,7 @@
   "menu": {
       "home": "Головна",
       "swap": "Обмін",
+      "apps": "Програми",
       "nft": "NFT",
       "settings": "Налаштування"
   },
@@ -346,7 +347,8 @@
       "total-balance": "Загальний баланс",
       "latest-addresses": "Останні адреси",
       "confirmation": "Підтвердження",
-      "your-sending": "Ви надсилаєте"
+      "your-sending": "Ви надсилаєте",
+      "view-all": "Переглянути всі"
   },
   "create-card": {
       "title": "Створити картку",

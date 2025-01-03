@@ -203,6 +203,7 @@
     "menu": {
         "home": "Home",
         "swap": "Swap",
+        "apps": "Apps",
         "nft": "NFT",
         "settings": "Settings"
     },
@@ -346,7 +347,8 @@
         "total-balance": "Total balance",
         "latest-addresses": "Latest addresses",
         "confirmation": "Confirmation",
-        "your-sending": "You sending"
+        "your-sending": "You sending",
+        "view-all": "View all"
     },
     "create-card": {
         "title": "Create card",
