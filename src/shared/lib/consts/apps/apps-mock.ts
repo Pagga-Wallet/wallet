@@ -9,7 +9,7 @@ export const appsMock: App[] = [
     title: "DeDust",
     description: "DeFi Exchanger",
     logo: DEDUST_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Pagga AI", "Popular"],
     type: "",
     link: "https://dedust.io/swap"
   },
@@ -17,7 +17,7 @@ export const appsMock: App[] = [
     title: "StonFi",
     description: "Low-fee defi exchanger",
     logo: STONFI_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Pagga AI", "Popular"],
     type: "",
     link: "https://app.ston.fi/swap?chartVisible=false&chartInterval=1w&ft=TON&tt=USD%E2%82%AE"
   },
@@ -25,7 +25,7 @@ export const appsMock: App[] = [
     title: "Avanchange",
     description: "IDOs, Token Sales and VCs",
     logo: AVANCHANGE_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Pagga AI", "Popular"],
     type: "",
     link: "https://avanchange.com/"
   },
@@ -33,7 +33,7 @@ export const appsMock: App[] = [
     title: "DeDust",
     description: "DeFi Exchanger",
     logo: DEDUST_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Popular"],
     type: "",
     link: "https://dedust.io/swap"
   },
@@ -41,7 +41,7 @@ export const appsMock: App[] = [
     title: "StonFi",
     description: "Low-fee defi exchanger",
     logo: STONFI_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Popular"],
     type: "",
     link: "https://app.ston.fi/swap?chartVisible=false&chartInterval=1w&ft=TON&tt=USD%E2%82%AE"
   },
@@ -49,7 +49,7 @@ export const appsMock: App[] = [
     title: "Avanchange",
     description: "IDOs, Token Sales and VCs",
     logo: AVANCHANGE_IMAGE,
-    category: ["DeFi", "Popular"],
+    category: ["Popular"],
     type: "",
     link: "https://avanchange.com/"
   }
