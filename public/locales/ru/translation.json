@@ -236,7 +236,8 @@
         }
     },
     "import-token": {
-        "already-imported": "Токен уже был добавлен"
+        "already-imported": "Токен уже был добавлен",
+        "input-placeholder": "Введите или вставьте адрес контракта"
     },
     "connect-wallet-list": {
         "add-new-connection": "Добавить новое подключение",
@@ -341,7 +342,8 @@
         "latest-addresses": "Последние адреса",
         "confirmation": "Подтверждение",
         "your-sending": "Вы отправляете",
-        "view-all": "Посмотреть все"
+        "view-all": "Посмотреть все",
+        "paste": "Вставить"
     },
     "create-card": {
         "title": "Создать карту",

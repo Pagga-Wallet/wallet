@@ -114,7 +114,7 @@ export const WordArea = ({
                     type="text"
                     autoFocus
                     style={{
-                        width: words.length === 0 ? "21ch" : `${inputValue.length + 1}ch`,
+                        width: words.length === 0 ? "23ch" : `${inputValue.length + 1}ch`,
                     }}
                     onKeyDown={onKeyDown}
                     disabled={disabled}

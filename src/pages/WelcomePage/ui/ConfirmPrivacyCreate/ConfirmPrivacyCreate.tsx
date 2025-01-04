@@ -33,36 +33,38 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
 
     return (
         <>
-            <WithDecorLayout>
-                <div className={s.inner}>
-                    <div className={s.innerImg}>
-                        <SecuritySticker />
-                    </div>
-
-                    <Title className={s.innerTitle} level={2}>
-                        {t("security.title")}
-                    </Title>
-
-                    <ul className={s.innerList}>
-                        {securityItems.map((item, index) => (
-                            <li key={`security-item-${index}`} className={s.innerItem} onClick={() => handleCheckboxChange(index)}>
-                                <Checkbox
-                                    isConfirmed={confirmedStates[index]}
-                                    setIsConfirmed={() => handleCheckboxChange(index)}
-                                />
-                                <p className={s.innerItemText}>{item}</p>
-                            </li>
-                        ))}
-                    </ul>
-                    <CustomButton
-                        firstButton={{
-                            children: <>{t("registration.create-wallet")}</>,
-                            type: "purple",
-                            onClick: onCreate,
-                            isDisabled: !confirmedStates.every(state => state)
-                        }}
-                    />
+            <WithDecorLayout withoutPadding>
+                <div className={s.innerImg}>
+                    <SecuritySticker />
                 </div>
+
+                <Title className={s.innerTitle} level={2}>
+                    {t("security.title")}
+                </Title>
+
+                <ul className={s.innerList}>
+                    {securityItems.map((item, index) => (
+                        <li
+                            key={`security-item-${index}`}
+                            className={s.innerItem}
+                            onClick={() => handleCheckboxChange(index)}
+                        >
+                            <Checkbox
+                                isConfirmed={confirmedStates[index]}
+                                setIsConfirmed={() => handleCheckboxChange(index)}
+                            />
+                            <p className={s.innerItemText}>{item}</p>
+                        </li>
+                    ))}
+                </ul>
+                <CustomButton
+                    firstButton={{
+                        children: <>{t("registration.create-wallet")}</>,
+                        type: "purple",
+                        onClick: onCreate,
+                        isDisabled: !confirmedStates.every(state => state)
+                    }}
+                />
             </WithDecorLayout>
         </>
     );

@@ -22,6 +22,7 @@ import { TokenBalance } from "@/shared/lib/types/multichainAccount";
 import { TokenDetailQueryObj } from "@/shared/lib/types/token";
 import { CreateCard, UserInfo } from "@/shared/components";
 import s from "./Home.module.scss";
+import { useSetupBackButton } from "@/shared/lib";
 
 export const Home: FC = () => {
     const {
@@ -29,6 +30,10 @@ export const Home: FC = () => {
         isFetching: accountBalanceFetching,
         refetch: refetchBalance
     } = useFetchTotalBalanceQuery();
+
+    useSetupBackButton({
+        visible: false
+    })
 
     const navigate = useNavigate();
     const handleTokenSelect = useCallback(

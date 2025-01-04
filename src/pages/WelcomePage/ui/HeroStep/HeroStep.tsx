@@ -50,7 +50,7 @@ export const HeroStep: FC<HeroStepProps> = ({ setStep }) => {
                 </div>
 
                 <div className={s.heroPrivacy}>
-                {t("registration.privacy-confirmation")}
+                {t("registration.privacy-confirmation")} {" "}
                     <Link to="/privacy-policy">{t("registration.disclaimer")}</Link>
                 </div>
             </div>

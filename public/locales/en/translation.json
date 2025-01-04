@@ -243,7 +243,8 @@
         }
     },
     "import-token": {
-        "already-imported": "This token is already saved"
+        "already-imported": "This token is already saved",
+        "input-placeholder": "Enter or insert contract address"
     },
     "connect-wallet-list": {
         "add-new-connection": "Add a new connection",
@@ -348,7 +349,8 @@
         "latest-addresses": "Latest addresses",
         "confirmation": "Confirmation",
         "your-sending": "You sending",
-        "view-all": "View all"
+        "view-all": "View all",
+        "paste": "Paste"
     },
     "create-card": {
         "title": "Create card",

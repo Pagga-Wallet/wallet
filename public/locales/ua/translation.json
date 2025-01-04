@@ -243,7 +243,8 @@
       }
   },
   "import-token": {
-      "already-imported": "Цей токен вже збережено"
+      "already-imported": "Цей токен вже збережено",
+      "input-placeholder": "Введіть або вставте адресу контракту"
   },
   "connect-wallet-list": {
       "add-new-connection": "Додати нове з’єднання",
@@ -348,7 +349,8 @@
       "latest-addresses": "Останні адреси",
       "confirmation": "Підтвердження",
       "your-sending": "Ви надсилаєте",
-      "view-all": "Переглянути всі"
+      "view-all": "Переглянути всі",
+      "paste": "Вставити"
   },
   "create-card": {
       "title": "Створити картку",
