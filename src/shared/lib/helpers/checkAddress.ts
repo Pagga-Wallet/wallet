@@ -1,3 +1,4 @@
+import { PublicKey } from "@solana/web3.js";
 import { Address } from "@ton/core";
 import { ethers } from "ethers";
 import { TronWeb } from "tronweb";
@@ -24,6 +25,13 @@ export const checkAddress = async (
             }
         } else if (chain === CHAINS.TRON) {
             return TronWeb.isAddress(address) ? address : null;
+        } else if (chain === CHAINS.SOLANA) {
+            try {
+                const pubkey = new PublicKey(address);
+                return pubkey ? address : null;
+            } catch (error) {
+                return null;
+            }
         } else return null;
     } catch (error) {
         return null;
@@ -52,6 +60,13 @@ export const checkAddressFromUnknownChain = async (
         }
         if (TronWeb.isAddress(address)) return { address, chain: CHAINS.TRON };
         if (ethers.isAddress(address)) return { address, chain: CHAINS.ETH };
+        try {
+            const pubkey = new PublicKey(address);
+            if (pubkey) return { address, chain: CHAINS.SOLANA };
+        } catch (error) {
+            console.error(error);
+        }
+
         return null;
     } catch (error) {
         return null;

@@ -6,7 +6,7 @@ interface TokenListItemSkeletonProps {
     count?: number;
 }
 
-const Skeleton = (
+const Skeleton = () => (
     <div className={s.tokenSkeleton}>
         <ContentLoader
             speed={2}
@@ -28,7 +28,7 @@ const Skeleton = (
 export const TokenListItemSkeleton: FC<TokenListItemSkeletonProps> = React.memo(({ count = 1 }) => {
     const arr = [];
     for (let i = 0; i < count; i++) {
-        arr.push(Skeleton);
+        arr.push(<Skeleton key={i} />);
     }
     return arr;
 });

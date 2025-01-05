@@ -5,4 +5,5 @@ export const networkLabels = {
     [CHAINS.TON]: "The Open Network",
     [CHAINS.TRON]: "Tron(TRC-20)",
     [CHAINS.ETH]: "Ethereum (ERC-20)",
+    [CHAINS.SOLANA]: "Solana",
 };

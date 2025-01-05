@@ -33,7 +33,7 @@ export const useConnectEffect = () => {
     }, [urlSearch]);
 
     useEffect(() => {
-        console.log("connections", connections);
+        // console.log("connections", connections);
         if (!startParam) {
             return;
         }
@@ -42,12 +42,12 @@ export const useConnectEffect = () => {
         }
         try {
             const { strategy, request, version, id } = parseStartParams(startParam);
-            console.log("connect with startParam", {
-                id,
-                version,
-                request,
-                strategy,
-            });
+            // console.log("connect with startParam", {
+            //     id,
+            //     version,
+            //     request,
+            //     strategy,
+            // });
 
             const existConnection = connections?.find(
                 (connection: any) => connection.clientSessionId === id

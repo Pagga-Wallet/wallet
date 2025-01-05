@@ -1,8 +1,14 @@
+import { HDNodeWallet } from "ethers";
+import { SolanaWalletData } from "../solana/SolanaWalletData";
+import { TonWalletData } from "../ton/TonWalletData";
+import { TronWalletData } from "../tron/TronWalletData";
+
 export enum CHAINS {
     ETH = "ETH",
     BNB = "BNB",
     TON = "TON",
     TRON = "TRON",
+    SOLANA = "SOLANA"
 }
 
 export type EVM_CHAINS = CHAINS.ETH | CHAINS.BNB;
@@ -12,7 +18,7 @@ export const isEVMChain = (chain: CHAINS): chain is EVM_CHAINS => EVM_CHAINS_ARR
 export enum TON_ADDRESS_INTERFACES {
     V4 = "V4",
     V3R1 = "V3R1",
-    V3R2 = "V3R2",
+    V3R2 = "V3R2"
 }
 
 export interface ITONWallet {
@@ -24,6 +30,18 @@ export interface ITONWallet {
     };
 }
 
+export interface IUserWalletsData {
+    mainMnemonic: string;
+    eth: HDNodeWallet;
+    ton: TonWalletData;
+    tron: TronWalletData;
+    solana: SolanaWalletData;
+}
+
+export interface IMonoWalletData {
+    address: string;
+}
+
 export interface IStandartWalletData {
     publicKey: string;
     address: string;
@@ -33,6 +51,7 @@ export interface IMultiwallet {
     TON: ITONWallet;
     ETH: IStandartWalletData;
     TRON: IStandartWalletData;
+    SOLANA: IMonoWalletData;
 }
 
 export interface IMultichainAccount {

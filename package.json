@@ -16,6 +16,7 @@
         "@dedust/sdk": "^0.8.7",
         "@reduxjs/toolkit": "^2.2.3",
         "@rollup/plugin-alias": "^5.1.0",
+        "@solana/web3.js": "^1.98.0",
         "@tanstack/react-query": "^5.36.0",
         "@telegram-apps/sdk-react": "^2.0.19",
         "@ton/core": "^0.56.3",

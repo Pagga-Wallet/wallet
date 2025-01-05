@@ -27,9 +27,9 @@ export const useHandleConnectMessage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log({
-            connections,
-        });
+        // console.log({
+        //     connections,
+        // });
         if (connections && connections.length > 0) {
             TonConnectRemoteBridge.open({
                 connections,

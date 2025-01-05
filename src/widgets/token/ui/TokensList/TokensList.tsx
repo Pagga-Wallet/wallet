@@ -45,7 +45,6 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
 
     const sortedTokens: TokenBalance[] = useMemo(() => {
         if (accountBalance) {
-            // PROD-TON-ONLY
             // const allTokens = tokenList ?? [
             //     accountBalance.chains.TON.nativeToken,
             //     ...(accountBalance.chains.TON.tokens ?? []),

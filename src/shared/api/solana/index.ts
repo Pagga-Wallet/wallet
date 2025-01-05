@@ -1,0 +1,1 @@
+export { SolanaWallet } from "./model";
