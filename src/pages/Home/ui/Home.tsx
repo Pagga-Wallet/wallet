@@ -1,11 +1,10 @@
 /* eslint-disable no-irregular-whitespace */
 import { miniApp } from "@telegram-apps/sdk-react";
 import { motion } from "framer-motion";
+import { t } from "i18next";
 import queryString from "query-string";
 import { FC, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { t } from "i18next";
-import { NftList } from "@/widgets/nft";
 import { TokensList } from "@/widgets/token/ui/TokensList/TokensList";
 import { TransactionsHistoryList } from "@/widgets/transaction";
 import { useHandleConnectMessage } from "@/features/connect";
@@ -13,16 +12,16 @@ import { useConnectEffect } from "@/features/connect/lib/useConnectEffect";
 import { useOpenConnect } from "@/features/connect/model/connectService";
 import { useQRScanner } from "@/features/qrScanner";
 import { useFetchTotalBalanceQuery } from "@/entities/multichainAccount";
+import { CreateCard, UserInfo } from "@/shared/components";
 import { SkeletonRect } from "@/shared/components/Skeletons";
 import { PrivateLayout } from "@/shared/layouts";
+import { useSetupBackButton } from "@/shared/lib";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { checkDesktopPlatform } from "@/shared/lib/helpers/checkDesktopPlatform";
 import { formatNumber } from "@/shared/lib/helpers/formatNumber";
 import { TokenBalance } from "@/shared/lib/types/multichainAccount";
 import { TokenDetailQueryObj } from "@/shared/lib/types/token";
-import { CreateCard, UserInfo } from "@/shared/components";
 import s from "./Home.module.scss";
-import { useSetupBackButton } from "@/shared/lib";
 
 export const Home: FC = () => {
     const {
@@ -33,7 +32,7 @@ export const Home: FC = () => {
 
     useSetupBackButton({
         visible: false
-    })
+    });
 
     const navigate = useNavigate();
     const handleTokenSelect = useCallback(
