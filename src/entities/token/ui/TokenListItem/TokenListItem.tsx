@@ -20,6 +20,7 @@ interface ITokenListItemProps {
     icon?: string;
     onClick?: () => void;
     chain?: CHAINS;
+    isImportedToken?: boolean;
     noHover?: boolean;
 }
 
@@ -33,6 +34,7 @@ export const TokenListItem: FC<ITokenListItemProps> = ({
     onClick,
     chain,
     noHover,
+    isImportedToken,
 }) => {
     const showChainLogo = name !== "TON" && chain;
 
@@ -42,6 +44,7 @@ export const TokenListItem: FC<ITokenListItemProps> = ({
                 s.token,
                 { [s.tokenClickable]: Boolean(onClick) },
                 { [s.tokenNoHover]: noHover },
+                { [s.tokenImported]: isImportedToken },
                 "token-" + name + "-" + chain
             )}
             onClick={onClick}
@@ -56,7 +59,7 @@ export const TokenListItem: FC<ITokenListItemProps> = ({
                         )}
                     </div>
                     <div className={s.price}>
-                        <div>
+                        <div className={s.priceInfo}>
                             <span className={s.priceMain}>$</span>
                             <AmountFormat className={s.priceMain} value={tokenPrice ?? 0} />
                         </div>

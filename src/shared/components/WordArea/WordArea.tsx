@@ -1,5 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import clsx, { ClassValue } from "clsx";
+
 import styles from "./WordArea.module.scss";
 
 interface WordAreaProps {
@@ -13,16 +15,18 @@ interface WordAreaProps {
     onChange?: (words: string[]) => void;
     value?: string[];
     title?: ReactNode;
+    isImport?: boolean;
 }
 
 interface WordProps {
     text: string;
     index: number;
+    isImport?: ClassValue;
 }
 
-const Word = ({ text, index }: WordProps) => {
+const Word = ({ text, index, isImport }: WordProps) => {
     return (
-        <span className={styles.word}>
+        <span className={clsx(styles.word, { [styles.wordImport]: isImport })}>
             {index}. {text}
         </span>
     );
@@ -34,6 +38,7 @@ export const WordArea = ({
     onChange,
     value,
     title,
+    isImport
 }: WordAreaProps) => {
     const [inputValue, setInputValue] = useState("");
     const refInput = useRef<HTMLInputElement | null>(null);
@@ -97,16 +102,19 @@ export const WordArea = ({
             }}
         >
             {title && <span className={styles.title}>{title}</span>}
-            <div className={styles.container}>
+            <div className={clsx(styles.container, {
+                [styles.containerImport]: isImport
+            })}>
                 {words.map((word, i) => (
-                    <Word text={word} index={i + 1} key={i} />
+                    <Word text={word} index={i + 1} key={i} isImport={isImport} />
                 ))}
+                
                 <input
                     ref={refInput}
                     type="text"
                     autoFocus
                     style={{
-                        width: words.length === 0 ? "21ch" : `${inputValue.length + 1}ch`,
+                        width: words.length === 0 ? "23ch" : `${inputValue.length + 1}ch`,
                     }}
                     onKeyDown={onKeyDown}
                     disabled={disabled}

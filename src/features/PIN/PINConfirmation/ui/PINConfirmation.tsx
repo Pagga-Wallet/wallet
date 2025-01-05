@@ -25,14 +25,6 @@ export const PINConfirmation = ({
     pin,
 }: PINConfirmationProps) => {
     const { t } = useTranslation();
-    useSetupMainButton({
-        params: {
-            text: t("pincode.enter"),
-            isEnabled: true,
-            isVisible: true,
-            isLoaderVisible: isLoading,
-        },
-    });
     useSetupBackButton({
         onBack,
     });

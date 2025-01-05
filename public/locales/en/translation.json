@@ -19,7 +19,7 @@
         "recovery-info": "Your recovery phrase is a secret - don’t share it with anyone",
         "recovery-info-title": "Your recovery phrase",
         "wallet-list": "Wallet List",
-        "change-password": "Change password",
+        "change-password": "Change pin code",
         "account-deletion": "Account deletion",
         "security": "Security",
         "use-biometry": "Use biometry",
@@ -90,7 +90,7 @@
         "network": "Network"
     },
     "send-status": {
-        "your-tx": "Your TX has been",
+        "your-tx": "Your transaction has been",
         "sent-successfully": "sent successfully!",
         "being-processed": "and now is being processed in the blockchain",
         "check-balance": "check your balance and TX fee",
@@ -103,14 +103,13 @@
         "pay-invoice-btn": "Pay invoice"
     },
     "registration": {
-        "title-welcome": "Welcome to wallet",
-        "welcome-text1": "Send, buy and store TON",
-        "welcome-text2": "inside Telegram",
+        "title-welcome": "Pagga Wallet",
+        "welcome-text": "The first non-custodial multichain wallet in Telegram",
         "create-wallet": "Create Wallet",
         "import-wallet": "Import Wallet",
-        "import-wallet2": "Import Wallet",
-        "privacy-confirmation": "By continuing you agree to the disclaimer.",
-        "seed": "Enter your seed phrase"
+        "privacy-confirmation": "By continuing you agree to the",
+        "disclaimer": " disclaimer.",
+        "seed": "Enter a seed phrase of 12 or 24 words "
     },
     "receive": {
         "title": "Receive",
@@ -121,18 +120,20 @@
         "to-this-address": "to this address. You must send at least",
         "ton-or-jetton": "0.1 TON or 0.1 Jetton",
         "or-more-deposit": "or more to deposit.",
-        "receive-other": "Send to this address only. Other assets such as tokens or NFTs will be permanently lost."
+        "receive-other": "Send to this address only. Other assets such as tokens or NFTs will be permanently lost.",
+        "receive-part1": "Only send",
+        "receive-part2": "assets to this address. Other assets will be lost forever."
     },
     "send": {
-        "select-token": "Select token",
+        "select-token": "Choose token",
         "send-to": "Send to",
-        "enter-amount": "Enter amount",
+        "enter-amount": "Enter the amount",
         "checkout": "Check of amount",
         "checkout2": "Confirmed",
         "unknown": "Unknown",
         "invalid-receiver": "Invalid receiver",
         "confirm-transaction": "Confirm the transaction",
-        "select-recipient": "Select recipient",
+        "select-recipient": "Enter address",
         "transaction-confirm": "Transaction confirmation",
         "transaction-success": "Your transaction has been sent successfully!",
         "transaction-failed": "Transaction not sent!",
@@ -147,7 +148,7 @@
             "no-recent": "No recent transactions."
         },
         "enter-amount-position": {
-            "enter-amount": "Enter amount",
+            "enter-amount": "Enter the amount",
             "insufficient-balance": "Insufficient balance",
             "proceed": "Proceed",
             "available": "Available:",
@@ -202,6 +203,7 @@
     "menu": {
         "home": "Home",
         "swap": "Swap",
+        "apps": "Apps",
         "nft": "NFT",
         "settings": "Settings"
     },
@@ -223,9 +225,9 @@
     },
     "security": {
         "title": "Safety",
-        "item-1": "Now the secret words will appear. Write them down in the correct order and keep them in a safe place.",
-        "item-2": "They allow you to access your wallet if you forget your password or lose access to this device.",
-        "item-3": "If anyone sees these words, your funds may be stolen. Make sure no one is nearby!"
+        "item-1": "Now the secret words will appear. Write them down in the correct order and keep them in a safe place.",
+        "item-2": "They allow you to access your wallet if you forget your pin code or lose access to that device.",
+        "item-3": "If someone sees these words, your funds may be stolen. Make sure no one is around!"
     },
     "exchanges-list": {
         "ton": {
@@ -241,7 +243,8 @@
         }
     },
     "import-token": {
-        "already-imported": "This token is already saved"
+        "already-imported": "This token is already saved",
+        "input-placeholder": "Enter or insert contract address"
     },
     "connect-wallet-list": {
         "add-new-connection": "Add a new connection",
@@ -257,17 +260,17 @@
     "common": {
         "back": "Back",
         "cancel": "Cancel",
-        "enter-password": "Enter password",
-        "enter-a-password": "Enter a password",
-        "enter-a-password2": "Enter a password",
-        "confirm-password": "Confirm password",
-        "create-a-password": "Create a password",
-        "create-password": "Create password",
-        "password-dismatches": "Passwords dismatches",
-        "password": "Enter password",
+        "enter-password": "Enter pin code",
+        "enter-a-password": "Enter a pin code",
+        "enter-a-password2": "Enter a pin code",
+        "confirm-password": "Confirm pin code",
+        "create-a-password": "Create a pin code",
+        "create-password": "Create pin code",
+        "password-dismatches": "Pin codes dismatches",
+        "password": "Enter pin code",
         "close": "Close",
-        "copy": "Copy",
-        "incorrect-password": "Incorrect password",
+        "copy": "Copy to Clipboard",
+        "incorrect-password": "Incorrect pin code",
         "are-you-sure": "Are you sure?",
         "info": "Info",
         "connect-to": "Connect to",
@@ -308,25 +311,26 @@
         "network": "Network",
         "support": "Support",
         "min-8": "Minimum 8 characters",
-        "change-psw": "Change password",
+        "change-psw": "Change Pin Code",
         "insufficient-funds": "Insufficient funds",
         "insufficient-funds-ton": "Minimum 0.1 TON",
         "insufficient-ton": "Insufficient TON",
         "invalid-amount": "Invalid amount",
         "search-by-name": "Search by name",
         "send": "Send",
-        "in-stock": "In stock",
+        "in-stock": "Remaining:",
         "all": "All",
         "coming-soon": "Coming soon",
         "select-module": "Select module",
         "import-token": "Import a token",
         "import": "Import",
-        "select-network": "Select network",
+        "select-network": "Choose network",
         "enter-contract-address": "Enter contract address",
         "search-by-address": "Search by address",
         "title": "Title",
         "enter-recepients-address": "Enter recepient's address",
-        "save-mnemonic": "Save mnemonic",
+        "save-mnemonic": "Save the seed phrase",
+        "save-mnemonic-desc": "Write down 12 words",
         "i-saved-mnemonic": "I saved mnemonic",
         "mnemonics-copied": "Mnemonics copied",
         "continue": "Continue",
@@ -334,12 +338,23 @@
         "go-back": "Go back",
         "memo": "Memo",
         "memo-enter": "Enter memo",
-        "wordsMnemonic": "Enter 12 or 24 words",
+        "wordsMnemonic": "Enter a seed phrase",
         "pasteClipboard": "Paste from clipboard",
         "changing-pin": "Changing the PIN",
         "no-charts-data": "No data on schedule",
         "to-main": "To main page",
-        "save": "Save"
+        "save": "Save",
+        "done": "Done",
+        "total-balance": "Total balance",
+        "latest-addresses": "Latest addresses",
+        "confirmation": "Confirmation",
+        "your-sending": "You sending",
+        "view-all": "View all",
+        "paste": "Paste"
+    },
+    "create-card": {
+        "title": "Create card",
+        "description": "Pass KYC to get a card"
     },
     "introduction": {
         "multichain-title": "Wallet is now a multichain",

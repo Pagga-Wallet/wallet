@@ -1,5 +1,8 @@
+import clsx from "clsx";
 import React, { FC } from "react";
-import ContentLoader from "react-content-loader";
+
+import { SkeletonRound } from "@/shared/components/Skeletons";
+
 import s from "./TokenListItem.module.sass";
 
 interface TokenListItemSkeletonProps {
@@ -7,21 +10,29 @@ interface TokenListItemSkeletonProps {
 }
 
 const Skeleton = () => (
-    <div className={s.tokenSkeleton}>
-        <ContentLoader
-            speed={2}
-            width={"100%"}
-            height={40}
-            viewBox="0 0 350 40"
-            backgroundColor={"rgb(var(--secondary-bg))"}
-            foregroundColor={"rgb(var(--tertiary-bg))"}
-        >
-            <circle cx="20" cy="20" r="20" />
-            <rect x="48" y="23" rx="2" ry="2" width="100" height="12" />
-            <rect x="48" y="5" rx="2" ry="2" width="50" height="12" />
-            <rect x="280" y="5" rx="2" ry="2" width="70" height="12" />
-            <rect x="300" y="23" rx="2" ry="2" width="50" height="12" />
-        </ContentLoader>
+    <div className={clsx(s.token, s.tokenNoHover)}>
+        <div className={s.left}>
+            <SkeletonRound customWidth={40} height={40} style={{ borderRadius: '50%' }} />
+            <div className={s.info}>
+                <div className={s.name}>
+                    <SkeletonRound customWidth={60} height={20} />
+                </div>
+                <div className={s.price}>
+                    <div className={s.priceInfo}>
+                        <SkeletonRound customWidth={40} height={18} />
+                    </div>
+                    <SkeletonRound customWidth={40} height={18} />
+                    {/* <span className={s.priceChange}>+2.3%</span> */}
+                </div>
+            </div>
+        </div>
+        <div className={s.total}>
+            <SkeletonRound customWidth={50} height={19} />
+            <div className={s.totalAmount}>
+                {" "}
+                <SkeletonRound customWidth={50} height={19} />
+            </div>
+        </div>
     </div>
 );
 

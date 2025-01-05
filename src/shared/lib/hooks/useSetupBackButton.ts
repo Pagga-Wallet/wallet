@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 interface BackButtonOptions {
     onBack?(): void;
+    visible?: boolean;
 }
 /** 
     @param deps - Костыль для принудительного обновления кнопки по зависимостям.
@@ -12,9 +13,11 @@ interface BackButtonOptions {
 export const useSetupBackButton = (options?: BackButtonOptions, deps: any[] = []) => {
     const navigate = useNavigate();
 
+    const { onBack, visible = true } = options || {};
+
     const onClick = useCallback(() => {
-        if (options?.onBack) {
-            options.onBack();
+        if (onBack) {
+            onBack();
         } else {
             console.log("back");
             navigate(-1);
@@ -23,13 +26,20 @@ export const useSetupBackButton = (options?: BackButtonOptions, deps: any[] = []
 
     useEffect(() => {
         backButton.show();
-        // console.log('show btn')
-        return () => {
-            backButton.hide();
-            // console.log('hide btn')
-        };
+        // return () => {
+        //     backButton.hide();
+        //     console.log('hide')
+        // };
     }, [JSON.stringify(deps)]);
 
+    useEffect(() => {
+        if (visible) {
+            backButton.show();
+        } else {
+            backButton.hide();
+        }
+    }, [visible]);
+    
     useEffect(() => {
         if (onClick) {
             return backButton.onClick(onClick);

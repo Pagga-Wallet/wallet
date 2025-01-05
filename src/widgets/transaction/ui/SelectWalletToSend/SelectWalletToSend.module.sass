@@ -1,7 +1,4 @@
 .inner
-  padding: 16px 8px
-  background-color: #2e353d66
-  border-radius: 24px
   display: flex
   flex-direction: column
   gap: 16px
@@ -9,9 +6,9 @@
     display: flex
     align-items: center
     gap: 8px
-    padding: 16px 35px 16px 14px
-    background-color: #424b564d
-    border-radius: 20px
+    padding: 15.5px 35px 15.5px 14px
+    background-color: rgba(var(--foreground-secondary))
+    border-radius: 16px
     position: relative
     &Input
       width: 100%
@@ -36,12 +33,21 @@
 
         &:hover > svg > path
           fill: rgba(var(--placeholder-primary), 0.8)
-
   .empty
     display: flex
     align-items: center
     justify-content: center
-    height: 30vh
+    height: 50vh
     font-size: 21px
     font-weight: 510
     text-align: center
+
+.list
+  padding: 24px 0
+  margin: 16px -16px -20px -16px
+  border-radius: 32px 32px 0 0
+  background: rgb(var(--foreground-primary))
+  min-height: 63vh
+  &Title
+    padding-left: 16px
+    margin-bottom: 8px

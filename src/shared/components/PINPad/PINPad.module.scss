@@ -1,10 +1,14 @@
 .pincode {
-  height: 95vh;
-  max-height: 95vh;
-  overflow: hidden;
-
   display: flex;
   flex-direction: column;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 32px 16px 50px 16px !important;
 
   .action {
     display: flex;
@@ -12,17 +16,17 @@
   }
 
   .top {
-    height: 50%;
+    flex: 1 1 100%;
+    min-height: 210px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     &Title {
       text-align: center;
-      color: var(--placeholder-primary, #FFFFFF);
-      font-size: 32px;
-      margin-bottom: 24px;
+      font-size: 26px;
       font-weight: 510;
+      margin-bottom: 24px;
     }
     .dots {
       display: flex;
@@ -31,20 +35,20 @@
       gap: 8px;
       &Item {
         transition: background ease-in-out 0.5ms;
-        width: 14px;
-        height: 14px;
+        width: 10px;
+        height: 10px;
         border-radius: 100%;
-        background-color: grey;
+        background-color: #7F7F91;
       }
       .active {
-        background-color: #fff;
+        background-color: rgba(var(--accent-tertiary));
       }
       .failure {
-        background: rgba(var(--accent-danger), 1);
+        background: rgba(var(--accent-red), 1);
       }
 
       .success {
-        background: rgba(var(--accent-success), 1);
+        background: rgba(var(--accent-green), 1);
       }
     }
 
@@ -55,8 +59,6 @@
   }
 
   .pinPad {
-    margin-bottom: 55px;
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
@@ -70,11 +72,17 @@
       }
     }
     .pinPadButton {
-      background: rgba(var(--tertiary-bg), 0.4);
+      background: rgba(var(--foreground-secondary));
       cursor: pointer;
-      border-radius: 4vw;
-      padding-top: 4vw;
-      padding-bottom: 4vw;
+      // border-radius: 4vw;
+      // padding-top: 4vw;
+      // padding-bottom: 4vw;
+      border-radius: 96px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       border: none;
       box-shadow: none;
 

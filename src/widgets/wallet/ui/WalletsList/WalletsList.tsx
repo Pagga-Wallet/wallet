@@ -62,7 +62,6 @@ export const WalletsList: FC<WalletsList> = ({ onClose }) => {
         }
         return username;
     };
-    console.log(accounts);
 
     const calculateMaxHeight = (length: number) => {
         switch (length) {

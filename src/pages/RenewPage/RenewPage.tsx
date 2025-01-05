@@ -23,7 +23,8 @@ export const RenewPage = () => {
 
     useSetupBackButton({
         onBack() {
-            navigate("/introduction");
+            // navigate("/introduction");
+            navigate("/");
         },
     });
 

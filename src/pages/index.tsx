@@ -23,11 +23,13 @@ import { Swap } from "./Swap";
 import { TokenDetail } from "./TokenDetail";
 import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
+import { PrivacyPolicy } from "./PrivacyPolicy/ui";
+import { Apps } from "./Apps/ui/Apps";
 
 export const Routing = () => {
     return (
         <>
-            <Suspense fallback={<>Loading</>}>
+            <Suspense fallback={<></>}>
                 <Routes>
                     <Route path="/" element={<WelcomePage />} />
                     <Route path="/home" element={<Home />} />
@@ -41,6 +43,8 @@ export const Routing = () => {
 
                     <Route path="/send" element={<Send />} />
 
+                    <Route path="/apps" element={<Apps />} />
+
                     <Route path="/settings" element={<SettingsPage />} />
                     <Route path="/ton-version" element={<ChangeTonVersion />} />
 
@@ -50,6 +54,8 @@ export const Routing = () => {
                     <Route path="/account/:id/recovery" element={<RecoveryPhrasePage />} />
 
                     {/* <Route path="/swap" element={<Swap />} /> */}
+
+                    <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
                     <Route path="/import/token" element={<ImportTokenPage />} />
 
@@ -62,8 +68,8 @@ export const Routing = () => {
                         element={<ConnectWalletListPage />}
                     />
 
-                    <Route path="/introduction" element={<IntroductionPage />} />
-                    <Route path="/introduction/renew" element={<RenewPage />} />
+                    {/* <Route path="/introduction" element={<IntroductionPage />} />
+                    <Route path="/introduction/renew" element={<RenewPage />} /> */}
 
                     <Route path="/transaction" element={<TransactionPage />} />
                 </Routes>

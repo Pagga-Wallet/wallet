@@ -8,6 +8,7 @@ interface SectionButtonProps {
     danger?: boolean;
     disabled?: boolean;
     className?: ClassValue;
+    isLast?: boolean
 }
 export const SectionButton = ({
     children,
@@ -15,12 +16,14 @@ export const SectionButton = ({
     danger,
     disabled,
     className,
+    isLast
 }: SectionButtonProps) => {
     return (
         <button
             className={clsx(styles.item, {
                 [styles["item--danger"]]: danger,
                 [styles["item--disabled"]]: disabled,
+                [styles["item--last"]]: isLast,
                 className,
             })}
             onClick={onClick}

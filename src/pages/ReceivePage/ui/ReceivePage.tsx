@@ -2,18 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ReceiveInner } from "@/widgets/receive";
-import { TokensList } from "@/widgets/token";
 import {
     MultichainAccount,
     multichainAccountStore,
-    useFetchTotalBalanceQuery,
+    useFetchTotalBalanceQuery
 } from "@/entities/multichainAccount";
-import { PrivateLayout } from "@/shared/layouts";
 import { useAppSelector, useSetupBackButton } from "@/shared/lib";
-import { CHAINS, TokenBalance } from "@/shared/lib/types";
-import { title } from "../consts";
+import { CHAINS } from "@/shared/lib/types";
 import { ReceiveSteps } from "../types/ReceiveSteps";
-import s from "./ReceivePage.module.sass";
+import { SelectNetwork } from "@/widgets/import";
+import { getSelectBlockhainConfig } from "@/shared/lib/consts/import-list";
 
 export const ReceivePage = () => {
     const { t } = useTranslation();
@@ -35,21 +33,18 @@ export const ReceivePage = () => {
         tokenPlatfromParam ? (tokenPlatfromParam as CHAINS) : null
     );
 
-    const { data: accountBalance = null, isFetching: accountBalanceFetching } =
-        useFetchTotalBalanceQuery();
+    const {
+        data: accountBalance = null,
+        isFetching: accountBalanceFetching
+    } = useFetchTotalBalanceQuery();
 
-    const onTokenSelect = useCallback(
-        (token: TokenBalance) => {
-            if (!multichainAccount) return;
-            const network: CHAINS = token.platform as CHAINS;
-            const address = multichainAccount.getAddressInNetwork(network);
-            if (!address) return;
-            setSendAddress(address);
-            setTokenChain(token.platform);
-            setStep(ReceiveSteps.receive);
-        },
-        [multichainAccount]
-    );
+    useEffect(() => {
+        if (!multichainAccount || !tokenChain) return;
+        const address = multichainAccount.getAddressInNetwork(tokenChain);
+        if (!address) return;
+        setSendAddress(address);
+        setStep(ReceiveSteps.receive);
+    }, [tokenChain]);
 
     const onBack = useCallback(() => {
         switch (step) {
@@ -58,6 +53,7 @@ export const ReceivePage = () => {
                 break;
             case ReceiveSteps.receive:
                 if (tokenPlatfromParam) navigate(-1);
+                setTokenChain(null);
                 setStep(ReceiveSteps.select);
                 break;
             default:
@@ -79,22 +75,21 @@ export const ReceivePage = () => {
         }
     }, [tokenPlatfromParam, multichainAccount]);
 
+    const configNetworks = getSelectBlockhainConfig();
     return (
-        <PrivateLayout>
-            <div className={s.title}>{t(title[step])}</div>
-
+        <>
             {step === ReceiveSteps.select && (
-                <TokensList
-                    search
-                    isSelectMode
-                    accountBalance={accountBalance}
-                    onTokenSelect={onTokenSelect}
-                    isLoading={accountBalanceFetching}
+                <SelectNetwork
+                    setNetwork={setTokenChain}
+                    config={configNetworks}
+                    network={tokenChain}
+                    title={t("main.receive-btn")}
+                    subtitle={t("common.select-network")}
                 />
             )}
             {step === ReceiveSteps.receive && (
                 <ReceiveInner address={sendAddress} chain={tokenChain} />
             )}
-        </PrivateLayout>
+        </>
     );
 };

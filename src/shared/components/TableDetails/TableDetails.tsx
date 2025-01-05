@@ -14,7 +14,7 @@ export const TableDetails: FC<TableDetailsProps> = ({ txHash, fee, memo }) => {
 
     return (
         <div className={s.details}>
-            <div className={s.detailsTitle}>{t("trans-detail.header")}</div>
+            {/* <div className={s.detailsTitle}>{t("trans-detail.header")}</div> */}
             {txHash && (
                 <div className={s.detailRow}>
                     <div className={s.detailRowTitle}>{t("trans-detail.address")}</div>

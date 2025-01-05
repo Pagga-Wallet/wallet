@@ -1,13 +1,13 @@
 import { skipToken } from "@reduxjs/toolkit/query";
 import { backButton } from "@telegram-apps/sdk-react";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { InputAddressContract, SelectNetwork } from "@/widgets/import";
 import { useGetImportedTokensQuery, useImportTokenMutation } from "@/entities/multichainAccount";
 import { useGetTokenByContractQuery } from "@/entities/token/model/tokenService";
 import { TokenListItem } from "@/entities/token/ui";
-import { Title } from "@/shared/components";
+import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 import { tokensWhitelist } from "@/shared/lib/consts/token";
@@ -16,6 +16,8 @@ import { CHAINS } from "@/shared/lib/types";
 import { btnText } from "../consts";
 import { ImportTokenSteps } from "../types/ImportTokenSteps";
 import s from "./ImportTokenPage.module.sass";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+import { TokenImportEmpty } from "@/widgets/token";
 
 interface ImportTokenPageProps {}
 
@@ -39,7 +41,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         isFetching || (network && savedTokens?.[network].includes(addressContract))
     );
     const isWhitelistedToken = tokensWhitelist.some(
-        (token) => addressContract && token.contract === addressContract
+        token => addressContract && token.contract === addressContract
     );
     const isSavedToken = isWhitelistedToken || isImportedToken;
 
@@ -62,19 +64,24 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, onSaveContractAddress]);
 
-    useSetupMainButton({
-        onClick: onForward,
-        params: {
-            text: isSavedToken ? t("import-token.already-imported") : t(btnText[step]),
-            isVisible: true,
-            isEnabled:
-                step === ImportTokenSteps.address_contract
-                    ? isValidToken && !isSavedToken
-                    : !!(step === ImportTokenSteps.network && network),
-            isLoaderVisible: isFetching,
-            backgroundColor: "#007AFF",
-        },
-    });
+    useEffect(() => {
+        if (!network) return;
+        setStep(ImportTokenSteps.address_contract);
+    }, [network]);
+
+    // useSetupMainButton({
+    //     onClick: onForward,
+    //     params: {
+    //         text: isSavedToken ? t("import-token.already-imported") : t(btnText[step]),
+    //         isVisible: true,
+    //         isEnabled:
+    //             step === ImportTokenSteps.address_contract
+    //                 ? isValidToken && !isSavedToken
+    //                 : !!(step === ImportTokenSteps.network && network),
+    //         isLoaderVisible: isFetching,
+    //         backgroundColor: "#007AFF"
+    //     }
+    // });
 
     const onBack = useCallback(() => {
         switch (step) {
@@ -90,41 +97,64 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, navigate]);
 
-    backButton.mount()
+    backButton.mount();
     useSetupBackButton({
-        onBack,
+        onBack
     });
 
     return (
-        <BaseLayout>
-            <Title level={2} className={s.title}>
-                {t("common.import-token")}
-            </Title>
-
+        <>
             {step === ImportTokenSteps.network && (
-                <SelectNetwork setNetwork={setNetwork} network={network} />
+                <SelectNetwork
+                    setNetwork={setNetwork}
+                    network={network}
+                    subtitle={t("common.select-network")}
+                    title={t("common.import")}
+                />
             )}
 
             {step === ImportTokenSteps.address_contract && (
-                <>
+                <BaseLayout className={s.inner} withDecor>
                     <InputAddressContract
                         addressContract={addressContract}
                         setAddressContract={setAddressContract}
                     />
-                    {/* Тут отображать найденный токен */}
-                    {isValidAddress && tokenData && !isLoading ? (
-                        <TokenListItem
-                            name={tokenData.tokenName}
-                            balance={tokenData.balance}
-                            balanceUSD={tokenData.balanceUSD}
-                            change24={tokenData.change24h}
-                            tokenPrice={tokenData.price}
-                            icon={tokenData.tokenIcon}
-                            chain={tokenData.platform}
-                        />
-                    ) : null}
-                </>
+
+                    <div className={s.innerContent}>
+                        {/* Тут отображать найденный токен */}
+                        {isValidAddress && tokenData && !isLoading ? (
+                            <TokenListItem
+                                name={tokenData.tokenName}
+                                balance={tokenData.balance}
+                                balanceUSD={tokenData.balanceUSD}
+                                change24={tokenData.change24h}
+                                tokenPrice={tokenData.price}
+                                icon={tokenData.tokenIcon}
+                                chain={tokenData.platform}
+                                isImportedToken
+                            />
+                        ) : (
+                            <TokenImportEmpty />
+                        )}
+                    </div>
+
+                    <CustomButton
+                        firstButton={{
+                            children: isSavedToken
+                                ? t("import-token.already-imported")
+                                : t(btnText[step]),
+                            type: isValidToken ? "purple" : "grey",
+                            onClick: onForward,
+                            isDisabled:
+                                step === ImportTokenSteps.address_contract
+                                    ? !isValidToken || isSavedToken || isFetching || !isValidAddress
+                                    : step === ImportTokenSteps.network
+                                    ? !network || isFetching || !isValidAddress
+                                    : isFetching || !isValidAddress
+                        }}
+                    />
+                </BaseLayout>
             )}
-        </BaseLayout>
+        </>
     );
 };

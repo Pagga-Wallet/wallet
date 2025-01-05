@@ -2,20 +2,31 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding-bottom: 20px;
     &Content {
+        background: rgb(var(--foreground-primary));
         display: flex;
         flex-direction: column;
         gap: 16px;
-        margin-top: -74px;
+        border-radius: 32px 32px;
+        margin: -74px -14px 0 -14px;
+        padding: 0 16px;
     }
+}
+
+.top, .topActions {
+    display: flex;
+    gap: 8px;
 }
 
 .top {
     width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 8px;
 }
+
+.topActions {
+    flex-direction: row-reverse;
+}
+
 .icon_button {
     width: 46px;
     height: 46px;
@@ -23,20 +34,20 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: rgb(var(--primary-bg));
+    background-color: rgb(var(--foreground-primary));
     border: none;
     box-shadow: none;
     cursor: pointer;
     &:active {
-        outline: 1px solid rgb(var(--placeholder-tertiary));
+        outline: 1px solid rgb(var(--foreground-primary));
         transform: scale(0.95) !important;
     }
     &:hover {
-        background: linear-gradient(0deg, #3f474f 0%, #43484d 100%), rgba(46, 49, 53, 0.8);
+        background-color: rgba(var(--foreground-primary), 0.7);
     }
     &:disabled {
         cursor: initial;
-        background-color: rgb(var(--primary-bg));
+        background-color: rgba(var(--foreground-primary), 0.7);
         opacity: 0.3;
         &:active {
             outline: none;
@@ -54,6 +65,7 @@
     &Label {
         font-size: 14px;
         color: rgb(var(--placeholder-secondary));
+        letter-spacing: 0.28px;
     }
     &Text {
         font-size: 42px;
@@ -62,7 +74,7 @@
 }
 
 .actions {
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     display: flex;
     align-items: center;
@@ -80,10 +92,15 @@
         align-items: center;
         width: 50%;
         gap: 8px;
-        border-radius: 32px;
+        // border-radius: 32px;
         height: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
         &:active {
-            background: rgba(var(--placeholder-tertiary), 0.2);
+            background: rgba(var(--placeholder-primary), 0.2);
+        }
+        &:hover {
+            background: rgba(var(--placeholder-primary), 0.2);
         }
     }
     &Text {
@@ -99,7 +116,6 @@
         justify-content: center;
 
         &:active {
-            outline: 1px solid rgb(var(--placeholder-tertiary));
             transform: scale(0.95) !important;
         }
 

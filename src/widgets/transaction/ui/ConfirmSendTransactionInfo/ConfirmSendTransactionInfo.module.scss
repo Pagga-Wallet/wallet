@@ -1,47 +1,68 @@
 .confirm {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 70vh;
-    .title {
-        color: var(--Placeholder-Primary, #fff);
-        text-align: center;
-        font-size: 32px;
-        font-weight: 510;
+    min-height: calc(100vh - 132px);
+}
+
+.info {
+    padding: 24px 16px 10px 16px;
+    border-radius: 32px 32px 0 0;
+    min-height: 43vh;
+    background: rgb(var(--foreground-primary));
+    margin: auto -16px -20px -16px;
+    &Top {
         margin-bottom: 40px;
     }
+    &Title,
+    &Subtitle {
+        text-align: center;
+    }
+    &Subtitle {
+        color: rgb(var(--placeholder-secondary));
+        margin-bottom: 6px;
+    }
+    &Title {
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 110%;
+        letter-spacing: 0.52px;
+    }
 
-    .info {
-        &Title {
-            color: var(--Placeholder-Secondary, #94a3b8);
-            text-align: center;
-            font-size: 14px;
-            font-weight: 400;
-            margin-bottom: 12px;
+    &Content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 40px;
+        &Img {
+            margin-bottom: 24px;
         }
-        .amount {
+        &Title {
+            color: rgb(var(--placeholder-secondary));
+            margin-bottom: 11px;
+        }
+        &Amount {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 5px;
+            margin-bottom: 11px;
             &Value {
-                color: var(--Placeholder-Primary, #fff);
-                text-align: center;
-                font-size: 40px;
-                font-weight: 510;
+                font-size: 32px;
+                font-weight: 500;
+                letter-spacing: 0.64px;
+                color: rgb(var(--placeholder-primary));
             }
             &Currency {
-                color: var(--Placeholder-Secondary, #94a3b8);
-                text-align: center;
-                font-size: 28px;
-                font-weight: 510;
+                font-size: 26px;
+                font-weight: 500;
+                letter-spacing: 0.52px;
+                color: rgb(var(--accent-tertiary));
             }
-        }
-        .total {
-            color: var(--Placeholder-Primary, #fff);
-            text-align: center;
-            font-size: 18px;
-            font-weight: 400;
+            &Total {
+                color: rgb(var(--placeholder-secondary));
+                font-size: 16px;
+                font-weight: 500;
+            }
         }
     }
 }

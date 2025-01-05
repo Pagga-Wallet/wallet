@@ -33,7 +33,13 @@ export const TokenIcon: FC<ITokenIconProps> = ({
     className
 }) => {
     return (
-        <div className={clsx(s.tokenIcon, className)}>
+        <div
+            className={clsx(s.tokenIcon, className)}
+            style={{
+                height: size + "px",
+                width: size + "px"
+            }}
+        >
             <img
                 src={icon ?? TokenImg}
                 alt="token"

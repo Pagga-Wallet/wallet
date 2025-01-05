@@ -23,7 +23,6 @@ export const TransactionsHistoryListDetail: FC<TransactionsHistoryListDetailProp
     const { t } = useTranslation();
 
     const { data: lastTxs, isLoading } = useGetLastTxsByTokenQuery(token);
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -36,7 +35,7 @@ export const TransactionsHistoryListDetail: FC<TransactionsHistoryListDetailProp
     );
 
     const renderSkeletons = () =>
-        new Array(5).fill(null).map(() => <TransactionHistoryDetailItemSkeleton key={uuidv4()} />);
+        new Array(10).fill(null).map(() => <TransactionHistoryDetailItemSkeleton key={uuidv4()} />);
 
     const renderEmptyMessage = () => (
         <div className={s.empty}>{t("send.send-to-position.no-recent")}</div>
@@ -50,6 +49,7 @@ export const TransactionsHistoryListDetail: FC<TransactionsHistoryListDetailProp
             symbol={tx.symbol}
             direction={tx.direction}
             key={tx.hash}
+            timestamp={tx.timestamp}
             onClick={() => onOpenDetails(tx)}
             participantAddress={tx.direction === "OUT" ? tx.to : tx.from}
         />

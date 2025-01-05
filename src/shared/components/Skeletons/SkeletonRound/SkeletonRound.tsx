@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { CSSProperties, FC } from "react";
 import ContentLoader from "react-content-loader";
 
 interface SkeletonRoundProps {
@@ -7,6 +7,7 @@ interface SkeletonRoundProps {
     widthSmall?: boolean;
     customWidth?: string | number;
     height?: number;
+    style?: CSSProperties;
 }
 
 export const SkeletonRound: FC<SkeletonRoundProps> = ({
@@ -14,6 +15,7 @@ export const SkeletonRound: FC<SkeletonRoundProps> = ({
     widthHalf = false,
     widthSmall = false,
     customWidth,
+    style,
     height = 20,
     ...rest
 }) => {
@@ -25,8 +27,9 @@ export const SkeletonRound: FC<SkeletonRoundProps> = ({
             width={widthValue}
             height={height}
             viewBox={`0 0 ${widthValue} ${height}`}
-            backgroundColor={"rgb(var(--secondary-bg))"}
-            foregroundColor={"rgb(var(--tertiary-bg))"}
+            backgroundColor={"rgba(var(--foreground-secondary), 0.8)"}
+            foregroundColor={"rgb(var(--foreground-secondary))"}
+            style={style}
             {...rest}
         >
             <rect x="0" y="0" rx="10" ry="10" width="100%" height={height} />

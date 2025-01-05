@@ -5,40 +5,38 @@
     gap: 12px;
     padding: 0px 16px;
     height: 46px;
-    background-color: rgb(var(--secondary-bg));
+    background-color: rgb(var(--foreground-secondary));
     border-radius: 32px;
     position: relative;
-    svg path {
-        //stroke: rgb(var(--placeholder-secondary));
-    }
     &Input {
         width: 100%;
+        height: 46px;
         background: none;
         margin-right: 6px;
         outline: none;
         border: none;
-        font-size: 16px;
-        line-height: 16px;
+        font-size: 14px;
+        letter-spacing: 0.28px;
         color: rgb(var(--placeholder-secondary));
     }
     &Clear {
         cursor: pointer;
         position: absolute;
-        top: 18px;
+        top: 14px;
         right: 14px;
         transition: fill 0.3s ease 0s;
         background: transparent;
         outline: none;
         border: none;
         > svg > path {
-            fill: rgb(var(--placeholder-secondary));
+            fill: rgb(var(--placeholder-primary));
         }
         &:hover > svg > path {
-            fill: rgb(var(--placeholder-secondary));
+            fill: rgba(var(--placeholder-primary), 0.8);
         }
     }
 }
 
 .focused {
-    background-color: #4856674d;
+    background-color: rgba(var(--foreground-secondary), 0.8);
 }

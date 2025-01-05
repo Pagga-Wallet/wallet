@@ -9,6 +9,7 @@ import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { TokenBalance, BaseToken } from "@/shared/lib/types";
 import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import s from "./SelectWalletToSend.module.sass";
+import { Text } from "@/shared/components";
 
 interface SelectWalletToSendProps {
     value: string;
@@ -56,7 +57,6 @@ export const SelectWalletToSend: FC<SelectWalletToSendProps> = ({
         <TransactionRecentItem
             participantAddress={tx.to}
             onClick={() => (onAddressSelect ? onAddressSelect(tx.to) : setValue(tx.to))}
-            txHash={tx.hash}
             chain={tx.chain}
             timestamp={tx.timestamp}
         />
@@ -65,7 +65,6 @@ export const SelectWalletToSend: FC<SelectWalletToSendProps> = ({
     return (
         <div className={s.inner}>
             <div className={s.search}>
-                <SvgSelector id="search" />
                 <BaseInput
                     onChange={setValue}
                     value={value}
@@ -87,6 +86,7 @@ export const SelectWalletToSend: FC<SelectWalletToSendProps> = ({
             </div>
 
             <div className={s.list}>
+                <Text className={s.listTitle}>{t("common.latest-addresses")}</Text>
                 {isLoading
                     ? renderSkeletons()
                     : !filteredDataOut?.length

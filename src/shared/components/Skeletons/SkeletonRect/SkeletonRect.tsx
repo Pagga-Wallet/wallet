@@ -17,8 +17,8 @@ export const SkeletonRect: FC<SkeletonRectProps> = ({
     <ContentLoader
         speed={2}
         viewBox={`0 0 ${width} ${height}`}
-        backgroundColor={"rgba(49, 54, 62, 1)"}
-        foregroundColor={"rgb(var(--tertiary-bg))"}
+        backgroundColor={"rgba(var(--foreground-primary), 0.8)"}
+        foregroundColor={"rgb(var(--foreground-primary))"}
         width={width}
         height={height}
         style={{

@@ -16,6 +16,7 @@ interface TokensListSelectable {
     isLoading?: boolean;
     chainFilter?: CHAINS[];
     tokenList?: TokenBalance[];
+    isSend?: boolean;
 }
 
 interface TokensList {
@@ -27,6 +28,7 @@ interface TokensList {
     isLoading?: boolean;
     chainFilter?: CHAINS[];
     tokenList?: TokenBalance[];
+    isSend?: boolean;
 }
 
 export const TokensList: FC<TokensList | TokensListSelectable> = ({
@@ -38,6 +40,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
     isLoading = false,
     chainFilter,
     tokenList,
+    isSend
 }) => {
     const [searchValue, setSearchValue] = useState<string>("");
 
@@ -69,7 +72,9 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
     }, [searchValue, sortedTokens, chainFilter]);
 
     return (
-        <div className={s.tokensList}>
+        <div className={s.tokensList} style={{
+            padding: isSend ? "16px 0 0 0" : "72px 0 0 0"
+        }}>
             {search && (
                 <div
                     className={s.tokensListTop}
@@ -78,7 +83,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
                     <SearchInput setValue={setSearchValue} value={searchValue} />
                     {includedImportsIcon && (
                         <Button
-                            type="primary"
+                            type="grey"
                             className={s.importBtn}
                             onClick={() => navigate("/import/token")}
                             // isDisabled
@@ -90,7 +95,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
             )}
             <div className={s.list}>
                 {isLoading ? (
-                    <TokenListItemSkeleton count={5} />
+                    <TokenListItemSkeleton count={10} />
                 ) : (
                     filteredTokens.map((token) => (
                         <TokenListItem
