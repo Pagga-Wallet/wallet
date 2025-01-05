@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { SelectNetwork } from "@/widgets/import";
 import { ReceiveInner } from "@/widgets/receive";
 import {
     MultichainAccount,
@@ -8,10 +9,9 @@ import {
     useFetchTotalBalanceQuery
 } from "@/entities/multichainAccount";
 import { useAppSelector, useSetupBackButton } from "@/shared/lib";
+import { getSelectBlockhainConfig } from "@/shared/lib/consts/import-list";
 import { CHAINS } from "@/shared/lib/types";
 import { ReceiveSteps } from "../types/ReceiveSteps";
-import { SelectNetwork } from "@/widgets/import";
-import { getSelectBlockhainConfig } from "@/shared/lib/consts/import-list";
 
 export const ReceivePage = () => {
     const { t } = useTranslation();

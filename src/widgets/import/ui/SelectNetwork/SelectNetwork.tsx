@@ -1,10 +1,10 @@
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TokenImport } from "@/entities/token/ui";
+import { BaseLayout, PrivateLayout, WithDecorLayout } from "@/shared/layouts/layouts";
 import { SelectBlockhainConfig, importList } from "@/shared/lib/consts/import-list";
 import { CHAINS } from "@/shared/lib/types";
 import s from "./SelectNetwork.module.sass";
-import { BaseLayout, PrivateLayout, WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface SelectNetworkProps {
     setNetwork: React.Dispatch<React.SetStateAction<CHAINS | null>>;
