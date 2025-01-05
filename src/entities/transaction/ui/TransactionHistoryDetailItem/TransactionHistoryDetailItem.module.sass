@@ -2,53 +2,50 @@
   display: flex
   align-items: center
   justify-content: space-between
-  padding: 16px 10px 17px 10px
+  margin: 0 -16px
+  padding: 15.5px 16px
   cursor: pointer
   transition: all 0.3s ease 0s
-  border-radius: 0 
-  &:first-child
-    border-radius: 24px 24px 0 0
-  &:last-child
-    border-radius: 0 0 24px 24px
-  &:active
-    background: rgba(var(--placeholder-tertiary), 0.2)
-  &:not(:last-child)
-    border-bottom: 1px solid #384452
+  border-radius: 0
+  position: relative
+  &NoHover
+    cursor: default
+    &:hover
+      background: transparent !important
+    &::before
+      display: block !important
+  &:hover
+    background: #28282F
+    &::before
+      display: none
+  &:not(:last-child)::before
+    content: ''
+    position: absolute
+    width: calc( 100% - 84px )
+    height: 0.7px
+    bottom: 0
+    right: 16px
+    background: rgb(var(--border-secondary))
+    opacity: 0.7
   .left
     display: flex
     align-items: center
     gap: 12px
-    .transactionLogo
-      width: 40px
-      height: 40px
-      border-radius: 100%
-      object-fit: cover
-      display: flex
-      align-items: center
-      justify-content: center
-      font-size: 20px
-      font-weight: 800
     .info
       .title
         font-size: 16px
-        font-weight: 510
+        font-weight: 500
         margin-bottom: 4px
         text-transform: capitalize
       .details
-        display: flex
-        align-items: center
-        gap: 6px
-        &Address
-          font-size: 14px
-          color: var(--Placeholder-Secondary, #94a3b8)
+        font-size: 13px
+        color: rgb(var(--placeholder-secondary))
   .right
     text-align: right
-    .status
-      font-size: 14px
-      text-align: right
-      font-weight: 510
-      color: #10B981 !important
-      margin-bottom: 7px
-      .amount
-        font-size: 14px
-        font-weight: 510
+    .amount
+      font-size: 15px
+      font-weight: 500
+      margin-bottom: 4px
+    .address
+      font-size: 13px
+      color: rgb(var(--placeholder-secondary))

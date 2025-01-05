@@ -20,7 +20,7 @@ const icons: Record<CHAINS, string> = {
     [CHAINS.ETH]: EthNetwork,
     [CHAINS.BNB]: BNBNetwork,
     [CHAINS.TON]: TonNetwork,
-    [CHAINS.TRON]: TronNetwork,
+    [CHAINS.TRON]: TronNetwork
 };
 
 export const TokenIcon: FC<ITokenIconProps> = ({
@@ -28,10 +28,16 @@ export const TokenIcon: FC<ITokenIconProps> = ({
     showChain,
     chain,
     size = 40,
-    className,
+    className
 }) => {
     return (
-        <div className={clsx(s.tokenIcon, className)}>
+        <div
+            className={clsx(s.tokenIcon, className)}
+            style={{
+                height: size + "px",
+                width: size + "px"
+            }}
+        >
             <img
                 src={icon ?? TokenImg}
                 alt="token"
@@ -42,7 +48,7 @@ export const TokenIcon: FC<ITokenIconProps> = ({
                 }}
                 style={{
                     height: size + "px",
-                    width: size + "px",
+                    width: size + "px"
                 }}
             />
             {showChain && chain && (
@@ -53,7 +59,7 @@ export const TokenIcon: FC<ITokenIconProps> = ({
                     style={{
                         height: size / 2 + "px",
                         width: size / 2 + "px",
-                        border: chain === "TRON" ? "2px solid #1F1F25" : "none",
+                        border: chain === "TRON" ? "2px solid #1F1F25" : "none"
                     }}
                 />
             )}

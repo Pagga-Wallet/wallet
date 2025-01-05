@@ -196,6 +196,7 @@
     "menu": {
         "home": "Главная",
         "swap": "Обмен",
+        "apps": "Приложения",
         "nft": "NFT",
         "settings": "Настройки"
     },
@@ -235,7 +236,8 @@
         }
     },
     "import-token": {
-        "already-imported": "Токен уже был добавлен"
+        "already-imported": "Токен уже был добавлен",
+        "input-placeholder": "Введите или вставьте адрес контракта"
     },
     "connect-wallet-list": {
         "add-new-connection": "Добавить новое подключение",
@@ -339,7 +341,9 @@
         "total-balance": "Общий баланс",
         "latest-addresses": "Последние адреса",
         "confirmation": "Подтверждение",
-        "your-sending": "Вы отправляете"
+        "your-sending": "Вы отправляете",
+        "view-all": "Посмотреть все",
+        "paste": "Вставить"
     },
     "create-card": {
         "title": "Создать карту",

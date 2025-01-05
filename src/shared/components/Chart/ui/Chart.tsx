@@ -56,9 +56,9 @@ export const Chart: FC<ChartProps> = ({
 
         const areaSeries = chart.addAreaSeries({
             ...areaSeriesConfig,
-            lineColor: priceChange > 0 ? "rgba(33, 150, 243, 1)" : "rgba(255, 28, 69, 1)",
-            bottomColor: priceChange > 0 ? "rgba(33, 150, 243, 0.04)" : "rgba(255, 28, 69, 0.04)",
-            topColor: priceChange > 0 ? "rgba(33, 150, 243, 0.56)" : "rgba(255, 28, 69, 0.56)",
+            lineColor: priceChange > 0 ? "rgba(84, 255, 144, 1)" : "rgba(255, 28, 69, 1)",
+            bottomColor: priceChange > 0 ? "rgba(149, 149, 149, 1)" : "rgba(149, 149, 149, 1)",
+            topColor: priceChange > 0 ? "rgba(84, 255, 144, 1)" : "rgba(255, 28, 69, 1)",
         });
 
         const syncToTheme = (theme: keyof typeof themesData) => {

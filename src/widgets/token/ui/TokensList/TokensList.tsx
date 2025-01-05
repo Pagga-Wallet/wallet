@@ -96,7 +96,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
             )}
             <div className={s.list}>
                 {isLoading ? (
-                    <TokenListItemSkeleton count={5} />
+                    <TokenListItemSkeleton count={10} />
                 ) : (
                     filteredTokens.map((token) => (
                         <TokenListItem

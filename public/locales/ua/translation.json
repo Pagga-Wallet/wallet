@@ -203,6 +203,7 @@
   "menu": {
       "home": "Головна",
       "swap": "Обмін",
+      "apps": "Програми",
       "nft": "NFT",
       "settings": "Налаштування"
   },
@@ -242,7 +243,8 @@
       }
   },
   "import-token": {
-      "already-imported": "Цей токен вже збережено"
+      "already-imported": "Цей токен вже збережено",
+      "input-placeholder": "Введіть або вставте адресу контракту"
   },
   "connect-wallet-list": {
       "add-new-connection": "Додати нове з’єднання",
@@ -346,7 +348,9 @@
       "total-balance": "Загальний баланс",
       "latest-addresses": "Останні адреси",
       "confirmation": "Підтвердження",
-      "your-sending": "Ви надсилаєте"
+      "your-sending": "Ви надсилаєте",
+      "view-all": "Переглянути всі",
+      "paste": "Вставити"
   },
   "create-card": {
       "title": "Створити картку",
