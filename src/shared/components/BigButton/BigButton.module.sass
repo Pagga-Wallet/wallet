@@ -1,22 +1,23 @@
 .bigButton
     padding: 16px 20px
     border-radius: 20px
-    background: rgba(46, 53, 61, 0.4)
+    background: rgb(var(--foreground-primary))
     display: flex
     align-items: center
     justify-content: space-between
     cursor: pointer
-    color: var(--Placeholder-Primary, #fff)
+    margin-bottom: 20px
+    transition: all 0.3s ease 0s
+    &:hover
+        background: rgba(var(--foreground-primary), 0.8)
     .left
         .title
-            color: inherit
             overflow: hidden
-            font-family: Inter
+            color: rgb(var(--accent-red))
             text-overflow: ellipsis
             font-size: 16px
             font-weight: 400
         .description
-            color: var(--Placeholder-Secondary, #94a3b8)
             font-size: 14px
             font-weight: 400
     .right

@@ -63,7 +63,7 @@
 
     color: rgb(var(--placeholder-primary));
 
-    transition: background 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
 
     &--disabled {
         pointer-events: none;
@@ -72,6 +72,10 @@
     }
 
     &:active:not(&--disabled) {
+        opacity: 0.7;
+    }
+
+    &:hover {
         opacity: 0.7;
     }
 

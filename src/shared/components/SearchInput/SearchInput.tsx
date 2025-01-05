@@ -11,9 +11,17 @@ interface SearchInputProps {
     value: string;
     setValue: React.Dispatch<React.SetStateAction<string>>;
     placeholder?: string;
+    withIcon?: boolean;
+    withClearIcon?: boolean;
 }
 
-export const SearchInput: FC<SearchInputProps> = ({ setValue, value, placeholder }) => {
+export const SearchInput: FC<SearchInputProps> = ({
+    setValue,
+    value,
+    placeholder,
+    withIcon = true,
+    withClearIcon = true
+}) => {
     const ref = useRef<HTMLInputElement>(null);
     const { t } = useTranslation();
     const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -57,7 +65,7 @@ export const SearchInput: FC<SearchInputProps> = ({ setValue, value, placeholder
                 ref?.current?.focus();
             }}
         >
-            <SvgSelector id="search" />
+            {withIcon && <SvgSelector id="search" />}
             <input
                 ref={ref}
                 type="text"
@@ -68,7 +76,7 @@ export const SearchInput: FC<SearchInputProps> = ({ setValue, value, placeholder
                 onBlur={() => setIsFocused(false)}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
             />
-            {value.length >= 1 && (
+            {value.length >= 1 && withClearIcon && (
                 <button
                     className={s.searchClear}
                     onClick={() => {

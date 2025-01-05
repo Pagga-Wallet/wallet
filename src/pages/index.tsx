@@ -24,11 +24,12 @@ import { TokenDetail } from "./TokenDetail";
 import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
 import { PrivacyPolicy } from "./PrivacyPolicy/ui";
+import { Apps } from "./Apps/ui/Apps";
 
 export const Routing = () => {
     return (
         <>
-            <Suspense fallback={<>Loading</>}>
+            <Suspense fallback={<></>}>
                 <Routes>
                     <Route path="/" element={<WelcomePage />} />
                     <Route path="/home" element={<Home />} />
@@ -41,6 +42,8 @@ export const Routing = () => {
                     <Route path="/nft/send" element={<NftSendPage />} />
 
                     <Route path="/send" element={<Send />} />
+
+                    <Route path="/apps" element={<Apps />} />
 
                     <Route path="/settings" element={<SettingsPage />} />
                     <Route path="/ton-version" element={<ChangeTonVersion />} />

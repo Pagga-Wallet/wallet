@@ -23,7 +23,7 @@ const items = [
     // },
     {
         label: "menu.apps",
-        path: "/settings",
+        path: "/apps",
         isStroke: false,
         icon: <SvgSelector id="apps-icon" />,
         activeIcon: <AppsActiveIcon />,

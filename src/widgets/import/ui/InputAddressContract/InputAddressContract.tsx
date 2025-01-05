@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, SearchInput } from "@/shared/components";
+import { Button, SearchInput, Title } from "@/shared/components";
 
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
@@ -14,7 +14,7 @@ interface InputAddressContractProps {
 
 export const InputAddressContract: FC<InputAddressContractProps> = ({
     addressContract,
-    setAddressContract,
+    setAddressContract
 }) => {
     const { t } = useTranslation();
 
@@ -29,16 +29,21 @@ export const InputAddressContract: FC<InputAddressContractProps> = ({
 
     return (
         <div className={s.inner}>
+            <Title level={2} className={s.subtitle}>
+                {t("common.import")}
+            </Title>
             <p className={s.title}>{t("common.enter-contract-address")}</p>
 
             <div className={s.innerActions}>
                 <SearchInput
-                    placeholder={t("common.search-by-address")}
+                    withIcon={false}
+                    placeholder={t("import-token.input-placeholder")}
                     setValue={setAddressContract}
                     value={addressContract}
+                    withClearIcon={false}
                 />
                 <Button type="grey" className={s.import} onClick={handleImportClick}>
-                    <SvgSelector id="import" />
+                    {t("common.paste")}
                 </Button>
             </div>
         </div>

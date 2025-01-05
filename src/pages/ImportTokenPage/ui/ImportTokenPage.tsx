@@ -7,7 +7,7 @@ import { InputAddressContract, SelectNetwork } from "@/widgets/import";
 import { useGetImportedTokensQuery, useImportTokenMutation } from "@/entities/multichainAccount";
 import { useGetTokenByContractQuery } from "@/entities/token/model/tokenService";
 import { TokenListItem } from "@/entities/token/ui";
-import { Title } from "@/shared/components";
+import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 import { tokensWhitelist } from "@/shared/lib/consts/token";
@@ -17,6 +17,7 @@ import { btnText } from "../consts";
 import { ImportTokenSteps } from "../types/ImportTokenSteps";
 import s from "./ImportTokenPage.module.sass";
 import { WithDecorLayout } from "@/shared/layouts/layouts";
+import { TokenImportEmpty } from "@/widgets/token";
 
 interface ImportTokenPageProps {}
 
@@ -64,7 +65,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
     }, [step, onSaveContractAddress]);
 
     useEffect(() => {
-        if (!network) return
+        if (!network) return;
         setStep(ImportTokenSteps.address_contract);
     }, [network]);
 
@@ -103,22 +104,23 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
 
     return (
         <>
-            <>
-                {step === ImportTokenSteps.network && (
-                    <SelectNetwork
-                        setNetwork={setNetwork}
-                        network={network}
-                        subtitle={t("common.select-network")}
-                        title={t("common.import")}
-                    />
-                )}
+            {step === ImportTokenSteps.network && (
+                <SelectNetwork
+                    setNetwork={setNetwork}
+                    network={network}
+                    subtitle={t("common.select-network")}
+                    title={t("common.import")}
+                />
+            )}
 
-                {step === ImportTokenSteps.address_contract && (
-                    <>
-                        <InputAddressContract
-                            addressContract={addressContract}
-                            setAddressContract={setAddressContract}
-                        />
+            {step === ImportTokenSteps.address_contract && (
+                <BaseLayout className={s.inner} withDecor>
+                    <InputAddressContract
+                        addressContract={addressContract}
+                        setAddressContract={setAddressContract}
+                    />
+
+                    <div className={s.innerContent}>
                         {/* Тут отображать найденный токен */}
                         {isValidAddress && tokenData && !isLoading ? (
                             <TokenListItem
@@ -129,11 +131,30 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
                                 tokenPrice={tokenData.price}
                                 icon={tokenData.tokenIcon}
                                 chain={tokenData.platform}
+                                isImportedToken
                             />
-                        ) : null}
-                    </>
-                )}
-            </>
+                        ) : (
+                            <TokenImportEmpty />
+                        )}
+                    </div>
+
+                    <CustomButton
+                        firstButton={{
+                            children: isSavedToken
+                                ? t("import-token.already-imported")
+                                : t(btnText[step]),
+                            type: isValidToken ? "purple" : "grey",
+                            onClick: onForward,
+                            isDisabled:
+                                step === ImportTokenSteps.address_contract
+                                    ? !isValidToken || isSavedToken || isFetching || !isValidAddress
+                                    : step === ImportTokenSteps.network
+                                    ? !network || isFetching || !isValidAddress
+                                    : isFetching || !isValidAddress
+                        }}
+                    />
+                </BaseLayout>
+            )}
         </>
     );
 };

@@ -15,6 +15,5 @@ export function scientificToDecimal(num: number): string {
         result = "0." + "0".repeat(decimals - 1) + result.replace(/^(0)+/, "");
     }
 
-    console.log(result);
     return result;
 }

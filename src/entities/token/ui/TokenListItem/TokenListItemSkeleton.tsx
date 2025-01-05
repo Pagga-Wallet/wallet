@@ -1,14 +1,16 @@
 import React, { FC } from "react";
-import ContentLoader from "react-content-loader";
-import s from "./TokenListItem.module.sass";
+import clsx from "clsx";
+
 import { SkeletonRound } from "@/shared/components/Skeletons";
+
+import s from "./TokenListItem.module.sass";
 
 interface TokenListItemSkeletonProps {
     count?: number;
 }
 
 const Skeleton = (
-    <div className={s.token}>
+    <div className={clsx(s.token, s.tokenNoHover)}>
         <div className={s.left}>
             <SkeletonRound customWidth={40} height={40} style={{ borderRadius: '50%' }} />
             <div className={s.info}>

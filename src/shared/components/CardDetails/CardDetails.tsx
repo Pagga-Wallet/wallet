@@ -17,7 +17,7 @@ export const CardDetails = ({ sections }: CardDetailsProps) => {
         <div className={styles.card}>
             {sections.map(({ title, properties }) => (
                 <div className={styles.section}>
-                    <span className={styles.section__name}>{title}</span>
+                    {/* <span className={styles.section__name}>{title}</span> */}
                     <div className={styles.section__properties}>
                         {properties.map((property) => (
                             <div className={styles.property}>
