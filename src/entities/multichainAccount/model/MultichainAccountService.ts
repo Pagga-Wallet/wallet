@@ -1,31 +1,25 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
-import { HDNodeWallet } from "ethers";
 import { multichainAccountStore } from "@/entities/multichainAccount";
 // eslint-disable-next-line boundaries/element-types
 import { NFTItem } from "@/entities/nft";
 import { telegramStorage } from "@/shared/api/telegramStorage";
 import { cryptographyController } from "@/shared/lib";
-import { createBaseSelector, registerService } from "@/shared/lib/redux";
-import { TonWalletData } from "@/shared/lib/types";
+import { registerService } from "@/shared/lib/redux";
 import {
     BaseToken,
     CHAINS,
     IMultichainAccount,
+    IUserWalletsData,
     TokenBalance,
     TON_ADDRESS_INTERFACES,
-    TotalBalance,
+    TotalBalance
 } from "@/shared/lib/types/multichainAccount";
 import { BaseTxnParsed } from "@/shared/lib/types/transaction";
-import { TronWalletData } from "@/shared/lib/types/tron/TronWalletData";
 import { MultichainAccount } from "./MultichainAccount";
 
-export interface ICreateAccountResult {
+export interface ICreateAccountResult extends IUserWalletsData {
     id: string;
     isNew: boolean;
-    mainMnemonic: string;
-    eth: HDNodeWallet;
-    ton: TonWalletData;
-    tron: TronWalletData;
 }
 
 interface IGetAccNFTsResult {
@@ -64,9 +58,9 @@ export const multichainAccountAPI = createApi({
         "verifyPIN",
         "NFT",
         "TonVersion",
-        "TxList",
+        "TxList"
     ],
-    endpoints: (builder) => ({
+    endpoints: builder => ({
         fetchTotalBalance: builder.query<TotalBalance, void>({
             queryFn: async (_, api) => {
                 try {
@@ -79,28 +73,28 @@ export const multichainAccountAPI = createApi({
                 } catch (error) {
                     return {
                         error: {
-                            message: (error as Error).message,
-                        },
+                            message: (error as Error).message
+                        }
                     };
                 }
             },
-            providesTags: (result) => (result ? [{ type: "Balance" }] : []),
+            providesTags: result => (result ? [{ type: "Balance" }] : [])
         }),
         loadAccount: builder.query<IMultichainAccount | null, string>({
-            queryFn: async (accId) => {
+            queryFn: async accId => {
                 try {
                     const account = await telegramStorage.getAccountData(accId);
                     return {
                         data: {
                             ...account,
-                            id: accId,
-                        },
+                            id: accId
+                        }
                     };
                 } catch (error) {
                     return {
                         error: {
-                            message: (error as Error).message,
-                        },
+                            message: (error as Error).message
+                        }
                     };
                 }
             },
@@ -111,35 +105,35 @@ export const multichainAccountAPI = createApi({
                     dispatch(
                         multichainAccountAPI.util.invalidateTags([
                             { type: "Balance" },
-                            { type: "NFT" },
+                            { type: "NFT" }
                         ])
                     );
                     await telegramStorage.setLastUsedAccountId(accId);
                 } catch (error) {
-                    console.log("Error load account.", error);
+                    console.error("Error load account.", error);
                 }
             },
-            providesTags: (result, _, arg) => (result ? [{ type: "Account", id: arg }] : []),
+            providesTags: (result, _, arg) => (result ? [{ type: "Account", id: arg }] : [])
         }),
         createAccount: builder.mutation<ICreateAccountResult, void>({
             queryFn: async () => {
                 const id = await telegramStorage.getNextAccountId();
                 const newWallet = await cryptographyController.createMultichainWallet();
-                const isNew = await telegramStorage.isWalletAvailable().then((res) => !res);
+                const isNew = await telegramStorage.isWalletAvailable().then(res => !res);
                 await telegramStorage.setLastUsedAccountId(id);
                 return {
                     data: {
                         ...newWallet,
                         id,
-                        isNew,
-                    },
+                        isNew
+                    }
                 };
-            },
+            }
         }),
         saveAccount: builder.mutation<IMultichainAccount, ISaveAccount>({
             queryFn: async ({ walletData, pincode }) => {
                 try {
-                    console.log("walletData", walletData);
+                    // console.log("walletData", walletData);
                     const mainHash = cryptographyController.KeyToHash(
                         walletData.mainMnemonic,
                         pincode
@@ -148,8 +142,8 @@ export const multichainAccountAPI = createApi({
                         // TODO описать ошибку
                         return {
                             error: {
-                                message: "",
-                            },
+                                message: ""
+                            }
                         };
                     }
                     // Сохраняем аккаунт
@@ -161,33 +155,36 @@ export const multichainAccountAPI = createApi({
                         multiwallet: {
                             ETH: {
                                 publicKey: walletData.eth.publicKey,
-                                address: walletData.eth.address,
+                                address: walletData.eth.address
                             },
                             TON: {
                                 publicKey: walletData.ton.publicKey,
                                 address: {
                                     V4: walletData.ton.addressV4,
                                     V3R1: walletData.ton.addressV3R1,
-                                    V3R2: walletData.ton.addressV3R2,
-                                },
+                                    V3R2: walletData.ton.addressV3R2
+                                }
                             },
                             TRON: {
                                 publicKey: walletData.tron.publicKey,
-                                address: walletData.tron.address,
+                                address: walletData.tron.address
                             },
-                        },
+                            SOLANA: {
+                                address: walletData.solana.address
+                            }
+                        }
                     };
                     await telegramStorage.saveNewAccount(newAccount);
                     return {
                         data: {
-                            ...newAccount,
-                        },
+                            ...newAccount
+                        }
                     };
                 } catch (e) {
                     return {
                         error: {
-                            message: (e as Error).message,
-                        },
+                            message: (e as Error).message
+                        }
                     };
                 }
             },
@@ -196,11 +193,11 @@ export const multichainAccountAPI = createApi({
                     multichainAccountAPI.util.updateQueryData(
                         "fetchAccounts",
                         undefined,
-                        (accounts) => {
+                        accounts => {
                             accounts.push({
                                 id: walletData.id,
                                 name: "",
-                                emojiId: "0",
+                                emojiId: "0"
                             });
                         }
                     )
@@ -210,7 +207,7 @@ export const multichainAccountAPI = createApi({
                 } catch {
                     patchResult.undo();
                 }
-            },
+            }
         }),
         getAllNFTs: builder.query<IGetAccNFTsResult, void>({
             queryFn: async (_, { getState }) => {
@@ -222,20 +219,20 @@ export const multichainAccountAPI = createApi({
                 ).getAllNFTs();
                 return {
                     data: {
-                        items,
-                    },
+                        items
+                    }
                 };
             },
-            providesTags: (result) =>
+            providesTags: result =>
                 result
                     ? [
                           ...result.items.map(({ address, chain }) => ({
                               type: "NFT" as const,
-                              id: `${chain}_${address}`,
+                              id: `${chain}_${address}`
                           })),
-                          "NFT",
+                          "NFT"
                       ]
-                    : ["NFT"],
+                    : ["NFT"]
         }),
         getLastTxsByToken: builder.query<IGetLastTxsByToken, TokenBalance | BaseToken>({
             queryFn: async (token, { getState }) => {
@@ -247,11 +244,11 @@ export const multichainAccountAPI = createApi({
                 ).getLastTxsByToken(token);
                 return {
                     data: {
-                        items,
-                    },
+                        items
+                    }
                 };
             },
-            providesTags: ["TxList"],
+            providesTags: ["TxList"]
         }),
         getLastTxs: builder.query<IGetLastTxsByToken, void>({
             queryFn: async (_, { getState }) => {
@@ -263,17 +260,17 @@ export const multichainAccountAPI = createApi({
                 ).getLastTxs();
                 return {
                     data: {
-                        items,
-                    },
+                        items
+                    }
                 };
             },
-            providesTags: ["TxList"],
+            providesTags: ["TxList"]
         }),
         getImportedTokens: builder.query<Record<CHAINS, string[]> | undefined, void>({
             queryFn: async () => {
                 return { data: await telegramStorage.getImportedTokens() };
             },
-            providesTags: (result) => (result ? [{ type: "SavedERC20Tokens" }] : []),
+            providesTags: result => (result ? [{ type: "SavedERC20Tokens" }] : [])
         }),
         deleteImportedToken: builder.mutation<
             { success: boolean },
@@ -282,35 +279,35 @@ export const multichainAccountAPI = createApi({
             queryFn: async ({ token, chain }) => {
                 const success = await telegramStorage.deleteImportedToken(token, chain);
                 return {
-                    data: { success },
+                    data: { success }
                 };
             },
-            invalidatesTags: (result) =>
-                result?.success ? [{ type: "SavedERC20Tokens" }, { type: "Balance" }] : [],
+            invalidatesTags: result =>
+                result?.success ? [{ type: "SavedERC20Tokens" }, { type: "Balance" }] : []
         }),
         importToken: builder.mutation<{ success: boolean }, { token: string; chain: CHAINS }>({
             queryFn: async ({ token, chain }) => {
                 const success = await telegramStorage.saveImportedToken(token, chain);
                 return {
-                    data: { success },
+                    data: { success }
                 };
             },
-            invalidatesTags: (result) =>
-                result?.success ? [{ type: "SavedERC20Tokens" }, { type: "Balance" }] : [],
+            invalidatesTags: result =>
+                result?.success ? [{ type: "SavedERC20Tokens" }, { type: "Balance" }] : []
         }),
         importAccount: builder.mutation<ICreateAccountResult, string[]>({
-            queryFn: async (mnemonic) => {
+            queryFn: async mnemonic => {
                 const id = await telegramStorage.getNextAccountId();
                 const wallet = await cryptographyController.importWallet(mnemonic.join(" "));
-                const isNew = await telegramStorage.isWalletAvailable().then((res) => !res);
+                const isNew = await telegramStorage.isWalletAvailable().then(res => !res);
                 return {
                     data: {
                         ...wallet,
                         id,
-                        isNew,
-                    },
+                        isNew
+                    }
                 };
-            },
+            }
         }),
         fetchAccounts: builder.query<
             {
@@ -323,22 +320,22 @@ export const multichainAccountAPI = createApi({
             queryFn: async () => {
                 const accounts = await telegramStorage.getAccounts();
                 return {
-                    data: accounts,
+                    data: accounts
                 };
             },
-            providesTags: (result) =>
+            providesTags: result =>
                 result
                     ? [...result.map(({ id }) => ({ type: "Account" as const, id })), "Account"]
-                    : ["Account"],
+                    : ["Account"]
         }),
         fetchAccount: builder.query<IMultichainAccount, string>({
-            queryFn: async (id) => {
+            queryFn: async id => {
                 const account = await telegramStorage.getAccountData(id);
                 return {
-                    data: account,
+                    data: account
                 };
             },
-            providesTags: (result) => (result ? [{ type: "Account", id: result.id }] : []),
+            providesTags: result => (result ? [{ type: "Account", id: result.id }] : [])
         }),
         updateAccount: builder.mutation<{ success: boolean }, IUpdateWallet>({
             queryFn: async ({ id, payload }) => {
@@ -346,18 +343,18 @@ export const multichainAccountAPI = createApi({
                     const account = await telegramStorage.getAccountData(id);
                     await telegramStorage.saveAccount({
                         ...account,
-                        ...payload,
+                        ...payload
                     });
                     return {
                         data: {
-                            success: true,
-                        },
+                            success: true
+                        }
                     };
                 } catch (error) {
                     return {
                         error: {
-                            message: (error as Error).message,
-                        },
+                            message: (error as Error).message
+                        }
                     };
                 }
             },
@@ -365,7 +362,7 @@ export const multichainAccountAPI = createApi({
                 result?.success ? [{ type: "Account", id }] : [],
             async onQueryStarted({ id, payload }, { dispatch, queryFulfilled, getState }) {
                 const patchFetchAccount = dispatch(
-                    multichainAccountAPI.util.updateQueryData("fetchAccount", id, (account) => {
+                    multichainAccountAPI.util.updateQueryData("fetchAccount", id, account => {
                         Object.assign(account, payload);
                     })
                 );
@@ -381,19 +378,19 @@ export const multichainAccountAPI = createApi({
                         dispatch(multichainAccountStore.actions.updateAccount(previousState));
                     }
                 }
-            },
+            }
         }),
         deleteAccount: builder.mutation<{ prevAccId: string | null }, string>({
-            queryFn: async (id) => {
+            queryFn: async id => {
                 const accIds = await telegramStorage.getAccountIds();
                 if (!accIds.includes(id)) {
                     return {
                         error: {
-                            message: "Account not found.",
-                        },
+                            message: "Account not found."
+                        }
                     };
                 }
-                const prevAccId = accIds.filter((accId) => accId !== id).at(-1);
+                const prevAccId = accIds.filter(accId => accId !== id).at(-1);
                 await telegramStorage.deleteAccount(id);
                 const lastAccId = await telegramStorage.getLastUsedAccountId();
                 if (lastAccId === id) {
@@ -401,11 +398,11 @@ export const multichainAccountAPI = createApi({
                 }
                 return {
                     data: {
-                        prevAccId: prevAccId || null,
-                    },
+                        prevAccId: prevAccId || null
+                    }
                 };
             },
-            invalidatesTags: ["Account"],
+            invalidatesTags: ["Account"]
         }),
         verifyPIN: builder.query<boolean, string>({
             queryFn: async (pin, { getState }) => {
@@ -416,10 +413,10 @@ export const multichainAccountAPI = createApi({
                     account.masterHash
                 );
                 return {
-                    data: !!result,
+                    data: !!result
                 };
             },
-            providesTags: ["verifyPIN"],
+            providesTags: ["verifyPIN"]
         }),
         changePIN: builder.mutation<
             { id: string; iv: string; hashFromKey: string }[],
@@ -432,17 +429,17 @@ export const multichainAccountAPI = createApi({
                 try {
                     const ids = await telegramStorage.getAccountIds();
                     const accountsData = await Promise.all(
-                        ids.map((id) => telegramStorage.getAccountData(id))
+                        ids.map(id => telegramStorage.getAccountData(id))
                     );
 
-                    const result = accountsData.map((acc) => {
+                    const result = accountsData.map(acc => {
                         return {
                             id: acc.id,
                             mnemonic: cryptographyController.HashToKey(
                                 oldPIN,
                                 acc.masterIV,
                                 acc.masterHash
-                            )!,
+                            )!
                         };
                     });
 
@@ -454,27 +451,27 @@ export const multichainAccountAPI = createApi({
                         return {
                             id,
                             iv,
-                            hashFromKey,
+                            hashFromKey
                         };
                     });
 
                     await Promise.all(
-                        updateData.map((masterData) =>
+                        updateData.map(masterData =>
                             telegramStorage.updateMasterData(masterData.id, {
                                 masterIV: masterData.iv,
-                                masterHash: masterData.hashFromKey,
+                                masterHash: masterData.hashFromKey
                             })
                         )
                     );
 
                     return {
-                        data: updateData,
+                        data: updateData
                     };
                 } catch (e) {
                     return {
                         error: {
-                            message: (e as Error).message,
-                        },
+                            message: (e as Error).message
+                        }
                     };
                 }
             },
@@ -482,21 +479,21 @@ export const multichainAccountAPI = createApi({
                 try {
                     const { data: updateData } = await queryFulfilled;
                     const previousState = (getState() as any).multichainAccount.account;
-                    const currentAcc = updateData.find((acc) => previousState.id === acc.id);
+                    const currentAcc = updateData.find(acc => previousState.id === acc.id);
                     if (!currentAcc) {
                         throw new Error("Account not found.");
                     }
                     dispatch(
                         multichainAccountStore.actions.updateAccount({
                             masterIV: currentAcc.iv,
-                            masterHash: currentAcc.hashFromKey,
+                            masterHash: currentAcc.hashFromKey
                         })
                     );
                 } catch (e) {
                     console.error(e);
                 }
             },
-            invalidatesTags: ["verifyPIN"],
+            invalidatesTags: ["verifyPIN"]
         }),
         sendNFT: builder.mutation({
             queryFn: async ({ address, receiverAddress, pin, memo }, { getState }) => {
@@ -518,19 +515,19 @@ export const multichainAccountAPI = createApi({
                         nftAddress: address,
                         receiverAddress,
                         privateKey,
-                        memo,
+                        memo
                     });
                     return {
-                        data: {},
+                        data: {}
                     };
                 } catch (e) {
                     return {
                         error: {
-                            message: (e as Error).message,
-                        },
+                            message: (e as Error).message
+                        }
                     };
                 }
-            },
+            }
         }),
         getOldAccount: builder.query<{ hash: string; iv: string } | null, void>({
             queryFn: async () => {
@@ -539,17 +536,17 @@ export const multichainAccountAPI = createApi({
 
                 if (!hash || !iv) {
                     return {
-                        data: null,
+                        data: null
                     };
                 }
 
                 return {
                     data: {
                         hash,
-                        iv,
-                    },
+                        iv
+                    }
                 };
-            },
+            }
         }),
         renewAccount: builder.mutation<any, { iv: string; pin: string; hash: string }>({
             queryFn: async ({ pin, hash, iv }) => {
@@ -558,8 +555,8 @@ export const multichainAccountAPI = createApi({
                 if (!mnemonic) {
                     return {
                         error: {
-                            message: "Invalid PIN",
-                        },
+                            message: "Invalid PIN"
+                        }
                     };
                 }
 
@@ -569,37 +566,37 @@ export const multichainAccountAPI = createApi({
                 return {
                     data: {
                         ...wallet,
-                        id,
-                    },
+                        id
+                    }
                 };
-            },
+            }
         }),
         finishOnboarding: builder.mutation<{ success: true }, void>({
             queryFn: async () => {
                 await telegramStorage.setIsOnboarded("true");
                 return {
                     data: {
-                        success: true,
-                    },
+                        success: true
+                    }
                 };
-            },
+            }
         }),
         loadTonVersion: builder.query<TON_ADDRESS_INTERFACES, void>({
             queryFn: async () => {
                 const version = await telegramStorage.getTonVersion();
                 return {
-                    data: (version || TON_ADDRESS_INTERFACES.V4) as TON_ADDRESS_INTERFACES,
+                    data: (version || TON_ADDRESS_INTERFACES.V4) as TON_ADDRESS_INTERFACES
                 };
             },
-            providesTags: ["TonVersion"],
+            providesTags: ["TonVersion"]
         }),
         switchTonVersion: builder.mutation<{ success: true }, TON_ADDRESS_INTERFACES>({
-            queryFn: async (version) => {
+            queryFn: async version => {
                 await telegramStorage.setTonVersion(version);
                 return {
                     data: {
-                        success: true,
-                    },
+                        success: true
+                    }
                 };
             },
             async onQueryStarted(version, { dispatch, queryFulfilled }) {
@@ -612,16 +609,16 @@ export const multichainAccountAPI = createApi({
                                 { type: "Balance" },
                                 { type: "NFT" },
                                 { type: "TxList" },
-                                { type: "TonVersion" },
+                                { type: "TonVersion" }
                             ])
                         );
                     }
                 } catch (e) {
                     console.error(e);
                 }
-            },
-        }),
-    }),
+            }
+        })
+    })
 });
 
 registerService(multichainAccountAPI);
@@ -650,5 +647,5 @@ export const {
     useFinishOnboardingMutation,
     useGetLastTxsQuery,
     useSwitchTonVersionMutation,
-    useLoadTonVersionQuery,
+    useLoadTonVersionQuery
 } = multichainAccountAPI;

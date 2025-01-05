@@ -6,6 +6,7 @@ export const chainToGeckoPlatform: { [key in CHAINS]: string } = {
     [CHAINS.BNB]: "binance-smart-chain",
     [CHAINS.TON]: "the-open-network",
     [CHAINS.TRON]: "tron",
+    [CHAINS.SOLANA]: "solana"
 };
 
 export const chainToGeckoTokenID: { [key in CHAINS]: string } = {
@@ -13,4 +14,5 @@ export const chainToGeckoTokenID: { [key in CHAINS]: string } = {
     [CHAINS.BNB]: CoinIds.BNB,
     [CHAINS.TON]: CoinIds.TON,
     [CHAINS.TRON]: CoinIds.TRON,
+    [CHAINS.SOLANA]: CoinIds.SOLANA
 };

@@ -52,7 +52,6 @@ export const BEP20TokensWhitelist: WhitelistItem[] = [
 ];
 
 export const tokensWhitelist = [
-    // PROD-TON-ONLY
     ...ERC20TokensWhitelist,
     ...TRC20TokensWhitelist,
     ...BEP20TokensWhitelist,

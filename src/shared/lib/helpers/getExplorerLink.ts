@@ -27,6 +27,9 @@ export const getExplorerLink = ({ txHash, userAddress, chain }: GetExplorerLinkA
         case CHAINS.TRON:
             link = `https://tronscan.org/index.html#/transaction/${txHash}`;
             break;
+        case CHAINS.SOLANA:
+            link = `https://solscan.io/tx/${txHash}`;
+            break;
     }
     return link;
 };

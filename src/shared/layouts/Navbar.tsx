@@ -13,7 +13,7 @@ const items = [
         label: "menu.home",
         path: "/home",
         isStroke: false,
-        icon: <SvgSelector id="home-icon" />,
+        icon: <SvgSelector id="home-icon" />
     },
     // {
     //     label: "menu.swap",
@@ -26,22 +26,22 @@ const items = [
         path: "/apps",
         isStroke: false,
         icon: <SvgSelector id="apps-icon" />,
-        activeIcon: <AppsActiveIcon />,
+        activeIcon: <AppsActiveIcon />
     },
     {
         label: "menu.settings",
         path: "/settings",
         isStroke: false,
         icon: <SvgSelector id="settings-icon" />,
-        activeIcon: <SettingsActiveIcon />,
-    },
+        activeIcon: <SettingsActiveIcon />
+    }
 ];
 
 export const Navbar: FC = () => {
     const { t } = useTranslation();
     return (
         <div className={styles.navbar} id="navbar-bottom">
-            {items.map((item) => (
+            {items.map(item => (
                 <NavLink
                     className={styles.navbar__item}
                     to={item.path}

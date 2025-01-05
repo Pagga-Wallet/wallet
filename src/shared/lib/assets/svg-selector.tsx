@@ -30,16 +30,16 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M10.25 16.875V3.125"
                         stroke="#4422EF"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M4.625 8.75L10.25 3.125L15.875 8.75"
                         stroke="#4422EF"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );
@@ -56,16 +56,16 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M10.75 3.125V16.875"
                         stroke="#4422EF"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M5.125 11.25L10.75 16.875L16.375 11.25"
                         stroke="#4422EF"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );
@@ -662,37 +662,37 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M13.75 3.125H16.875V6.25"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M6.25 16.875H3.125V13.75"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M16.875 13.75V16.875H13.75"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M3.125 6.25V3.125H6.25"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M13.75 6.25H6.25V13.75H13.75V6.25Z"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );
@@ -816,16 +816,16 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M8.75 15C12.2018 15 15 12.2018 15 8.75C15 5.29822 12.2018 2.5 8.75 2.5C5.29822 2.5 2.5 5.29822 2.5 8.75C2.5 12.2018 5.29822 15 8.75 15Z"
                         stroke="#A8A8B5"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M13.1694 13.1695L17.4999 17.5"
                         stroke="#A8A8B5"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );
@@ -1138,16 +1138,16 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M1.875 4.375V8.125H5.625"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M5.28047 15C6.26318 15.9274 7.49741 16.5447 8.82895 16.7747C10.1605 17.0048 11.5303 16.8373 12.7672 16.2933C14.0041 15.7492 15.0532 14.8528 15.7835 13.7159C16.5139 12.579 16.893 11.2521 16.8735 9.90097C16.854 8.54985 16.4368 7.23444 15.674 6.11908C14.9112 5.00372 13.8366 4.13787 12.5846 3.62973C11.3325 3.12158 9.95847 2.99367 8.63412 3.26197C7.30977 3.53027 6.09385 4.18289 5.13828 5.13828L1.875 8.125"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );
@@ -1178,16 +1178,16 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     <path
                         d="M10 13.125C11.7259 13.125 13.125 11.7259 13.125 10C13.125 8.27411 11.7259 6.875 10 6.875C8.27411 6.875 6.875 8.27411 6.875 10C6.875 11.7259 8.27411 13.125 10 13.125Z"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                     <path
                         d="M3.23667 13.9133C2.89134 13.3185 2.62677 12.6803 2.44995 12.0156L3.76089 10.375C3.74605 10.1242 3.74605 9.87271 3.76089 9.62189L2.45073 7.98126C2.62725 7.31648 2.89127 6.67809 3.23589 6.08282L5.32261 5.84845C5.48924 5.66071 5.6669 5.48305 5.85464 5.31642L6.08901 3.23048C6.68342 2.88751 7.32077 2.62505 7.98433 2.45001L9.62495 3.76095C9.87577 3.74611 10.1273 3.74611 10.3781 3.76095L12.0187 2.45079C12.6835 2.62731 13.3219 2.89134 13.9171 3.23595L14.1515 5.32267C14.3393 5.4893 14.5169 5.66696 14.6835 5.8547L16.7695 6.08907C17.1148 6.68389 17.3794 7.32205 17.5562 7.98673L16.2453 9.62736C16.2601 9.87818 16.2601 10.1297 16.2453 10.3805L17.5554 12.0211C17.3801 12.6857 17.1174 13.3241 16.7742 13.9195L14.6875 14.1539C14.5208 14.3417 14.3432 14.5193 14.1554 14.6859L13.921 16.7719C13.3262 17.1172 12.6881 17.3818 12.0234 17.5586L10.3828 16.2477C10.1319 16.2625 9.88046 16.2625 9.62964 16.2477L7.98901 17.5578C7.32443 17.3825 6.68604 17.1198 6.09058 16.7766L5.8562 14.6899C5.66846 14.5232 5.4908 14.3456 5.32417 14.1578L3.23667 13.9133Z"
                         stroke="#FBFBFB"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
             );

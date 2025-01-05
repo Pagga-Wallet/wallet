@@ -4,12 +4,13 @@ import { CoinIds, coingeckoClient } from "@/shared/api/coingecko";
 import { BNBWallet, EthereumWallet, getEVMWalletByChain } from "@/shared/api/evm";
 import { getEVMAPIClientByChain } from "@/shared/api/evm";
 import { parseEVMTokenTxn, parseEVMNativeTxn } from "@/shared/api/evm";
+import { SolanaWallet } from "@/shared/api/solana";
 import { telegramStorage } from "@/shared/api/telegramStorage";
 import { TonWalletService } from "@/shared/api/ton";
 import { tonAPIClient } from "@/shared/api/tonapi";
 import {
     getAllJettonsBalancesDTOToTokenBalances,
-    getAllNFTsDTOToNFTItems,
+    getAllNFTsDTOToNFTItems
 } from "@/shared/api/tonapi";
 import { getAccountEventsDTOToParsedTxn } from "@/shared/api/tonapi/lib/getAccountEventsDTOToParsedTx";
 import { getTransferJettonHistoryDTOToParsedTxn } from "@/shared/api/tonapi/lib/getTransferJettonHistoryDTOToParsedTx";
@@ -26,7 +27,7 @@ import {
     TON_ADDRESS_INTERFACES,
     TokenBalance,
     TotalBalance,
-    isEVMChain,
+    isEVMChain
 } from "@/shared/lib/types/multichainAccount";
 import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import { TransferTokenDTO } from "../lib/types";
@@ -42,6 +43,7 @@ export class MultichainAccount {
     public _bnbWallet: BNBWallet;
     public _tronWallet: TronWallet;
     public _tronAPI: TronAPI;
+    public _solanaWallet: SolanaWallet;
     public _tonVersion: TON_ADDRESS_INTERFACES;
 
     constructor(account: IMultichainAccount, tonVersion: TON_ADDRESS_INTERFACES) {
@@ -50,6 +52,7 @@ export class MultichainAccount {
         this._ethereumWallet = new EthereumWallet(this._ethAddress);
         this._bnbWallet = new BNBWallet(this._ethAddress);
         this._tronWallet = new TronWallet(this._account.multiwallet.TRON.address);
+        this._solanaWallet = new SolanaWallet(this._account.multiwallet.SOLANA.address);
         this._tonWallet = new TonWalletService(
             account.multiwallet.TON.publicKey,
             account.multiwallet.TON.address[tonVersion],
@@ -69,12 +72,14 @@ export class MultichainAccount {
                 return this._account.multiwallet.TRON.address;
             case CHAINS.TON:
                 return this._account.multiwallet.TON.address[this._tonVersion];
+            case CHAINS.SOLANA:
+                return this._account.multiwallet.SOLANA.address;
         }
     }
 
     async getAllNFTs() {
         const tonNFTs = await tonAPIClient.getAllNFTs({
-            account: this.getAddressInNetwork(CHAINS.TON),
+            account: this.getAddressInNetwork(CHAINS.TON)
         });
         return getAllNFTsDTOToNFTItems(tonNFTs);
     }
@@ -83,12 +88,12 @@ export class MultichainAccount {
         const savedTokens = await telegramStorage.getImportedTokens();
         const savedTokensArr: WhitelistItem[] = flatMap(savedTokens, (addresses, chain) => {
             const chainKey = CHAINS[chain as keyof typeof CHAINS];
-            return addresses.map((address) => ({ contract: address, chain: chainKey }));
+            return addresses.map(address => ({ contract: address, chain: chainKey }));
         });
         const list = [...tokensWhitelist, ...savedTokensArr];
         // получаем все сохранённые токены
         const tokens = await Promise.all(
-            list.map(async (item) => {
+            list.map(async item => {
                 if (item.chain === CHAINS.TON) {
                     // для жетонов
                     return await tonAPIClient.getJettonDataById({ jettonAddress: item.contract });
@@ -96,7 +101,7 @@ export class MultichainAccount {
                     // для трона
                     const token = (
                         await this._tronAPI.getTokenByContractAddress({
-                            contractaddress: item.contract,
+                            contractaddress: item.contract
                         })
                     ).data;
                     if (!token) return null;
@@ -107,7 +112,7 @@ export class MultichainAccount {
                     const client = getEVMAPIClientByChain(this._ethAddress, item.chain);
                     const token = (
                         await client.getTokenByContractAddress({
-                            contractaddress: item.contract,
+                            contractaddress: item.contract
                         })
                     ).data;
                     if (!token) return null;
@@ -118,7 +123,7 @@ export class MultichainAccount {
         );
         const tokensFiltered = tokens.filter((data): data is TokenBalance => data !== null); // очищаем токены с неверным адресом контракта
 
-        const grouped = groupBy(tokensFiltered, (value) => value.platform) as Record<
+        const grouped = groupBy(tokensFiltered, value => value.platform) as Record<
             CHAINS,
             TokenBalance[]
         >;
@@ -136,24 +141,31 @@ export class MultichainAccount {
     }
 
     async getTotalBalance(): Promise<TotalBalance> {
-        // PROD-TON-ONLY
         const { data: ethBalance } = await this._ethereumWallet.getNativeTokenBalance();
         const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
         const { data: tronBalance } = await this._tronWallet.getNativeTokenBalance();
+        const { data: solanaBalance } = await this._solanaWallet.getNativeTokenBalance();
+        console.log("🚀 ~ MultichainAccount ~ getTotalBalance ~ solanaBalance:", solanaBalance);
 
         const tonBalance = parseFloat(await this._tonWallet.balanceTon());
         const tonPrice = await tonAPIClient.getRates("native");
-        const [ethPrice, bnbPrice, tronPrice] = await coingeckoClient.getCoinPriceByCoinID([
+        const [
+            ethPrice,
+            bnbPrice,
+            tronPrice,
+            solanaPrice
+        ] = await coingeckoClient.getCoinPriceByCoinID([
             CoinIds.ETH,
             CoinIds.BNB,
             CoinIds.TRON,
+            CoinIds.SOLANA
         ]);
         // Native balances
         const tonUSDBalance = tonPrice.price_usd * (tonBalance ?? 0);
-        // PROD-TON-ONLY
         const ethUSDBalance = ethPrice.price * (ethBalance ?? 0);
         const bnbUSDBalance = bnbPrice.price * (bnbBalance ?? 0);
         const tronUSDBalance = tronPrice.price * (tronBalance ?? 0);
+        const solanaUSDBalance = solanaPrice.price * (solanaBalance ?? 0);
 
         // imported Tokens
         const importedTokens = await this.getImportedTokens();
@@ -161,17 +173,17 @@ export class MultichainAccount {
         const savedJettons = importedTokens.TON;
         const tonTokens = await tonAPIClient.getAllJettonsBalances({
             account: this.getAddressInNetwork(CHAINS.TON),
-            currencies: ["usd"],
+            currencies: ["usd"]
         });
         const allJettonsBalances = getAllJettonsBalancesDTOToTokenBalances(tonTokens); // все жетоны на акке
-        console.log(allJettonsBalances);
+        // console.log(allJettonsBalances);
         const combinedJettons = uniqBy([...allJettonsBalances, ...savedJettons], "tokenContract"); // избавляемся от дубликатов
         // Total
         const totalUSDBalance: number =
-            // PROD-TON-ONLY
             ethUSDBalance +
             tronUSDBalance +
             tonUSDBalance +
+            solanaUSDBalance +
             // баланс всех импортнутых токенов
             Object.values(importedTokens)
                 .reduce((pv, cv) => [...pv, ...cv], [])
@@ -186,40 +198,34 @@ export class MultichainAccount {
                         tokenID: "ethereum",
                         tokenSymbol: "ETH",
                         tokenName: "Ethereum",
-                        // PROD-TON-ONLY
                         balance: ethBalance ?? 0,
                         balanceUSD: ethUSDBalance,
-                        // balance: 0,
-                        // balanceUSD: 0,
                         price: ethPrice.price,
                         decimals: 18,
                         tokenIcon:
                             "https://raw.githubusercontent.com/delab-team/manifests-images/main/eth-icon-160x160.png",
                         platform: CHAINS.ETH,
                         isNativeToken: true,
-                        change24h: ethPrice.change24h,
+                        change24h: ethPrice.change24h
                     },
-                    tokens: importedTokens.ETH,
+                    tokens: importedTokens.ETH
                 },
                 BNB: {
                     nativeToken: {
                         tokenID: "binancecoin",
                         tokenSymbol: "BNB",
                         tokenName: "BNB",
-                        // PROD-TON-ONLY
                         balance: bnbBalance ?? 0,
                         balanceUSD: bnbUSDBalance,
-                        // balance: 0,
-                        // balanceUSD: 0,
                         price: bnbPrice.price,
                         decimals: 18,
                         tokenIcon:
                             "https://coin-images.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1696501970",
                         platform: CHAINS.BNB,
                         isNativeToken: true,
-                        change24h: bnbPrice.change24h,
+                        change24h: bnbPrice.change24h
                     },
-                    tokens: importedTokens.BNB,
+                    tokens: importedTokens.BNB
                 },
                 TON: {
                     nativeToken: {
@@ -233,9 +239,9 @@ export class MultichainAccount {
                         price: tonPrice.price_usd,
                         platform: CHAINS.TON,
                         isNativeToken: true,
-                        change24h: tonPrice.price_change_24h,
+                        change24h: tonPrice.price_change_24h
                     },
-                    tokens: combinedJettons,
+                    tokens: combinedJettons
                 },
                 TRON: {
                     nativeToken: {
@@ -244,19 +250,31 @@ export class MultichainAccount {
                         tokenName: "TRON",
                         tokenIcon:
                             "https://raw.githubusercontent.com/delab-team/manifests-images/main/trx-icon-160x160.png",
-                        // PROD-TON-ONLY
                         balance: tronBalance ?? 0,
                         balanceUSD: tronUSDBalance,
-                        // balance: 0,
-                        // balanceUSD: 0,
                         price: tronPrice.price,
                         platform: CHAINS.TRON,
                         isNativeToken: true,
-                        change24h: tronPrice.change24h,
+                        change24h: tronPrice.change24h
                     },
-                    tokens: importedTokens.TRON,
+                    tokens: importedTokens.TRON
                 },
-            },
+                SOLANA: {
+                    nativeToken: {
+                        tokenID: "solana",
+                        tokenSymbol: "SOL",
+                        tokenName: "Solana",
+                        tokenIcon:
+                            "https://coin-images.coingecko.com/coins/images/4128/large/solana.png?1718769756",
+                        balance: solanaBalance ?? 0,
+                        balanceUSD: solanaUSDBalance,
+                        price: solanaPrice.price,
+                        platform: CHAINS.SOLANA,
+                        isNativeToken: true,
+                        change24h: solanaPrice.change24h
+                    }
+                }
+            }
         };
     }
 
@@ -265,7 +283,7 @@ export class MultichainAccount {
         receiver,
         amount,
         mnemonics,
-        memo = "",
+        memo = ""
     }: TransferTokenDTO): Promise<TransferTokenResponse> {
         try {
             let result: TransferTokenResponse;
@@ -275,11 +293,11 @@ export class MultichainAccount {
                         amount: amount,
                         to: receiver,
                         mnemonics,
-                        memo,
+                        memo
                     });
                     result = {
                         isError: !txRes,
-                        data: null,
+                        data: null
                     };
                 } else if (tokenSelected.tokenContract) {
                     const txRes = await this._tonWallet.transferJetton({
@@ -287,11 +305,11 @@ export class MultichainAccount {
                         to: receiver,
                         mnemonics,
                         tokenAddress: tokenSelected.tokenContract,
-                        memo,
+                        memo
                     });
                     result = {
                         isError: !txRes,
-                        data: null,
+                        data: null
                     };
                 } else throw new Error("Invalid Token");
             } else if (tokenSelected.platform === CHAINS.TRON) {
@@ -309,6 +327,14 @@ export class MultichainAccount {
                         tokenSelected?.tokenContract,
                         mnemonics,
                         memo
+                    );
+                } else throw new Error("Invalid Token");
+            } else if (tokenSelected.platform === CHAINS.SOLANA) {
+                if (tokenSelected?.isNativeToken) {
+                    result = await this._solanaWallet.transferNativeToken(
+                        receiver,
+                        amount,
+                        mnemonics
                     );
                 } else throw new Error("Invalid Token");
             } else if (isEVMChain(tokenSelected.platform)) {
@@ -331,7 +357,7 @@ export class MultichainAccount {
             return {
                 data: null,
                 isError: true,
-                errorMessage: (error as EthersError).shortMessage ?? (error as EthersError).message,
+                errorMessage: (error as EthersError).shortMessage ?? (error as EthersError).message
             } as APIResponseFail;
         }
     }
@@ -339,7 +365,7 @@ export class MultichainAccount {
     async getLastTxs(): Promise<BaseTxnParsed[]> {
         const tonTxs = await tonAPIClient.getAccountEvents({
             account: this.getAddressInNetwork(CHAINS.TON),
-            limit: 100,
+            limit: 100
         });
         return getAccountEventsDTOToParsedTxn(tonTxs, this.getAddressInNetwork(CHAINS.TON));
     }
@@ -350,7 +376,7 @@ export class MultichainAccount {
                 if (token.isNativeToken) {
                     const tonTxs = await tonAPIClient.getAccountEvents({
                         account: this.getAddressInNetwork(CHAINS.TON),
-                        limit: 100,
+                        limit: 100
                     });
                     return getAccountEventsDTOToParsedTxn(
                         tonTxs,
@@ -360,7 +386,7 @@ export class MultichainAccount {
                     const jettonTxs = await tonAPIClient.getTransferJettonHistory({
                         account: this.getAddressInNetwork(CHAINS.TON),
                         jettonId: token.tokenContract ?? "",
-                        limit: 500,
+                        limit: 500
                     });
                     return getTransferJettonHistoryDTOToParsedTxn(
                         jettonTxs,
@@ -372,18 +398,18 @@ export class MultichainAccount {
                 const client = getEVMAPIClientByChain(this._ethAddress, token.platform);
                 if (token.isNativeToken) {
                     const { data } = await client.getNormalTransactions({
-                        offset: 500,
+                        offset: 500
                     });
                     if (!data) return [];
                     return parseEVMNativeTxn(
-                        data.filter((tx) => tx.value !== "0"),
+                        data.filter(tx => tx.value !== "0"),
                         client._address.toString(),
                         token.platform
                     );
                 } else if (token.tokenContract) {
                     const { data } = await client.getTokenTransactions({
                         offset: 500,
-                        contractaddress: token.tokenContract,
+                        contractaddress: token.tokenContract
                     });
                     if (!data) return [];
                     return parseEVMTokenTxn(data, client._address.toString(), token.platform);
@@ -396,7 +422,7 @@ export class MultichainAccount {
                     return parseTronNativeTxn(data, this._tronAPI._address);
                 } else if (token.tokenContract) {
                     const { data } = await this._tronAPI.getTokenTransactions({
-                        contractaddress: token.tokenContract,
+                        contractaddress: token.tokenContract
                     });
                     if (!data) return [];
                     return parseTronTokenTxn(data, this._tronAPI._address);
@@ -413,7 +439,7 @@ export class MultichainAccount {
         nftAddress,
         receiverAddress,
         privateKey,
-        memo,
+        memo
     }: {
         receiverAddress: string;
         nftAddress: string;
@@ -429,7 +455,7 @@ export class MultichainAccount {
 
     async signRawMessages({
         messages,
-        mnemonic,
+        mnemonic
     }: {
         mnemonic: string;
         messages: SignRawMessage[];

@@ -31,7 +31,7 @@ export class TronWallet {
     async getNativeTokenBalance(): PromisedAPIResponse<number> {
         try {
             const balance = await tronwebProvider.trx.getBalance(this._address);
-            return { data: Number(tronwebProvider.fromSun(balance)), isError: true };
+            return { data: Number(tronwebProvider.fromSun(balance)), isError: false };
         } catch (error) {
             console.error(error);
             return { data: 0, isError: true, errorMessage: (error as Error).message };

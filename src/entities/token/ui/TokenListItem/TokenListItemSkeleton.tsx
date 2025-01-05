@@ -1,5 +1,5 @@
-import React, { FC } from "react";
 import clsx from "clsx";
+import React, { FC } from "react";
 
 import { SkeletonRound } from "@/shared/components/Skeletons";
 
@@ -9,7 +9,7 @@ interface TokenListItemSkeletonProps {
     count?: number;
 }
 
-const Skeleton = (
+const Skeleton = () => (
     <div className={clsx(s.token, s.tokenNoHover)}>
         <div className={s.left}>
             <SkeletonRound customWidth={40} height={40} style={{ borderRadius: '50%' }} />
@@ -39,7 +39,7 @@ const Skeleton = (
 export const TokenListItemSkeleton: FC<TokenListItemSkeletonProps> = React.memo(({ count = 1 }) => {
     const arr = [];
     for (let i = 0; i < count; i++) {
-        arr.push(Skeleton);
+        arr.push(<Skeleton key={i} />);
     }
     return arr;
 });
