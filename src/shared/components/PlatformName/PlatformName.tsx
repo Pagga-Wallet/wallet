@@ -19,6 +19,7 @@ const platformNames = {
     [CHAINS.BNB]: "BEP20",
     [CHAINS.TON]: "TON",
     [CHAINS.TRON]: "TRC20",
+    [CHAINS.SOLANA]: "SOLANA",
 };
 
 export const PlatformName: FC<IPlatformNameProps> = ({

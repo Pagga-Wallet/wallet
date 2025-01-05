@@ -24,7 +24,6 @@ export const getSelectBlockhainConfig = (
         category: "Ethereum",
         previewUrl: ETHEREUM,
         disabled: enabledChains ? !enabledChains?.includes(CHAINS.ETH) : false,
-        // PROD-TON-ONLY
         // disabled: true,
         chain: CHAINS.ETH,
     },
@@ -32,7 +31,6 @@ export const getSelectBlockhainConfig = (
         category: "Tron",
         previewUrl: TRON,
         disabled: enabledChains ? !enabledChains?.includes(CHAINS.TRON) : false,
-        // PROD-TON-ONLY
         // disabled: true,
         chain: CHAINS.TRON,
     },
@@ -40,7 +38,6 @@ export const getSelectBlockhainConfig = (
         category: "BNB Smart Chain",
         previewUrl: BNB,
         disabled: enabledChains ? !enabledChains?.includes(CHAINS.BNB) : false,
-        // PROD-TON-ONLY
         // disabled: true,
         chain: CHAINS.BNB,
     },

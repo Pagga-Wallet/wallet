@@ -4,7 +4,7 @@ import {
     useFetchAccountsQuery,
     useFetchTotalBalanceQuery,
     useLoadAccountQuery,
-    useLoadTonVersionQuery,
+    useLoadTonVersionQuery
 } from "@/entities/multichainAccount";
 import { Loader } from "@/shared/components";
 import { useIsFetchingQuery } from "@/shared/lib/hooks/useIsFetchingQuery";
@@ -17,15 +17,15 @@ export const AppLoader = ({ children }: AppLoaderProps) => {
     const { isLoading: loadingTonVersion } = useLoadTonVersionQuery();
     const { loading: loadingLastAccId, lastAccId } = useAvailableAccounts();
     useLoadAccountQuery(lastAccId as string, {
-        skip: !lastAccId,
+        skip: !lastAccId
     });
     useFetchTotalBalanceQuery(undefined, {
-        skip: !lastAccId,
+        skip: !lastAccId
     });
     const { isLoading: loadingAccounts, isFetching: fetchingAccounts } = useFetchAccountsQuery(
         undefined,
         {
-            skip: !lastAccId,
+            skip: !lastAccId
         }
     );
     const isFetchingAccount = useIsFetchingQuery("loadAccount");

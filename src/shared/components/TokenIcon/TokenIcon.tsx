@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import EthNetwork from "@/shared/lib/images/ethNetwork.png";
 import BNBNetwork from "@/shared/lib/images/network/bnb.png";
 import TronNetwork from "@/shared/lib/images/network/tron.png";
+import SolanaNetwork from "@/shared/lib/images/solanaNetwork.png";
 import TokenImg from "@/shared/lib/images/token.png";
 import TonNetwork from "@/shared/lib/images/tonNetwork.png";
 import { CHAINS } from "@/shared/lib/types";
@@ -20,7 +21,8 @@ const icons: Record<CHAINS, string> = {
     [CHAINS.ETH]: EthNetwork,
     [CHAINS.BNB]: BNBNetwork,
     [CHAINS.TON]: TonNetwork,
-    [CHAINS.TRON]: TronNetwork
+    [CHAINS.TRON]: TronNetwork,
+    [CHAINS.SOLANA]: SolanaNetwork
 };
 
 export const TokenIcon: FC<ITokenIconProps> = ({

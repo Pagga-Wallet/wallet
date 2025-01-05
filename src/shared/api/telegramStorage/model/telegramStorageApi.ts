@@ -3,7 +3,7 @@ import {
     CHAINS,
     IMultichainAccount,
     IMultiwallet,
-    TON_ADDRESS_INTERFACES,
+    TON_ADDRESS_INTERFACES
 } from "@/shared/lib/types/multichainAccount";
 import {
     ACCOUNT_IDS_ARRAY,
@@ -21,7 +21,7 @@ import {
     CONNECTION_PREFIX,
     IS_ONBOARDED_FIELD,
     USE_BIOMETRY_FIELD,
-    TON_VERSION_FIELD,
+    TON_VERSION_FIELD
 } from "../lib/consts";
 import { getTokensField } from "../lib/helpers";
 
@@ -141,6 +141,11 @@ export class TelegramStorage {
                 `${accountPrefix}${CHAINS.TRON}_${ADDRESS_FIELD}`,
                 account.multiwallet.TRON.address
             ),
+            // SOLANA DATA
+            this.save(
+                `${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`,
+                account.multiwallet.SOLANA.address
+            ),
             // TON DATA
             this.save(
                 `${accountPrefix}${CHAINS.TON}_${PUBLIC_KEY_FIELD}`,
@@ -157,7 +162,7 @@ export class TelegramStorage {
             this.save(
                 `${accountPrefix}${CHAINS.TON}_${TON_ADDRESS_INTERFACES.V3R2}_${ADDRESS_FIELD}`,
                 account.multiwallet.TON.address.V3R2
-            ),
+            )
         ]);
     }
 
@@ -165,7 +170,7 @@ export class TelegramStorage {
         id: string,
         {
             masterIV,
-            masterHash,
+            masterHash
         }: {
             masterIV: string;
             masterHash: string;
@@ -174,7 +179,7 @@ export class TelegramStorage {
         const accountPrefix = this._getAccountPrefix(id);
         await Promise.all([
             this.save(accountPrefix + MASTER_IV_FIELD, masterIV),
-            this.save(accountPrefix + MASTER_HASH_FIELD, masterHash),
+            this.save(accountPrefix + MASTER_HASH_FIELD, masterHash)
         ]);
     }
 
@@ -195,14 +200,14 @@ export class TelegramStorage {
     public async getAccounts() {
         const accountIds = await this.getAccountIds();
         return await Promise.all(
-            accountIds.map(async (accountId) => {
+            accountIds.map(async accountId => {
                 const accountPrefix = this._getAccountPrefix(accountId);
                 const name = await this.get(accountPrefix + NAME_FIELD);
                 const emojiId = await this.get(accountPrefix + EMOJI_ID_FIELD);
                 return {
                     id: accountId,
                     name,
-                    emojiId,
+                    emojiId
                 };
             })
         );
@@ -219,10 +224,11 @@ export class TelegramStorage {
             multiwallet: {
                 ETH: {},
                 TRON: {},
+                SOLANA: {},
                 TON: {
-                    address: {},
-                },
-            },
+                    address: {}
+                }
+            }
         } as IMultichainAccount;
         const accountPrefix = this._getAccountPrefix(id);
 
@@ -238,12 +244,16 @@ export class TelegramStorage {
         account.multiwallet.ETH.publicKey = (await this.get(
             `${accountPrefix}${CHAINS.ETH}_${PUBLIC_KEY_FIELD}`
         ))!;
-        // ETH DATA
+        // TRON DATA
         account.multiwallet.TRON.address = (await this.get(
             `${accountPrefix}${CHAINS.TRON}_${ADDRESS_FIELD}`
         ))!;
         account.multiwallet.TRON.publicKey = (await this.get(
             `${accountPrefix}${CHAINS.TRON}_${PUBLIC_KEY_FIELD}`
+        ))!;
+        // SOLANA DATA
+        account.multiwallet.SOLANA.address = (await this.get(
+            `${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`
         ))!;
         // TON DATA
         account.multiwallet.TON.publicKey = (await this.get(
@@ -273,6 +283,7 @@ export class TelegramStorage {
                 TON: await this.get(
                     `${accountPrefix}${CHAINS.TON}_${TON_ADDRESS_INTERFACES.V4}_${ADDRESS_FIELD}`
                 ),
+                SOLANA: await this.get(`${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`)
             };
         }
 
@@ -284,7 +295,7 @@ export class TelegramStorage {
             // Удаляем акк из списка
             const accountIds = await this.getAccountIds();
             if (accountIds.includes(id)) {
-                const newArray = accountIds.filter((el) => el !== id);
+                const newArray = accountIds.filter(el => el !== id);
                 await this.save(ACCOUNT_IDS_ARRAY, JSON.stringify(newArray));
             }
             // Удаляем все ассоциированные поля
@@ -296,7 +307,7 @@ export class TelegramStorage {
             const res = await Promise.all(
                 keys
                     .filter((key: string) => key.startsWith(this._getAccountPrefix(id)))
-                    .map((key) => this.delete(key))
+                    .map(key => this.delete(key))
             );
             return res.every(Boolean);
         } catch (error) {
@@ -308,7 +319,7 @@ export class TelegramStorage {
     public async deleteAllAccounts(): Promise<boolean> {
         try {
             const accountIds = await this.getAccountIds();
-            await Promise.all(accountIds.map((id) => this.deleteAccount(id)));
+            await Promise.all(accountIds.map(id => this.deleteAccount(id)));
             return true;
         } catch (error) {
             console.error();
@@ -319,7 +330,7 @@ export class TelegramStorage {
     public async UNSAFE_resetAllStorage(): Promise<boolean> {
         try {
             const keys = await this.getKeys();
-            const res = await Promise.all(keys.map((key) => this.delete(key)));
+            const res = await Promise.all(keys.map(key => this.delete(key)));
             return res.every(Boolean);
         } catch (error) {
             console.error(error);
@@ -331,7 +342,7 @@ export class TelegramStorage {
         try {
             const keys = await this.getKeys();
             keys.forEach(
-                (key) =>
+                key =>
                     (key.startsWith(LEGACY_UNSAFE_PREFIX) || key === "lastAccId") &&
                     this.delete(key)
             );
@@ -345,10 +356,12 @@ export class TelegramStorage {
     public async getImportedTokens(): Promise<Record<CHAINS, string[]>> {
         const chains = Object.values(CHAINS) as CHAINS[];
         const entries: Array<[CHAINS, string[]]> = await Promise.all(
-            chains.map(async (chain): Promise<[CHAINS, string[]]> => {
-                const data = await this.get(getTokensField(chain));
-                return [chain, JSON.parse(data || "[]")];
-            })
+            chains.map(
+                async (chain): Promise<[CHAINS, string[]]> => {
+                    const data = await this.get(getTokensField(chain));
+                    return [chain, JSON.parse(data || "[]")];
+                }
+            )
         );
         const result = Object.fromEntries(entries) as Record<CHAINS, string[]>;
         return result;
@@ -364,7 +377,7 @@ export class TelegramStorage {
         const tokens = (await this.getImportedTokens())[chain];
         return await this.save(
             getTokensField(chain),
-            JSON.stringify(tokens.filter((str) => str !== contractAddress))
+            JSON.stringify(tokens.filter(str => str !== contractAddress))
         );
     }
 
@@ -392,7 +405,7 @@ export class TelegramStorage {
             .filter(([, value]) => value)
             .map(([key, value]) => ({
                 key: key.replace(CONNECTION_PREFIX, ""),
-                ...(value ? JSON.parse(value) : {}),
+                ...(value ? JSON.parse(value) : {})
             }));
     }
 

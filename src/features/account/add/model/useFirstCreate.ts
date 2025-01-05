@@ -26,18 +26,18 @@ export const useFirstCreate = (createPIN: createPINFc, isUseBiometry?: boolean) 
                     await biometry.requestAccess({ reason: "Use biometry authenticate" });
                     await biometry.updateToken({ token: pin });
                 } catch (error) {
-                    console.log("error Biometry Manager", error);
+                    console.error("error Biometry Manager", error);
                 }
             }
-            console.log("save");
+            // console.log("save");
             const acc = await saveAccount({
                 walletData,
                 pincode: pin,
             }).unwrap();
 
-            console.log("switch");
+            // console.log("switch");
             await switchAccount(acc.id);
-            console.log("navigate");
+            // console.log("navigate");
             navigate("/home");
             setIsLoading(false);
         },
@@ -45,11 +45,11 @@ export const useFirstCreate = (createPIN: createPINFc, isUseBiometry?: boolean) 
     );
 
     useEffect(() => {
-        console.log("init");
+        // console.log("init");
     }, []);
 
     useEffect(() => {
-        console.log("isLoading", isLoading);
+        // console.log("isLoading", isLoading);
     }, [isLoading]);
 
     return {
