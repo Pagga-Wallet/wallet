@@ -3,7 +3,7 @@ import {
     Transaction,
     LAMPORTS_PER_SOL,
     SystemProgram,
-    sendAndConfirmTransaction,
+    sendAndConfirmTransaction
 } from "@solana/web3.js";
 import { EthersError } from "ethers";
 import { cryptographyController } from "@/shared/lib";
@@ -22,6 +22,7 @@ export class SolanaWallet {
     readonly _publicKey: PublicKey;
     constructor(address: string) {
         this._address = address;
+        // this._address = "6a5eA9THjvKuV5nn6FiPWdYD88th49jvts2KZTk5Vsre";
         this._publicKey = new PublicKey(this._address);
     }
 
@@ -42,9 +43,11 @@ export class SolanaWallet {
 
             if (!signature) throw new Error("Tx Failed");
 
-            const res = await solanaRPC.getParsedTransaction(signature)
-            const lamports = Number((res?.transaction.message.instructions[0] as any)?.parsed?.info?.lamports) || 0
-            const to = (res?.transaction.message.instructions[0] as any)?.parsed?.info?.destination
+            const res = await solanaRPC.getParsedTransaction(signature);
+            const lamports =
+                Number((res?.transaction.message.instructions[0] as any)?.parsed?.info?.lamports) ||
+                0;
+            const to = (res?.transaction.message.instructions[0] as any)?.parsed?.info?.destination;
             return {
                 data: parseSolanaSignedTxn(tx, this._address, signature, to, lamports),
                 isError: false
