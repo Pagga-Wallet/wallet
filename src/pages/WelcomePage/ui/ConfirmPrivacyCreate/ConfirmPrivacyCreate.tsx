@@ -51,7 +51,7 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
                         >
                             <Checkbox
                                 isConfirmed={confirmedStates[index]}
-                                setIsConfirmed={() => handleCheckboxChange(index)}
+                                setIsConfirmed={() => {}}
                             />
                             <p className={s.innerItemText}>{item}</p>
                         </li>

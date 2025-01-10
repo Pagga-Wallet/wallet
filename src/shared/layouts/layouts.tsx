@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import React, { useRef } from "react";
+import clsx, { ClassValue } from "clsx";
+
 import { useTelegramViewportHack } from "../lib/hooks/useTelegramViewportResize";
 
 import styles from "./MainLayout.module.scss";
@@ -11,6 +12,7 @@ interface BaseLayoutProps {
     navbar?: React.ReactNode;
     className?: string;
     withoutPadding?: boolean;
+    classNameWrapper?: ClassValue;
     withDecor?: boolean; // Add only decor
 }
 
@@ -18,18 +20,24 @@ export const BaseLayout = ({
     children,
     navbar,
     className,
+    classNameWrapper,
     withoutPadding,
     withDecor
 }: BaseLayoutProps) => {
     const scrollableRef = useRef<HTMLDivElement>(null);
     useTelegramViewportHack();
     return (
-        <div className={styles.wrapper} id="mainWrapper">
+        <div
+            className={clsx(styles.wrapper, classNameWrapper, {
+                [styles.wrapperDecor]: withDecor
+            })}
+            id="mainWrapper"
+        >
             <div className={styles.bottom}>{navbar}</div>
             {withDecor && <div className={styles.innerDecor}></div>}
             <div
                 className={clsx(styles.content, className, {
-                    [styles.contentZero]: withoutPadding
+                    [styles.contentZero]: !window?.Telegram?.WebApp?.isFullscreen && withoutPadding
                 })}
                 ref={scrollableRef}
             >
@@ -39,9 +47,13 @@ export const BaseLayout = ({
     );
 };
 
-export const PrivateLayout = ({ children, withDecor }: Omit<BaseLayoutProps, "navbar">) => {
+export const PrivateLayout = ({
+    children,
+    withDecor,
+    ...rest
+}: Omit<BaseLayoutProps, "navbar">) => {
     return (
-        <BaseLayout navbar={<Navbar />}>
+        <BaseLayout navbar={<Navbar />} withDecor={withDecor} {...rest}>
             {withDecor && <div className={styles.innerDecor}></div>}
             {children}
         </BaseLayout>
@@ -58,8 +70,13 @@ export const WithDecorLayout = ({
         <div className={styles.inner}>
             <div className={styles.innerDecor}></div>
             <div
+                style={{
+                    padding: window?.Telegram?.WebApp?.isFullscreen
+                        ? "16px 16px 190px 16px"
+                        : "16px 16px 110px 16px"
+                }}
                 className={clsx(styles.innerContent, className, {
-                    [styles.contentZero]: withoutPadding
+                    [styles.contentZero]: !window?.Telegram?.WebApp?.isFullscreen && withoutPadding
                 })}
             >
                 {children}
