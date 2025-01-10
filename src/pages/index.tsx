@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AccountPage } from "./AccountPage";
-import { ChangeTonVersion } from "./ChangeTonVersion";
 import { ConnectConfirm } from "./ConnectConfirm/ui/ConnectConfirm";
 import { ConnectOpenPage } from "./ConnectOpenPage/ui/ConnectOpenPage";
 import { ConnectTransactionFailed } from "./ConnectTransactionFailed/ui/ConnectTransactionFailed";
@@ -46,7 +45,6 @@ export const Routing = () => {
                     <Route path="/apps" element={<Apps />} />
 
                     <Route path="/settings" element={<SettingsPage />} />
-                    <Route path="/ton-version" element={<ChangeTonVersion />} />
 
                     <Route path="/receive" element={<ReceivePage />} />
 

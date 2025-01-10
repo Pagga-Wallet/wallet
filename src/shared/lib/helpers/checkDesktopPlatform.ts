@@ -25,6 +25,7 @@ declare global {
         setParams: (params: MainButtonParams) => void;
     }
     interface TelegramWebApp {
+        [x: string]: any;
         initData: string;
         platform: string;
         MainButton: MainButton;

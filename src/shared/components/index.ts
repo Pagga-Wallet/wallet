@@ -31,3 +31,5 @@ export { CustomButton } from "./CustomButton/CustomButton"
 export { UserInfo } from "./UserInfo/UserInfo";
 export { CreateCard } from "./CreateCard/CreateCard";
 export { ReceiveMessage } from "./ReceiveMessage/ReceiveMessage";
+import { TonVersion } from "./TonVersion/TonVersion";
+import { NotFound } from "./NotFound/NotFound";

@@ -256,7 +256,10 @@ export const Send: FC = () => {
         <BaseLayout withoutPadding withDecor>
             <div
                 className={s.send}
-                style={{ paddingBottom: step !== SendSteps.select ? "90px" : "0" }}
+                style={{ 
+                    paddingBottom: step !== SendSteps.select ? "90px" : "0",
+                    minHeight: step === SendSteps.input && tokenSelected?.platform !== CHAINS.TON ? "100%" : ""
+                }}
             >
                 {step !== SendSteps.success && step !== SendSteps.failed && step !== SendSteps.confirm && (
                     <div className={s.sendTop}>

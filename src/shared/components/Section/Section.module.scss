@@ -83,10 +83,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        svg {
-            height: 18px;
-            width: auto;
-        }
+        // svg {
+        //     height: 18px;
+        //     width: auto;
+        // }
     }
 
     &:not(:last-child):after {

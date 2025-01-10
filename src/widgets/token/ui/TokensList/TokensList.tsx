@@ -1,11 +1,16 @@
 import { FC, useState, useMemo } from "react";
+import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { TokenListItem, TokenListItemSkeleton } from "@/entities/token/ui";
 import { Button, SearchInput } from "@/shared/components";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sortTokens } from "@/shared/lib/helpers/sortTokens";
 import { CHAINS, TokenBalance, TotalBalance } from "@/shared/lib/types";
+
 import s from "./TokensList.module.sass";
+import { NotFound } from "@/shared/components/NotFound/NotFound";
 
 interface TokensListSelectable {
     search?: boolean;
@@ -46,6 +51,8 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
 
     const navigate = useNavigate();
 
+    const { t } = useTranslation();
+
     const sortedTokens: TokenBalance[] = useMemo(() => {
         if (accountBalance) {
             // const allTokens = tokenList ?? [
@@ -64,7 +71,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
 
     const filteredTokens: TokenBalance[] = useMemo(() => {
         const filtered = sortedTokens.filter(
-            (token) =>
+            token =>
                 token.tokenSymbol.toLowerCase().includes(searchValue.toLowerCase().trim()) &&
                 (chainFilter ? chainFilter.includes(token.platform) : true)
         );
@@ -72,9 +79,14 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
     }, [searchValue, sortedTokens, chainFilter]);
 
     return (
-        <div className={s.tokensList} style={{
-            padding: isSend ? "16px 0 0 0" : "72px 0 0 0"
-        }}>
+        <div
+            className={clsx(s.tokensList, {
+                [s.tokensListSend]: isSend
+            })}
+            style={{
+                padding: isSend ? "16px 0 0 0" : "72px 0 0 0"
+            }}
+        >
             {search && (
                 <div
                     className={s.tokensListTop}
@@ -96,8 +108,8 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
             <div className={s.list}>
                 {isLoading ? (
                     <TokenListItemSkeleton count={10} />
-                ) : (
-                    filteredTokens.map((token) => (
+                ) : filteredTokens?.length >= 1 ? (
+                    filteredTokens.map(token => (
                         <TokenListItem
                             key={
                                 token.tokenID +
@@ -115,6 +127,8 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
                             onClick={isSelectMode ? () => onTokenSelect?.(token) : undefined}
                         />
                     ))
+                ) : (
+                    <NotFound text={t("common.not-found")} />
                 )}
             </div>
         </div>

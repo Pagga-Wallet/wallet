@@ -1,31 +1,26 @@
+.wrapper
+  height: 100% !important
+  
 .inner
   display: flex
   flex-direction: column
   justify-content: space-between
   height: 100%
-  min-height: 100vh
-  overflow-y: auto
   &Title
     font-size: 24px
     font-weight: 700
     text-align: left
     margin-bottom: 24px
-  &Decor
-    background: url("/blue-back.png") no-repeat center center
-    background-size: cover
-    height: 100%
-    top: 0
-    bottom: 0
-    right: 0
-    left: 0
-    position: absolute
-    z-index: -1
   &Content
     padding: 24px 0 16px 0
     margin: 0 -16px
     border-radius: 32px
     background: rgb(var(--foreground-primary))
-  &Item
+  &Item,
+  &Version
     display: flex
     align-items: center
+  &Item
     gap: 12px
+  &Version
+    gap: 6px

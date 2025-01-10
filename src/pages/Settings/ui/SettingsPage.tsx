@@ -1,6 +1,8 @@
-import { hapticFeedback, biometry } from "@telegram-apps/sdk-react";
+import { hapticFeedback, biometry, openPopup } from "@telegram-apps/sdk-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { v1 } from "uuid";
+
 import { useChangePIN, usePINConfirmation } from "@/features/PIN";
 import {
     useGetUseBiometryQuery,
@@ -9,16 +11,25 @@ import {
 import { telegramStorage } from "@/shared/api/telegramStorage";
 import { Section, Container, Title } from "@/shared/components";
 import { PrivateLayout } from "@/shared/layouts";
-import { useSetupBackButton } from "@/shared/lib";
+import { useAppSelector, useSetupBackButton } from "@/shared/lib";
+import { multichainAccountStore, useSwitchTonVersionMutation } from "@/entities/multichainAccount";
+
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
+
+import { TON_ADDRESS_INTERFACES } from "@/shared/lib/types";
 
 import BIOMETRY from "@/shared/lib/images/icons/biometry.svg?react";
 import NUMPAD from "@/shared/lib/images/icons/numpad.svg?react";
 import WALLET_CONNECT from "@/shared/lib/images/icons/wallet-connect.svg?react";
 import TON_CONNECT from "@/shared/lib/images/icons/ton-connect.svg?react";
 import DELETE from "@/shared/lib/images/icons/delete.svg?react";
+import LOCK from "@/shared/lib/images/icons/lock.svg?react";
 
 import s from "./SettingPage.module.sass";
+import { smallAddress } from "@/shared/lib/helpers/smallAddress";
+import { TonWalletService } from "@/shared/api/ton";
+import { TonVersion } from "@/shared/components/TonVersion/TonVersion";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const SettingsPage = () => {
     const {
@@ -31,16 +42,35 @@ export const SettingsPage = () => {
     const [setUseBiometry, { isLoading: isSettingBiometry }] = useSetUseBiometryMutation();
     const { changePIN } = useChangePIN();
 
+    const currentAccount = useAppSelector(multichainAccountStore.selectors.selectAccount);
+
+    const tonVersion = useAppSelector(multichainAccountStore.selectors.selectTonVersion);
+    const [switchTonVersion, { isLoading: isLoadingVersion }] = useSwitchTonVersionMutation();
+
     useSetupBackButton();
 
-    const onResetData = async () => {
-        hapticFeedback.impactOccurred("medium");
-        if (window.confirm(t("settings.reset-description"))) {
-            await confirm({ title: t("settings.reset") });
-            await telegramStorage.UNSAFE_resetAllStorage();
-            window.location.reload();
-            navigate("/");
-        }
+    const onResetData = () => {
+        openPopup({
+            title: t("settings.reset"),
+            message: t("settings.reset-description"),
+            buttons: [
+                {
+                    id: "del-btn",
+                    type: "default",
+                    text: t("common.continue")
+                },
+                { id: "cancel", type: "cancel" }
+            ]
+        }).then(async buttonId => {
+            if (buttonId !== "cancel") {
+                hapticFeedback.impactOccurred("medium");
+
+                await confirm({ title: t("settings.reset") });
+                await telegramStorage.UNSAFE_resetAllStorage();
+                window.location.reload();
+                navigate("/");
+            }
+        });
     };
 
     const onChangeLang = (lang: "ru" | "en" | "ua") => {
@@ -60,9 +90,14 @@ export const SettingsPage = () => {
         setUseBiometry(value);
     };
 
+    const interfaces = Object.values(TON_ADDRESS_INTERFACES);
+
+    const onSwitchVersion = (version: TON_ADDRESS_INTERFACES) => {
+        if (tonVersion !== version) switchTonVersion(version);
+    };
+
     return (
-        <PrivateLayout className={s.inner}>
-            <div className={s.innerDecor}></div>
+        <PrivateLayout withDecor className={s.inner}>
             <Title level={1} className={s.innerTitle}>
                 {t("menu.settings")}
             </Title>
@@ -86,7 +121,15 @@ export const SettingsPage = () => {
                             <NUMPAD />
                             {t("settings.change-password")}
                         </div>
+                        <SvgSelector id="chevron-right-gray" />
                     </Section.Button>
+
+                    <Section.Link to={`/account/${currentAccount?.id}/recovery`}>
+                        <div className={s.innerItem}>
+                            <LOCK />
+                            {t("settings.show-recovery-phrase")}
+                        </div>
+                    </Section.Link>
                 </Section>
                 <Section title="dApps">
                     <Section.Link disabled to="">
@@ -101,6 +144,26 @@ export const SettingsPage = () => {
                             TON Connect
                         </div>
                     </Section.Link>
+                </Section>
+                <Section title={t("settings.ton-version")}>
+                    {interfaces.map(i => (
+                        <Section.Radio
+                            checked={tonVersion === i}
+                            onSelect={() => onSwitchVersion(i)}
+                            disabled={isLoadingVersion}
+                            withoutCheckbox
+                        >
+                            <div className={s.innerVersion}>
+                                {smallAddress(
+                                    TonWalletService.createWalletByVersion(
+                                        i,
+                                        currentAccount?.multiwallet?.TON.publicKey!
+                                    ).address.toString({ bounceable: false })
+                                )}
+                                <TonVersion version={i} />
+                            </div>
+                        </Section.Radio>
+                    ))}
                 </Section>
                 <Section title={t("settings.language")}>
                     <Section.Radio
@@ -136,7 +199,7 @@ export const SettingsPage = () => {
                     >
                         <div className={s.innerItem}>
                             <SvgSelector id="ua-lang" />
-                            Ukrainian
+                            Українська
                         </div>
                     </Section.Radio>
                 </Section>
@@ -144,13 +207,13 @@ export const SettingsPage = () => {
                     <Section.Link to="">
                         <div className={s.innerItem}>
                             <SvgSelector id="telegram" />
-                            Telegram Channel
+                            {t("common.telegram-channel")}
                         </div>
                     </Section.Link>
                     <Section.Link to="">
                         <div className={s.innerItem}>
                             <SvgSelector id="support" />
-                            Support
+                            {t("common.support")}
                         </div>
                     </Section.Link>
                 </Section>

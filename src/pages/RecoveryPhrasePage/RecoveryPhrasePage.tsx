@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePINConfirmation } from "@/features/PIN";
 import { useFetchAccountQuery } from "@/entities/multichainAccount";
-import { WordArea } from "@/shared/components";
+import { Loader, WordArea } from "@/shared/components";
 import { PrivateLayout } from "@/shared/layouts";
 import { cryptographyController, useSetupBackButton } from "@/shared/lib";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const RecoveryPhrasePage = () => {
     const { id } = useParams();
@@ -26,9 +27,9 @@ export const RecoveryPhrasePage = () => {
     useEffect(() => {
         if (!isFetching && account) {
             confirm({
-                title: t("pincode.enter"),
+                title: t("pincode.enter")
             })
-                .then((pin) => {
+                .then(pin => {
                     const result = cryptographyController.HashToKey(
                         pin,
                         account!.masterIV,
@@ -44,10 +45,14 @@ export const RecoveryPhrasePage = () => {
         }
     }, [isFetching, account]);
 
+    if (isFetching) {
+        return <Loader />;
+    }
+
     return (
-        <PrivateLayout>
+        <WithDecorLayout>
             <WordArea
-                title={t("settings.title")}
+                title={t("common.save-mnemonic")}
                 disabled
                 value={mnemonic}
                 buttonProps={{
@@ -56,9 +61,9 @@ export const RecoveryPhrasePage = () => {
                     onClick: (_, words) => {
                         navigator.clipboard.writeText(words.join(" "));
                         sendNotification(t("common.mnemonics-copied"), "success");
-                    },
+                    }
                 }}
             />
-        </PrivateLayout>
+        </WithDecorLayout>
     );
 };

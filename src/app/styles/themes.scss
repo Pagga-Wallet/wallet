@@ -5,6 +5,7 @@
     --foreground-secondary-dark: 40, 40, 47;
     --foreground-tertiary-dark: 55, 55, 64;
     --foreground-primary-dark: 31, 31, 37;
+    --foreground-quaternary-dark: 90, 90, 105;
 
     --placeholder-primary-dark: 251, 251, 251;
     --placeholder-secondary-dark: 168, 168, 181;
@@ -27,6 +28,7 @@
     --foreground-secondary: var(--foreground-secondary-dark);
     --foreground-tertiary: var(--foreground-tertiary-dark);
     --foreground-primary: var(--foreground-primary-dark);
+    --foreground-quaternary: var(--foreground-quaternary-dark);
 
     --placeholder-primary: var(--placeholder-primary-dark);
     --placeholder-secondary: var(--placeholder-secondary-dark);
@@ -49,6 +51,7 @@
     --foreground-secondary: var(--foreground-secondary-dark);
     --foreground-tertiary: var(--foreground-tertiary-dark);
     --foreground-primary: var(--foreground-primary-dark);
+    --foreground-quaternary: var(--foreground-quaternary-dark);
 
     --placeholder-primary: var(--placeholder-primary-dark);
     --placeholder-secondary: var(--placeholder-secondary-dark);

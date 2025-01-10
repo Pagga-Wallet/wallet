@@ -22,7 +22,7 @@
         "change-password": "Изменить пин-код",
         "security": "Безопасность",
         "use-biometry": "Использовать биометрию",
-        "ton-version": "Сменить интерфейс адреса TON"
+        "ton-version": "Версия кошелька TON"
     },
     "wallet": {
         "show-private-key": "Показать ключ",
@@ -343,7 +343,8 @@
         "confirmation": "Подтверждение",
         "your-sending": "Вы отправляете",
         "view-all": "Посмотреть все",
-        "paste": "Вставить"
+        "paste": "Вставить",
+        "telegram-channel": "Телеграм Канал"
     },
     "create-card": {
         "title": "Создать карту",

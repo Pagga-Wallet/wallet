@@ -23,7 +23,7 @@
       "account-deletion": "Видалення облікового запису",
       "security": "Безпека",
       "use-biometry": "Використовувати біометрію",
-      "ton-version": "Змінити інтерфейс адреси TON"
+      "ton-version": "Версія гаманця TON"
   },
   "wallet": {
       "show-private-key": "Показати ключ",
@@ -350,7 +350,8 @@
       "confirmation": "Підтвердження",
       "your-sending": "Ви надсилаєте",
       "view-all": "Переглянути всі",
-      "paste": "Вставити"
+      "paste": "Вставити",
+      "telegram-channel": "Телеграм Канал"
   },
   "create-card": {
       "title": "Створити картку",

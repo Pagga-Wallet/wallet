@@ -64,11 +64,6 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
         }
     }, [step, onSaveContractAddress]);
 
-    useEffect(() => {
-        if (!network) return;
-        setStep(ImportTokenSteps.address_contract);
-    }, [network]);
-
     // useSetupMainButton({
     //     onClick: onForward,
     //     params: {
@@ -110,6 +105,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
                     network={network}
                     subtitle={t("common.select-network")}
                     title={t("common.import")}
+                    onClick={() => setStep(ImportTokenSteps.address_contract)}
                 />
             )}
 

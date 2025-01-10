@@ -8,6 +8,20 @@ export const useTMAInit = () => {
 
     const backColor = theme === "dark" ? "#1f1f25" : "#212325";
 
+    const applySafeAreaInsets = () => {
+        const { top, bottom, left, right } = window.Telegram.WebApp.contentSafeAreaInset || {
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        };
+
+        window.document.body.style.paddingTop = `${top + 35}px`;
+        window.document.body.style.paddingBottom = `${bottom}px`;
+        window.document.body.style.paddingLeft = `${left}px`;
+        window.document.body.style.paddingRight = `${right}px`;
+    };
+
     useLayoutEffect(() => {
         console.log('TMA INIT')
         init();
@@ -22,5 +36,8 @@ export const useTMAInit = () => {
         miniApp.setHeaderColor(backColor);
         miniApp.setBackgroundColor(backColor);
         postEvent("web_app_expand");
+        if (window?.Telegram?.WebApp?.isFullscreen) {
+            applySafeAreaInsets();
+        }
     })
 };
