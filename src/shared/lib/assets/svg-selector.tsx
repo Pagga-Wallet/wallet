@@ -1419,11 +1419,6 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     fill="none"
                 >
                     <path
-                        d="M0.0625 0.0625H19.9375V19.9375H0.0625V0.0625Z"
-                        stroke="#A999F8"
-                        stroke-width="0.125"
-                    />
-                    <path
                         d="M17.5 15.625V16.25C17.5 16.913 17.2366 17.5489 16.7678 18.0178C16.2989 18.4866 15.663 18.75 15 18.75H10.625"
                         stroke="#A999F8"
                         stroke-width="2"

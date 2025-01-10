@@ -58,10 +58,10 @@ export const useQRScanner = ({ connect }: QRScannerProps) => {
         // Ton
         if (content?.startsWith("ton://")) {
             content = content.replace("ton://transfer/", "");
-            return qrScanner.close();
         }
-        // Else
         navigate(`/send?receiver=${content}`);
+        
+        // Else
         return qrScanner.close();
     }, [connect, qrScanner, navigate]);
     return [scanHandle];

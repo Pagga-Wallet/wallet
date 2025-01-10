@@ -15,16 +15,17 @@
     width: 100%
     div:first-child
       padding: 16px 85px 16px 14px
-      button
-        right: 51px
+
     .import
+      position: absolute
+      top: 50%
+      right: 10%
+      transform: translate(50%, -50%)
+      width: max-content
       font-size: 15px
       font-weight: 500
       color: rgb(var(--accent-tertiary))
-      position: absolute
       background: transparent
-      right: 55px
-      width: 24px
-      height: 24px
-      top: 32%
-      transform: translateY(-50%)
+      @media (max-width: 430px)
+        right: 13.5%
+        

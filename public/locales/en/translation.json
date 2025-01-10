@@ -2,7 +2,7 @@
     "settings": {
         "title": "Settings",
         "show-private-key": "Show private key",
-        "show-recovery-phrase": "Show recovery phrase",
+        "show-recovery-phrase": "Show secret phrase",
         "delete-account": "Delete account",
         "exit": "Exit",
         "reset": "Delete user data",
@@ -23,11 +23,11 @@
         "account-deletion": "Account deletion",
         "security": "Security",
         "use-biometry": "Use biometry",
-        "ton-version": "Change TON address interface"
+        "ton-version": "Wallet TON Version"
     },
     "wallet": {
         "show-private-key": "Show key",
-        "show-recovery-phrase": "Show recovery phrase",
+        "show-recovery-phrase": "Show secret phrase",
         "deletion": "Account deleting",
         "default-name": "Wallet {{id}}"
     },
@@ -350,7 +350,8 @@
         "confirmation": "Confirmation",
         "your-sending": "You sending",
         "view-all": "View all",
-        "paste": "Paste"
+        "paste": "Paste",
+        "telegram-channel": "Telegram Channel"
     },
     "create-card": {
         "title": "Create card",
