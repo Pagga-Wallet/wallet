@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { AppsBanners, AppsList } from "@/widgets/apps/ui";
+import { AppsBanners, AppsCategory, AppsList } from "@/widgets/apps/ui";
 
 import { BaseLayout, PrivateLayout } from "@/shared/layouts";
 
@@ -16,7 +16,7 @@ interface AppsProps {}
 
 export const Apps: FC<AppsProps> = ({}) => {
     const [appCategory, setAppCategory] = useState<string | null>(null);
-    
+
     useSetupBackButton({
         visible: !!appCategory,
         onBack: () => setAppCategory(null)
@@ -24,12 +24,12 @@ export const Apps: FC<AppsProps> = ({}) => {
 
     if (appCategory) {
         return (
-          <BaseLayout withDecor>
-              <AppsListSingle
-                  apps={appsMock.filter(a => a.category.includes(appCategory))}
-                  category={(appCategory as unknown) as string}
-              />
-          </BaseLayout>
+            <BaseLayout withDecor>
+                <AppsListSingle
+                    apps={appsMock.filter(a => a.category.includes(appCategory))}
+                    category={(appCategory as unknown) as string}
+                />
+            </BaseLayout>
         );
     }
 
@@ -40,8 +40,8 @@ export const Apps: FC<AppsProps> = ({}) => {
     return (
         <PrivateLayout withDecor>
             <AppsBanners banners={appsBannersMock} />
-
             <div className={s.content}>
+                <AppsCategory />
                 <AppsList isLoading={false} apps={appsMock} onClickAll={handleViewAll} />
             </div>
         </PrivateLayout>

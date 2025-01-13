@@ -1491,6 +1491,146 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     />
                 </svg>
             );
+        case "star-decor":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="8"
+                    viewBox="0 0 8 8"
+                    fill="none"
+                >
+                    <path
+                        d="M4 0L4.63192 2.16078C4.80212 2.74278 5.25722 3.19788 5.83922 3.36808L8 4L5.83922 4.63192C5.25722 4.80212 4.80212 5.25722 4.63192 5.83922L4 8L3.36808 5.83922C3.19788 5.25722 2.74278 4.80212 2.16078 4.63192L0 4L2.16078 3.36808C2.74278 3.19788 3.19788 2.74278 3.36808 2.16078L4 0Z"
+                        fill="url(#paint0_radial_989_2521)"
+                    />
+                    <defs>
+                        <radialGradient
+                            id="paint0_radial_989_2521"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientUnits="userSpaceOnUse"
+                            gradientTransform="translate(0.833333 1.64706) rotate(30.7284) scale(11.0517 19.1613)"
+                        >
+                            <stop stop-color="#A999F8" />
+                            <stop offset="1" stop-color="#664AF2" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+            );
+        case "diamond":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="29"
+                    height="28"
+                    viewBox="0 0 29 28"
+                    fill="none"
+                >
+                    <path
+                        opacity="0.2"
+                        d="M4.5 14L14.125 26.25L23.75 14L14.125 18.375L4.5 14Z"
+                        fill="#A999F8"
+                    />
+                    <path
+                        d="M14.125 1.75V26.25"
+                        stroke="#A999F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M23.75 14L14.125 18.375L4.5 14"
+                        stroke="#A999F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M14.125 1.75L23.75 14L14.125 26.25L4.5 14L14.125 1.75Z"
+                        stroke="#A999F8"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            );
+        case "show-more2":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="29"
+                    height="28"
+                    viewBox="0 0 29 28"
+                    fill="none"
+                >
+                    <g id="SquaresFour">
+                        <path
+                            id="Vector"
+                            opacity="0.2"
+                            d="M12.25 5.25H7C6.51675 5.25 6.125 5.64175 6.125 6.125V11.375C6.125 11.8582 6.51675 12.25 7 12.25H12.25C12.7332 12.25 13.125 11.8582 13.125 11.375V6.125C13.125 5.64175 12.7332 5.25 12.25 5.25Z"
+                            fill="#A999F8"
+                        />
+                        <path
+                            id="Vector_2"
+                            opacity="0.2"
+                            d="M17.5 5.3125H22.75C23.1987 5.3125 23.5625 5.67627 23.5625 6.125V11.375C23.5625 11.8237 23.1987 12.1875 22.75 12.1875H17.5C17.0513 12.1875 16.6875 11.8237 16.6875 11.375V6.125C16.6875 5.67627 17.0513 5.3125 17.5 5.3125Z"
+                            fill="#A999F8"
+                            stroke="#A999F8"
+                            stroke-width="0.125"
+                        />
+                        <path
+                            id="Vector_3"
+                            opacity="0.2"
+                            d="M7 15.8125H12.25C12.6987 15.8125 13.0625 16.1763 13.0625 16.625V21.875C13.0625 22.3237 12.6987 22.6875 12.25 22.6875H7C6.55127 22.6875 6.1875 22.3237 6.1875 21.875V16.625C6.1875 16.1763 6.55127 15.8125 7 15.8125Z"
+                            fill="#A999F8"
+                            stroke="#A999F8"
+                            stroke-width="0.125"
+                        />
+                        <path
+                            id="Vector_4"
+                            opacity="0.2"
+                            d="M17.5 15.8125H22.75C23.1987 15.8125 23.5625 16.1763 23.5625 16.625V21.875C23.5625 22.3237 23.1987 22.6875 22.75 22.6875H17.5C17.0513 22.6875 16.6875 22.3237 16.6875 21.875V16.625C16.6875 16.1763 17.0513 15.8125 17.5 15.8125Z"
+                            fill="#A999F8"
+                            stroke="#A999F8"
+                            stroke-width="0.125"
+                        />
+                        <path
+                            id="Vector_5"
+                            d="M22.75 15.75H17.5C17.0168 15.75 16.625 16.1418 16.625 16.625V21.875C16.625 22.3582 17.0168 22.75 17.5 22.75H22.75C23.2332 22.75 23.625 22.3582 23.625 21.875V16.625C23.625 16.1418 23.2332 15.75 22.75 15.75Z"
+                            stroke="#A999F8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            id="Vector_6"
+                            d="M12.25 5.25H7C6.51675 5.25 6.125 5.64175 6.125 6.125V11.375C6.125 11.8582 6.51675 12.25 7 12.25H12.25C12.7332 12.25 13.125 11.8582 13.125 11.375V6.125C13.125 5.64175 12.7332 5.25 12.25 5.25Z"
+                            stroke="#A999F8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            id="Vector_7"
+                            d="M22.75 5.25H17.5C17.0168 5.25 16.625 5.64175 16.625 6.125V11.375C16.625 11.8582 17.0168 12.25 17.5 12.25H22.75C23.2332 12.25 23.625 11.8582 23.625 11.375V6.125C23.625 5.64175 23.2332 5.25 22.75 5.25Z"
+                            stroke="#A999F8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            id="Vector_8"
+                            d="M12.25 15.75H7C6.51675 15.75 6.125 16.1418 6.125 16.625V21.875C6.125 22.3582 6.51675 22.75 7 22.75H12.25C12.7332 22.75 13.125 22.3582 13.125 21.875V16.625C13.125 16.1418 12.7332 15.75 12.25 15.75Z"
+                            stroke="#A999F8"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </g>
+                </svg>
+            );
         default:
             return null;
     }

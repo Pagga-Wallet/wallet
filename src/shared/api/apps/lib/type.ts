@@ -20,3 +20,8 @@ export interface App {
   type: AppsLinkType | string
   link?: string
 }
+
+export interface AppCategoryType {
+  icon: string
+  title: string
+}
