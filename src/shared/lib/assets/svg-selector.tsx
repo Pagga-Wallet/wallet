@@ -1631,6 +1631,38 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     </g>
                 </svg>
             );
+        case "points":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                    <path
+                        d="M6.25 3.125H15L19.375 8.125L10.625 17.5L1.875 8.125L6.25 3.125Z"
+                        stroke="#A8A8B5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M14.375 8.125L10.625 17.5L6.875 8.125L10.625 3.125L14.375 8.125Z"
+                        stroke="#A8A8B5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M1.875 8.125H19.375"
+                        stroke="#A8A8B5"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            );
         default:
             return null;
     }

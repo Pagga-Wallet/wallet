@@ -14,19 +14,22 @@ const items = [
         path: "/home",
         isStroke: false,
         icon: <SvgSelector id="home-icon" />,
+        disabled: false,
     },
-    // {
-    //     label: "menu.swap",
-    //     path: "/swap",
-    //     isStroke: true,
-    //     icon: <SvgSelector id="swap-icon" />,
-    // },
+    {
+        label: "menu.points",
+        path: "/points",
+        isStroke: false,
+        icon: <SvgSelector id="points" />,
+        disabled: true,
+    },
     {
         label: "menu.apps",
         path: "/apps",
         isStroke: false,
         icon: <SvgSelector id="apps-icon" />,
         activeIcon: <AppsActiveIcon />,
+        disabled: false,
     },
     {
         label: "menu.settings",
@@ -34,6 +37,7 @@ const items = [
         isStroke: false,
         icon: <SvgSelector id="settings-icon" />,
         activeIcon: <SettingsActiveIcon />,
+        disabled: false,
     },
 ];
 
@@ -43,8 +47,8 @@ export const Navbar: FC = () => {
         <div className={styles.navbar} id="navbar-bottom">
             {items.map((item) => (
                 <NavLink
-                    className={styles.navbar__item}
-                    to={item.path}
+                    className={`${styles.navbar__item} ${item.disabled ? styles["navbar__item--disabled"] : ""}`}
+                    to={item.disabled ? "" : item.path}
                     activeClassName={
                         !item.isStroke
                             ? styles["navbar__item--active"]
