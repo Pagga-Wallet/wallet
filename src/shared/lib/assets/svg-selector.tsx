@@ -1434,6 +1434,63 @@ export const SvgSelector: FC<SvgSelectorProps> = ({ id, isTg }) => {
                     />
                 </svg>
             );
+        case "activity":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                >
+                    <path
+                        d="M10 18C14.1421 18 17.5 14.6421 17.5 10.5C17.5 6.35786 14.1421 3 10 3C5.85786 3 2.5 6.35786 2.5 10.5C2.5 14.6421 5.85786 18 10 18Z"
+                        stroke="#A999F8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M10 10.5V3"
+                        stroke="#A999F8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M16.4955 6.75L3.50488 14.25"
+                        stroke="#A999F8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            );
+        case "checked-checked":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                >
+                    <path
+                        d="M1.25 10.6789L4.25 13.625L11.25 6.75"
+                        stroke="#A999F8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M9.84082 11.75L11.7502 13.625L18.7502 6.75"
+                        stroke="#A999F8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            );
         default:
             return null;
     }

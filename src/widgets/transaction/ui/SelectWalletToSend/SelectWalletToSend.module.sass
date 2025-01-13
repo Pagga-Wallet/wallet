@@ -37,17 +37,26 @@
     display: flex
     align-items: center
     justify-content: center
-    height: 50vh
+    height: 40vh
     font-size: 21px
     font-weight: 510
     text-align: center
-
+    @media (max-height: 630px)
+      height: 30vh
+    @media (max-height: 530px)
+      height: 25vh
 .list
   padding: 24px 0
   margin: 16px -16px -20px -16px
   border-radius: 32px 32px 0 0
   background: rgb(var(--foreground-primary))
   min-height: 63vh
+  @media (max-height: 763px)
+    min-height: 58vh
+  @media (max-height: 630px)
+    min-height: 50vh
+  @media (max-height: 530px)
+    min-height: 30vh
   &Title
     padding-left: 16px
     margin-bottom: 8px

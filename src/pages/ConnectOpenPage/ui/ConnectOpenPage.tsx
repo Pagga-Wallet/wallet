@@ -27,6 +27,7 @@ export const ConnectOpenPage = () => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { confirm } = usePINConfirmation();
+
     const [isShowConfirm, setShowConfirm] = useState<boolean>(false);
 
     const account = useAppSelector(multichainAccountStore.selectors.selectAccount);
@@ -118,7 +119,7 @@ export const ConnectOpenPage = () => {
     });
 
     return (
-        <BaseLayout>
+        <BaseLayout withDecor>
             <div className={styles.modal}>
                 <AccountSelector />
                 <h2 className={styles.title}>

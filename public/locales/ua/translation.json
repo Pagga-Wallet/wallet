@@ -247,15 +247,19 @@
       "input-placeholder": "Введіть або вставте адресу контракту"
   },
   "connect-wallet-list": {
-      "add-new-connection": "Додати нове з’єднання",
-      "delete-connection": "Видалити з’єднання",
-      "connection-list": "Список з’єднань",
-      "connection": "З’єднання",
-      "wallet-connect": "TON Connect",
-      "networks": "Мережі",
-      "wallet": "Гаманець",
-      "linked": "Пов’язано",
-      "introduction-description": "Підключіть свій гаманець для взаємодії з dApp та здійснення транзакцій."
+    "add-new-connection": "Додати нове з’єднання",
+    "delete-connection": "Видалити з’єднання",
+    "connection-list": "Список з’єднань",
+    "connection": "З’єднання",
+    "wallet-connect": "Wallet Connect",
+    "ton-connect": "TON Connect",
+    "networks": "Мережі",
+    "wallet": "Гаманець",
+    "linked": "Пов’язано",
+    "introduction-description": "Підключіть свій гаманець для взаємодії з dApp та здійснення транзакцій.",
+    "disconnect": "Відключити",
+    "info-item-1": "Перегляд балансу гаманця та активності",
+    "info-item-2": "Запит підтвердження транзакції"
   },
   "common": {
       "back": "Назад",

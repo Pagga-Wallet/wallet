@@ -4,3 +4,8 @@ export type QueryConnect = {
     id: string;
     request: string;
 };
+
+export enum ConnectionType {
+    TonConnect = 'ton-connect',
+    WalletConnect = 'wallet-connect',
+}

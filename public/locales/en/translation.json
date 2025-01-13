@@ -247,15 +247,19 @@
         "input-placeholder": "Enter or insert contract address"
     },
     "connect-wallet-list": {
-        "add-new-connection": "Add a new connection",
+        "add-new-connection": "Add a New Connection",
         "delete-connection": "Delete connection",
         "connection-list": "Connection list",
         "connection": "Connection",
-        "wallet-connect": "TON Connect",
+        "wallet-connect": "Wallet Connect",
+        "ton-connect": "TON Connect",
         "networks": "Networks",
         "wallet": "Wallet",
         "linked": "Linked",
-        "introduction-description": "Connect your wallet to interact with the dApp and make transactions."
+        "introduction-description": "Connect your wallet to interact with the dApp and make transactions.",
+        "disconnect": "Disconnect",
+        "info-item-1": "View wallet balance and activity",
+        "info-item-2": "Request transaction confirmation"
     },
     "common": {
         "back": "Back",

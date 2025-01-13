@@ -1,24 +1,26 @@
 .item
-  padding: 17.5px 19px
-  border-radius: 20px
-  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
+  padding: 14px 16px
+  margin: 0 -14px
   display: flex
   align-items: center
   justify-content: space-between
   gap: 10px
+  position: relative
   &:not(:last-child)
-    margin-bottom: 12px
+    &:after
+      content: ""
+      position: absolute
+      right: 30px
+      bottom: 0
+      width: calc(100% - 114px)
+      height: 1px
+      background: rgb(var(--border-secondary))
   &Hover
+    padding: 14px 30px !important
     cursor: pointer
     transition: all 0.3s ease 0s
     &:hover
-      background: var(--background-transparent, rgba(66, 75, 86, 0.40))
-  &Actions
-    svg
-      width: 15px
-      height: 16px
-    path
-      stroke: #A1ACBB
+      opacity: 0.8
   &Inner
     display: flex
     align-items: center
@@ -31,8 +33,7 @@
       object-fit: contain
   &Title
     font-size: 16px
-    font-weight: 510
+    font-weight: 500
   &Description
-    margin-top: 2px
-    font-family: 'Inter'
-    color: rgba(var(--placeholder-secondary, #A1ACBB))
+    font-size: 13px
+    color: rgb(var(--placeholder-secondary))

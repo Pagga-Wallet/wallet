@@ -62,7 +62,7 @@ export const Routing = () => {
                     <Route path="/connect/success" element={<ConnectTransactionSuccess />} />
                     <Route path="/connect/failed" element={<ConnectTransactionFailed />} />
                     <Route
-                        path="/connect/wallet-connect-list"
+                        path="/connect/wallet-connect-list/:type"
                         element={<ConnectWalletListPage />}
                     />
 
