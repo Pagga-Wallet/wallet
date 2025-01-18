@@ -11,7 +11,6 @@ export const useQRScanner = ({ connect }: QRScannerProps) => {
     const navigate = useNavigate();
     const scanHandle = useCallback(async () => {
         let content = await qrScanner.open({ text: "Scan QR code" });
-        console.log("🚀 ~ scanHandle ~ content:", content);
         if (!content) return qrScanner.close();
 
         const queryString = content.split("?")[1];
