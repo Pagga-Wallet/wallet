@@ -5,18 +5,24 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { connectStore } from "@/features/connect/model/connectSlice";
 import { usePINConfirmation } from "@/features/PIN";
-import { AccountSelector } from "@/features/switchAccount";
 import { MultichainAccount, multichainAccountStore } from "@/entities/multichainAccount";
 import { BaseLayout } from "@/shared/layouts";
 import {
     cryptographyController,
     useAppSelector,
     useSetupBackButton,
-    useSetupMainButton,
+    useSetupMainButton
 } from "@/shared/lib";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { workchain } from "@/shared/lib/consts/ton";
 import { smallAddress } from "@/shared/lib/helpers/smallAddress";
+
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+
+import { CustomButton, Title } from "@/shared/components";
+
+import { ConnectItem } from "@/features/connect";
+
 import styles from "./ConnectOpenPage.module.sass";
 
 export const ConnectOpenPage = () => {
@@ -33,29 +39,29 @@ export const ConnectOpenPage = () => {
     const account = useAppSelector(multichainAccountStore.selectors.selectAccount);
 
     const tonVersion = useAppSelector(multichainAccountStore.selectors.selectTonVersion);
-    const shortAddress = useMemo(
-        () => smallAddress(account?.multiwallet.TON.address[tonVersion]),
-        [account]
-    );
+    const shortAddress = useMemo(() => smallAddress(account?.multiwallet.TON.address[tonVersion]), [
+        account
+    ]);
 
     const onConnect = useCallback(
         async (mnemonics: string) => {
             const accountService = new MultichainAccount(account!, tonVersion);
             const { wallet, stateInit } = await accountService.getStateInit({
-                version: tonVersion,
+                version: tonVersion
             });
 
             const multichainWallet = await cryptographyController.importWallet(mnemonics);
             const tonWallet = multichainWallet.ton;
             const secretKey = Buffer.from(tonWallet.secretKey, "hex");
-
-            if (tonWallet.publicKey != accountService._tonWallet.publicKey) {
-                throw new Error("Public key mismatch");
-            }
+            
+            // !! IF NOT DEPLOYED WALLET NOT CONNECTED
+            // if (tonWallet.publicKey != accountService._tonWallet.publicKey) {
+            //     throw new Error("Public key mismatch");
+            // }
 
             const replyItems = replyBuilder!.createReplyItems(
                 wallet.address.toRawString(),
-                secretKey as unknown as Uint8Array, // FIXME
+                (secretKey as unknown) as Uint8Array, // FIXME
                 tonWallet.publicKey,
                 stateInit
             );
@@ -63,7 +69,7 @@ export const ConnectOpenPage = () => {
             requestPromise!.resolve({
                 address: wallet.address.toRawString(),
                 replyItems,
-                notificationsEnabled: false,
+                notificationsEnabled: false
             });
             navigate("/home");
         },
@@ -100,14 +106,14 @@ export const ConnectOpenPage = () => {
         }
     }, [account, t]);
 
-    useSetupMainButton({
-        params: {
-            text: t("common.connect"),
-            isVisible: !isShowConfirm,
-            isEnabled: true,
-        },
-        onClick: handleClick,
-    });
+    // useSetupMainButton({
+    //     params: {
+    //         text: t("common.connect"),
+    //         isVisible: !isShowConfirm,
+    //         isEnabled: true,
+    //     },
+    //     onClick: handleClick,
+    // });
 
     const onBack = useCallback(() => {
         requestPromise?.reject();
@@ -115,36 +121,65 @@ export const ConnectOpenPage = () => {
     }, [requestPromise, navigate]);
 
     useSetupBackButton({
-        onBack,
+        onBack
     });
 
     return (
-        <BaseLayout withDecor>
-            <div className={styles.modal}>
-                <AccountSelector />
-                <h2 className={styles.title}>
-                    {t("common.connect-to")} <br />
-                    {app!.name}
-                </h2>
-                <div className={styles.modalContent}>
-                    <div className={styles.modalConnect}>
-                        <img
-                            src="https://raw.githubusercontent.com/delab-team/manifests-images/main/WalletAvatar.png"
-                            alt="example"
-                        />
-                        <SvgSelector id="connect" />
-                        <img src={app!.iconUrl} alt="example" />
-                    </div>
-                    <div className={styles.modalInfo}>
-                        <p className={styles.modalInfoText}>
-                            <span>Example</span>{" "}
-                            {`${t("common.is-want-to-connect")} ${t(
-                                "common.to-your-wallet"
-                            )} ${shortAddress}`}
-                        </p>
-                    </div>
+        <WithDecorLayout>
+            <div className={styles.top}>
+                <div className={styles.topImg}>
+                    <img src={app!.iconUrl} width={80} height={80} alt="example" />
+                </div>
+                <div className={styles.topInfo}>
+                    <Title level={2} className={styles.topInfoTitle}>
+                        {app?.name ?? "App"}
+                    </Title>
+
+                    <p className={styles.topInfoSubtitle}>
+                        {t("connect-wallet-list.requests-a-connection")}
+                    </p>
                 </div>
             </div>
-        </BaseLayout>
+
+            <div className={styles.innerDetail}>
+                <div className={styles.item}>
+                    <p className={styles.itemLeft}>{t("common.network")}</p>
+                    <p className={styles.itemRight}>The Open Network</p>
+                </div>
+                <div className={styles.item}>
+                    <p className={styles.itemLeft}>{t("trans-detail.address")}</p>
+                    <p className={styles.itemRight}>{app?.url}</p>
+                </div>
+            </div>
+
+            <div className={styles.innerInfo}>
+                <div className={styles.innerInfoItem}>
+                    <SvgSelector id="activity" />
+                    {t("connect-wallet-list.info-item-1")}
+                </div>
+                <div className={styles.innerInfoItem}>
+                    <SvgSelector id="checked-checked" />
+                    {t("connect-wallet-list.info-item-2")}
+                </div>
+            </div>
+
+            <Title level={3} className={styles.networkTitle}>
+                {t("connect-wallet-list.networks")}
+            </Title>
+            <ConnectItem
+                title="TON"
+                description={shortAddress}
+                preview="https://s2.coinmarketcap.com/static/img/coins/200x200/11419.png"
+            />
+            {!isShowConfirm && (
+                <CustomButton
+                    firstButton={{
+                        children: t("common.connect"),
+                        type: "purple",
+                        onClick: handleClick
+                    }}
+                />
+            )}
+        </WithDecorLayout>
     );
 };

@@ -259,7 +259,8 @@
         "introduction-description": "Connect your wallet to interact with the dApp and make transactions.",
         "disconnect": "Disconnect",
         "info-item-1": "View wallet balance and activity",
-        "info-item-2": "Request transaction confirmation"
+        "info-item-2": "Request transaction confirmation",
+        "requests-a-connection": "Requests a connection"
     },
     "common": {
         "back": "Back",

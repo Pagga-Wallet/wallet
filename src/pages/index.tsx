@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { AccountPage } from "./AccountPage";
 import { ConnectConfirm } from "./ConnectConfirm/ui/ConnectConfirm";
 import { ConnectOpenPage } from "./ConnectOpenPage/ui/ConnectOpenPage";

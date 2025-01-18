@@ -417,7 +417,7 @@ export class TelegramStorage {
     }
 
     public async getOld(key: string) {
-        return await this.get(`dewallet-${key}`);
+        return await this.get(`wallet-${key}`);
     }
 
     public async getIsOnboarded() {

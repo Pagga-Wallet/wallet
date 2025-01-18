@@ -1,59 +1,65 @@
-.modal
-  height: 100vh
+.top
+  padding-top: 20px
   display: flex
-  flex-direction: column
   align-items: center
-  gap: 10px
+  flex-direction: column
+  margin-bottom: 24px
+  &Img
+    margin-bottom: 24px
+    img
+      border-radius: 50%
+      object-fit: contain
+  &InfoTitle
+    font-size: 26px
+    font-weight: 700
+    line-height: 100%
+    letter-spacing: 0.52px
+    margin-bottom: 6px
+  &InfoSubtitle
+    color: rgb(var(--accent-tertiary))
 
-  .title
-    font-size: 32px
-    font-weight: 540
-    text-align: center
-    letter-spacing: 0.43px
-    line-height: 110%
-    margin-bottom: 70px
-  &Content
-    display: flex
-    align-items: center
-    height: 90%
-    flex-direction: column
-  &Connect
-    display: flex
-    align-items: center
-    gap: 18px
-    margin-bottom: 20px
-  &UserAvatar
-    border-radius: 50%
-    background: linear-gradient(180deg, #007AFF 0%, #A0DBFB 100%)
-    color: #fff
-    display: flex
-    align-items: center
-    justify-content: center
-    font-size: 30px
-    font-weight: 760
-    line-height: 166%
-    font-variant-numeric: lining-nums tabular-nums
-  .modalUserAvatar,
-  .modalConnect > img
-    overflow: hidden
-    width: 80px
-    height: 80px
-    border-radius: 30px
-  &Info
-    &Title
-      color: rgb(var(--placeholder-primary))
-      font-size: 32px
-      font-weight: 540
-      text-align: center
-      letter-spacing: 0.43px
-      line-height: 110%
-      margin-bottom: 70px
-    &Text
-      margin: 0 auto
-      max-width: 235px
-      font-size: 16px
-      text-align: center
-      font-weight: 410
-      line-height: 137%
-      span
-        font-weight: 510
+
+.innerInfo
+    border-radius: 24px
+    padding: 12px 16px
+    background: rgb(var(--foreground-secondary))
+    margin-bottom: 24px
+    &Item
+      display: flex
+      align-items: center
+      gap: 12px
+      color: rgb(var(--placeholder-secondary))
+      &:not(:last-child)
+        margin-bottom: 12px
+
+.innerDetail
+    border-radius: 24px
+    background: rgb(var(--foreground-secondary))
+    margin-bottom: 24px
+    .item
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 16px
+      gap: 10px
+      flex-wrap: wrap
+      position: relative
+      &:not(:last-child)
+        &:after
+          content: ""
+          position: absolute
+          right: 16px
+          left: 16px
+          bottom: 0
+          width: calc(100% - 32px)
+          height: 1px
+          background: rgb(var(--border-secondary))
+
+      &Left
+        color: rgba(var(--placeholder-secondary, #94A3B8))
+        font-size: 14px
+
+.networkTitle
+  font-size: 14px
+  color: rgb(var(--placeholder-secondary))
+  text-align: left

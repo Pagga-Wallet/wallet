@@ -66,6 +66,12 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
             return;
         }
 
+        // CHECK TYPE OF CONNECTIONS. NOW CHECK ONLY TON CONNECT
+        if (connectionType === ConnectionType.WalletConnect) {
+            setStep(ConnectWalletListSteps.connect_introduction);
+            return
+        }
+
         if (!connections || connections.length === 0) {
             setStep(ConnectWalletListSteps.connect_introduction);
         } else {
