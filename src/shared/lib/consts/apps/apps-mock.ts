@@ -54,3 +54,30 @@ export const appsMock: App[] = [
     link: "https://avanchange.com/"
   }
 ]
+
+export const categoryMock = [
+  {
+    icon: "diamond",
+    title: "Category"
+  },
+  {
+    icon: "diamond",
+    title: "Category"
+  },
+  {
+    icon: "diamond",
+    title: "Category"
+  },
+  {
+    icon: "diamond",
+    title: "Category"
+  },
+  {
+    icon: "diamond",
+    title: "Category"
+  },
+  {
+    icon: "diamond",
+    title: "Category"
+  }
+]

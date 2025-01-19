@@ -58,13 +58,19 @@ export class TonConnectService {
 
     async fallbackGetManifest(request: ConnectRequest): Promise<DAppManifest> {
         try {
-            const response = await axios.get(
-                `${import.meta.env.VITE_PROXY_URL || "https://proxy.dewallet.pro"}/manifest`,
-                {
-                    params: { url: request.manifestUrl },
-                }
-            );
-            const manifest = response.data;
+            // const response = await axios.get(
+            //     `${import.meta.env.VITE_PROXY_URL}/manifest`,
+            //     {
+            //         params: { url: request.manifestUrl },
+            //     }
+            // );
+            // const manifest = response.data;
+
+            const manifest = {
+                url: "t.me/privateton_bot/start",
+                name: "Test app",
+                iconUrl: "https://media.istockphoto.com/id/1053093832/vector/grunge-red-rubber-preview-word-with-star-icon-round-rubber-seal-stamp-on-white-background.jpg?s=612x612&w=0&k=20&c=fR0YRF0CiA9BZ8ukLXN59RFwPbtLVcr4Nl7LeuIJlXk="
+            };
 
             const isValid =
                 manifest &&

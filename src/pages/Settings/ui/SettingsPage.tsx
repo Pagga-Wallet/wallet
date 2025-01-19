@@ -132,13 +132,13 @@ export const SettingsPage = () => {
                     </Section.Link>
                 </Section>
                 <Section title="dApps">
-                    <Section.Link disabled to="">
+                    <Section.Link to="/connect/wallet-connect-list/wallet-connect">
                         <div className={s.innerItem}>
                             <WALLET_CONNECT />
                             Wallet Connect
                         </div>
                     </Section.Link>
-                    <Section.Link disabled to="/connect/wallet-connect-list">
+                    <Section.Link to="/connect/wallet-connect-list/ton-connect">
                         <div className={s.innerItem}>
                             <TON_CONNECT />
                             TON Connect

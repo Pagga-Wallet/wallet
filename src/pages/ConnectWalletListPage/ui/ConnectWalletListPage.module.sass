@@ -1,7 +1,28 @@
-.top 
+.top
   margin-bottom: 24px
   .title
-    margin-bottom: 5px
+    font-size: 26px
+    font-weight: 700
+    line-height: 110%
+    text-align: left
   .description
-    text-align: center
-    color: var(--Placeholder-Secondary, #A1ACBB)
+    color: rgb(var(--placeholder-secondary))
+    letter-spacing: 0.28px
+    text-align: left
+    margin-bottom: 6px
+
+.inner
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  min-height: calc(100vh - 36px)
+  &Content
+    padding: 8px 0 16px 0
+    margin: 0 -16px
+    border-radius: 32px 32px 0 0
+    background: rgb(var(--foreground-primary))
+    min-height: 75vh
+
+.mainButton
+  border-radius: 0
+  background: rgb(var(--foreground-primary))

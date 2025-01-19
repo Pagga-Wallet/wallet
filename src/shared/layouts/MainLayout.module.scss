@@ -84,6 +84,16 @@
                     stroke: rgb(var(--placeholder-primary)) !important;
                 }
             }
+            &--disabled {
+                opacity: 0.4;
+                event-prevent: none;
+                &:hover {
+                    cursor: default;
+                }
+                &:active svg {
+                    transform: scale(1);
+                }
+            }
             &--active {
                 color: rgb(var(--placeholder-primary));
                 svg path {

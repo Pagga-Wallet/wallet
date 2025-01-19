@@ -1,45 +1,59 @@
+.inner
+  padding: 28px 16px 0 16px
+  height: calc(100vh - 100px)
+  &Top
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    gap: 24px
+    margin-bottom: 24px
+    img
+      border-radius: 50%
+      object-fit: cover
+    &Date
+      color: rgb(var(--placeholder-secondary))
+  &Detail
+    border-radius: 24px
+    background: rgb(var(--foreground-secondary))
+    margin-bottom: 24px
+    .item
+      display: flex
+      align-items: center
+      justify-content: space-between
+      padding: 16px
+      gap: 10px
+      flex-wrap: wrap
+      position: relative
+      &:not(:last-child)
+        &:after
+          content: ""
+          position: absolute
+          right: 16px
+          left: 16px
+          bottom: 0
+          width: calc(100% - 32px)
+          height: 1px
+          background: rgb(var(--border-secondary))
+
+      &Left
+        color: rgba(var(--placeholder-secondary, #94A3B8))
+        font-size: 14px
+  &Info
+    border-radius: 24px
+    padding: 12px 16px
+    background: rgb(var(--foreground-secondary))
+    margin-bottom: 24px
+    &Item
+      display: flex
+      align-items: center
+      gap: 12px
+      color: rgb(var(--placeholder-secondary))
+      &:not(:last-child)
+        margin-bottom: 12px
+
 .title
+  font-size: 14px
+  color: rgb(var(--placeholder-secondary))
   text-align: left
-  color: rgba(var(--placeholder-secondary-dark, #94A3B8))
-  font-size: 16px
-  margin-bottom: 12px
 
-.innerDetail
-  margin: 24px 0
-  border-radius: 28px
-  backdrop-filter: blur(28px)
-  -webkit-backdrop-filter: blur(28px)
-  padding: 16px
-  display: flex
-  justify-content: center
-  flex-direction: column
-  gap: 17px
-  background: var(--background-transparent, rgba(66, 75, 86, 0.30))
-  .item
-    display: flex
-    align-items: center
-    justify-content: space-between
-    gap: 10px
-    flex-wrap: wrap
-    &Left
-      color: rgba(var(--placeholder-secondary, #94A3B8))
-      font-size: 14px
-
-.actions
-  margin-top: 24px
-  button
-    display: flex
-    align-items: center
-    justify-content: space-between
-    gap: 10px
-    padding: 19px 16px
-    border-radius: 24px !important
-    background: var(--background-transparent, rgba(66, 75, 86, 0.30))
-    transition: all 0.3s ease 0s
-    &:hover
-      opacity: 0.8
-    svg
-      width: 15px
-      height: 16px
-      path
-        stroke: #A1ACBB

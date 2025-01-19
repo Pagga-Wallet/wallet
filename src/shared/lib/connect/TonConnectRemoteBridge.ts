@@ -34,7 +34,7 @@ class TonConnectRemoteBridgeService {
     private readonly storeKey = "ton-connect-http-bridge-lastEventId";
 
     private readonly bridgeUrl = `${
-        import.meta.env.VITE_BRIDGE_URL || "https://bridge.dewallet.pro"
+        import.meta.env.VITE_BRIDGE_URL
     }/bridge`;
 
     private readonly defaultTtl = 300;
@@ -127,16 +127,19 @@ class TonConnectRemoteBridgeService {
             const protocolVersion = Number(query.version);
             const clientSessionId = query.id;
 
-            let request = JSON.parse(
-                decodeURIComponent(query.request.replace(/--/g, "%"))
-            ) as ConnectRequest;
-            if (!isObject(request)) {
-                request = JSON.parse(request);
-            }
+            let request: ConnectRequest;
 
-            console.log("request", request);
-            console.log("clientSessionId", clientSessionId);
-            console.log("protocolVersion", protocolVersion);
+            try {
+                request = JSON.parse(
+                    decodeURIComponent(query.request.replace(/--/g, "%"))
+                ) as ConnectRequest;
+                
+                if (!isObject(request)) {
+                    request = JSON.parse(query.request) as ConnectRequest;
+                }
+            } catch (error) {
+                request = query.request as any;
+            }
 
             const sessionCrypto = new SessionCrypto();
 

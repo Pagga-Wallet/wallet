@@ -1,7 +1,7 @@
 import { popup } from "@telegram-apps/sdk-react";
 import { FC, useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ConnectIntroduction, ConnectList, ConnectListDetail } from "@/widgets/connect";
 
@@ -10,14 +10,16 @@ import { useQRScanner } from "@/features/qrScanner";
 import { useGetConnectionsQuery, useRemoveConnectionMutation } from "@/entities/connection";
 import { IConnection, IConnectionWithWalletName } from "@/entities/connection/model/types";
 import { useFetchAccountsQuery } from "@/entities/multichainAccount";
-import { Title } from "@/shared/components";
+import { Container, CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 
 import { checkDesktopPlatform } from "@/shared/lib/helpers/checkDesktopPlatform";
-import { btnText, title } from "../consts";
+import { btnText } from "../consts";
 
 import { ConnectWalletListSteps } from "../types/ConnectWalletListSteps";
+
+import { ConnectionType } from "@/shared/lib/types/connect";
 
 import s from "./ConnectWalletListPage.module.sass";
 
@@ -40,9 +42,34 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
 
     const [detailInfo, setDetailInfo] = useState<IConnectionWithWalletName | null>(null);
 
+    // CHECK TYPE OF CONNECTIONS
+    // NOW CHECK ONLY TON CONNECT
+    // START
+    const { type } = useParams();
+
+    const [connectionType, setConnectionType] = useState<ConnectionType | null>(null);
+
+    useEffect(() => {
+        if (type === ConnectionType.TonConnect) {
+            setConnectionType(ConnectionType.TonConnect);
+        } else if (type === ConnectionType.WalletConnect) {
+            setConnectionType(ConnectionType.WalletConnect);
+        } else {
+            setConnectionType(null);
+        }
+    }, [type]);
+
+    // END
+
     useEffect(() => {
         if (isLoadingAccounts || isLoadingConnections) {
             return;
+        }
+
+        // CHECK TYPE OF CONNECTIONS. NOW CHECK ONLY TON CONNECT
+        if (connectionType === ConnectionType.WalletConnect) {
+            setStep(ConnectWalletListSteps.connect_introduction);
+            return
         }
 
         if (!connections || connections.length === 0) {
@@ -54,7 +81,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
 
     const updatedConnections = connections?.map((c: IConnection) => {
         const currentAccount = accounts?.find(
-            (account: { id: string; name: string; emojiId: string }) => account.id === c.accId
+            (account: { id: string; name: string; emojiId: string }) => account?.id === c?.accId
         );
         return {
             ...c,
@@ -62,8 +89,8 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
                 currentAccount?.name && currentAccount?.name.length > 1
                     ? currentAccount.name
                     : t("wallet.default-name", {
-                          id: `${parseInt(currentAccount?.id ?? "0") + 1}`,
-                      }),
+                          id: `${parseInt(currentAccount?.id ?? "0") + 1}`
+                      })
         };
     });
 
@@ -78,24 +105,26 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
 
     useSetupBackButton({ onBack });
 
-    const onForward = useCallback(() => {
-        if (
-            step === ConnectWalletListSteps.connect_list ||
-            step === ConnectWalletListSteps.connect_introduction
-        ) {
-            scanHandle();
+    const handleMain = useCallback(() => {
+        switch (step) {
+            case ConnectWalletListSteps.connect_list:
+            case ConnectWalletListSteps.connect_introduction:
+                scanHandle();
+                break;
+            case ConnectWalletListSteps.connect_list_detail:
+                handleRemove();
         }
     }, [step]);
 
-    useSetupMainButton({
-        onClick: onForward,
-        params: {
-            text: t(btnText[step]),
-            isEnabled: !isDesktop,
-            isLoaderVisible: false,
-            isVisible: step !== ConnectWalletListSteps.connect_list_detail,
-        },
-    });
+    // useSetupMainButton({
+    //     onClick: onForward,
+    //     params: {
+    //         text: t(btnText[step]),
+    //         isEnabled: !isDesktop,
+    //         isLoaderVisible: false,
+    //         isVisible: step !== ConnectWalletListSteps.connect_list_detail,
+    //     },
+    // });
 
     const handleListDetail = (clientSessionId: string) => {
         const detailInfo =
@@ -106,7 +135,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
         setStep(ConnectWalletListSteps.connect_list_detail);
     };
 
-    const handleRemove = () => { 
+    const handleRemove = () => {
         popup
             .open({
                 title: t("connect-wallet-list.delete-connection"),
@@ -115,12 +144,12 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
                     {
                         id: "del-btn",
                         type: "default",
-                        text: t("connect-wallet-list.delete-connection"),
+                        text: t("connect-wallet-list.delete-connection")
                     },
-                    { id: "cancel", type: "cancel" },
-                ],
+                    { id: "cancel", type: "cancel" }
+                ]
             })
-            .then(async (buttonId) => {
+            .then(async buttonId => {
                 if (buttonId !== "cancel" && detailInfo) {
                     await removeConnection(detailInfo!.clientSessionId);
                     setStep(ConnectWalletListSteps.connect_list);
@@ -129,27 +158,48 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
     };
 
     return (
-        <BaseLayout>
-            {step !== ConnectWalletListSteps.connect_introduction && (
+        <BaseLayout withDecor className={s.inner} withoutPadding>
+            {step === ConnectWalletListSteps.connect_list && (
                 <div className={s.top}>
+                    <p className={s.description}>
+                        {connectionType === ConnectionType.TonConnect
+                            ? t("connect-wallet-list.ton-connect")
+                            : t("connect-wallet-list.wallet-connect")}
+                    </p>
                     <Title level={1} className={s.title}>
-                        {t(title[step])}
+                        {t("connect-wallet-list.connection-list")}
                     </Title>
-                    <p className={s.description}>{t("connect-wallet-list.connection-list")}</p>
                 </div>
             )}
 
-            {step === ConnectWalletListSteps.connect_introduction && <ConnectIntroduction />}
-            {step === ConnectWalletListSteps.connect_list && (
-                <ConnectList
-                    onClick={handleListDetail}
-                    connections={updatedConnections}
-                    isLoading={isLoadingAccounts || isLoadingConnections}
-                />
-            )}
-            {step === ConnectWalletListSteps.connect_list_detail && (
-                <ConnectListDetail detailInfo={detailInfo} handleRemove={handleRemove} />
-            )}
+            <Container className={s.innerContent}>
+                {step === ConnectWalletListSteps.connect_introduction && (
+                    <ConnectIntroduction type={connectionType} />
+                )}
+                {step === ConnectWalletListSteps.connect_list && (
+                    <ConnectList
+                        onClick={handleListDetail}
+                        connections={updatedConnections}
+                        isLoading={isLoadingAccounts || isLoadingConnections}
+                    />
+                )}
+                {step === ConnectWalletListSteps.connect_list_detail && (
+                    <ConnectListDetail
+                        type={connectionType}
+                        detailInfo={detailInfo}
+                    />
+                )}
+            </Container>
+
+            <CustomButton
+                containerClassName={s.mainButton}
+                firstButton={{
+                    children: t(btnText[step]),
+                    isDisabled: isDesktop,
+                    onClick: handleMain,
+                    type: "purple"
+                }}
+            />
         </BaseLayout>
     );
 };
