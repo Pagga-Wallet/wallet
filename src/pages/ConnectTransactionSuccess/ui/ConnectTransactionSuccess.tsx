@@ -1,13 +1,18 @@
 import { openLink } from "@telegram-apps/sdk-react";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+
 import { useNavigate } from "react-router-dom";
+
 import { multichainAccountStore } from "@/entities/multichainAccount";
-import { Title } from "@/shared/components";
-import { BaseLayout } from "@/shared/layouts";
-import { useAppSelector, useSetupBackButton, useSetupMainButton } from "@/shared/lib";
-import moneyGif from "@/shared/lib/gifs/money.gif";
-import styles from "./ConnectTransactionSuccess.module.scss";
+
+import { CustomButton } from "@/shared/components";
+
+import { useAppSelector, useSetupBackButton } from "@/shared/lib";
+
+import { SuccessTransaction } from "@/widgets/transaction";
+
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const ConnectTransactionSuccess = () => {
     const { t } = useTranslation();
@@ -19,35 +24,32 @@ export const ConnectTransactionSuccess = () => {
     }, [navigate]);
 
     useSetupBackButton({
-        onBack,
+        onBack
     });
 
     const handleClick = useCallback(() => {
         openLink(`https://tonviewer.com/${account!.multiwallet.TON.address.V4}`);
     }, [account]);
 
-    useSetupMainButton({
-        params: {
-            text: t("connect.tx-view"),
-            isVisible: true,
-            isEnabled: true,
-        },
-        onClick: handleClick,
-    });
+    // useSetupMainButton({
+    //     params: {
+    //         text: t("connect.tx-view"),
+    //         isVisible: true,
+    //         isEnabled: true
+    //     },
+    //     onClick: handleClick
+    // });
 
     return (
-        <BaseLayout>
-            <div className={styles.wrapperImage}>
-                <img className={styles.wrapperImage__image} src={moneyGif} alt="success" />
-            </div>
-            <div className={styles.containerContent}>
-                <div className={styles.wrapperContent}>
-                    <Title className={styles.title}>{t("connect.tx-success")}!</Title>
-                    <div>
-                        <p className={styles.subtitle}>{t("connect.tx-success-subtitle")}</p>
-                    </div>
-                </div>
-            </div>
-        </BaseLayout>
+        <WithDecorLayout>
+            <SuccessTransaction />
+            <CustomButton
+                firstButton={{
+                    children:  t("connect.tx-view"),
+                    type: "purple",
+                    onClick: handleClick
+                }}
+            />
+        </WithDecorLayout>
     );
 };

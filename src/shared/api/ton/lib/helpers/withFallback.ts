@@ -1,5 +1,5 @@
 import { TonClient4 } from "@ton/ton";
-import { tonClient4, tonClient4Delab } from "@/shared/api/tonapi";
+import { tonClient4 } from "@/shared/api/tonapi";
 
 export type Method<T extends any[], R> = (client: TonClient4, ...args: T) => Promise<R>;
 

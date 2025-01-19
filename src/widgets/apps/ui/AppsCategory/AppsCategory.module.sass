@@ -1,0 +1,28 @@
+.block
+  margin: 0 16px 24px 16px
+  padding: 16px
+  background: rgb(var(--foreground-secondary))
+  border-radius: 24px
+  &Title
+    font-size: 20px
+    font-weight: 700
+    text-align: left
+    line-height: 110%
+    position: relative
+    margin-bottom: 16px
+    span
+      background: radial-gradient(283.26% 199.45% at 108.33% -44.12%, #A999F8 0%, #664AF2 100%)
+      background-clip: text
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent
+    svg
+      position: absolute
+      top: -10%
+      fill: rgb(var(--foreground-secondary))
+  &Items
+    display: grid
+    justify-items: center
+    align-items: start
+    gap: 10px 5px
+    margin: 0 auto
+    grid-template-columns: repeat(4, 1fr)

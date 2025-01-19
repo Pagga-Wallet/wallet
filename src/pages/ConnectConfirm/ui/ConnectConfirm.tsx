@@ -12,7 +12,7 @@ import {
     multichainAccountStore,
     useFetchTotalBalanceQuery,
 } from "@/entities/multichainAccount";
-import { Title } from "@/shared/components";
+import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import {
     cryptographyController,
@@ -22,6 +22,7 @@ import {
 } from "@/shared/lib";
 import { SendTransactionError } from "@/shared/lib/connect/SendTransactionError";
 import styles from "./ConnectConfirm.module.scss";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 // зарефакторить в фичу
 export const ConnectConfirm = () => {
@@ -97,26 +98,26 @@ export const ConnectConfirm = () => {
         navigate("/home");
     }, [requestPromise, request, navigate]);
 
-    useSetupMainButton({
-        onClick: onSend,
-        params: {
-            text: isInsufficientBalance ? t("common.insufficient-ton") : t("common.send"),
-            isLoaderVisible: false,
-            isEnabled: !isInsufficientBalance,
-            isVisible: true,
-        },
-    });
+    // useSetupMainButton({
+    //     onClick: onSend,
+    //     params: {
+    //         text: isInsufficientBalance ? t("common.insufficient-ton") : t("common.send"),
+    //         isLoaderVisible: false,
+    //         isEnabled: !isInsufficientBalance,
+    //         isVisible: true,
+    //     },
+    // });
 
     useSetupBackButton({
         onBack,
     });
 
     return (
-        <BaseLayout>
+        <WithDecorLayout>
             <Title className={styles.title}>{t("connect.confirm-from")}</Title>
             <div className={styles.app}>
-                <img width={32} height={32} src={connection.iconUrl} alt="example" />
-                {connection.name}
+                <img width={32} height={32} src={connection?.iconUrl} alt="example" />
+                {connection?.name}
             </div>
             <div className={styles.messageList}>
                 {messages
@@ -134,6 +135,14 @@ export const ConnectConfirm = () => {
                         <MessageForSign {...msg} />
                     ))}
             </div>
-        </BaseLayout>
+            <CustomButton 
+                firstButton={{
+                    children: isInsufficientBalance ? t("common.insufficient-ton") : t("common.send"),
+                    isDisabled: isInsufficientBalance,
+                    type: "purple",
+                    onClick: onSend
+                }}
+            />
+        </WithDecorLayout>
     );
 };

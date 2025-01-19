@@ -1,9 +1,12 @@
 import { FC } from "react";
+import { v1 } from "uuid";
 
 import { ConnectItem, SkeletonItemSkeleton } from "@/features/connect";
 
-import { IConnection, IConnectionWithWalletName } from "@/entities/connection/model/types";
-import { Emoji, Title } from "@/shared/components";
+import { IConnectionWithWalletName } from "@/entities/connection/model/types";
+import { Title } from "@/shared/components";
+
+import { ConnectionType } from "@/shared/lib/types/connect";
 
 import { SkeletonRound } from "@/shared/components/Skeletons";
 
@@ -16,16 +19,6 @@ interface ConnectListProps {
 }
 
 export const ConnectList: FC<ConnectListProps> = ({ onClick, connections, isLoading }) => {
-    const groupedConnections = connections?.reduce((acc, connection) => {
-        const { accId, walletFullName } = connection;
-
-        if (!acc[accId]) {
-            acc[accId] = { walletFullName, connections: [] };
-        }
-        acc[accId].connections.push(connection);
-        return acc;
-    }, {} as Record<string, { walletFullName: string; connections: IConnection[] }>);
-
     return (
         <div>
             {isLoading ? (
@@ -39,27 +32,17 @@ export const ConnectList: FC<ConnectListProps> = ({ onClick, connections, isLoad
                     ))}
                 </div>
             ) : (
-                Object.entries(groupedConnections ?? {}).map(
-                    ([accId, { walletFullName, connections }]) => (
-                        <div key={accId} className={s.group}>
-                            <Title level={2} className={s.title}>
-                                <Emoji id={+accId} />
-                                {walletFullName}
-                            </Title>
-                            <div className={s.items}>
-                                {connections.map((connection) => (
-                                    <ConnectItem
-                                        key={connection.clientSessionId}
-                                        title={connection.name}
-                                        preview={connection.iconUrl}
-                                        onClick={() => onClick(connection.clientSessionId)}
-                                        isActions
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    )
-                )
+                <div className={s.group}>
+                    {connections?.map(c => (
+                        <ConnectItem
+                            key={v1()}
+                            title={c.name}
+                            preview={c.iconUrl}
+                            onClick={() => onClick(c.clientSessionId)}
+                            isActions
+                        />
+                    ))}
+                </div>
             )}
         </div>
     );

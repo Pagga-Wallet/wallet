@@ -1,5 +1,5 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { AccountPage } from "./AccountPage";
 import { ConnectConfirm } from "./ConnectConfirm/ui/ConnectConfirm";
 import { ConnectOpenPage } from "./ConnectOpenPage/ui/ConnectOpenPage";
@@ -62,7 +62,7 @@ export const Routing = () => {
                     <Route path="/connect/success" element={<ConnectTransactionSuccess />} />
                     <Route path="/connect/failed" element={<ConnectTransactionFailed />} />
                     <Route
-                        path="/connect/wallet-connect-list"
+                        path="/connect/wallet-connect-list/:type"
                         element={<ConnectWalletListPage />}
                     />
 

@@ -195,7 +195,7 @@
     },
     "menu": {
         "home": "Главная",
-        "swap": "Обмен",
+        "points": "Очки",
         "apps": "Приложения",
         "nft": "NFT",
         "settings": "Настройки"
@@ -245,10 +245,15 @@
         "connection-list": "Список подключений",
         "connection": "Подключение",
         "wallet-connect": "Wallet Connect",
+        "ton-connect": "TON Connect",
         "networks": "Сети",
         "wallet": "Кошелек",
         "linked": "Привязан",
-        "introduction-description": "Подключите свой кошелек для взаимодействия с dApp и совершения транзакций."
+        "introduction-description": "Подключите свой кошелек для взаимодействия с dApp и совершения транзакций.",
+        "disconnect": "Отключить",
+        "info-item-1": "Просмотр баланса и активности кошелька",
+        "info-item-2": "Запрос подтверждения транзакции",
+        "requests-a-connection": "Запрашивает подключение"
     },
     "common": {
         "back": "Назад",
