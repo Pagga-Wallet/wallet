@@ -1,7 +1,8 @@
+import * as solana from "@solana/web3.js";
 import {
     keyPairFromSeed,
     mnemonicToPrivateKey,
-    mnemonicValidate as tonMnemonicValidate,
+    mnemonicValidate as tonMnemonicValidate
 } from "@ton/crypto";
 import { WalletContractV3R1, WalletContractV3R2, WalletContractV4 } from "@ton/ton";
 import * as bip39 from "bip39";
@@ -9,8 +10,9 @@ import * as crypto from "crypto-js";
 import { derivePath } from "ed25519-hd-key";
 import { ethers } from "ethers";
 import { TronWeb } from "tronweb";
-import { TonWalletData } from "@/shared/lib/types";
+import { IUserWalletsData, TonWalletData } from "@/shared/lib/types";
 import { workchain } from "./consts/ton/index";
+import { SolanaWalletData } from "./types/solana/SolanaWalletData";
 import { TronWalletData } from "./types/tron/TronWalletData";
 
 const globalSecret = "7275737369616e207761727368697020676f206675636b20796f757273656c66";
@@ -19,7 +21,7 @@ class CryptographyController {
         return bip39.generateMnemonic();
     }
 
-    // этот метод для получения валлетов из мнемоников как у траста, сгенерированных через bip39
+    // bip39
     private async getTonWalletFromBip39Mnemonic(mnemonics: string[]): Promise<TonWalletData> {
         const joinedPhrase = mnemonics.join(" ").trim();
         const seed = await bip39.mnemonicToSeed(joinedPhrase);
@@ -34,11 +36,11 @@ class CryptographyController {
             addressV3R2: walletV3R2.address.toString({ bounceable: false }),
             addressV3R1: walletV3R1.address.toString({ bounceable: false }),
             publicKey: kp.publicKey.toString("hex"),
-            secretKey: kp.secretKey.toString("hex"),
+            secretKey: kp.secretKey.toString("hex")
         };
     }
 
-    // этот метод для получения валлетов из мнемоников TON типа, сгенерированных через метод из ton-crypto
+    // ton-crypto
     private async getTonWalletFromTonMnemonic(mnemonics: string[]): Promise<TonWalletData> {
         const keyPair = await mnemonicToPrivateKey(mnemonics);
         const walletV4 = WalletContractV4.create({ workchain, publicKey: keyPair.publicKey });
@@ -49,20 +51,22 @@ class CryptographyController {
             addressV3R2: walletV3R2.address.toString({ bounceable: false }),
             addressV3R1: walletV3R1.address.toString({ bounceable: false }),
             publicKey: keyPair.publicKey.toString("hex"),
-            secretKey: keyPair.secretKey.toString("hex"),
+            secretKey: keyPair.secretKey.toString("hex")
         };
     }
+
+    // ETHEREUM
 
     private async _ethereumWalletFromTonMnemonic(mnemonic: string): Promise<ethers.HDNodeWallet> {
         const seed = await bip39.mnemonicToSeed(mnemonic);
         const pk = derivePath("m/44'/607'/0'", seed.toString("hex"));
-        const wallet = ethers.HDNodeWallet.fromSeed(pk.key);
+        const wallet = ethers.HDNodeWallet.fromSeed(Uint8Array.from(pk.key));
         return wallet;
     }
 
     private async _ethereumWalletFromBip39Mnemonic(mnemonic: string): Promise<ethers.HDNodeWallet> {
         const seed = await bip39.mnemonicToSeed(mnemonic);
-        const wallet = ethers.HDNodeWallet.fromSeed(seed);
+        const wallet = ethers.HDNodeWallet.fromSeed(Uint8Array.from(seed));
         return wallet;
     }
 
@@ -76,11 +80,44 @@ class CryptographyController {
         else throw new Error("Invalid mnemonic");
     }
 
-    private async _legacyTonWalletFromBip39Mnemonic(mnemonic: string): Promise<TonWalletData> {
+    // SOLANA
+
+    public async solanaKeypairFromMnemonic(mnemonic: string) {
         const seed = await bip39.mnemonicToSeed(mnemonic);
-        const wallet = await this.getTonWalletFromBip39Mnemonic(seed.toString("hex").split(" "));
-        return wallet;
+        const { key } = derivePath("m/44'/501'/0'", seed.toString("hex"));
+        const keypair = solana.Keypair.fromSeed(Uint8Array.from(key));
+        return keypair;
     }
+
+    private async _solanaWalletFromTonMnemonic(mnemonic: string): Promise<SolanaWalletData> {
+        const keypair = await this.solanaKeypairFromMnemonic(mnemonic);
+        const privateKey = Buffer.from(keypair.secretKey).toString("hex");
+        const publicKey = keypair.publicKey.toBase58();
+        return {
+            privateKey,
+            address: publicKey
+        };
+    }
+
+    private async _solanaWalletFromBip39Mnemonic(mnemonic: string): Promise<SolanaWalletData> {
+        const keypair = await this.solanaKeypairFromMnemonic(mnemonic);
+        const privateKey = Buffer.from(keypair.secretKey).toString("hex");
+        const publicKey = keypair.publicKey.toBase58();
+        return {
+            privateKey,
+            address: publicKey
+        };
+    }
+
+    public async solanaWalletFromUnknownMnemonic(mnemonic: string): Promise<SolanaWalletData> {
+        const isTONMnemonic = await tonMnemonicValidate(mnemonic.split(" "));
+        const isBIP39Mnemonic = bip39.validateMnemonic(mnemonic);
+        if (isTONMnemonic) return this._solanaWalletFromTonMnemonic(mnemonic);
+        else if (isBIP39Mnemonic) return this._solanaWalletFromBip39Mnemonic(mnemonic);
+        else throw new Error("Invalid mnemonic");
+    }
+
+    // TON
 
     private async _tonWalletFromBip39Mnemonic(mnemonic: string): Promise<TonWalletData> {
         const wallet = await this.getTonWalletFromBip39Mnemonic(mnemonic.split(" "));
@@ -91,16 +128,15 @@ class CryptographyController {
         return await this.getTonWalletFromTonMnemonic(mnemonic.split(" "));
     }
 
-    public async tonWalletFromUnknownMnemonic(
-        mnemonic: string,
-        valid?: boolean
-    ): Promise<TonWalletData> {
+    public async tonWalletFromUnknownMnemonic(mnemonic: string): Promise<TonWalletData> {
         const isTONMnemonic = await tonMnemonicValidate(mnemonic.split(" "));
         const isBIP39Mnemonic = bip39.validateMnemonic(mnemonic);
         if (isTONMnemonic) return this._tonWalletFromTonMnemonic(mnemonic);
         else if (isBIP39Mnemonic) return this._tonWalletFromBip39Mnemonic(mnemonic);
         else throw new Error("Invalid mnemonic");
     }
+
+    // TRON
 
     private async _tronWalletFromTONMnemonic(mnemonic: string): Promise<TronWalletData> {
         const keyPair = await mnemonicToPrivateKey(mnemonic.split(" "));
@@ -111,7 +147,7 @@ class CryptographyController {
         return {
             address: Trc20WalletAddress,
             privateKey: keyPair.publicKey.toString("hex").replace(/^0x/, ""),
-            publicKey: keyPair.secretKey.toString("hex").replace(/^0x/, ""),
+            publicKey: keyPair.secretKey.toString("hex").replace(/^0x/, "")
         };
     }
 
@@ -120,7 +156,7 @@ class CryptographyController {
         return {
             address: Trc20Wallet.address,
             privateKey: Trc20Wallet.privateKey.replace(/^0x/, ""),
-            publicKey: Trc20Wallet.publicKey.replace(/^0x/, ""),
+            publicKey: Trc20Wallet.publicKey.replace(/^0x/, "")
         };
     }
 
@@ -132,31 +168,37 @@ class CryptographyController {
         else throw new Error("Invalid mnemonic");
     }
 
-    public async createMultichainWallet() {
+    // GENERAL
+
+    public async createMultichainWallet(): Promise<IUserWalletsData> {
         const mnemonics = this._generateMnemonicBIP39();
         const ethereumWallet = await this._ethereumWalletFromBip39Mnemonic(mnemonics);
-        const tonWallet = await this._legacyTonWalletFromBip39Mnemonic(mnemonics);
+        const tonWallet = await this._tonWalletFromBip39Mnemonic(mnemonics);
         const tronWallet = await this._tronWalletFromBIP39Mnemonic(mnemonics);
+        const solanaWallet = await this._solanaWalletFromBip39Mnemonic(mnemonics);
         return {
             mainMnemonic: mnemonics,
             eth: ethereumWallet,
             ton: tonWallet,
             tron: tronWallet,
+            solana: solanaWallet
         };
     }
 
-    public async importWallet(mnemonic: string) {
+    public async importWallet(mnemonic: string): Promise<IUserWalletsData> {
         const isTONMnemonic = await tonMnemonicValidate(mnemonic.split(" "));
         const isBIP39Mnemonic = bip39.validateMnemonic(mnemonic);
         if (!isTONMnemonic && !isBIP39Mnemonic) throw new Error("Invalid mnemonic");
         const tonWallet = await this.tonWalletFromUnknownMnemonic(mnemonic);
         const ethereumWallet = await this.ethereumHDWalletFromUnknownMnemonic(mnemonic);
         const tronWallet = await this.tronWalletFromUnknownMnemonic(mnemonic);
+        const solanaWallet = await this.solanaWalletFromUnknownMnemonic(mnemonic);
         return {
             mainMnemonic: mnemonic,
             eth: ethereumWallet,
             ton: tonWallet,
             tron: tronWallet,
+            solana: solanaWallet
         };
     }
 
@@ -168,7 +210,7 @@ class CryptographyController {
             const hashFromKey = crypto.AES.encrypt(mnemonics, key).toString();
             return {
                 iv: initializationVector.toString(),
-                hashFromKey,
+                hashFromKey
             };
         } catch (error) {
             console.error(error);

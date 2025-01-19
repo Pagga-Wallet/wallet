@@ -1,22 +1,16 @@
-import { FC, useCallback, useMemo } from "react";
+import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
-import {
-    MultichainAccount,
-    multichainAccountStore,
-    useGetLastTxsByTokenQuery,
-} from "@/entities/multichainAccount";
-
+import { useGetLastTxsByTokenQuery } from "@/entities/multichainAccount";
 import {
     TransactionHistoryDetailItem,
-    TransactionHistoryDetailItemSkeleton,
+    TransactionHistoryDetailItemSkeleton
 } from "@/entities/transaction";
 import { transactionStore } from "@/entities/transaction/model/transactionSlice";
-import { useAppDispatch, useAppSelector } from "@/shared/lib";
-import { CHAINS, TokenBalance } from "@/shared/lib/types";
-import { BaseTxnParsed, TxnDirection } from "@/shared/lib/types/transaction";
+import { useAppDispatch } from "@/shared/lib";
+import { TokenBalance } from "@/shared/lib/types";
+import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import s from "./TransactionsHistoryListDetail.module.sass";
 
 interface TransactionsHistoryListDetailProps {
@@ -24,7 +18,7 @@ interface TransactionsHistoryListDetailProps {
 }
 
 export const TransactionsHistoryListDetail: FC<TransactionsHistoryListDetailProps> = ({
-    token,
+    token
 }) => {
     const { t } = useTranslation();
 

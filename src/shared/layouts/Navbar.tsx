@@ -45,7 +45,7 @@ export const Navbar: FC = () => {
     const { t } = useTranslation();
     return (
         <div className={styles.navbar} id="navbar-bottom">
-            {items.map((item) => (
+            {items.map(item => (
                 <NavLink
                     className={`${styles.navbar__item} ${item.disabled ? styles["navbar__item--disabled"] : ""}`}
                     to={item.disabled ? "" : item.path}

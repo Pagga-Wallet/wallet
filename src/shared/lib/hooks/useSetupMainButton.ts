@@ -52,7 +52,7 @@ export function useSetupMainButton({ onClick, params }: Options) {
 
     useEffect(() => {
         return () => {
-            console.log('hide button')
+            // console.log('hide button')
             hideBtn();
         };
     }, []);
