@@ -68,7 +68,6 @@ export const Routing = () => {
                     />
 
                     <Route path="/points" element={<PointsPage />} />
-                    <Route path="/points/detail/:id" element={<PointsPage />} />
 
                     {/* <Route path="/introduction" element={<IntroductionPage />} />
                     <Route path="/introduction/renew" element={<RenewPage />} /> */}
