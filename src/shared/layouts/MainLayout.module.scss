@@ -64,11 +64,13 @@
             .item_title {
                 font-size: 11px;
                 font-style: normal;
-                font-weight: 510;
+                font-weight: 500;
                 line-height: 13px;
             }
 
             svg {
+                width: 20px;
+                height: 20px;
                 color: rgb(var(--placeholder-secondary));
                 transition: all 0.3s ease 0s;
             }
@@ -78,11 +80,9 @@
                 }
             }
             &--active-stroke {
+                
                 color: rgb(var(--placeholder-primary));
-                svg path {
-                    fill: rgb(var(--placeholder-primary));
-                    stroke: rgb(var(--placeholder-primary)) !important;
-                }
+
             }
             &--disabled {
                 opacity: 0.4;
@@ -96,10 +96,6 @@
             }
             &--active {
                 color: rgb(var(--placeholder-primary));
-                svg path {
-                    fill: rgb(var(--placeholder-primary));
-                    stroke: rgba(0, 0, 0, 0) !important;
-                }
             }
         }
 

@@ -356,7 +356,9 @@
       "your-sending": "Ви надсилаєте",
       "view-all": "Переглянути всі",
       "paste": "Вставити",
-      "telegram-channel": "Телеграм Канал"
+      "telegram-channel": "Телеграм Канал",
+      "show-less": "Показувати менше",
+      "show-more": "Показати більше"
   },
   "create-card": {
       "title": "Створити картку",

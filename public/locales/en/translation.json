@@ -356,7 +356,9 @@
         "your-sending": "You sending",
         "view-all": "View all",
         "paste": "Paste",
-        "telegram-channel": "Telegram Channel"
+        "telegram-channel": "Telegram Channel",
+        "show-less": "Show less",
+        "show-more": "Show more"
     },
     "create-card": {
         "title": "Create card",

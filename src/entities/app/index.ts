@@ -1,2 +1,2 @@
 export * from "./AppItem/AppItem"
-export * from "./AppCategory/AppCategory"
+export * from "../../shared/components/CategoryItem/CategoryItem"

@@ -33,12 +33,12 @@
         -webkit-filter: brightness(1.1);
         filter: brightness(1.1);
     }
-    
+
     &:active &Bg {
         -webkit-filter: brightness(1.1);
         filter: brightness(1.1);
     }
-    
+
     .chain {
         position: absolute;
         top: 10px;
@@ -81,7 +81,7 @@
 
         &Name {
             font-size: 12px;
-            font-weight: 510;
+            font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
