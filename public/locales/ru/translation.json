@@ -349,7 +349,9 @@
         "your-sending": "Вы отправляете",
         "view-all": "Посмотреть все",
         "paste": "Вставить",
-        "telegram-channel": "Телеграм Канал"
+        "telegram-channel": "Телеграм Канал",
+        "show-less": "Показать меньше",
+        "show-more": "Показать больше"
     },
     "create-card": {
         "title": "Создать карту",

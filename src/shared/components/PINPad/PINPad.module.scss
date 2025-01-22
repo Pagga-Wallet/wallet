@@ -1,124 +1,124 @@
 .pincode {
-  display: flex;
-  flex-direction: column;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 32px 16px 50px 16px !important;
-
-  .action {
     display: flex;
-    justify-content: end;
-  }
-
-  .top {
-    flex: 1 1 100%;
-    min-height: 210px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    &Title {
-      text-align: center;
-      font-size: 26px;
-      font-weight: 510;
-      margin-bottom: 24px;
-    }
-    .dots {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      &Item {
-        transition: background ease-in-out 0.5ms;
-        width: 10px;
-        height: 10px;
-        border-radius: 100%;
-        background-color: #7F7F91;
-      }
-      .active {
-        background-color: rgba(var(--accent-tertiary));
-      }
-      .failure {
-        background: rgba(var(--accent-red), 1);
-      }
 
-      .success {
-        background: rgba(var(--accent-green), 1);
-      }
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 32px 16px 50px 16px !important;
+
+    .action {
+        display: flex;
+        justify-content: end;
     }
 
-    .subtitle {
-      text-align: center;
-      color: rgba(var(--placeholder-secondary),1);
-    }
-  }
+    .top {
+        flex: 1 1 100%;
+        min-height: 210px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        &Title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        .dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            &Item {
+                transition: background ease-in-out 0.5ms;
+                width: 10px;
+                height: 10px;
+                border-radius: 100%;
+                background-color: #7f7f91;
+            }
+            .active {
+                background-color: rgba(var(--accent-tertiary));
+            }
+            .failure {
+                background: rgba(var(--accent-red), 1);
+            }
 
-  .pinPad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
+            .success {
+                background: rgba(var(--accent-green), 1);
+            }
+        }
 
-    &--disabled {
-      opacity: 0.4;
-      .pinPadButton {
-        pointer-events: none;
-      }
-    }
-    .pinPadButton {
-      background: rgba(var(--foreground-secondary));
-      cursor: pointer;
-      // border-radius: 4vw;
-      // padding-top: 4vw;
-      // padding-bottom: 4vw;
-      border-radius: 96px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      border: none;
-      box-shadow: none;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .numSymbol {
-        cursor: pointer;
-        text-align: center;
-        font-size: 22px;
-
-        font-weight: 590;
-
-        color: rgb(var(--placeholder-primary));
-      }
+        .subtitle {
+            text-align: center;
+            color: rgba(var(--placeholder-secondary), 1);
+        }
     }
 
-    .pinPadButton:active {
-      background: rgba(117, 130, 146, 0.4);
-    }
+    .pinPad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
 
-    .delete {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-    .delete > svg > path {
-      fill: rgb(var(--placeholder-primary));
-    }
+        &--disabled {
+            opacity: 0.4;
+            .pinPadButton {
+                pointer-events: none;
+            }
+        }
+        .pinPadButton {
+            background: rgba(var(--foreground-secondary));
+            cursor: pointer;
+            // border-radius: 4vw;
+            // padding-top: 4vw;
+            // padding-bottom: 4vw;
+            border-radius: 96px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border: none;
+            box-shadow: none;
 
-    .delete:active > svg > path {
-      fill: rgba(117, 130, 146, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .numSymbol {
+                cursor: pointer;
+                text-align: center;
+                font-size: 22px;
+
+                font-weight: 590;
+
+                color: rgb(var(--placeholder-primary));
+            }
+        }
+
+        .pinPadButton:active {
+            background: rgba(117, 130, 146, 0.4);
+        }
+
+        .delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .delete > svg > path {
+            fill: rgb(var(--placeholder-primary));
+        }
+
+        .delete:active > svg > path {
+            fill: rgba(117, 130, 146, 0.4);
+        }
     }
-  }
 }

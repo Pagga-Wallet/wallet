@@ -14,7 +14,7 @@
     position: absolute;
     padding: 12px 12px 0 12px;
     border-radius: 28px;
-    background: rgba(var(--tertiary-bg), 0.40);
+    background: rgba(var(--tertiary-bg), 0.4);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     margin-left: auto;
@@ -83,7 +83,7 @@
             &Name {
                 color: var(--Placeholder-Primary, #fff);
                 font-size: 18px;
-                font-weight: 510;
+                font-weight: 500;
             }
         }
     }
@@ -117,7 +117,7 @@
             &Title {
                 color: var(--Placeholder-Primary, #fff);
                 font-size: 16px;
-                font-weight: 510;
+                font-weight: 500;
                 white-space: nowrap;
                 justify-content: space-around;
             }
@@ -180,7 +180,7 @@
         height: 21px;
     }
     path {
-        stroke: #A1ACBB;
+        stroke: #a1acbb;
     }
 }
 

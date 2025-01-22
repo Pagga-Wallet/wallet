@@ -6,17 +6,21 @@
   gap: 8px
   cursor: pointer
   transition: all 0.3s ease 0s
-  &:hover
+  &Grey
     .itemIcon
-      background: rgba(var(--foreground-tertiary), 0.8)
+      background: rgb(var(--foreground-tertiary)) !important
+  &DarkGrey
+    .itemIcon
+      background: rgb(var(--foreground-secondary)) !important
   &Icon
     border-radius: 24px
-    background: rgb(var(--foreground-tertiary))
     height: 58px
     width: 58px
     display: flex
     align-items: center
     justify-content: center
+    &:hover
+      opacity: 0.8
   &Title
     width: 100%
     font-size: 13px
