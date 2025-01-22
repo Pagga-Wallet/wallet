@@ -1,10 +1,16 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import AppsActiveIcon from "@/shared/assets/apps-active.svg?react";
-import SettingsActiveIcon from "@/shared/assets/settings-active.svg?react";
 import { NavLink } from "@/shared/components";
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
+
+import HomeIcon from "@/shared/assets/home.svg?react";
+import HomeActiveIcon from "@/shared/assets/home-active.svg?react";
+import AppsIcon from "@/shared/assets/apps.svg?react";
+import AppsActiveIcon from "@/shared/assets/apps-active.svg?react";
+import PointsIcon from "@/shared/assets/points.svg?react";
+import PointsActiveIcon from "@/shared/assets/points-active.svg?react";
+import SettingsIcon from "@/shared/assets/settings.svg?react";
+import SettingsActiveIcon from "@/shared/assets/settings-active.svg?react";
 
 import styles from "./MainLayout.module.scss";
 
@@ -13,29 +19,31 @@ const items = [
         label: "menu.home",
         path: "/home",
         isStroke: false,
-        icon: <SvgSelector id="home-icon" />,
+        icon: <HomeIcon />,
+        activeIcon: <HomeActiveIcon />,
+        disabled: false,
+    },
+    {
+        label: "menu.apps",
+        path: "/apps",
+        isStroke: false,
+        icon: <AppsIcon />,
+        activeIcon: <AppsActiveIcon />,
         disabled: false,
     },
     {
         label: "menu.points",
         path: "/points",
         isStroke: false,
-        icon: <SvgSelector id="points" />,
-        disabled: true,
-    },
-    {
-        label: "menu.apps",
-        path: "/apps",
-        isStroke: false,
-        icon: <SvgSelector id="apps-icon" />,
-        activeIcon: <AppsActiveIcon />,
+        icon: <PointsIcon />,
+        activeIcon: <PointsActiveIcon />,
         disabled: false,
     },
     {
         label: "menu.settings",
         path: "/settings",
         isStroke: false,
-        icon: <SvgSelector id="settings-icon" />,
+        icon: <SettingsIcon />,
         activeIcon: <SettingsActiveIcon />,
         disabled: false,
     },

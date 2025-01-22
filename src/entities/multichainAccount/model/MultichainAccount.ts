@@ -145,7 +145,6 @@ export class MultichainAccount {
         const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
         const { data: tronBalance } = await this._tronWallet.getNativeTokenBalance();
         const { data: solanaBalance } = await this._solanaWallet.getNativeTokenBalance();
-        console.log("🚀 ~ MultichainAccount ~ getTotalBalance ~ solanaBalance:", solanaBalance);
 
         const tonBalance = parseFloat(await this._tonWallet.balanceTon());
         const tonPrice = await tonAPIClient.getRates("native");

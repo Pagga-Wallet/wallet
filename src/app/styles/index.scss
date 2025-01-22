@@ -1,29 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @font-face {
-    font-family: "SF-PRO";
+    font-family: "Helvetica";
     font-display: swap;
-    src: local("SF-PRO"), local("SF-PRO-Medium"),
-        url("../../shared/lib/fonts/SF-Pro-Text-Medium.woff2") format("truetype");
-    font-weight: 540;
+    src: local("Helvetica"), local("Helvetica-Medium"),
+        url("../../shared/lib/fonts/HelveticaNowDisplay-Medium.woff2") format("truetype");
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "SF-PRO";
+    font-family: "Helvetica";
     font-display: swap;
-    src: local("SF-PRO"), local("SF-PRO-Semibold"),
-        url("../../shared/lib/fonts/SF-Pro-Text-Semibold.woff2") format("truetype");
-    font-weight: 760;
+    src: local("Helvetica"), local("Helvetica-Bold"),
+        url("../../shared/lib/fonts/HelveticaNowDisplay-Bold.woff2") format("truetype");
+    font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "SF-PRO";
+    font-family: "Helvetica";
     font-display: swap;
-    src: local("SF-PRO"), local("SF-PRO-Regular"),
-        url("../../shared/lib/fonts/SF-Pro-Text-Regular.woff2") format("truetype");
-    font-weight: 410;
+    src: local("Helvetica"), local("Helvetica-Regular"),
+        url("../../shared/lib/fonts/HelveticaNowDisplay-Regular.woff2") format("truetype");
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -61,7 +61,7 @@ input {
 }
 
 body {
-    font-family: "SF-PRO";
+    font-family: "Helvetica";
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch !important;
     background: rgb(var(--primary-bg));

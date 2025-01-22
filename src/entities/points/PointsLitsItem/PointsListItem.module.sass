@@ -1,0 +1,32 @@
+.item
+  height: 397px
+  border-radius: 32px
+  padding: 20px 16px
+  margin: 0 16px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  background-position: center
+  cursor: pointer
+  transition: all 0.3s ease 0s
+  &:hover
+    filter: brightness(0.8)
+    -webkit-filter: brightness(0.8)
+  &:not(:last-child)
+    margin-bottom: 16px
+  &Points
+    margin-left: auto
+  &Content
+    margin-top: auto
+    &Top
+      display: flex
+      align-items: center
+      gap: 13px
+      margin-bottom: 6px
+    &Title
+      font-size: 22px
+      font-weight: 700
+      line-height: 110%
+      letter-spacing: 0.44px
+    &Description
+      opacity: 0.8

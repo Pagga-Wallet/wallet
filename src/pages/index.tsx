@@ -24,6 +24,7 @@ import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
 import { PrivacyPolicy } from "./PrivacyPolicy/ui";
 import { Apps } from "./Apps/ui/Apps";
+import { PointsPage } from "./PointsPage/PointsPage";
 
 export const Routing = () => {
     return (
@@ -65,6 +66,8 @@ export const Routing = () => {
                         path="/connect/wallet-connect-list/:type"
                         element={<ConnectWalletListPage />}
                     />
+
+                    <Route path="/points" element={<PointsPage />} />
 
                     {/* <Route path="/introduction" element={<IntroductionPage />} />
                     <Route path="/introduction/renew" element={<RenewPage />} /> */}
