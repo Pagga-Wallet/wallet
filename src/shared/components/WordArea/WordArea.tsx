@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import clsx, { ClassValue } from "clsx";
 
 import styles from "./WordArea.module.scss";
+import { useTelegramViewportHack } from "@/shared/lib/hooks/useTelegramViewportResize";
 
 interface WordAreaProps {
     placeholder?: string;
@@ -55,7 +56,7 @@ export const WordArea = ({
         const wordsInValue = value.split(/\s+/);
 
         if (wordsInValue.length > 2) {
-            setWords((oldValue) => {
+            setWords(oldValue => {
                 const newValue = [...oldValue, ...wordsInValue];
                 onChange?.(newValue);
                 return newValue;
@@ -66,7 +67,7 @@ export const WordArea = ({
         setInputValue(trimmedValue);
 
         if (trimmedValue.length > 1 && value.endsWith(" ")) {
-            setWords((oldValue) => {
+            setWords(oldValue => {
                 const newValue = [...oldValue, trimmedValue];
                 onChange?.(newValue);
                 return newValue;
@@ -78,7 +79,7 @@ export const WordArea = ({
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         const text = e.currentTarget.value;
         if (e.key === "Backspace" && !text && words.length && !disabled) {
-            setWords((oldValue) => {
+            setWords(oldValue => {
                 const newValue = oldValue.slice(0, -1);
                 onChange?.(newValue);
                 return newValue;
@@ -102,19 +103,20 @@ export const WordArea = ({
             }}
         >
             {title && <span className={styles.title}>{title}</span>}
-            <div className={clsx(styles.container, {
-                [styles.containerImport]: isImport
-            })}>
+            <div
+                className={clsx(styles.container, {
+                    [styles.containerImport]: isImport
+                })}
+            >
                 {words.map((word, i) => (
                     <Word text={word} index={i + 1} key={i} isImport={isImport} />
                 ))}
-                
+
                 <input
                     ref={refInput}
                     type="text"
-                    autoFocus
                     style={{
-                        width: words.length === 0 ? "23ch" : `${inputValue.length + 1}ch`,
+                        width: words.length === 0 ? "23ch" : `${inputValue.length + 1}ch`
                     }}
                     onKeyDown={onKeyDown}
                     disabled={disabled}

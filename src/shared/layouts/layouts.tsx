@@ -29,7 +29,8 @@ export const BaseLayout = ({
     return (
         <div
             className={clsx(styles.wrapper, classNameWrapper, {
-                [styles.wrapperDecor]: withDecor
+                [styles.wrapperDecor]: withDecor,
+                [styles.wrapperFs]: window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
             })}
             id="mainWrapper"
         >
@@ -63,20 +64,17 @@ export const PrivateLayout = ({
 // Decor with rounded div
 export const WithDecorLayout = ({
     children,
-    withoutPadding,
+    withoutPadding = false,
     className
 }: Omit<BaseLayoutProps, "navbar">) => {
     return (
         <div className={styles.inner}>
             <div className={styles.innerDecor}></div>
             <div
-                style={{
-                    padding: window?.Telegram?.WebApp?.isFullscreen
-                        ? "16px 16px 190px 16px"
-                        : "16px 16px 110px 16px"
-                }}
                 className={clsx(styles.innerContent, className, {
-                    [styles.contentZero]: !window?.Telegram?.WebApp?.isFullscreen && withoutPadding
+                    [styles.contentZero]: withoutPadding,
+                    [styles.innerContentFs]:
+                        window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
                 })}
             >
                 {children}

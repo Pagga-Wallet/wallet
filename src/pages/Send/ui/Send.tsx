@@ -253,7 +253,7 @@ export const Send: FC = () => {
     );
 
     return (
-        <BaseLayout withoutPadding withDecor>
+        <BaseLayout className={s.content} withoutPadding withDecor>
             <div
                 className={s.send}
                 style={{ 

@@ -6,11 +6,18 @@
     height: 100vh;
     overflow: auto;
     overflow-x: hidden;
+    &Fs {
+        padding-bottom: 80px !important;
+    }
+    &NoFs {
+        padding-bottom: 0 !important;
+    }
     &Decor {
         // height: auto !important;
     }
     .content {
         padding: 16px 16px 100px 16px;
+        height: 100%;
         overflow-x: hidden;
         scroll-behavior: smooth;
         &Zero {
@@ -80,9 +87,7 @@
                 }
             }
             &--active-stroke {
-                
                 color: rgb(var(--placeholder-primary));
-
             }
             &--disabled {
                 opacity: 0.4;
@@ -138,4 +143,9 @@
     height: auto;
     max-height: 100vh;
     margin-top: auto;
+    padding: 14px 14px 100px 14px;
+}
+
+.innerContentFs {
+    padding: 14px 14px 180px 14px !important;
 }

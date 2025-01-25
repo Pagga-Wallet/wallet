@@ -1,14 +1,17 @@
+.wrapper {
+    min-height: 100% !important;
+}
+
 .pincode {
     display: flex;
     flex-direction: column;
-
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     max-width: 500px;
     margin: 0 auto;
-    padding: 32px 16px 50px 16px !important;
+    padding: 32px 16px 40px 16px !important;
 
     .action {
         display: flex;

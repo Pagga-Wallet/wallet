@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import styles from "./PINPad.module.scss";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
+import { BaseLayout, WithDecorLayout } from "@/shared/layouts/layouts";
 
 export interface PINPadProps {
     title: string;
@@ -20,7 +20,7 @@ export interface PINPadProps {
 const PIN_CODE_LENGTH = 4;
 const ANIMATION_DURATION = 0.2;
 
-const delay = (delayInms: number) => new Promise((resolve) => setTimeout(resolve, delayInms));
+const delay = (delayInms: number) => new Promise(resolve => setTimeout(resolve, delayInms));
 
 export const PINPad = ({
     title,
@@ -30,7 +30,7 @@ export const PINPad = ({
     onChange,
     onChangeState,
     subtitle,
-    disabled,
+    disabled
 }: PINPadProps) => {
     const [code, setCode] = useState("");
     const hapticApi = hapticFeedback;
@@ -59,11 +59,11 @@ export const PINPad = ({
     }, [value]);
 
     const errorClean = async () => {
-        setCode((code) => code.slice(0, 3));
+        setCode(code => code.slice(0, 3));
         await delay(100);
-        setCode((code) => code.slice(0, 2));
+        setCode(code => code.slice(0, 2));
         await delay(100);
-        setCode((code) => code.slice(0, 1));
+        setCode(code => code.slice(0, 1));
         await delay(100);
         setCode("");
         onChangeState?.(undefined);
@@ -86,7 +86,7 @@ export const PINPad = ({
     }, [state]);
 
     return (
-        <WithDecorLayout className={styles.pincode} withoutPadding>
+        <WithDecorLayout className={styles.pincode} classNameWrapper={styles.wrapper}>
             {action && <div className={styles.action}>{action}</div>}
             <div className={styles.top}>
                 {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
@@ -94,11 +94,11 @@ export const PINPad = ({
                 <motion.div
                     className={styles.dots}
                     transition={{
-                        duration: state === "success" ? 0.25 : state === "failure" ? 0.3 : 0,
+                        duration: state === "success" ? 0.25 : state === "failure" ? 0.3 : 0
                     }}
                     animate={{
                         scale: state === "success" ? [1, 1.15, 1] : 1,
-                        x: state === "failure" ? [-5, 5, -5, 5, -5, 0] : 0,
+                        x: state === "failure" ? [-5, 5, -5, 5, -5, 0] : 0
                     }}
                 >
                     {[1, 2, 3, 4].map((item, index) => (
@@ -107,7 +107,7 @@ export const PINPad = ({
                             className={clsx(styles.dotsItem, {
                                 [styles.active]: code.length >= item,
                                 [styles.success]: index <= lastFilledIndex && state === "success",
-                                [styles.failure]: index <= lastFilledIndex && state === "failure",
+                                [styles.failure]: index <= lastFilledIndex && state === "failure"
                             })}
                             animate={
                                 index === lastFilledIndex ? { scale: [1, 1.2, 1] } : { scale: 1 }
@@ -118,7 +118,7 @@ export const PINPad = ({
                 </motion.div>
             </div>
             <div className={clsx(styles.pinPad, { [styles["pinPad--disabled"]]: disabled })}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(digit => (
                     <button
                         key={digit}
                         className={styles.pinPadButton}
