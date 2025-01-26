@@ -2,6 +2,7 @@
   display: flex
   flex-direction: column
   gap: 16px
+  padding-bottom: 90px
   .search
     display: flex
     align-items: center
@@ -10,6 +11,7 @@
     background-color: rgba(var(--foreground-secondary))
     border-radius: 16px
     position: relative
+
     &Input
       width: 100%
       background: none
@@ -28,35 +30,35 @@
       background: none
       outline: none
       border: none
+
       > svg > path
         fill: rgb(var(--placeholder-primary))
 
         &:hover > svg > path
           fill: rgba(var(--placeholder-primary), 0.8)
+
   .empty
+    height: 90%
     display: flex
     align-items: center
     justify-content: center
-    height: 40vh
     font-size: 21px
     font-weight: 500
     text-align: center
+
+  .list
+    padding: 24px 0
+    margin: 16px -16px -20px -16px
+    border-radius: 32px 32px 0 0
+    background: rgb(var(--foreground-primary))
+    flex-grow: 1
+    height: 50vh
+    overflow: auto
     @media (max-height: 630px)
       height: 30vh
+
     @media (max-height: 530px)
       height: 25vh
-.list
-  padding: 24px 0
-  margin: 16px -16px -20px -16px
-  border-radius: 32px 32px 0 0
-  background: rgb(var(--foreground-primary))
-  min-height: 63vh
-  @media (max-height: 763px)
-    min-height: 58vh
-  @media (max-height: 630px)
-    min-height: 50vh
-  @media (max-height: 530px)
-    min-height: 30vh
-  &Title
-    padding-left: 16px
-    margin-bottom: 8px
+    &Title
+      padding-left: 16px
+      margin-bottom: 8px

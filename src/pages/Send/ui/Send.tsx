@@ -33,6 +33,7 @@ import { btnText, title } from "../lib/consts";
 import { SendSteps } from "../lib/types/SendSteps";
 import s from "./Send.module.sass";
 import { CustomButton } from "@/shared/components";
+import clsx from "clsx";
 
 export const Send: FC = () => {
     const navigate = useNavigate();
@@ -253,85 +254,87 @@ export const Send: FC = () => {
     );
 
     return (
-        <BaseLayout className={s.content} withoutPadding withDecor>
-            <div
-                className={s.send}
-                style={{ 
-                    paddingBottom: step !== SendSteps.select ? "90px" : "0",
-                    minHeight: step === SendSteps.input && tokenSelected?.platform !== CHAINS.TON ? "100%" : ""
-                }}
-            >
-                {step !== SendSteps.success && step !== SendSteps.failed && step !== SendSteps.confirm && (
-                    <div className={s.sendTop}>
-                        <div className={s.subtitle}>{t("main.send-btn")}</div>
-                        <div className={s.title}>{t(title[step])}</div>
-                    </div>
-                )}
-
-                <div className={s.sendContent}>
-                    {step === SendSteps.select && (
-                        <TokensList
-                            search
-                            accountBalance={accountBalance}
-                            isSelectMode
-                            isSend
-                            onTokenSelect={onTokenSelect}
-                            isLoading={accountBalanceFetching}
-                            chainFilter={
-                                allowedChain
-                                    ? allowedChain === CHAINS.ETH
-                                        ? EVM_CHAINS_ARRAY
-                                        : [allowedChain]
-                                    : undefined
-                            }
-                        />
-                    )}
-                    {step === SendSteps.pickAddress && (
-                        <SelectWalletToSend
-                            tokenSelected={tokenSelected}
-                            value={receiver}
-                            setValue={setReceiver}
-                            onAddressSelect={onAddressSelect}
-                            disabled={!!preselectedReceiver}
-                        />
-                    )}
-                    {step === SendSteps.input && (
-                        <>
-                            <InputAmountToSend
-                                value={valueAmount}
-                                setValue={setValueAmount}
-                                tokenSelected={tokenSelected}
-                            />
-                            {tokenSelected?.platform === CHAINS.TON && (
-                                <InputMemo value={memo} setValue={setMemo} />
-                            )}
-                        </>
-                    )}
-                    {step === SendSteps.confirm && (
-                        <ConfirmSendTransactionInfo
-                            onConfirm={onConfirm}
-                            tokenSymbol={tokenSelected?.tokenSymbol}
-                            price={tokenSelected?.price}
-                            amount={valueAmount}
-                            receiver={receiver}
-                            memo={memo}
-                        />
-                    )}
-                    {step === SendSteps.success && <SuccessTransaction />}
-                    {step === SendSteps.failed && <FailedTransaction />}
+        <BaseLayout
+            withoutPadding
+            withDecor
+            style={
+                {
+                    minHeight:
+                        step === SendSteps.input && tokenSelected?.platform !== CHAINS.TON ? "100%" : ""
+                }
+            }
+            className={s.send}
+        >
+            {step !== SendSteps.success && step !== SendSteps.failed && step !== SendSteps.confirm && (
+                <div className={s.sendTop}>
+                    <div className={s.subtitle}>{t("main.send-btn")}</div>
+                    <div className={s.title}>{t(title[step])}</div>
                 </div>
-                {step !== SendSteps.select && (
-                    <CustomButton
-                        containerClassName={s.mainButton}
-                        firstButton={{
-                            children: errorText || t(btnText[step]),
-                            isDisabled: disableBtn,
-                            type: step !== SendSteps.confirm ? "grey" : "purple",
-                            onClick: onForward
-                        }}
+            )}
+
+            <div className={s.sendContent}>
+                {step === SendSteps.select && (
+                    <TokensList
+                        search
+                        accountBalance={accountBalance}
+                        isSelectMode
+                        isSend
+                        onTokenSelect={onTokenSelect}
+                        isLoading={accountBalanceFetching}
+                        chainFilter={
+                            allowedChain
+                                ? allowedChain === CHAINS.ETH
+                                    ? EVM_CHAINS_ARRAY
+                                    : [allowedChain]
+                                : undefined
+                        }
                     />
                 )}
+                {step === SendSteps.pickAddress && (
+                    <SelectWalletToSend
+                        tokenSelected={tokenSelected}
+                        value={receiver}
+                        setValue={setReceiver}
+                        onAddressSelect={onAddressSelect}
+                        disabled={!!preselectedReceiver}
+                    />
+                )}
+                {step === SendSteps.input && (
+                    <>
+                        <InputAmountToSend
+                            value={valueAmount}
+                            setValue={setValueAmount}
+                            tokenSelected={tokenSelected}
+                        />
+                        {tokenSelected?.platform === CHAINS.TON && (
+                            <InputMemo value={memo} setValue={setMemo} />
+                        )}
+                    </>
+                )}
+                {step === SendSteps.confirm && (
+                    <ConfirmSendTransactionInfo
+                        onConfirm={onConfirm}
+                        tokenSymbol={tokenSelected?.tokenSymbol}
+                        price={tokenSelected?.price}
+                        amount={valueAmount}
+                        receiver={receiver}
+                        memo={memo}
+                    />
+                )}
+                {step === SendSteps.success && <SuccessTransaction />}
+                {step === SendSteps.failed && <FailedTransaction />}
             </div>
+            {step !== SendSteps.select && (
+                <CustomButton
+                    containerClassName={s.mainButton}
+                    firstButton={{
+                        children: errorText || t(btnText[step]),
+                        isDisabled: disableBtn,
+                        type: step !== SendSteps.confirm ? "grey" : "purple",
+                        onClick: onForward
+                    }}
+                />
+            )}
         </BaseLayout>
     );
 };

@@ -14,6 +14,7 @@ interface BaseLayoutProps {
     withoutPadding?: boolean;
     classNameWrapper?: ClassValue;
     withDecor?: boolean; // Add only decor
+    style?: React.CSSProperties;
 }
 
 export const BaseLayout = ({
@@ -22,7 +23,8 @@ export const BaseLayout = ({
     className,
     classNameWrapper,
     withoutPadding,
-    withDecor
+    withDecor,
+    ...rest
 }: BaseLayoutProps) => {
     const scrollableRef = useRef<HTMLDivElement>(null);
     useTelegramViewportHack();
@@ -33,6 +35,7 @@ export const BaseLayout = ({
                 [styles.wrapperFs]: window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
             })}
             id="mainWrapper"
+            {...rest}
         >
             <div className={styles.bottom}>{navbar}</div>
             {withDecor && <div className={styles.innerDecor}></div>}
