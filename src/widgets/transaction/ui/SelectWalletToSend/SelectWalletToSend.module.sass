@@ -38,7 +38,7 @@
           fill: rgba(var(--placeholder-primary), 0.8)
 
   .empty
-    height: 90%
+    height: 85%
     display: flex
     align-items: center
     justify-content: center
@@ -52,13 +52,13 @@
     border-radius: 32px 32px 0 0
     background: rgb(var(--foreground-primary))
     flex-grow: 1
-    height: 50vh
+    height: 60vh
     overflow: auto
-    @media (max-height: 630px)
-      height: 30vh
+    @media (max-width: 480px)
+      height: 57vh
+    @media (max-width: 380px)
+      height: 50vh
 
-    @media (max-height: 530px)
-      height: 25vh
     &Title
       padding-left: 16px
       margin-bottom: 8px
