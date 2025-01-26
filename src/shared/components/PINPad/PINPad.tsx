@@ -86,7 +86,13 @@ export const PINPad = ({
     }, [state]);
 
     return (
-        <WithDecorLayout className={styles.pincode} withDecor classNameWrapper={styles.wrapper}>
+        <WithDecorLayout
+            className={styles.pincode}
+            withoutPadding
+            style={{
+                bottom: window?.Telegram?.WebApp?.isFullscreen ? "80px" : "0"
+            }}
+        >
             {action && <div className={styles.action}>{action}</div>}
             <div className={styles.top}>
                 {subtitle && <div className={styles.subtitle}>{subtitle}</div>}

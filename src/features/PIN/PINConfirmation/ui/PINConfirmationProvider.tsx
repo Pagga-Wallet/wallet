@@ -15,15 +15,17 @@ const initialState: ConfirmationState = {
     state: undefined,
     pin: undefined,
     onChange: () => {},
-    onClose: () => {},
+    onClose: () => {}
 };
 
 export const PINConfirmationProvider = ({ children }: PINConfirmationProviderProps) => {
-    const [{ isOpen, isLoading, pin, title, action, onChange, onClose, state }, _setState] =
-        useState(initialState);
+    const [
+        { isOpen, isLoading, pin, title, action, onChange, onClose, state },
+        _setState
+    ] = useState(initialState);
 
     const setState = (value: Partial<ConfirmationState>) => {
-        _setState((oldValue) => ({ ...oldValue, ...value }));
+        _setState(oldValue => ({ ...oldValue, ...value }));
     };
 
     const reset = () => {
@@ -38,25 +40,23 @@ export const PINConfirmationProvider = ({ children }: PINConfirmationProviderPro
     return (
         <>
             {isOpen && (
-                <BaseLayout>
-                    <PINConfirmation
-                        pin={pin}
-                        isLoading={isLoading}
-                        onChangeState={onChangeState}
-                        onBack={reset}
-                        state={state}
-                        onChange={onChange}
-                        title={title}
-                        action={action}
-                    />
-                </BaseLayout>
+                <PINConfirmation
+                    pin={pin}
+                    isLoading={isLoading}
+                    onChangeState={onChangeState}
+                    onBack={reset}
+                    state={state}
+                    onChange={onChange}
+                    title={title}
+                    action={action}
+                />
             )}
             <confirmationContext.Provider
                 value={{
                     setState,
                     reset,
                     isOpen,
-                    isLoading,
+                    isLoading
                 }}
             >
                 <div style={{ display: isOpen ? "none" : undefined }}>{children}</div>

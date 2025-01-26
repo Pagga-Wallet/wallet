@@ -5,7 +5,7 @@ import {
     useLazyGetOldAccountQuery,
     useLazyLoadAccountQuery,
     useRenewAccountMutation,
-    useSaveAccountMutation,
+    useSaveAccountMutation
 } from "@/entities/multichainAccount";
 import { PINPad } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
@@ -25,19 +25,19 @@ export const RenewPage = () => {
         onBack() {
             // navigate("/introduction");
             navigate("/");
-        },
+        }
     });
 
     const onChange = (pin: string) => {
         if (pin.length === 4) {
             getOldAccount()
                 .unwrap()
-                .then(async (result) => {
+                .then(async result => {
                     if (result) {
                         const resultRenew = await renewAccount({
                             pin,
                             hash: result.hash,
-                            iv: result.iv,
+                            iv: result.iv
                         });
                         if ("error" in resultRenew && resultRenew.error) {
                             return setState("failure");
@@ -47,7 +47,7 @@ export const RenewPage = () => {
                             setTimeout(() => {
                                 saveAccount({
                                     walletData: resultRenew.data,
-                                    pincode: pin,
+                                    pincode: pin
                                 })
                                     .unwrap()
                                     .then(() => {
@@ -71,19 +71,17 @@ export const RenewPage = () => {
     };
 
     return (
-        <BaseLayout>
-            <PINPad
-                title={t("pincode.enter")}
-                subtitle={t("introduction.sing-in-acc")}
-                onChangeState={onChangeState}
-                state={state}
-                action={
-                    <button onClick={onSkip} className={styles.skip_btn}>
-                        {t("common.skip")}
-                    </button>
-                }
-                onChange={onChange}
-            />
-        </BaseLayout>
+        <PINPad
+            title={t("pincode.enter")}
+            subtitle={t("introduction.sing-in-acc")}
+            onChangeState={onChangeState}
+            state={state}
+            action={
+                <button onClick={onSkip} className={styles.skip_btn}>
+                    {t("common.skip")}
+                </button>
+            }
+            onChange={onChange}
+        />
     );
 };

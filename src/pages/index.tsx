@@ -53,7 +53,6 @@ export const Routing = () => {
                     <Route path="/account/:id" element={<AccountPage />} />
                     <Route path="/account/:id/recovery" element={<RecoveryPhrasePage />} />
 
-
                     <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
                     <Route path="/import/token" element={<ImportTokenPage />} />

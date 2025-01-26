@@ -68,10 +68,12 @@ export const PrivateLayout = ({
 export const WithDecorLayout = ({
     children,
     withoutPadding = false,
-    className
+    classNameWrapper,
+    className,
+    style
 }: Omit<BaseLayoutProps, "navbar">) => {
     return (
-        <div className={styles.inner}>
+        <div className={clsx(styles.inner, classNameWrapper)}>
             <div className={styles.innerDecor}></div>
             <div
                 className={clsx(styles.innerContent, className, {
@@ -79,6 +81,7 @@ export const WithDecorLayout = ({
                     [styles.innerContentFs]:
                         window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
                 })}
+                style={style}
             >
                 {children}
             </div>
