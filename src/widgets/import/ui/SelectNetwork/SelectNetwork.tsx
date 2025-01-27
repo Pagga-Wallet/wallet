@@ -47,6 +47,7 @@ export const SelectNetwork: FC<SelectNetworkProps> = ({
                         key={el.category}
                     />
                 ))}
+                
             </div>
         </BaseLayout>
     );

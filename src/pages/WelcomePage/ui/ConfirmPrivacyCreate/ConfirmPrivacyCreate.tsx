@@ -29,11 +29,15 @@ export const ConfirmPrivacyCreate: FC<ConfirmPrivacyCreateProps> = ({ setStep })
         onBack: () => setStep(IntroductionSteps.hero)
     });
 
-    const securityItems = [t("security.item-1"), t("security.item-2"), t("security.item-3")];
+    const securityItems = [
+        t("security.item-1"), 
+        t("security.item-2"), 
+        t("security.item-3")
+    ];
 
     return (
         <>
-            <WithDecorLayout withoutPadding>
+            <WithDecorLayout>
                 <div className={s.innerImg}>
                     <SecuritySticker />
                 </div>

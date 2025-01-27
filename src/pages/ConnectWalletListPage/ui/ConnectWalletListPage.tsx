@@ -69,7 +69,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
         // CHECK TYPE OF CONNECTIONS. NOW CHECK ONLY TON CONNECT
         if (connectionType === ConnectionType.WalletConnect) {
             setStep(ConnectWalletListSteps.connect_introduction);
-            return
+            return;
         }
 
         if (!connections || connections.length === 0) {
@@ -77,7 +77,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
         } else {
             setStep(ConnectWalletListSteps.connect_list);
         }
-    }, [connections, isLoadingAccounts, isLoadingConnections]);
+    }, [connections, isLoadingAccounts, isLoadingConnections, connectionType]);
 
     const updatedConnections = connections?.map((c: IConnection) => {
         const currentAccount = accounts?.find(
@@ -184,10 +184,7 @@ export const ConnectWalletListPage: FC<ConnectWalletListPageProps> = () => {
                     />
                 )}
                 {step === ConnectWalletListSteps.connect_list_detail && (
-                    <ConnectListDetail
-                        type={connectionType}
-                        detailInfo={detailInfo}
-                    />
+                    <ConnectListDetail type={connectionType} detailInfo={detailInfo} />
                 )}
             </Container>
 

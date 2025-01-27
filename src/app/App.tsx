@@ -7,12 +7,13 @@ import { withProviders } from "./providers";
 import "./styles/themes.scss";
 import "./styles/index.scss";
 import { useTMAInit } from "./useTMAInit";
+import { useTelegramViewportHack } from "@/shared/lib/hooks/useTelegramViewportResize";
 import "./i18n";
 
 const App = () => {
     useTMAInit();
     useTheme();
-
+    useTelegramViewportHack();
     return (
         <AppLoader>
             <Routing />

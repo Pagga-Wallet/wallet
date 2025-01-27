@@ -16,7 +16,7 @@ interface PINCreationState {
 const initialState = {
     isOpen: false,
     resolve: null,
-    reject: null,
+    reject: null
 };
 
 export const PINCreationProvider = ({ children }: PINCreationProviderProps) => {
@@ -28,26 +28,26 @@ export const PINCreationProvider = ({ children }: PINCreationProviderProps) => {
 
     const setListeners = ({
         resolve,
-        reject,
+        reject
     }: {
         resolve: (pin: string) => void;
         reject: () => void;
     }) => {
-        setState((prevState) => ({ ...prevState, resolve, reject }));
+        setState(prevState => ({ ...prevState, resolve, reject }));
     };
 
     const open = () => {
-        setState((prevState) => ({
+        setState(prevState => ({
             ...prevState,
-            isOpen: true,
+            isOpen: true
         }));
     };
 
     const onSuccess = useCallback(
         (pin: string) => {
-            setState((prevState) => ({
+            setState(prevState => ({
                 ...prevState,
-                isOpen: false,
+                isOpen: false
             }));
             resolve?.(pin);
             reset();
@@ -56,9 +56,9 @@ export const PINCreationProvider = ({ children }: PINCreationProviderProps) => {
     );
 
     const onBack = useCallback(() => {
-        setState((prevState) => ({
+        setState(prevState => ({
             ...prevState,
-            isOpen: false,
+            isOpen: false
         }));
         reject?.();
         reset();
@@ -66,11 +66,7 @@ export const PINCreationProvider = ({ children }: PINCreationProviderProps) => {
 
     return (
         <>
-            {isOpen && (
-                <BaseLayout>
-                    <PINCreation onBack={onBack} onSuccess={onSuccess} />
-                </BaseLayout>
-            )}
+            {isOpen && <PINCreation onBack={onBack} onSuccess={onSuccess} />}
             <pinCreationContext.Provider value={{ isOpen, open, setListeners }}>
                 <div style={{ display: isOpen ? "none" : undefined }}>{children}</div>
             </pinCreationContext.Provider>

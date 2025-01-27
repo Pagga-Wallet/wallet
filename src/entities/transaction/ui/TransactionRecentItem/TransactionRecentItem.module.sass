@@ -22,6 +22,12 @@
       bottom: 0
       transform: translateX(50%)
       background: rgb(var(--border-secondary))
+  &NoHover
+    &:hover,
+    &:active
+      background: transparent !important
+      &::after
+        display: block
   &Logo
     min-width: 40px
     min-height: 40px

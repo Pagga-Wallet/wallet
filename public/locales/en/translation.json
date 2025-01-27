@@ -358,7 +358,8 @@
         "paste": "Paste",
         "telegram-channel": "Telegram Channel",
         "show-less": "Show less",
-        "show-more": "Show more"
+        "show-more": "Show more",
+        "all-apps": "All apps"
     },
     "create-card": {
         "title": "Create card",

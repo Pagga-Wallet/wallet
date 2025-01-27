@@ -14,6 +14,7 @@ interface BaseLayoutProps {
     withoutPadding?: boolean;
     classNameWrapper?: ClassValue;
     withDecor?: boolean; // Add only decor
+    style?: React.CSSProperties;
 }
 
 export const BaseLayout = ({
@@ -22,16 +23,19 @@ export const BaseLayout = ({
     className,
     classNameWrapper,
     withoutPadding,
-    withDecor
+    withDecor,
+    ...rest
 }: BaseLayoutProps) => {
     const scrollableRef = useRef<HTMLDivElement>(null);
     useTelegramViewportHack();
     return (
         <div
             className={clsx(styles.wrapper, classNameWrapper, {
-                [styles.wrapperDecor]: withDecor
+                [styles.wrapperDecor]: withDecor,
+                [styles.wrapperFs]: window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
             })}
             id="mainWrapper"
+            {...rest}
         >
             <div className={styles.bottom}>{navbar}</div>
             {withDecor && <div className={styles.innerDecor}></div>}
@@ -63,21 +67,21 @@ export const PrivateLayout = ({
 // Decor with rounded div
 export const WithDecorLayout = ({
     children,
-    withoutPadding,
-    className
+    withoutPadding = false,
+    classNameWrapper,
+    className,
+    style
 }: Omit<BaseLayoutProps, "navbar">) => {
     return (
-        <div className={styles.inner}>
+        <div className={clsx(styles.inner, classNameWrapper)}>
             <div className={styles.innerDecor}></div>
             <div
-                style={{
-                    padding: window?.Telegram?.WebApp?.isFullscreen
-                        ? "16px 16px 190px 16px"
-                        : "16px 16px 110px 16px"
-                }}
                 className={clsx(styles.innerContent, className, {
-                    [styles.contentZero]: !window?.Telegram?.WebApp?.isFullscreen && withoutPadding
+                    [styles.contentZero]: withoutPadding,
+                    [styles.innerContentFs]:
+                        window?.Telegram?.WebApp?.isFullscreen && !withoutPadding
                 })}
+                style={style}
             >
                 {children}
             </div>

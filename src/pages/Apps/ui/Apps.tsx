@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppsBanners, AppsCategory, AppsList } from "@/widgets/apps/ui";
 
@@ -8,14 +9,20 @@ import { appsBannersMock } from "@/shared/lib/consts/apps/apps-banners-mock";
 import { appsMock } from "@/shared/lib/consts/apps/apps-mock";
 import { App } from "@/shared/api/apps";
 
-import s from "./Apps.module.sass";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+
 import { AppsListSingle } from "./AppsListSingle";
+
 import { useSetupBackButton } from "@/shared/lib";
+
+import s from "./Apps.module.sass";
 
 interface AppsProps {}
 
 export const Apps: FC<AppsProps> = ({}) => {
     const [appCategory, setAppCategory] = useState<string | null>(null);
+
+    const { t } = useTranslation();
 
     useSetupBackButton({
         visible: !!appCategory,
@@ -24,10 +31,18 @@ export const Apps: FC<AppsProps> = ({}) => {
 
     if (appCategory) {
         return (
-            <BaseLayout withDecor>
+            <BaseLayout withoutPadding withDecor classNameWrapper={s.singleContent}>
                 <AppsListSingle
-                    apps={appsMock.filter(a => a.category.includes(appCategory))}
-                    category={(appCategory as unknown) as string}
+                    apps={
+                        appCategory === "all-apps"
+                            ? appsMock
+                            : appsMock.filter(a => a.category.includes(appCategory))
+                    }
+                    category={
+                        appCategory === "all-apps"
+                            ? t("common.all-apps")
+                            : ((appCategory as unknown) as string)
+                    }
                 />
             </BaseLayout>
         );
@@ -38,7 +53,7 @@ export const Apps: FC<AppsProps> = ({}) => {
     };
 
     return (
-        <PrivateLayout withDecor>
+        <PrivateLayout withDecor className={s.inner}>
             <AppsBanners banners={appsBannersMock} />
             <div className={s.content}>
                 <AppsCategory />

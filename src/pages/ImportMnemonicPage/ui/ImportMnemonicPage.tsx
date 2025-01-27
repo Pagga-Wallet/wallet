@@ -58,9 +58,11 @@ export const ImportMnemonicPage = () => {
         <Loader />
     ) : (
         <WithDecorLayout>
-            <Title className={styles.title}>{t("common.import")}</Title>
-            <div className={styles.subtitle}>{t("registration.seed")}</div>
-            <MnemonicInput onChange={onChange} isImport />
+            <div className={styles.content}>
+                <Title className={styles.title}>{t("common.import")}</Title>
+                <div className={styles.subtitle}>{t("registration.seed")}</div>
+                <MnemonicInput onChange={onChange} isImport />
+            </div>
 
             <CustomButton
                 firstButton={{

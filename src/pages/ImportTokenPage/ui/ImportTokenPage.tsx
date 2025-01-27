@@ -110,7 +110,7 @@ export const ImportTokenPage: FC<ImportTokenPageProps> = () => {
             )}
 
             {step === ImportTokenSteps.address_contract && (
-                <BaseLayout className={s.inner} withDecor>
+                <BaseLayout className={s.inner} classNameWrapper={s.wrapper} withDecor>
                     <InputAddressContract
                         addressContract={addressContract}
                         setAddressContract={setAddressContract}
