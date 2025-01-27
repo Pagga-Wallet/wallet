@@ -9,6 +9,7 @@ import { IntroductionSteps } from "../../types/IntroductionSteps";
 import WelcomeImg from "@/shared/lib/images/welcome.png";
 
 import s from "./HeroStep.module.sass";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface HeroStepProps {
     setStep: React.Dispatch<React.SetStateAction<IntroductionSteps>>;
@@ -20,8 +21,7 @@ export const HeroStep: FC<HeroStepProps> = ({ setStep }) => {
     const navigate = useNavigate();
 
     return (
-        <div className={s.introduction}>
-            <div className={s.introductionDecor}></div>
+        <WithDecorLayout withoutPadding className={s.introduction}>
             <div className={s.hero}>
                 <div className={s.heroInfo}>
                     <img src={WelcomeImg} alt="welcome" />
@@ -50,10 +50,10 @@ export const HeroStep: FC<HeroStepProps> = ({ setStep }) => {
                 </div>
 
                 <div className={s.heroPrivacy}>
-                {t("registration.privacy-confirmation")} {" "}
+                    {t("registration.privacy-confirmation")}{" "}
                     <Link to="/privacy-policy">{t("registration.disclaimer")}</Link>
                 </div>
             </div>
-        </div>
+        </WithDecorLayout>
     );
 };

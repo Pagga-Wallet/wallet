@@ -10,21 +10,22 @@ import { CreateMnemonicPage } from "./CreateMnemonicPage";
 import { Home } from "./Home/ui/Home";
 import { ImportMnemonicPage } from "./ImportMnemonicPage";
 import { ImportTokenPage } from "./ImportTokenPage";
-import { IntroductionPage } from "./IntroductionPage";
 import { NftDetail } from "./NftDetail/NftDetail";
 import { NftSendPage } from "./NftSendPage/";
 import { ReceivePage } from "./ReceivePage";
 import { RecoveryPhrasePage } from "./RecoveryPhrasePage/RecoveryPhrasePage";
-import { RenewPage } from "./RenewPage/RenewPage";
 import { Send } from "./Send";
 import { SettingsPage } from "./Settings";
-import { Swap } from "./Swap";
 import { TokenDetail } from "./TokenDetail";
 import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
 import { PrivacyPolicy } from "./PrivacyPolicy/ui";
 import { Apps } from "./Apps/ui/Apps";
 import { PointsPage } from "./PointsPage/PointsPage";
+
+// import { IntroductionPage } from "./IntroductionPage";
+// import { RenewPage } from "./RenewPage/RenewPage";
+// import { Swap } from "./Swap";
 
 export const Routing = () => {
     return (
@@ -52,8 +53,6 @@ export const Routing = () => {
                     <Route path="/account/:id" element={<AccountPage />} />
                     <Route path="/account/:id/recovery" element={<RecoveryPhrasePage />} />
 
-                    {/* <Route path="/swap" element={<Swap />} /> */}
-
                     <Route path="privacy-policy" element={<PrivacyPolicy />} />
 
                     <Route path="/import/token" element={<ImportTokenPage />} />
@@ -65,10 +64,11 @@ export const Routing = () => {
                     <Route
                         path="/connect/wallet-connect-list/:type"
                         element={<ConnectWalletListPage />}
-                    />
+                        />
 
                     <Route path="/points" element={<PointsPage />} />
 
+                    {/* <Route path="/swap" element={<Swap />} /> */}
                     {/* <Route path="/introduction" element={<IntroductionPage />} />
                     <Route path="/introduction/renew" element={<RenewPage />} /> */}
 

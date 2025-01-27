@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { clsx } from "clsx";
 
 import { SkeletonRound, SkeletonSquare } from "@/shared/components/Skeletons";
 
@@ -7,7 +8,7 @@ import s from "./TransactionRecentItem.module.sass";
 interface TransactionRecentItemSkeletonProps {}
 
 export const TransactionRecentItemSkeleton: FC<TransactionRecentItemSkeletonProps> = () => (
-    <div className={s.recent}>
+    <div className={clsx(s.recent, s.recentNoHover)}>
         <div className={s.recentLogo}>
             <SkeletonSquare />
         </div>

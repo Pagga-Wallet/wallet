@@ -3,7 +3,11 @@
     border-radius: 32px 32px 0 0
     background: rgb(var(--foreground-primary))
     padding: 24px 16px 0 16px
-    min-height: 43vh
+    min-height: 53vh
+    @media (max-width: 380px)
+        min-height: 45vh
+    @media (max-width: 350px)
+        min-height: 40vh
     .inputBlock
         display: flex
         align-items: center
@@ -15,4 +19,3 @@
             font-size: 14px
             font-weight: 500
             width: 100%
-           

@@ -1,50 +1,33 @@
 import { useCallback, useEffect, useState } from "react";
 
-// Fix iOS issue with virtual keyboard
-// Scroll page up when keyboard is hidden
 export const useTelegramViewportHack = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [keyboardVisible, setKeyboardVisible] = useState(false);
 
-    const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-
-    const handleKeyboardHide = useCallback(() => {
-        if (keyboardVisible) {
-            window.scrollTo(0, scrollPosition);
-            setKeyboardVisible(false);
-        }
-    }, [keyboardVisible, scrollPosition]);
-
-    const handleKeyboardShow = useCallback(() => {
-        if (!keyboardVisible) {
-            setScrollPosition(window.scrollY);
-            setKeyboardVisible(true);
-        }
-    }, [keyboardVisible]);
+    const isIOS = useCallback(() => /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream, []);
 
     useEffect(() => {
         if (!isIOS()) return;
 
-        const handleBlur = (event: Event) => {
-            const target = event.target as HTMLElement;
-            if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
-                handleKeyboardHide();
+        const handleResize = () => {
+            const viewportHeight = window.innerHeight;
+            const isKeyboardNowVisible = viewportHeight < screen.height * 0.75;
+
+            if (isKeyboardNowVisible && !keyboardVisible) {
+                setScrollPosition(window.scrollY);
+                setKeyboardVisible(true);
+            } else if (!isKeyboardNowVisible && keyboardVisible) {
+                setTimeout(() => {
+                    window.scrollTo(0, scrollPosition);
+                }, 100);
+                setKeyboardVisible(false);
             }
         };
 
-        const handleFocus = (event: Event) => {
-            const target = event.target as HTMLElement;
-            if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
-                handleKeyboardShow();
-            }
-        };
-
-        document.addEventListener("blur", handleBlur, true);
-        document.addEventListener("focus", handleFocus, true);
+        window.addEventListener("resize", handleResize);
 
         return () => {
-            document.removeEventListener("blur", handleBlur, true);
-            document.removeEventListener("focus", handleFocus, true);
+            window.removeEventListener("resize", handleResize);
         };
-    }, [handleKeyboardHide, handleKeyboardShow]);
+    }, [isIOS, keyboardVisible, scrollPosition]);
 };

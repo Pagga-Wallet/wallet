@@ -32,8 +32,8 @@ input::-webkit-calendar-picker-indicator {
 }
 
 input[type="text"] {
-    -webkit-appearance: textfield;
-    appearance: textfield;
+    -webkit-appearance: textfield !important;
+    appearance: textfield !important;
 }
 
 input {

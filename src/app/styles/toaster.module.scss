@@ -1,5 +1,6 @@
 .toaster {
     width: 100%;
+    top: calc(var(--tg-content-safe-area-inset-top) + 35px) !important;
     > div {
         width: 90%;
         margin: 0 auto;
