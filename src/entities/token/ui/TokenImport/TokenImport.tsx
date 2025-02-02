@@ -1,14 +1,10 @@
 import clsx from "clsx";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-
-import { Section } from "@/shared/components";
-
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { CHAINS } from "@/shared/lib/types";
 import { TokenImportType } from "../../model/types";
-
 import s from "./TokenImport.module.sass";
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 interface TokenImportProps extends TokenImportType {
     onClick: () => void;

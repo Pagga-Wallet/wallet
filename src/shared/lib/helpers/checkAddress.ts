@@ -1,3 +1,4 @@
+import { isValidSuiAddress } from "@mysten/sui/utils";
 import { PublicKey } from "@solana/web3.js";
 import { Address } from "@ton/core";
 import { ethers } from "ethers";
@@ -32,6 +33,8 @@ export const checkAddress = async (
             } catch (error) {
                 return null;
             }
+        } else if (chain === CHAINS.SUI) {
+            return isValidSuiAddress(address) ? address : null;
         } else return null;
     } catch (error) {
         return null;
@@ -60,6 +63,7 @@ export const checkAddressFromUnknownChain = async (
         }
         if (TronWeb.isAddress(address)) return { address, chain: CHAINS.TRON };
         if (ethers.isAddress(address)) return { address, chain: CHAINS.ETH };
+        if (isValidSuiAddress(address)) return { address, chain: CHAINS.SUI };
         try {
             const pubkey = new PublicKey(address);
             if (pubkey) return { address, chain: CHAINS.SOLANA };

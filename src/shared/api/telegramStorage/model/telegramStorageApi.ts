@@ -146,6 +146,11 @@ export class TelegramStorage {
                 `${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`,
                 account.multiwallet.SOLANA.address
             ),
+            // SOLANA DATA
+            this.save(
+                `${accountPrefix}${CHAINS.SUI}_${ADDRESS_FIELD}`,
+                account.multiwallet.SUI.address
+            ),
             // TON DATA
             this.save(
                 `${accountPrefix}${CHAINS.TON}_${PUBLIC_KEY_FIELD}`,
@@ -225,6 +230,7 @@ export class TelegramStorage {
                 ETH: {},
                 TRON: {},
                 SOLANA: {},
+                SUI: {},
                 TON: {
                     address: {}
                 }
@@ -255,6 +261,10 @@ export class TelegramStorage {
         account.multiwallet.SOLANA.address = (await this.get(
             `${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`
         ))!;
+        // SUI DATA
+        account.multiwallet.SUI.address = (await this.get(
+            `${accountPrefix}${CHAINS.SUI}_${ADDRESS_FIELD}`
+        ))!;
         // TON DATA
         account.multiwallet.TON.publicKey = (await this.get(
             `${accountPrefix}${CHAINS.TON}_${PUBLIC_KEY_FIELD}`
@@ -283,7 +293,8 @@ export class TelegramStorage {
                 TON: await this.get(
                     `${accountPrefix}${CHAINS.TON}_${TON_ADDRESS_INTERFACES.V4}_${ADDRESS_FIELD}`
                 ),
-                SOLANA: await this.get(`${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`)
+                SOLANA: await this.get(`${accountPrefix}${CHAINS.SOLANA}_${ADDRESS_FIELD}`),
+                SUI: await this.get(`${accountPrefix}${CHAINS.SUI}_${ADDRESS_FIELD}`)
             };
         }
 

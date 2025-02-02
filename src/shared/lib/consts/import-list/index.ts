@@ -2,6 +2,7 @@ import BNB from "@/shared/lib/images/network/bnb.png";
 import ETHEREUM from "@/shared/lib/images/network/ethereum.png";
 import POLYGON from "@/shared/lib/images/network/polygon.png";
 import TRON from "@/shared/lib/images/network/tron.png";
+import SUI from "@/shared/lib/images/suiNetwork.png";
 import { CHAINS } from "../../types";
 
 export type SelectBlockhainConfig = Array<{
@@ -49,6 +50,13 @@ export const getSelectBlockhainConfig = (
         // disabled: true,
         chain: CHAINS.SOLANA
     },
+    {
+        category: "Solana",
+        previewUrl: SUI,
+        disabled: enabledChains ? !enabledChains?.includes(CHAINS.SUI) : false,
+        // disabled: true,
+        chain: CHAINS.SUI
+    }
     // {
     //     category: "Polygon",
     //     previewUrl: POLYGON,

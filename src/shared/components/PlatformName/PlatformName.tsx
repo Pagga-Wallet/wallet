@@ -6,7 +6,7 @@ import s from "./PlatformName.module.sass";
 export enum PlatformNameSize {
     SMALL12 = "small12",
     MEDIUM16 = "medium16",
-    LARGE18 = "large18",
+    LARGE18 = "large18"
 }
 
 interface IPlatformNameProps {
@@ -20,11 +20,12 @@ const platformNames = {
     [CHAINS.TON]: "TON",
     [CHAINS.TRON]: "TRC20",
     [CHAINS.SOLANA]: "SOLANA",
+    [CHAINS.SUI]: "SUI"
 };
 
 export const PlatformName: FC<IPlatformNameProps> = ({
     chain,
-    size = PlatformNameSize.MEDIUM16,
+    size = PlatformNameSize.MEDIUM16
 }) => {
     return <span className={clsx(s.chains, s[size])}>{platformNames[chain]}</span>;
 };

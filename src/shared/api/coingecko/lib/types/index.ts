@@ -4,7 +4,8 @@ export enum CoinIds {
     TETHER = "tether",
     BNB = "binancecoin",
     TRON = "tron",
-    SOLANA = "solana"
+    SOLANA = "solana",
+    SUI = "sui",
 }
 export enum ContractAddresses {
     ETH = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
