@@ -1,4 +1,6 @@
 export * from "./multichainAccount";
+export { type SuiWalletData } from "./sui/SuiWalletData";
+export { type SolanaWalletData } from "./solana/SolanaWalletData";
 export { type TonWalletData } from "./ton/TonWalletData";
 export {
     type TransactionResponseNormal,
