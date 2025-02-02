@@ -1,10 +1,9 @@
 import { skipToken } from "@reduxjs/toolkit/query";
+import { miniApp } from "@telegram-apps/sdk-react";
 import queryString from "query-string";
 import { FC, useEffect, useMemo } from "react";
-import { miniApp } from "@telegram-apps/sdk-react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import { TransactionsHistoryListDetail } from "@/widgets/transaction";
 import {
     useDeleteImportedTokenMutation,
@@ -17,14 +16,11 @@ import { BigButton } from "@/shared/components";
 import { Chart } from "@/shared/components/Chart";
 import { SkeletonRect } from "@/shared/components/Skeletons";
 import { BaseLayout } from "@/shared/layouts";
-
 import { useSetupBackButton } from "@/shared/lib";
-import { CHAINS, TokenBalance } from "@/shared/lib/types";
-
-import { TokenDetailQueryObj } from "@/shared/lib/types/token";
-
-import s from "./TokenDetail.module.sass";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
+import { CHAINS, TokenBalance } from "@/shared/lib/types";
+import { TokenDetailQueryObj } from "@/shared/lib/types/token";
+import s from "./TokenDetail.module.sass";
 
 export const TokenDetail: FC = () => {
     useSetupBackButton();

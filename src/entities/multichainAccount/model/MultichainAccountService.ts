@@ -171,6 +171,9 @@ export const multichainAccountAPI = createApi({
                             },
                             SOLANA: {
                                 address: walletData.solana.address
+                            },
+                            SUI: {
+                                address: walletData.sui.address
                             }
                         }
                     };

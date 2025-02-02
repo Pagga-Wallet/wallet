@@ -30,6 +30,11 @@ export const getExplorerLink = ({ txHash, userAddress, chain }: GetExplorerLinkA
         case CHAINS.SOLANA:
             link = `https://solscan.io/tx/${txHash}`;
             break;
+        case CHAINS.SUI:
+            link = `https://suiscan.xyz/${
+                import.meta.env.VITE_NETWORK === "TESTNET" ? "testnet" : "mainnet"
+            }/tx/${txHash}`;
+            break;
     }
     return link;
 };
