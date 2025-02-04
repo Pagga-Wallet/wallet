@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { openLink } from "@telegram-apps/sdk-react";
+import clsx from "clsx";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -18,12 +19,12 @@ import {
     multichainAccountStore,
     useFetchTotalBalanceQuery
 } from "@/entities/multichainAccount";
+import { CustomButton } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 import {
     cryptographyController,
     useAppSelector,
     useSetupBackButton,
-    useSetupMainButton
 } from "@/shared/lib";
 import { checkAddress, checkAddressFromUnknownChain } from "@/shared/lib/helpers/checkAddress";
 import { getExplorerLink } from "@/shared/lib/helpers/getExplorerLink";
@@ -32,8 +33,6 @@ import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import { btnText, title } from "../lib/consts";
 import { SendSteps } from "../lib/types/SendSteps";
 import s from "./Send.module.sass";
-import { CustomButton } from "@/shared/components";
-import clsx from "clsx";
 
 export const Send: FC = () => {
     const navigate = useNavigate();
@@ -78,8 +77,6 @@ export const Send: FC = () => {
         setStep(SendSteps.pickAddress);
     }, []);
 
-    // Основная функция отправка транзакции
-    // TODO сделать через redux query
     const onConfirm = useCallback(async () => {
         try {
             const title = t("send.confirm-transaction");
@@ -257,12 +254,10 @@ export const Send: FC = () => {
         <BaseLayout
             withoutPadding
             withDecor
-            style={
-                {
-                    minHeight:
-                        step === SendSteps.input && tokenSelected?.platform !== CHAINS.TON ? "100%" : ""
-                }
-            }
+            style={{
+                minHeight:
+                    step === SendSteps.input && tokenSelected?.platform !== CHAINS.TON ? "100%" : ""
+            }}
             className={s.send}
         >
             {step !== SendSteps.success && step !== SendSteps.failed && step !== SendSteps.confirm && (

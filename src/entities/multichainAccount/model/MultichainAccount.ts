@@ -5,6 +5,7 @@ import { BNBWallet, EthereumWallet, getEVMWalletByChain } from "@/shared/api/evm
 import { getEVMAPIClientByChain } from "@/shared/api/evm";
 import { parseEVMTokenTxn, parseEVMNativeTxn } from "@/shared/api/evm";
 import { SolanaWallet } from "@/shared/api/solana";
+import { SuiWallet } from "@/shared/api/sui";
 import { telegramStorage } from "@/shared/api/telegramStorage";
 import { TonWalletService } from "@/shared/api/ton";
 import { tonAPIClient } from "@/shared/api/tonapi";
@@ -44,6 +45,7 @@ export class MultichainAccount {
     public _tronWallet: TronWallet;
     public _tronAPI: TronAPI;
     public _solanaWallet: SolanaWallet;
+    public _suiWallet: SuiWallet;
     public _tonVersion: TON_ADDRESS_INTERFACES;
 
     constructor(account: IMultichainAccount, tonVersion: TON_ADDRESS_INTERFACES) {
@@ -53,6 +55,7 @@ export class MultichainAccount {
         this._bnbWallet = new BNBWallet(this._ethAddress);
         this._tronWallet = new TronWallet(this._account.multiwallet.TRON.address);
         this._solanaWallet = new SolanaWallet(this._account.multiwallet.SOLANA.address);
+        this._suiWallet = new SuiWallet(this._account.multiwallet.SUI.address);
         this._tonWallet = new TonWalletService(
             account.multiwallet.TON.publicKey,
             account.multiwallet.TON.address[tonVersion],
@@ -74,6 +77,8 @@ export class MultichainAccount {
                 return this._account.multiwallet.TON.address[this._tonVersion];
             case CHAINS.SOLANA:
                 return this._account.multiwallet.SOLANA.address;
+            case CHAINS.SUI:
+                return this._account.multiwallet.SUI.address;
         }
     }
 
@@ -145,6 +150,7 @@ export class MultichainAccount {
         const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
         const { data: tronBalance } = await this._tronWallet.getNativeTokenBalance();
         const { data: solanaBalance } = await this._solanaWallet.getNativeTokenBalance();
+        const suiCoinBalances = await this._suiWallet.getAllCoinBalances();
 
         const tonBalance = parseFloat(await this._tonWallet.balanceTon());
         const tonPrice = await tonAPIClient.getRates("native");
@@ -165,7 +171,8 @@ export class MultichainAccount {
         const bnbUSDBalance = bnbPrice.price * (bnbBalance ?? 0);
         const tronUSDBalance = tronPrice.price * (tronBalance ?? 0);
         const solanaUSDBalance = solanaPrice.price * (solanaBalance ?? 0);
-
+        const suiAllUSDBalance =
+            suiCoinBalances.data?.reduce((acc, curr) => acc + curr.balanceUSD, 0) ?? 0;
         // imported Tokens
         const importedTokens = await this.getImportedTokens();
         // Jettons
@@ -183,6 +190,7 @@ export class MultichainAccount {
             tronUSDBalance +
             tonUSDBalance +
             solanaUSDBalance +
+            suiAllUSDBalance +
             // баланс всех импортнутых токенов
             Object.values(importedTokens)
                 .reduce((pv, cv) => [...pv, ...cv], [])
@@ -272,6 +280,22 @@ export class MultichainAccount {
                         isNativeToken: true,
                         change24h: solanaPrice.change24h
                     }
+                },
+                SUI: {
+                    nativeToken: suiCoinBalances.data?.find(coin => coin.isNativeToken) ?? {
+                        tokenID: "sui",
+                        tokenSymbol: "SUI",
+                        tokenName: "Sui",
+                        tokenIcon:
+                            "https://coin-images.coingecko.com/coins/images/26375/large/sui-ocean-square.png?1727791290",
+                        balance: 0,
+                        balanceUSD: 0,
+                        price: 0,
+                        platform: CHAINS.SUI,
+                        isNativeToken: true,
+                        change24h: 0
+                    },
+                    tokens: suiCoinBalances.data?.filter(coin => !coin.isNativeToken) ?? []
                 }
             }
         };
@@ -334,6 +358,22 @@ export class MultichainAccount {
                         receiver,
                         amount,
                         mnemonics
+                    );
+                } else throw new Error("Invalid Token");
+            } else if (tokenSelected.platform === CHAINS.SUI) {
+                if (tokenSelected?.isNativeToken) {
+                    result = await this._suiWallet.transferNativeToken(
+                        receiver,
+                        amount,
+                        mnemonics
+                    );
+                } else if (tokenSelected?.tokenContract) {
+                    result = await this._suiWallet.transferTokenByContractAddress(
+                        receiver,
+                        amount,
+                        tokenSelected?.tokenContract,
+                        mnemonics,
+                        memo
                     );
                 } else throw new Error("Invalid Token");
             } else if (isEVMChain(tokenSelected.platform)) {

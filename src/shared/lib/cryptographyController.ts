@@ -1,3 +1,5 @@
+import { Keypair } from "@mysten/sui/dist/cjs/cryptography";
+import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
 import * as solana from "@solana/web3.js";
 import {
     keyPairFromSeed,
@@ -10,7 +12,7 @@ import * as crypto from "crypto-js";
 import { derivePath } from "ed25519-hd-key";
 import { ethers } from "ethers";
 import { TronWeb } from "tronweb";
-import { IUserWalletsData, TonWalletData } from "@/shared/lib/types";
+import { IUserWalletsData, SuiWalletData, TonWalletData } from "@/shared/lib/types";
 import { workchain } from "./consts/ton/index";
 import { SolanaWalletData } from "./types/solana/SolanaWalletData";
 import { TronWalletData } from "./types/tron/TronWalletData";
@@ -117,6 +119,42 @@ class CryptographyController {
         else throw new Error("Invalid mnemonic");
     }
 
+    // SUI
+
+    public async suiKeypairFromMnemonic(mnemonic: string): Promise<Keypair> {
+        const seed = await bip39.mnemonicToSeed(mnemonic);
+        const keypair = Ed25519Keypair.deriveKeypairFromSeed(seed.toString("hex"));
+        return keypair;
+    }
+
+    private async _suiWalletFromTonMnemonic(mnemonic: string): Promise<SuiWalletData> {
+        const keypair = await this.suiKeypairFromMnemonic(mnemonic);
+        const privateKey = keypair.getSecretKey();
+        const publicKey = keypair.getPublicKey().toSuiAddress();
+        return {
+            privateKey,
+            address: publicKey
+        };
+    }
+
+    private async _suiWalletFromBip39Mnemonic(mnemonic: string): Promise<SuiWalletData> {
+        const keypair = await this.suiKeypairFromMnemonic(mnemonic);
+        const privateKey = keypair.getSecretKey();
+        const publicKey = keypair.getPublicKey().toSuiAddress();
+        return {
+            privateKey,
+            address: publicKey
+        };
+    }
+
+    public async suiWalletFromUnknownMnemonic(mnemonic: string): Promise<SuiWalletData> {
+        const isTONMnemonic = await tonMnemonicValidate(mnemonic.split(" "));
+        const isBIP39Mnemonic = bip39.validateMnemonic(mnemonic);
+        if (isTONMnemonic) return this._suiWalletFromTonMnemonic(mnemonic);
+        else if (isBIP39Mnemonic) return this._suiWalletFromBip39Mnemonic(mnemonic);
+        else throw new Error("Invalid mnemonic");
+    }
+
     // TON
 
     private async _tonWalletFromBip39Mnemonic(mnemonic: string): Promise<TonWalletData> {
@@ -171,17 +209,20 @@ class CryptographyController {
     // GENERAL
 
     public async createMultichainWallet(): Promise<IUserWalletsData> {
-        const mnemonics = this._generateMnemonicBIP39();
-        const ethereumWallet = await this._ethereumWalletFromBip39Mnemonic(mnemonics);
-        const tonWallet = await this._tonWalletFromBip39Mnemonic(mnemonics);
-        const tronWallet = await this._tronWalletFromBIP39Mnemonic(mnemonics);
-        const solanaWallet = await this._solanaWalletFromBip39Mnemonic(mnemonics);
+        const mnemonic = this._generateMnemonicBIP39();
+        const ethereumWallet = await this._ethereumWalletFromBip39Mnemonic(mnemonic);
+        const tonWallet = await this._tonWalletFromBip39Mnemonic(mnemonic);
+        const tronWallet = await this._tronWalletFromBIP39Mnemonic(mnemonic);
+        const solanaWallet = await this._solanaWalletFromBip39Mnemonic(mnemonic);
+        const suiWallet = await this._suiWalletFromBip39Mnemonic(mnemonic);
+
         return {
-            mainMnemonic: mnemonics,
+            mainMnemonic: mnemonic,
             eth: ethereumWallet,
             ton: tonWallet,
             tron: tronWallet,
-            solana: solanaWallet
+            solana: solanaWallet,
+            sui: suiWallet
         };
     }
 
@@ -193,12 +234,15 @@ class CryptographyController {
         const ethereumWallet = await this.ethereumHDWalletFromUnknownMnemonic(mnemonic);
         const tronWallet = await this.tronWalletFromUnknownMnemonic(mnemonic);
         const solanaWallet = await this.solanaWalletFromUnknownMnemonic(mnemonic);
+        const suiWallet = await this.suiWalletFromUnknownMnemonic(mnemonic);
+
         return {
             mainMnemonic: mnemonic,
             eth: ethereumWallet,
             ton: tonWallet,
             tron: tronWallet,
-            solana: solanaWallet
+            solana: solanaWallet,
+            sui: suiWallet
         };
     }
 

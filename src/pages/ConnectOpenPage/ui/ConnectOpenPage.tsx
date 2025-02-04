@@ -3,10 +3,13 @@ import { beginCell, storeStateInit, WalletContractV4 } from "@ton/ton";
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { ConnectItem } from "@/features/connect";
 import { connectStore } from "@/features/connect/model/connectSlice";
 import { usePINConfirmation } from "@/features/PIN";
 import { MultichainAccount, multichainAccountStore } from "@/entities/multichainAccount";
+import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import {
     cryptographyController,
     useAppSelector,
@@ -16,12 +19,6 @@ import {
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { workchain } from "@/shared/lib/consts/ton";
 import { smallAddress } from "@/shared/lib/helpers/smallAddress";
-
-import { WithDecorLayout } from "@/shared/layouts/layouts";
-
-import { CustomButton, Title } from "@/shared/components";
-
-import { ConnectItem } from "@/features/connect";
 
 import styles from "./ConnectOpenPage.module.sass";
 
@@ -53,7 +50,7 @@ export const ConnectOpenPage = () => {
             const multichainWallet = await cryptographyController.importWallet(mnemonics);
             const tonWallet = multichainWallet.ton;
             const secretKey = Buffer.from(tonWallet.secretKey, "hex");
-            
+
             // !! IF NOT DEPLOYED WALLET NOT CONNECTED
             // if (tonWallet.publicKey != accountService._tonWallet.publicKey) {
             //     throw new Error("Public key mismatch");

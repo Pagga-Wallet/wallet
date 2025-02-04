@@ -1,23 +1,22 @@
 import { skipToken } from "@reduxjs/toolkit/query";
 import { backButton } from "@telegram-apps/sdk-react";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { InputAddressContract, SelectNetwork } from "@/widgets/import";
+import { TokenImportEmpty } from "@/widgets/token";
 import { useGetImportedTokensQuery, useImportTokenMutation } from "@/entities/multichainAccount";
 import { useGetTokenByContractQuery } from "@/entities/token/model/tokenService";
 import { TokenListItem } from "@/entities/token/ui";
-import { CustomButton, Title } from "@/shared/components";
+import { CustomButton } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
-import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
+import { useSetupBackButton } from "@/shared/lib";
 import { tokensWhitelist } from "@/shared/lib/consts/token";
 import { checkAddress } from "@/shared/lib/helpers/checkAddress";
 import { CHAINS } from "@/shared/lib/types";
 import { btnText } from "../consts";
 import { ImportTokenSteps } from "../types/ImportTokenSteps";
 import s from "./ImportTokenPage.module.sass";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
-import { TokenImportEmpty } from "@/widgets/token";
 
 interface ImportTokenPageProps {}
 

@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@dedust/sdk": "^0.8.7",
+        "@mysten/sui": "^1.21.1",
         "@reduxjs/toolkit": "^2.2.3",
         "@rollup/plugin-alias": "^5.1.0",
         "@solana/web3.js": "^1.98.0",
