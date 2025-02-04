@@ -39,5 +39,5 @@ export const useTMAInit = () => {
         if (window?.Telegram?.WebApp?.isFullscreen) {
             applySafeAreaInsets();
         }
-    })
+    }, [])
 };
