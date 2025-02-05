@@ -13,6 +13,7 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@chainsim/sdk": "^1.0.0",
         "@dedust/sdk": "^0.8.7",
         "@mysten/sui": "^1.21.1",
         "@reduxjs/toolkit": "^2.2.3",
