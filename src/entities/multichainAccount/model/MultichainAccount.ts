@@ -362,18 +362,13 @@ export class MultichainAccount {
                 } else throw new Error("Invalid Token");
             } else if (tokenSelected.platform === CHAINS.SUI) {
                 if (tokenSelected?.isNativeToken) {
-                    result = await this._suiWallet.transferNativeToken(
-                        receiver,
-                        amount,
-                        mnemonics
-                    );
+                    result = await this._suiWallet.transferNativeToken(receiver, amount, mnemonics);
                 } else if (tokenSelected?.tokenContract) {
                     result = await this._suiWallet.transferTokenByContractAddress(
                         receiver,
                         amount,
                         tokenSelected?.tokenContract,
-                        mnemonics,
-                        memo
+                        mnemonics
                     );
                 } else throw new Error("Invalid Token");
             } else if (isEVMChain(tokenSelected.platform)) {

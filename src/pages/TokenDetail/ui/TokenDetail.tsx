@@ -110,7 +110,7 @@ export const TokenDetail: FC = () => {
                 />
             ) : null}
 
-            {!priceHistoryFetching ? (
+            {/* {!priceHistoryFetching ? (
                 <Chart
                     currentPrice={tokenBalance!.price}
                     priceChange={tokenBalance!.change24h!}
@@ -120,7 +120,7 @@ export const TokenDetail: FC = () => {
                 <div style={{ marginBottom: 24 }}>
                     <SkeletonRect borderRadius={32} width="100%" height={248} />
                 </div>
-            )}
+            )} */}
 
             <div className={s.actions}>
                 <div className={s.action} onClick={onSendClick}>
