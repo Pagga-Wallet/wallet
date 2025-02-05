@@ -23,18 +23,18 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
 
     const handleQuarterClick = useCallback(() => {
         const balance = tokenSelected?.balance ?? 0;
-        if (+scientificToDecimal(balance) < 0.00001) {
+        if (+scientificToDecimal(balance) < 0.000000001) {
             setValue(0);
             return;
         }
         const quarterValue = +scientificToDecimal(balance) * 0.25;
         setValue(+formatTokenAmount(String(quarterValue)));
     }, [tokenSelected, setValue]);
-    
+
     const handleHalfClick = useCallback(() => {
         const balance = tokenSelected?.balance ?? 0;
 
-        if (+scientificToDecimal(balance) < 0.00001) {
+        if (+scientificToDecimal(balance) < 0.000000001) {
             setValue(0);
             return;
         }
@@ -44,14 +44,12 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
 
     const handleMaxClick = useCallback(() => {
         const balance = tokenSelected?.balance ?? 0;
-        if (+scientificToDecimal(balance) < 0.00001) {
+        if (+scientificToDecimal(balance) < 0.000000001) {
             setValue(0);
             return;
         }
         setValue(+formatTokenAmount(scientificToDecimal(balance)));
     }, [tokenSelected, setValue]);
-
-    const dynamicMaxWidth = `${Math.max(value.toString().length * 14, 21)}px`;
 
     return (
         <div className={s.inputWrapper}>
@@ -68,7 +66,6 @@ export const InputAmountToSend: FC<InputAmountToSendProps> = ({
                     })}
                     value={value.toString()}
                     onChange={setValue}
-                    style={{ maxWidth: dynamicMaxWidth }}
                 />
                 <div
                     className={clsx(s.token, {
