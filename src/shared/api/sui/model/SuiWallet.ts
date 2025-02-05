@@ -17,7 +17,6 @@ import { getCoinType } from "../lib/helpers/getCoinType";
 import { parseSuiTxn } from "../lib/helpers/parseSuiTxn";
 import { suiClient } from "../lib/providers/suiClient";
 
-type CreateTxResponse = Promise<Transaction | null>;
 type TxAPIResponse = PromisedAPIResponse<BaseTxnParsed | null>;
 type TxAPIResponseFail = APIResponseFail;
 type TxAPIResponseNormal = APIResponseNormal<BaseTxnParsed | null>;
@@ -129,43 +128,11 @@ export class SuiWallet {
         }
     }
 
-    // async _createTransferTokenByContractTransaction(
-    //     to: string,
-    //     amount: number,
-    //     tokenContractAddress: string
-    // ): CreateTxResponse {
-    //     try {
-    //         const contract = await tronwebProvider.contract().at(tokenContractAddress);
-    //         const decimals = await contract.decimals().call();
-    //         const scaledAmount = tronwebProvider
-    //             .toBigNumber(amount)
-    //             .times(tronwebProvider.toBigNumber(10).pow(decimals));
-
-    //         const functionSelector = "transfer(address,uint256)";
-    //         const parameter = [
-    //             { type: "address", value: to },
-    //             { type: "uint256", value: scaledAmount.toFixed(0) },
-    //         ];
-    //         const tx = await tronwebProvider.transactionBuilder.triggerSmartContract(
-    //             tokenContractAddress,
-    //             functionSelector,
-    //             {},
-    //             parameter,
-    //             this._address
-    //         );
-    //         return tx.transaction;
-    //     } catch (error) {
-    //         console.error(error);
-    //         return null;
-    //     }
-    // }
-
     async transferTokenByContractAddress(
         to: string,
         amount: number,
         tokenContractAddress: string,
         mnemonic: string,
-        memo?: string
     ): TxAPIResponse {
         try {
             const tx = new Transaction();
