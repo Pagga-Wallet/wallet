@@ -325,7 +325,7 @@ export const Send: FC = () => {
                     firstButton={{
                         children: errorText || t(btnText[step]),
                         isDisabled: disableBtn,
-                        type: step !== SendSteps.confirm ? "grey" : "purple",
+                        type: !disableBtn ? "purple" : "grey",
                         onClick: onForward
                     }}
                 />

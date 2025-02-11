@@ -1,33 +1,52 @@
 import { useCallback, useEffect, useState } from "react";
 
 export const useTelegramViewportHack = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
-
-    const isIOS = useCallback(() => /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream, []);
-
     useEffect(() => {
-        if (!isIOS()) return;
-
-        const handleResize = () => {
-            const viewportHeight = window.innerHeight;
-            const isKeyboardNowVisible = viewportHeight < screen.height * 0.75;
-
-            if (isKeyboardNowVisible && !keyboardVisible) {
-                setScrollPosition(window.scrollY);
-                setKeyboardVisible(true);
-            } else if (!isKeyboardNowVisible && keyboardVisible) {
-                setTimeout(() => {
-                    window.scrollTo(0, scrollPosition);
-                }, 100);
-                setKeyboardVisible(false);
-            }
+        const preventScroll = (e: Event) => {
+          if (e instanceof WheelEvent || e instanceof TouchEvent) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
         };
-
-        window.addEventListener("resize", handleResize);
-
+    
+        const onFocusIn = (e: FocusEvent) => {
+          const target = e.target as HTMLElement;
+          if (
+            target &&
+            (target.tagName === "INPUT" ||
+              target.tagName === "TEXTAREA" ||
+              target.tagName === "SELECT")
+          ) {
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+            window.addEventListener("wheel", preventScroll, { passive: false });
+            window.addEventListener("touchmove", preventScroll, { passive: false });
+          }
+        };
+    
+        const onFocusOut = (e: FocusEvent) => {
+          const target = e.target as HTMLElement;
+          if (
+            target &&
+            (target.tagName === "INPUT" ||
+              target.tagName === "TEXTAREA" ||
+              target.tagName === "SELECT")
+          ) {
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+            window.removeEventListener("wheel", preventScroll);
+            window.removeEventListener("touchmove", preventScroll);
+          }
+        };
+    
+        document.addEventListener("focusin", onFocusIn);
+        document.addEventListener("focusout", onFocusOut);
+    
         return () => {
-            window.removeEventListener("resize", handleResize);
+          document.removeEventListener("focusin", onFocusIn);
+          document.removeEventListener("focusout", onFocusOut);
+          window.removeEventListener("wheel", preventScroll);
+          window.removeEventListener("touchmove", preventScroll);
         };
-    }, [isIOS, keyboardVisible, scrollPosition]);
+      }, []);
 };
