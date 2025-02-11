@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import clsx, { ClassValue } from "clsx";
 
 import styles from "./WordArea.module.scss";
-import { useTelegramViewportHack } from "@/shared/lib/hooks/useTelegramViewportResize";
 
 interface WordAreaProps {
     placeholder?: string;
