@@ -7,6 +7,7 @@ import SearchIcon from "@/shared/assets/search.svg?react";
 import { SkeletonRound } from "@/shared/components/Skeletons";
 import tonLogo from "@/shared/lib/images/tonLogo.png";
 import s from "./NftDetailManage.module.scss";
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 interface NftDetailManageProps {
     address: string;
@@ -16,15 +17,15 @@ export const NftDetailManage = ({ address }: NftDetailManageProps) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const { data: nftDetails, isFetching } = useFetchNFTDetailsQuery({
-        address,
+        address
     });
     // const utils = initUtils();
 
     const onSend = () => {
         navigate("/nft/send", {
             state: {
-                address,
-            },
+                address
+            }
         });
     };
 
@@ -43,11 +44,28 @@ export const NftDetailManage = ({ address }: NftDetailManageProps) => {
                 <SkeletonRound customWidth={340} height={72} />
             ) : (
                 <div className={s.manageInfo}>
-                    <img src={tonLogo} className={s.manageInfoChain} alt="chain" />
                     <div className={s.manageInfoTitle}>{nftDetails?.name}</div>
+                    <div className={s.manageInfoChain}>
+                        <div className={s.manageInfoChainName}>The Open Network</div>
+                    </div>
                 </div>
             )}
+
             <div className={s.actions}>
+                <div className={s.actionsButton} onClick={onSend}>
+                    <div className={s.actionsIcon}>
+                        <SvgSelector id="arrow-up" />
+                    </div>
+                    <div className={s.actionsText}>{t("main.send-btn")}</div>
+                </div>
+                <div className={s.actionsButton} onClick={() => navigate("/receive")}>
+                    <div className={s.actionsIcon}>
+                        <SvgSelector id="arrow-down" />
+                    </div>
+                    <div className={s.actionsText}>{t("main.receive-btn")}</div>
+                </div>
+            </div>
+            {/* <div className={s.actions}>
                 <button className={s.actionsItem} onClick={onSend}>
                     <span className={s.action__icon}>
                         <ArrowUpIcon />
@@ -60,7 +78,7 @@ export const NftDetailManage = ({ address }: NftDetailManageProps) => {
                     </span>
                     <div className={s.actionsItemTitle}>{t("nft-details.look")}</div>
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -10,7 +10,24 @@ export const CardCollection = ({ address }: { address: string }) => {
     });
     return (
         <div className={styles.card}>
-            <div className={styles.section}>
+            <div className={styles.cardItem}>
+                <div className={styles.cardItemTitle}>{t("nft-details.collection")}</div>
+                <div className={styles.cardItemContent}>{nftDetails?.collection?.name}</div>
+            </div>
+            <div className={styles.cardItem}>
+                <div className={styles.cardItemTitle}>{t("nft-details.network")}</div>
+                <div className={styles.cardItemContent}>TON</div>
+            </div>
+            <div className={styles.cardItem}>
+                <div className={styles.cardItemTitle}>{t("nft-details.details")}</div>
+                <div className={styles.cardItemContent}>{smallAddress(nftDetails?.owner)}</div>
+            </div>
+            <div className={styles.cardItem}>
+                <div className={styles.cardItemTitle}>{t("nft-details.address")}</div>
+                <div className={styles.cardItemContent}>{smallAddress(nftDetails?.address)}</div>
+            </div>
+            
+            {/* <div className={styles.section}>
                 <span className={styles.section__name}>{t("nft-details.description")}</span>
                 <div className={styles.section__properties}>
                     <div className={styles.property}>
@@ -41,7 +58,7 @@ export const CardCollection = ({ address }: { address: string }) => {
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

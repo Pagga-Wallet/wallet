@@ -12,7 +12,7 @@ import { useConnectEffect } from "@/features/connect/lib/useConnectEffect";
 import { useOpenConnect } from "@/features/connect/model/connectService";
 import { useQRScanner } from "@/features/qrScanner";
 import { useFetchTotalBalanceQuery } from "@/entities/multichainAccount";
-import { CreateCard, UserInfo } from "@/shared/components";
+import { Button, CreateCard, SearchInput, UserInfo } from "@/shared/components";
 import { SkeletonRect } from "@/shared/components/Skeletons";
 import { PrivateLayout } from "@/shared/layouts";
 import { useSetupBackButton } from "@/shared/lib";
@@ -22,6 +22,8 @@ import { formatNumber } from "@/shared/lib/helpers/formatNumber";
 import { TokenBalance } from "@/shared/lib/types/multichainAccount";
 import { TokenDetailQueryObj } from "@/shared/lib/types/token";
 import s from "./Home.module.scss";
+import { NftList } from "@/widgets/nft";
+import clsx from "clsx";
 
 export const Home: FC = () => {
     const {
@@ -75,6 +77,8 @@ export const Home: FC = () => {
     const isDesktop = checkDesktopPlatform();
     const { connect } = useOpenConnect();
     const [scanHandle] = useQRScanner({ connect });
+
+    const [activeTab, setActiveTab] = useState<"tokens" | "nft">("tokens");
 
     return (
         <PrivateLayout>
@@ -135,20 +139,52 @@ export const Home: FC = () => {
                     /> */}
 
                 <div className={s.homeContent}>
+
+                <div
+                    className={s.contentTop}
+                >
+                    <div className={s.tabSelector}>
+                        <Button
+                            className={clsx(s.tabButton, { [s.nonActiveTab]: activeTab !== "tokens" })}
+                            onClick={() => setActiveTab("tokens")}
+                            type="purple"
+                        >
+                            Tokens
+                        </Button>
+                        <Button
+                            className={clsx(s.tabButton, { [s.nonActiveTab]: activeTab !== "nft" })}
+                            onClick={() => setActiveTab("nft")}
+                            type="purple"
+                        >
+                            NFT
+                        </Button>
+                    </div>
+                    
+                        <Button
+                            type="grey"
+                            className={s.importBtn}
+                            onClick={() => navigate("/import/token")}
+                            // isDisabled
+                        >
+                            <SvgSelector id="import" />
+                        </Button>
+                    
+                </div>
                     {/* <TabSelector
                         disabled={accountBalanceFetching}
                         activeTab={tab}
                         setActiveTab={setActiveTab}
                         tabs={tabs}
                     /> */}
-                    <TokensList
-                        search
+                    {activeTab === "tokens"  && <TokensList
+                        // search
                         isSelectMode
                         includedImportsIcon
                         onTokenSelect={handleTokenSelect}
                         accountBalance={accountBalance || null}
                         isLoading={accountBalanceFetching}
-                    />
+                    />}
+                    {activeTab === "nft"  && <NftList />}
                     {/* {tab === "main.navigation.history" && <TransactionsHistoryList />}
                     {tab === "main.navigation.nft" && <NftList />} */}
                 </div>

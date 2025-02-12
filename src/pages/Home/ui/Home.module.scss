@@ -127,3 +127,39 @@
         }
     }
 }
+
+.contentTop {
+    padding: 72px 16px 0 16px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    div:first-child {
+        flex: 1;
+    }
+    .importBtn {
+        border-radius: 100%;
+        height: 46px;
+        width: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.tabSelector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tabButton {
+    width: max-content;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.nonActiveTab {
+    background-color: transparent;
+}
