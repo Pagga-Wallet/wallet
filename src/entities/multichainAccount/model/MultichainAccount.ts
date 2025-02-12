@@ -146,11 +146,24 @@ export class MultichainAccount {
     }
 
     async getTotalBalance(): Promise<TotalBalance> {
-        const { data: ethBalance } = await this._ethereumWallet.getNativeTokenBalance();
-        const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
-        const { data: tronBalance } = await this._tronWallet.getNativeTokenBalance();
-        const { data: solanaBalance } = await this._solanaWallet.getNativeTokenBalance();
-        const suiCoinBalances = await this._suiWallet.getAllCoinBalances();
+        const [
+            { data: ethBalance },
+            { data: bnbBalance },
+            { data: tronBalance },
+            { data: solanaBalance },
+            { data: suiCoinBalances }
+        ] = await Promise.all([
+            this._ethereumWallet.getNativeTokenBalance(),
+            this._bnbWallet.getNativeTokenBalance(),
+            this._tronWallet.getNativeTokenBalance(),
+            this._solanaWallet.getNativeTokenBalance(),
+            this._suiWallet.getAllCoinBalances()
+        ]);
+        // const { data: ethBalance } = await this._ethereumWallet.getNativeTokenBalance();
+        // const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
+        // const { data: tronBalance } = await this._tronWallet.getNativeTokenBalance();
+        // const { data: solanaBalance } = await this._solanaWallet.getNativeTokenBalance();
+        // const suiCoinBalances = await this._suiWallet.getAllCoinBalances();
 
         const tonBalance = parseFloat(await this._tonWallet.balanceTon());
         const tonPrice = await tonAPIClient.getRates("native");
@@ -172,7 +185,8 @@ export class MultichainAccount {
         const tronUSDBalance = tronPrice.price * (tronBalance ?? 0);
         const solanaUSDBalance = solanaPrice.price * (solanaBalance ?? 0);
         const suiAllUSDBalance =
-            suiCoinBalances.data?.reduce((acc, curr) => acc + curr.balanceUSD, 0) ?? 0;
+            suiCoinBalances?.reduce((acc, curr) => acc + curr.balanceUSD, 0) ?? 0;
+            
         // imported Tokens
         const importedTokens = await this.getImportedTokens();
         // Jettons
@@ -282,7 +296,7 @@ export class MultichainAccount {
                     }
                 },
                 SUI: {
-                    nativeToken: suiCoinBalances.data?.find(coin => coin.isNativeToken) ?? {
+                    nativeToken: suiCoinBalances?.find(coin => coin.isNativeToken) ?? {
                         tokenID: "sui",
                         tokenSymbol: "SUI",
                         tokenName: "Sui",
@@ -295,7 +309,7 @@ export class MultichainAccount {
                         isNativeToken: true,
                         change24h: 0
                     },
-                    tokens: suiCoinBalances.data?.filter(coin => !coin.isNativeToken) ?? []
+                    tokens: suiCoinBalances?.filter(coin => !coin.isNativeToken) ?? []
                 }
             }
         };
