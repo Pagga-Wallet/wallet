@@ -13,18 +13,21 @@ interface NftListItemProps {
 export const NftListItem: FC<NftListItemProps> = ({ chain, title, previewUrl, address }) => {
     const navigate = useNavigate();
     return (
-        <div
-            className={s.nft}
-            onClick={() => {
-                navigate(`/nft/${address}`);
-            }}
-        >
-            <img src={previewUrl} alt="bg" className={s.nftBg} />
-            <div className={s.chain}>{chain}</div>
-            <div className={s.info}>
+        <div className={s.container}>
+            <div
+                className={s.nft}
+                onClick={() => {
+                    navigate(`/nft/${address}`);
+                }}
+            >
+                <img src={previewUrl} alt="bg" className={s.nftBg} />
+                <div className={s.chain}>{chain}</div>
+                {/* <div className={s.info}>
                 <img src={tonLogo} alt="logo" className={s.infoLogo} />
                 <div className={s.infoName}>{title}</div>
+            </div> */}
             </div>
+            <div className={s.nftTitle}>{title}</div>
         </div>
     );
 };

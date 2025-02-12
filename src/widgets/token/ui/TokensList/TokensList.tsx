@@ -84,7 +84,7 @@ export const TokensList: FC<TokensList | TokensListSelectable> = ({
                 [s.tokensListSend]: isSend
             })}
             style={{
-                padding: isSend ? "16px 0 0 0" : "72px 0 0 0"
+                padding: isSend ? "16px 0 0 0" : "0 0 0 0"
             }}
         >
             {search && (
