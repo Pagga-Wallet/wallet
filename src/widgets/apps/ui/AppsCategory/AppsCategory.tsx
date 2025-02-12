@@ -18,7 +18,7 @@ export const AppsCategory: FC<AppsCategoryProps> = () => {
     return (
         <div className={s.block}>
             <Title level={3} className={s.blockTitle}>
-                Pagga <span>AI</span> <SvgSelector id="star-decor" />
+                Pagg<span>AI</span> <SvgSelector id="star-decor" />
             </Title>
             <div className={s.blockItems}>
                 {visibleItems.map(c => (

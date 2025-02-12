@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from "clsx";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, ButtonProps } from "../Button/Button";
 
 import styles from "./CustomButton.module.sass";
@@ -19,8 +19,42 @@ export const CustomButton: FC<CustomButtonProps> = ({
     isLoading = false,
     isDisabled = false
 }) => {
+    const [keyboardOffset, setKeyboardOffset] = useState<number>(0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.visualViewport) {
+                const offset = window.innerHeight - window.visualViewport.height;
+                setKeyboardOffset(offset > 0 ? offset : 0);
+            }
+        };
+
+        const handleFocus = () => {
+            if (window.visualViewport) {
+                const offset = window.innerHeight - window.visualViewport.height;
+                setKeyboardOffset(offset > 0 ? offset : 0);
+            }
+        };
+
+        window.visualViewport?.addEventListener("resize", handleResize);
+        window.addEventListener("focus", handleFocus);
+
+        handleResize();
+
+        return () => {
+            window.visualViewport?.removeEventListener("resize", handleResize);
+            window.removeEventListener("focus", handleFocus);
+        };
+    }, []);
+
     return (
-        <div className={clsx(styles.container, containerClassName)}>
+        <div
+            className={clsx(styles.container, containerClassName)}
+            style={{
+                transform: `translateY(-${keyboardOffset}px)`,
+                transition: "transform 0.01s ease"
+            }}
+        >
             <div
                 className={clsx(styles.buttonWrapper, {
                     [styles.isLoading]: isLoading,
