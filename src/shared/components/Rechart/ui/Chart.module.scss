@@ -1,0 +1,32 @@
+.container {
+    background-color: rgb(var(--foreground-primary));
+    border-radius: 24px;
+    padding: 16px 0;
+    position: relative;
+    min-height: 85px;
+    margin-bottom: 24px;
+}
+
+.info {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    left: 16px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 258px;
+    color: rgba(var(--placeholder-secondary));
+    text-align: center;
+    font-size: 19px;
+    line-height: 120%
+}

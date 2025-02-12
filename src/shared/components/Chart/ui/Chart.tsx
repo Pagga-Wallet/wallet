@@ -5,7 +5,7 @@ import {
     TimeChartOptions,
     AreaStyleOptions,
     SeriesOptionsCommon,
-    Time,
+    Time
 } from "lightweight-charts";
 import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ export const Chart: FC<ChartProps> = ({
     points,
     selectedLanguage = "en",
     currentPrice,
-    priceChange,
+    priceChange
 }) => {
     const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -39,14 +39,17 @@ export const Chart: FC<ChartProps> = ({
 
         const chartOptions: DeepPartial<TimeChartOptions> = {
             ...chartConfig,
-            localization: { locale: selectedLanguage },
+            localization: { locale: selectedLanguage }
         };
 
         const chartContainer = chartContainerRef.current;
+
+        if (!chartContainer) return;
+
         const chart = createChart(chartContainer as HTMLDivElement, chartOptions);
 
         const resizeChart = () => {
-            const containerWidth = chartContainer?.getBoundingClientRect().width || 0;
+            const containerWidth = chartContainer?.getBoundingClientRect()?.width || 0;
             const aspectRatio = 0.75;
 
             chart.resize(containerWidth, containerWidth * aspectRatio);
@@ -58,7 +61,7 @@ export const Chart: FC<ChartProps> = ({
             ...areaSeriesConfig,
             lineColor: priceChange > 0 ? "rgba(84, 255, 144, 1)" : "rgba(255, 28, 69, 1)",
             bottomColor: "transparent",
-            topColor: priceChange > 0 ? "rgba(84, 255, 144, 1)" : "rgba(255, 28, 69, 1)",
+            topColor: priceChange > 0 ? "rgba(84, 255, 144, 1)" : "rgba(255, 28, 69, 1)"
         });
 
         const syncToTheme = (theme: keyof typeof themesData) => {
@@ -69,9 +72,9 @@ export const Chart: FC<ChartProps> = ({
         };
         syncToTheme("Dark");
 
-        const data: LineData[] = sortedData.map((el) => ({
+        const data: LineData[] = sortedData.map(el => ({
             time: (+new Date(el[0]) / 1000) as Time,
-            value: el[1] as number,
+            value: el[1] as number
         }));
         areaSeries.setData(data);
         chart.timeScale().fitContent();
@@ -80,7 +83,7 @@ export const Chart: FC<ChartProps> = ({
             window.removeEventListener("resize", resizeChart);
             chart.remove();
         };
-    }, [points, selectedLanguage]);
+    }, [JSON.stringify(points), selectedLanguage, chartContainerRef.current, priceChange]);
 
     if (currentPrice === 0) {
         return <></>;
