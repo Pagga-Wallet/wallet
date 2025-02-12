@@ -14,6 +14,7 @@ import { useGetTokenPriceHistoryQuery } from "@/entities/token/model/tokenServic
 import { TokenDetailInfo } from "@/entities/token/ui";
 import { BigButton } from "@/shared/components";
 import { Chart } from "@/shared/components/Chart";
+import { Rechart } from "@/shared/components/Rechart";
 import { SkeletonRect } from "@/shared/components/Skeletons";
 import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton } from "@/shared/lib";
@@ -110,17 +111,22 @@ export const TokenDetail: FC = () => {
                 />
             ) : null}
 
-            {/* {!priceHistoryFetching ? (
+            {!priceHistoryFetching ? (
                 <Chart
                     currentPrice={tokenBalance!.price}
                     priceChange={tokenBalance!.change24h!}
                     points={priceHistory}
                 />
+                // <Rechart
+                //     currentPrice={tokenBalance!.price}
+                //     priceChange={tokenBalance!.change24h!}
+                //     points={priceHistory}
+                // />
             ) : (
                 <div style={{ marginBottom: 24 }}>
                     <SkeletonRect borderRadius={32} width="100%" height={248} />
                 </div>
-            )} */}
+            )}
 
             <div className={s.actions}>
                 <div className={s.action} onClick={onSendClick}>
