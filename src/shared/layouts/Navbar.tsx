@@ -31,14 +31,14 @@ const items = [
         activeIcon: <AppsActiveIcon />,
         disabled: false,
     },
-    {
-        label: "menu.points",
-        path: "/points",
-        isStroke: false,
-        icon: <PointsIcon />,
-        activeIcon: <PointsActiveIcon />,
-        disabled: false,
-    },
+    // {
+    //     label: "menu.points",
+    //     path: "/points",
+    //     isStroke: false,
+    //     icon: <PointsIcon />,
+    //     activeIcon: <PointsActiveIcon />,
+    //     disabled: false,
+    // },
     {
         label: "menu.settings",
         path: "/settings",
