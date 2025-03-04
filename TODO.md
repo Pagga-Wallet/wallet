@@ -1,3 +1,0 @@
-- Фулл скрин
-- Connect pages
-- Confirm transaction modal
