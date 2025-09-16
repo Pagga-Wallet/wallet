@@ -253,7 +253,7 @@ class TonConnectRemoteBridgeService {
         try {
             // return await AsyncStorage.getItem(this.storeKey)
 
-            // eslint-disable-next-line @typescript-eslint/return-await
+             
             return await this._storage.get(this.storeKey);
         } catch {
             return null;

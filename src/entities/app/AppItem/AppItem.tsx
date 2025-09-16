@@ -1,11 +1,11 @@
-import { FC } from "react";
 import clsx, { ClassValue } from "clsx";
+import { FC } from "react";
 
 import { App } from "@/shared/api/apps";
 
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { useNavigateApps } from "@/shared/lib/hooks/useNavigateApps";
 
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 import s from "./AppItem.module.sass";
 

@@ -35,6 +35,14 @@ export const getExplorerLink = ({ txHash, userAddress, chain }: GetExplorerLinkA
                 import.meta.env.VITE_NETWORK === "TESTNET" ? "testnet" : "mainnet"
             }/tx/${txHash}`;
             break;
+        case CHAINS.STELLAR:
+            link = txHash
+                ? `https://stellar.expert/explorer/public/tx/${txHash}`
+                : `https://stellar.expert/explorer/public/account/${userAddress}`;
+            break;
+        default:
+            link = "";
+            break;
     }
     return link;
 };

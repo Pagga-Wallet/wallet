@@ -1,6 +1,7 @@
 import { Keypair } from "@mysten/sui/dist/cjs/cryptography";
 import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
 import * as solana from "@solana/web3.js";
+import { Keypair as StellarKeypair } from "@stellar/stellar-sdk";
 import {
     keyPairFromSeed,
     mnemonicToPrivateKey,
@@ -15,6 +16,7 @@ import { TronWeb } from "tronweb";
 import { IUserWalletsData, SuiWalletData, TonWalletData } from "@/shared/lib/types";
 import { workchain } from "./consts/ton/index";
 import { SolanaWalletData } from "./types/solana/SolanaWalletData";
+import { StellarWalletData } from "./types/stellar/StellarWalletData";
 import { TronWalletData } from "./types/tron/TronWalletData";
 
 const globalSecret = "7275737369616e207761727368697020676f206675636b20796f757273656c66";
@@ -206,6 +208,36 @@ class CryptographyController {
         else throw new Error("Invalid mnemonic");
     }
 
+    // STELLAR
+
+    private async _stellarWalletFromBip39Mnemonic(mnemonic: string): Promise<StellarWalletData> {
+        const seed = await bip39.mnemonicToSeed(mnemonic);
+        const derivedSeed = derivePath("m/44'/148'/0'", seed.toString("hex"));
+        const keypair = StellarKeypair.fromRawEd25519Seed(derivedSeed.key);
+
+        return {
+            privateKey: keypair.secret(),
+            address: keypair.publicKey()
+        };
+    }
+
+    private async _stellarWalletFromTonMnemonic(mnemonic: string): Promise<StellarWalletData> {
+        return this._stellarWalletFromBip39Mnemonic(mnemonic);
+    }
+
+    public async stellarWalletFromUnknownMnemonic(mnemonic: string): Promise<StellarWalletData> {
+        const isTONMnemonic = await tonMnemonicValidate(mnemonic.split(" "));
+        const isBIP39Mnemonic = bip39.validateMnemonic(mnemonic);
+        if (isTONMnemonic) return this._stellarWalletFromTonMnemonic(mnemonic);
+        else if (isBIP39Mnemonic) return this._stellarWalletFromBip39Mnemonic(mnemonic);
+        else throw new Error("Invalid mnemonic for Stellar");
+    }
+
+    public async stellarKeypairFromMnemonic(mnemonic: string): Promise<StellarKeypair> {
+        const stellarWallet = await this.stellarWalletFromUnknownMnemonic(mnemonic);
+        return StellarKeypair.fromSecret(stellarWallet.privateKey);
+    }
+
     // GENERAL
 
     public async createMultichainWallet(): Promise<IUserWalletsData> {
@@ -215,6 +247,7 @@ class CryptographyController {
         const tronWallet = await this._tronWalletFromBIP39Mnemonic(mnemonic);
         const solanaWallet = await this._solanaWalletFromBip39Mnemonic(mnemonic);
         const suiWallet = await this._suiWalletFromBip39Mnemonic(mnemonic);
+        const stellarWallet = await this._stellarWalletFromBip39Mnemonic(mnemonic);
 
         return {
             mainMnemonic: mnemonic,
@@ -222,7 +255,8 @@ class CryptographyController {
             ton: tonWallet,
             tron: tronWallet,
             solana: solanaWallet,
-            sui: suiWallet
+            sui: suiWallet,
+            stellar: stellarWallet
         };
     }
 
@@ -235,6 +269,7 @@ class CryptographyController {
         const tronWallet = await this.tronWalletFromUnknownMnemonic(mnemonic);
         const solanaWallet = await this.solanaWalletFromUnknownMnemonic(mnemonic);
         const suiWallet = await this.suiWalletFromUnknownMnemonic(mnemonic);
+        const stellarWallet = await this.stellarWalletFromUnknownMnemonic(mnemonic);
 
         return {
             mainMnemonic: mnemonic,
@@ -242,7 +277,8 @@ class CryptographyController {
             ton: tonWallet,
             tron: tronWallet,
             solana: solanaWallet,
-            sui: suiWallet
+            sui: suiWallet,
+            stellar: stellarWallet
         };
     }
 

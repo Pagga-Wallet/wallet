@@ -1,8 +1,8 @@
 import { App, AppsLinkType } from "@/shared/api/apps";
 
+import AVANCHANGE_IMAGE from "@/shared/lib/images/avanchange.png"
 import DEDUST_IMAGE from "@/shared/lib/images/dedust-icon.png"
 import STONFI_IMAGE from "@/shared/lib/images/stonfi.png"
-import AVANCHANGE_IMAGE from "@/shared/lib/images/avanchange.png"
 
 export const appsMock: App[] = [
   {

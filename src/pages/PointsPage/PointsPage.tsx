@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import { PrivateLayout } from "@/shared/layouts";
 
 import { PointsCategories, PointsIntroduction, PointsItemsList } from "@/widgets/points/ui";
 import { PointsBalance } from "@/shared/components";
+import { PrivateLayout } from "@/shared/layouts";
 
 import s from "./PointsPage.module.sass";
 

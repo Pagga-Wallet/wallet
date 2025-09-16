@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { AccountPage } from "./AccountPage";
+import { Apps } from "./Apps/ui/Apps";
 import { ConnectConfirm } from "./ConnectConfirm/ui/ConnectConfirm";
 import { ConnectOpenPage } from "./ConnectOpenPage/ui/ConnectOpenPage";
 import { ConnectTransactionFailed } from "./ConnectTransactionFailed/ui/ConnectTransactionFailed";
@@ -12,6 +13,8 @@ import { ImportMnemonicPage } from "./ImportMnemonicPage";
 import { ImportTokenPage } from "./ImportTokenPage";
 import { NftDetail } from "./NftDetail/NftDetail";
 import { NftSendPage } from "./NftSendPage/";
+import { PointsPage } from "./PointsPage/PointsPage";
+import { PrivacyPolicy } from "./PrivacyPolicy/ui";
 import { ReceivePage } from "./ReceivePage";
 import { RecoveryPhrasePage } from "./RecoveryPhrasePage/RecoveryPhrasePage";
 import { Send } from "./Send";
@@ -19,9 +22,6 @@ import { SettingsPage } from "./Settings";
 import { TokenDetail } from "./TokenDetail";
 import { TransactionPage } from "./TransactionPage";
 import { WelcomePage } from "./WelcomePage/WelcomePage";
-import { PrivacyPolicy } from "./PrivacyPolicy/ui";
-import { Apps } from "./Apps/ui/Apps";
-import { PointsPage } from "./PointsPage/PointsPage";
 
 // import { IntroductionPage } from "./IntroductionPage";
 // import { RenewPage } from "./RenewPage/RenewPage";

@@ -6,11 +6,11 @@ import { useGetUseBiometryQuery, usePINConfirmation, usePINCreation } from "@/fe
 import { useImportAccountMutation } from "@/entities/multichainAccount";
 import { CustomButton, Loader, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
 import styles from "./ImportMnemonicPage.module.scss";
 import { MnemonicInput } from "./MnemonicInput/MnemonicInput";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const ImportMnemonicPage = () => {
     const { t } = useTranslation();

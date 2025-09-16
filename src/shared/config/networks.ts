@@ -6,5 +6,6 @@ export const networkLabels: Record<CHAINS, string> = {
     [CHAINS.TRON]: "Tron(TRC-20)",
     [CHAINS.ETH]: "Ethereum (ERC-20)",
     [CHAINS.SOLANA]: "Solana",
-    [CHAINS.SUI]: "Sui"
+    [CHAINS.SUI]: "Sui",
+    [CHAINS.STELLAR]: "Stellar Network"
 };

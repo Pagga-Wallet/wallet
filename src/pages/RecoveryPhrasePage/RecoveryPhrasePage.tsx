@@ -5,10 +5,10 @@ import { usePINConfirmation } from "@/features/PIN";
 import { useFetchAccountQuery } from "@/entities/multichainAccount";
 import { Loader, WordArea } from "@/shared/components";
 import { PrivateLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { cryptographyController, useSetupBackButton } from "@/shared/lib";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const RecoveryPhrasePage = () => {
     const { id } = useParams();

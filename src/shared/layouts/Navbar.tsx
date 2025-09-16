@@ -1,16 +1,16 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { NavLink } from "@/shared/components";
 
-import HomeIcon from "@/shared/assets/home.svg?react";
-import HomeActiveIcon from "@/shared/assets/home-active.svg?react";
-import AppsIcon from "@/shared/assets/apps.svg?react";
 import AppsActiveIcon from "@/shared/assets/apps-active.svg?react";
-import PointsIcon from "@/shared/assets/points.svg?react";
+import AppsIcon from "@/shared/assets/apps.svg?react";
+import HomeActiveIcon from "@/shared/assets/home-active.svg?react";
+import HomeIcon from "@/shared/assets/home.svg?react";
 import PointsActiveIcon from "@/shared/assets/points-active.svg?react";
-import SettingsIcon from "@/shared/assets/settings.svg?react";
+import PointsIcon from "@/shared/assets/points.svg?react";
 import SettingsActiveIcon from "@/shared/assets/settings-active.svg?react";
+import SettingsIcon from "@/shared/assets/settings.svg?react";
+import { NavLink } from "@/shared/components";
 
 import styles from "./MainLayout.module.scss";
 

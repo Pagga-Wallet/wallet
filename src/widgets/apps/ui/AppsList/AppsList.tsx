@@ -7,10 +7,10 @@ import { AppItem } from "@/entities/app";
 
 import { App } from "@/shared/api/apps";
 
+import { Button } from "@/shared/components";
 import { useGroupedItems } from "@/shared/lib/hooks/useGroupedItems";
 
 import s from "./AppsList.module.sass";
-import { Button } from "@/shared/components";
 
 interface AppsListProps {
     apps: App[];

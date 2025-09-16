@@ -1,8 +1,8 @@
 import { FC } from "react";
 
+import { Text, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
 
-import { Text, Title } from "@/shared/components";
 
 import { useSetupBackButton } from "@/shared/lib";
 

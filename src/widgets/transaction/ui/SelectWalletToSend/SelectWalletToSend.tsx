@@ -2,16 +2,16 @@ import { uniqBy } from "lodash";
 import { FC, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import { useOpenConnect } from "@/features/connect/model/connectService";
+import { useQRScanner } from "@/features/qrScanner";
 import { useGetLastTxsByTokenQuery, useGetLastTxsQuery } from "@/entities/multichainAccount";
 import { TransactionRecentItem, TransactionRecentItemSkeleton } from "@/entities/transaction";
+import { Text } from "@/shared/components";
 import { BaseInput } from "@/shared/components/Input";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { TokenBalance, BaseToken } from "@/shared/lib/types";
 import { BaseTxnParsed } from "@/shared/lib/types/transaction";
 import s from "./SelectWalletToSend.module.sass";
-import { Text } from "@/shared/components";
-import { useQRScanner } from "@/features/qrScanner";
-import { useOpenConnect } from "@/features/connect/model/connectService";
 
 interface SelectWalletToSendProps {
     value: string;

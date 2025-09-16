@@ -6,9 +6,9 @@ import { ConnectItem, SkeletonItemSkeleton } from "@/features/connect";
 import { IConnectionWithWalletName } from "@/entities/connection/model/types";
 import { Title } from "@/shared/components";
 
+import { SkeletonRound } from "@/shared/components/Skeletons";
 import { ConnectionType } from "@/shared/lib/types/connect";
 
-import { SkeletonRound } from "@/shared/components/Skeletons";
 
 import s from "./ConnectList.module.sass";
 

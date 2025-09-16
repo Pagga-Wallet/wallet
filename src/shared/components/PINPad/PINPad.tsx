@@ -2,9 +2,9 @@ import { hapticFeedback } from "@telegram-apps/sdk-react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { BaseLayout, PrivateLayout, WithDecorLayout } from "@/shared/layouts/layouts";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import styles from "./PINPad.module.scss";
-import { BaseLayout, PrivateLayout, WithDecorLayout } from "@/shared/layouts/layouts";
 
 export interface PINPadProps {
     title: string;

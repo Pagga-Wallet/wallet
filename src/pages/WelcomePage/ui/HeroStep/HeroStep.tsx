@@ -4,12 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Button, Text, Title } from "@/shared/components";
 
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+import WelcomeImg from "@/shared/lib/images/welcome.png";
 import { IntroductionSteps } from "../../types/IntroductionSteps";
 
-import WelcomeImg from "@/shared/lib/images/welcome.png";
 
 import s from "./HeroStep.module.sass";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface HeroStepProps {
     setStep: React.Dispatch<React.SetStateAction<IntroductionSteps>>;

@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-fallthrough */
+ 
+ 
 import { FC } from "react";
 
 interface SvgSelectorProps {

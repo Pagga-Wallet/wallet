@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+ 
 import {
     SendTransactionRpcResponseError,
     SEND_TRANSACTION_ERROR_CODES,

@@ -15,11 +15,11 @@ import { BaseLayout } from "@/shared/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 
 import { checkDesktopPlatform } from "@/shared/lib/helpers/checkDesktopPlatform";
+import { ConnectionType } from "@/shared/lib/types/connect";
 import { btnText } from "../consts";
 
 import { ConnectWalletListSteps } from "../types/ConnectWalletListSteps";
 
-import { ConnectionType } from "@/shared/lib/types/connect";
 
 import s from "./ConnectWalletListPage.module.sass";
 

@@ -1,5 +1,5 @@
-import { FC } from "react";
 import clsx from "clsx";
+import { FC } from "react";
 
 import { SkeletonRound, SkeletonSquare } from "@/shared/components/Skeletons";
 import s from "./TransactionHistoryDetailItem.module.sass";

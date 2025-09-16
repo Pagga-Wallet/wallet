@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { SelectBlockhainConfig } from "@/shared/lib/consts/import-list";
 
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 import s from "./ReceiveMessage.module.sass";
 

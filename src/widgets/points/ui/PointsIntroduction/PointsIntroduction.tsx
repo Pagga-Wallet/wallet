@@ -2,8 +2,8 @@ import { FC } from "react";
 
 import DIAMOND_ICON from "@/shared/assets/diamond.svg?react";
 
-import s from "./PointsIntroduction.module.sass";
 import { Title } from "@/shared/components";
+import s from "./PointsIntroduction.module.sass";
 
 interface PointsIntroductionProps {}
 

@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { openTelegramLink } from "@telegram-apps/sdk-react";
-
-import CardIcon from "@/shared/lib/images/credit-card.svg?react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
+import CardIcon from "@/shared/lib/images/credit-card.svg?react";
 
-import { Title } from "../Title/Title";
+
 import { Text } from "../Text/Text";
+import { Title } from "../Title/Title";
 
 import s from "./CreateCard.module.sass";
 

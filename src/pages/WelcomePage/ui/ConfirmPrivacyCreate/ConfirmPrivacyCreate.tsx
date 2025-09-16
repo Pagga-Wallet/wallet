@@ -2,12 +2,12 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Checkbox, CustomButton, Title } from "@/shared/components";
+import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { useSetupBackButton } from "@/shared/lib";
 import SecuritySticker from "@/shared/lib/images/safety.svg?react";
 import { IntroductionSteps } from "../../types/IntroductionSteps";
 import s from "./ConfirmPrivacyCreate.module.sass";
-import { BaseLayout } from "@/shared/layouts";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 interface ConfirmPrivacyCreateProps {
     setStep: React.Dispatch<React.SetStateAction<IntroductionSteps>>;

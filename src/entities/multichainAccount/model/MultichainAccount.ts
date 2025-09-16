@@ -5,6 +5,7 @@ import { BNBWallet, EthereumWallet, getEVMWalletByChain } from "@/shared/api/evm
 import { getEVMAPIClientByChain } from "@/shared/api/evm";
 import { parseEVMTokenTxn, parseEVMNativeTxn } from "@/shared/api/evm";
 import { SolanaWallet } from "@/shared/api/solana";
+import { StellarWallet } from "@/shared/api/stellar";
 import { SuiWallet } from "@/shared/api/sui";
 import { telegramStorage } from "@/shared/api/telegramStorage";
 import { TonWalletService } from "@/shared/api/ton";
@@ -45,6 +46,7 @@ export class MultichainAccount {
     public _tronWallet: TronWallet;
     public _tronAPI: TronAPI;
     public _solanaWallet: SolanaWallet;
+    public _stellarWallet: StellarWallet;
     public _suiWallet: SuiWallet;
     public _tonVersion: TON_ADDRESS_INTERFACES;
 
@@ -55,6 +57,7 @@ export class MultichainAccount {
         this._bnbWallet = new BNBWallet(this._ethAddress);
         this._tronWallet = new TronWallet(this._account.multiwallet.TRON.address);
         this._solanaWallet = new SolanaWallet(this._account.multiwallet.SOLANA.address);
+        this._stellarWallet = new StellarWallet(this._account.multiwallet.STELLAR.address);
         this._suiWallet = new SuiWallet(this._account.multiwallet.SUI.address);
         this._tonWallet = new TonWalletService(
             account.multiwallet.TON.publicKey,
@@ -65,7 +68,7 @@ export class MultichainAccount {
         this._tonVersion = tonVersion;
     }
 
-    getAddressInNetwork(chain: CHAINS) {
+    getAddressInNetwork(chain: CHAINS): string {
         switch (chain) {
             case CHAINS.ETH:
                 return this._account.multiwallet.ETH.address;
@@ -79,6 +82,10 @@ export class MultichainAccount {
                 return this._account.multiwallet.SOLANA.address;
             case CHAINS.SUI:
                 return this._account.multiwallet.SUI.address;
+            case CHAINS.STELLAR:
+                return this._account.multiwallet.STELLAR.address;
+            default:
+                throw new Error(`Unsupported chain: ${chain}`);
         }
     }
 
@@ -96,24 +103,24 @@ export class MultichainAccount {
             return addresses.map(address => ({ contract: address, chain: chainKey }));
         });
         const list = [...tokensWhitelist, ...savedTokensArr];
-        // получаем все сохранённые токены
+        // get all saved tokens
         const tokens = await Promise.all(
             list.map(async item => {
                 if (item.chain === CHAINS.TON) {
-                    // для жетонов
+                    // for jettons
                     return await tonAPIClient.getJettonDataById({ jettonAddress: item.contract });
                 } else if (item.chain === CHAINS.TRON) {
-                    // для трона
+                    // for tron
                     const token = (
                         await this._tronAPI.getTokenByContractAddress({
                             contractaddress: item.contract
                         })
                     ).data;
                     if (!token) return null;
-                    // Ставим иконку из вайтлиста
+                    // Set icon from whitelist
                     else return { ...token, tokenIcon: item.overrideIcon ?? token.tokenIcon };
                 } else if (isEVMChain(item.chain)) {
-                    // для токенов EVM чейнов
+                    // for EVM chain tokens
                     const client = getEVMAPIClientByChain(this._ethAddress, item.chain);
                     const token = (
                         await client.getTokenByContractAddress({
@@ -121,18 +128,18 @@ export class MultichainAccount {
                         })
                     ).data;
                     if (!token) return null;
-                    // Ставим иконку из вайтлиста
+                    // Set icon from whitelist
                     else return { ...token, tokenIcon: item.overrideIcon ?? token.tokenIcon };
                 } else return [];
             })
         );
-        const tokensFiltered = tokens.filter((data): data is TokenBalance => data !== null); // очищаем токены с неверным адресом контракта
+        const tokensFiltered = tokens.filter((data): data is TokenBalance => data !== null); // clean tokens with invalid contract address
 
         const grouped = groupBy(tokensFiltered, value => value.platform) as Record<
             CHAINS,
             TokenBalance[]
         >;
-        // заглушка для всех ключей CHAINS
+        // stub for all CHAINS keys
         const defaultGrouped: Record<CHAINS, TokenBalance[]> = Object.values(CHAINS).reduce(
             (acc, chain) => {
                 acc[chain] = [];
@@ -140,7 +147,7 @@ export class MultichainAccount {
             },
             {} as Record<CHAINS, TokenBalance[]>
         );
-        // мержим с заглушкой
+        // merge with stub
         const mergedGrouped = { ...defaultGrouped, ...grouped };
         return mergedGrouped;
     }
@@ -151,13 +158,15 @@ export class MultichainAccount {
             { data: bnbBalance },
             { data: tronBalance },
             { data: solanaBalance },
-            { data: suiCoinBalances }
+            { data: suiCoinBalances },
+            { data: stellarBalance }
         ] = await Promise.all([
             this._ethereumWallet.getNativeTokenBalance(),
             this._bnbWallet.getNativeTokenBalance(),
             this._tronWallet.getNativeTokenBalance(),
             this._solanaWallet.getNativeTokenBalance(),
-            this._suiWallet.getAllCoinBalances()
+            this._suiWallet.getAllCoinBalances(),
+            this._stellarWallet.getNativeTokenBalance()
         ]);
         // const { data: ethBalance } = await this._ethereumWallet.getNativeTokenBalance();
         // const { data: bnbBalance } = await this._bnbWallet.getNativeTokenBalance();
@@ -171,12 +180,14 @@ export class MultichainAccount {
             ethPrice,
             bnbPrice,
             tronPrice,
-            solanaPrice
+            solanaPrice,
+            stellarPrice
         ] = await coingeckoClient.getCoinPriceByCoinID([
             CoinIds.ETH,
             CoinIds.BNB,
             CoinIds.TRON,
-            CoinIds.SOLANA
+            CoinIds.SOLANA,
+            CoinIds.XLM
         ]);
         // Native balances
         const tonUSDBalance = tonPrice.price_usd * (tonBalance ?? 0);
@@ -184,9 +195,10 @@ export class MultichainAccount {
         const bnbUSDBalance = bnbPrice.price * (bnbBalance ?? 0);
         const tronUSDBalance = tronPrice.price * (tronBalance ?? 0);
         const solanaUSDBalance = solanaPrice.price * (solanaBalance ?? 0);
+        const stellarUSDBalance = stellarPrice.price * (stellarBalance ?? 0);
         const suiAllUSDBalance =
             suiCoinBalances?.reduce((acc, curr) => acc + curr.balanceUSD, 0) ?? 0;
-            
+
         // imported Tokens
         const importedTokens = await this.getImportedTokens();
         // Jettons
@@ -195,17 +207,18 @@ export class MultichainAccount {
             account: this.getAddressInNetwork(CHAINS.TON),
             currencies: ["usd"]
         });
-        const allJettonsBalances = getAllJettonsBalancesDTOToTokenBalances(tonTokens); // все жетоны на акке
+        const allJettonsBalances = getAllJettonsBalancesDTOToTokenBalances(tonTokens); // all jettons on account
         // console.log(allJettonsBalances);
-        const combinedJettons = uniqBy([...allJettonsBalances, ...savedJettons], "tokenContract"); // избавляемся от дубликатов
+        const combinedJettons = uniqBy([...allJettonsBalances, ...savedJettons], "tokenContract"); // remove duplicates
         // Total
         const totalUSDBalance: number =
             ethUSDBalance +
             tronUSDBalance +
             tonUSDBalance +
             solanaUSDBalance +
+            stellarUSDBalance +
             suiAllUSDBalance +
-            // баланс всех импортнутых токенов
+            // balance of all imported tokens
             Object.values(importedTokens)
                 .reduce((pv, cv) => [...pv, ...cv], [])
                 .reduce((pv, cv) => pv + (cv.balanceUSD ?? 0), 0) +
@@ -294,6 +307,23 @@ export class MultichainAccount {
                         isNativeToken: true,
                         change24h: solanaPrice.change24h
                     }
+                },
+                STELLAR: {
+                    nativeToken: {
+                        tokenID: "stellar-lumens",
+                        tokenSymbol: "XLM",
+                        tokenName: "Stellar Lumens",
+                        tokenIcon:
+                            "https://assets.coingecko.com/coins/images/100/large/Stellar_symbol_black_RGB.png",
+                        balance: stellarBalance ?? 0,
+                        balanceUSD: stellarUSDBalance,
+                        price: stellarPrice.price,
+                        decimals: 7,
+                        platform: CHAINS.STELLAR,
+                        isNativeToken: true,
+                        change24h: stellarPrice.change24h
+                    },
+                    tokens: importedTokens.STELLAR ?? []
                 },
                 SUI: {
                     nativeToken: suiCoinBalances?.find(coin => coin.isNativeToken) ?? {
@@ -384,6 +414,12 @@ export class MultichainAccount {
                         tokenSelected?.tokenContract,
                         mnemonics
                     );
+                } else throw new Error("Invalid Token");
+            } else if (tokenSelected.platform === CHAINS.STELLAR) {
+                if (tokenSelected?.isNativeToken) {
+                    // For now, Stellar transfers are handled through UI components
+                    // This is a placeholder for future implementation
+                    throw new Error("Stellar transfers not implemented in this method");
                 } else throw new Error("Invalid Token");
             } else if (isEVMChain(tokenSelected.platform)) {
                 const wallet = getEVMWalletByChain(this._ethAddress, tokenSelected.platform);

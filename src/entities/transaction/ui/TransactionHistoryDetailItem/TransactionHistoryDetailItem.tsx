@@ -2,11 +2,11 @@ import React, { FC, useCallback, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { AmountFormat } from "@/shared/components";
+import { TransactionIconSelector } from "@/shared/lib/assets/transaction-icon-selector";
 import { formatTokenAmount } from "@/shared/lib/helpers/formatNumber";
 import { smallAddress } from "@/shared/lib/helpers/smallAddress";
 import { TxnDirection } from "@/shared/lib/types/transaction";
 
-import { TransactionIconSelector } from "@/shared/lib/assets/transaction-icon-selector";
 
 import s from "./TransactionHistoryDetailItem.module.sass";
 

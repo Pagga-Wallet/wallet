@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { v1 } from "uuid";
 import { Title } from "@/shared/components";
+import { CategoryItem } from "@/shared/components";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { categoryMock } from "@/shared/lib/consts/apps/apps-mock";
-import { CategoryItem } from "@/shared/components";
 import s from "./AppsCategory.module.sass";
 
 interface AppsCategoryProps {}

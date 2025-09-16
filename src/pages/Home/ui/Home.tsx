@@ -1,10 +1,12 @@
 /* eslint-disable no-irregular-whitespace */
 import { miniApp } from "@telegram-apps/sdk-react";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import { t } from "i18next";
 import queryString from "query-string";
 import { FC, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { NftList } from "@/widgets/nft";
 import { TokensList } from "@/widgets/token/ui/TokensList/TokensList";
 import { TransactionsHistoryList } from "@/widgets/transaction";
 import { useHandleConnectMessage } from "@/features/connect";
@@ -22,8 +24,6 @@ import { formatNumber } from "@/shared/lib/helpers/formatNumber";
 import { TokenBalance } from "@/shared/lib/types/multichainAccount";
 import { TokenDetailQueryObj } from "@/shared/lib/types/token";
 import s from "./Home.module.scss";
-import { NftList } from "@/widgets/nft";
-import clsx from "clsx";
 
 export const Home: FC = () => {
     const {

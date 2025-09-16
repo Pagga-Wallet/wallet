@@ -6,7 +6,8 @@ const chainsToTrustPlatform: Record<CHAINS, string> = {
     [CHAINS.TON]: "ton",
     [CHAINS.TRON]: "tron",
     [CHAINS.SOLANA]: "solana",
-    [CHAINS.SUI]: "sui"
+    [CHAINS.SUI]: "sui",
+    [CHAINS.STELLAR]: "stellar"
 };
 
 export const getTokenIconUrl = (platform: CHAINS, contractAddress: string): string => {

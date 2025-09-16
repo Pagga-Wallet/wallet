@@ -1,7 +1,7 @@
 {
-    "name": "wallet-v3",
+    "name": "wallet-v4",
     "private": true,
-    "version": "0.0.0",
+    "version": "4.0.0",
     "type": "module",
     "scripts": {
         "start": "npx serve -s dist -l 8080",
@@ -19,6 +19,8 @@
         "@reduxjs/toolkit": "^2.2.3",
         "@rollup/plugin-alias": "^5.1.0",
         "@solana/web3.js": "^1.98.0",
+        "@stellar/freighter-api": "^5.0.0",
+        "@stellar/stellar-sdk": "^12.0.0",
         "@tanstack/react-query": "^5.36.0",
         "@telegram-apps/sdk-react": "^2.0.19",
         "@ton/core": "^0.56.3",
@@ -91,7 +93,7 @@
         "eslint-plugin-react-refresh": "^0.4.5",
         "husky": "^8.0.0",
         "lint-staged": "^15.2.2",
-        "sass": "^1.71.1",
+        "sass": "^1.92.1",
         "typescript": "^5.2.2",
         "vite": "^5.1.4"
     }

@@ -1,5 +1,5 @@
-import { App } from "@/shared/api/apps";
 import { useMemo } from "react";
+import { App } from "@/shared/api/apps";
 
 
 export const useGroupedItems = (apps: App[]) => {

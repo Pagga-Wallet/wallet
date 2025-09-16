@@ -2,10 +2,10 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Title } from "@/shared/components";
-import { ConnectionType } from "@/shared/lib/types/connect";
 
 import TON_CONNECT from "@/shared/lib/images/tonConnect.png";
 import WALLET_CONNECT from "@/shared/lib/images/walletConnect.png";
+import { ConnectionType } from "@/shared/lib/types/connect";
 
 import s from "./ConnectIntroduction.module.sass";
 
