@@ -52,7 +52,7 @@ Account Creation
 public async saveNewAccount(account: IMultichainAccount): Promise<boolean> {
     // Check if maximum wallet limit is reached
     await this._checkAvailableCreation();
-    
+   
     // Update account registry
     const accountIds = await this.getAccountIds();
     await this.save(ACCOUNT_IDS_ARRAY, JSON.stringify([...accountIds, account.id]));
