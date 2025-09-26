@@ -25,3 +25,50 @@ dist-ssr
 
 .yalc/
 yalc.lock
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+out/
+
+# Vite cache
+.vite/
+node_modules/.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage / NYC
+coverage/
+.nyc_output/
+
+# Caches
+.cache/
+.turbo/
+.eslintcache
+
+# Framework outputs (safe to ignore if unused)
+.next/
+.nuxt/
+.svelte-kit/
+storybook-static/
+
+# Local certificates / keys
+*.pem
+*.crt
+*.cer
+*.key
+*.pfx
+*.p12
+
+# Yarn (Berry)
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
