@@ -73,6 +73,18 @@ export const SettingsPage = () => {
         });
     };
 
+    // Force reset without PIN or confirmation
+    const onForceResetData = async () => {
+        try {
+            hapticFeedback.impactOccurred("medium");
+            await telegramStorage.UNSAFE_resetAllStorage();
+            window.location.reload();
+            navigate("/");
+        } catch (e) {
+            // no-op
+        }
+    };
+
     const onChangeLang = (lang: "ru" | "en" | "ua") => {
         changeLanguage(lang).then(() => {
             localStorage.setItem("lang", lang);
@@ -218,7 +230,13 @@ export const SettingsPage = () => {
                     </Section.Link>
                 </Section>
                 <Section>
-                    <Section.Button onClick={onResetData} danger isLast>
+                    <Section.Button onClick={onForceResetData} danger>
+                        <div className={s.innerItem}>
+                            <DELETE />
+                            Force reset (no PIN)
+                        </div>
+                    </Section.Button>
+                    <Section.Button onClick={onResetData} danger>
                         <div className={s.innerItem}>
                             <DELETE />
                             {t("settings.reset")}

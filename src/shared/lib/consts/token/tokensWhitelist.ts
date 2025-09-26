@@ -59,7 +59,15 @@ export const tokensWhitelist = [
 ] as WhitelistItem[];
 
 // Порядок нативных токенов
-export const tokenNativeSortArr = [CHAINS.TON, CHAINS.ETH, CHAINS.BNB, CHAINS.TRON];
+export const tokenNativeSortArr = [
+    CHAINS.TON,
+    CHAINS.ETH,
+    CHAINS.BNB,
+    CHAINS.TRON,
+    CHAINS.SOLANA,
+    CHAINS.STELLAR,
+    CHAINS.SUI,
+];
 // Порядок вайтлиста по order
 export const tokenWhitelistSortArr = tokensWhitelist
     .sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity))
