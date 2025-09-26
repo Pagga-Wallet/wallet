@@ -139,14 +139,15 @@ export const multichainAccountAPI = createApi({
                         pincode
                     );
                     if (!mainHash?.iv || !mainHash?.hashFromKey) {
-                        // TODO описать ошибку
+                        // Failed to generate hash from mnemonic and pincode
                         return {
                             error: {
-                                message: ""
+                                message:
+                                    "Failed to encrypt wallet data. Invalid mnemonic or pincode."
                             }
                         };
                     }
-                    // Сохраняем аккаунт
+                    // Save account
                     const newAccount: IMultichainAccount = {
                         id: walletData.id,
                         masterIV: mainHash?.iv,
@@ -174,6 +175,10 @@ export const multichainAccountAPI = createApi({
                             },
                             SUI: {
                                 address: walletData.sui.address
+                            },
+                            STELLAR: {
+                                publicKey: walletData.stellar.address,
+                                address: walletData.stellar.address
                             }
                         }
                     };
@@ -214,7 +219,7 @@ export const multichainAccountAPI = createApi({
         }),
         getAllNFTs: builder.query<IGetAccNFTsResult, void>({
             queryFn: async (_, { getState }) => {
-                // TODO type root global state or slice
+                // Using any type for Redux state - proper typing would require Redux store configuration
                 const state = getState() as any;
                 const items = await new MultichainAccount(
                     state.multichainAccount.account,
@@ -239,7 +244,7 @@ export const multichainAccountAPI = createApi({
         }),
         getLastTxsByToken: builder.query<IGetLastTxsByToken, TokenBalance | BaseToken>({
             queryFn: async (token, { getState }) => {
-                // TODO type root global state or slice
+                // Using any type for Redux state - proper typing would require Redux store configuration
                 const state = getState() as any;
                 const items = await new MultichainAccount(
                     state.multichainAccount.account,
@@ -255,7 +260,7 @@ export const multichainAccountAPI = createApi({
         }),
         getLastTxs: builder.query<IGetLastTxsByToken, void>({
             queryFn: async (_, { getState }) => {
-                // TODO type root global state or slice
+                // Using any type for Redux state - proper typing would require Redux store configuration
                 const state = getState() as any;
                 const items = await new MultichainAccount(
                     state.multichainAccount.account,

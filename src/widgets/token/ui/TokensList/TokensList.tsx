@@ -1,16 +1,16 @@
-import { FC, useState, useMemo } from "react";
 import clsx from "clsx";
-import { useNavigate } from "react-router-dom";
+import { FC, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { TokenListItem, TokenListItemSkeleton } from "@/entities/token/ui";
 import { Button, SearchInput } from "@/shared/components";
+import { NotFound } from "@/shared/components/NotFound/NotFound";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sortTokens } from "@/shared/lib/helpers/sortTokens";
 import { CHAINS, TokenBalance, TotalBalance } from "@/shared/lib/types";
 
 import s from "./TokensList.module.sass";
-import { NotFound } from "@/shared/components/NotFound/NotFound";
 
 interface TokensListSelectable {
     search?: boolean;

@@ -1,12 +1,12 @@
 import { FC } from "react";
 
+import { PointsListItem } from "@/entities/points/PointsLitsItem/PointsListItem";
 import { PointsItem } from "@/shared/api/points/lib/types";
 
 import POINTS_BG from "@/shared/lib/images/points-bg-example.png";
 import POINTS_CATEGORY from "@/shared/lib/images/points-category-example.png";
 
 import s from "./PointsItemsList.module.sass";
-import { PointsListItem } from "@/entities/points/PointsLitsItem/PointsListItem";
 
 interface PointsItemsListProps {}
 

@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 
 import { AppsBanners, AppsCategory, AppsList } from "@/widgets/apps/ui";
 
+import { App } from "@/shared/api/apps";
 import { BaseLayout, PrivateLayout } from "@/shared/layouts";
 
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+import { useSetupBackButton } from "@/shared/lib";
 import { appsBannersMock } from "@/shared/lib/consts/apps/apps-banners-mock";
 import { appsMock } from "@/shared/lib/consts/apps/apps-mock";
-import { App } from "@/shared/api/apps";
 
-import { WithDecorLayout } from "@/shared/layouts/layouts";
-
-import { AppsListSingle } from "./AppsListSingle";
-
-import { useSetupBackButton } from "@/shared/lib";
 
 import s from "./Apps.module.sass";
+import { AppsListSingle } from "./AppsListSingle";
+
+
 
 interface AppsProps {}
 

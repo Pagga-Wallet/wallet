@@ -14,6 +14,7 @@ import {
 } from "@/entities/multichainAccount";
 import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import {
     cryptographyController,
     useAppSelector,
@@ -22,7 +23,6 @@ import {
 } from "@/shared/lib";
 import { SendTransactionError } from "@/shared/lib/connect/SendTransactionError";
 import styles from "./ConnectConfirm.module.scss";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 // зарефакторить в фичу
 export const ConnectConfirm = () => {

@@ -1,6 +1,6 @@
 import { biometry } from "@telegram-apps/sdk-react";
 import React from "react";
-// eslint-disable-next-line boundaries/element-types
+ 
 import { useGetUseBiometryQuery } from "@/features/PIN/PINConfirmation/model/confirmationService";
 import { useLazyVerifyPINQuery } from "@/entities/multichainAccount";
 import { useStrictContext } from "@/shared/lib/react";

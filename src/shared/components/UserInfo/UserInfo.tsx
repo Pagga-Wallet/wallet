@@ -1,9 +1,9 @@
-import { FC } from "react";
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
-
-import { Text } from "../Text/Text";
+import { FC } from "react";
 
 import UserProfile from "@/shared/lib/images/avatar.png";
+import { Text } from "../Text/Text";
+
 
 import s from "./UserInfo.module.sass";
 

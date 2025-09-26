@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 // import { TableDetails } from "@/shared/components";
 import { TableDetails } from "@/shared/components";
 import { formatNumber } from "@/shared/lib/helpers/formatNumber";
+import SEND from "@/shared/lib/images/send.svg?react";
 import { TokenBalance } from "@/shared/lib/types";
 
-import SEND from "@/shared/lib/images/send.svg?react";
 
 import s from "./ConfirmSendTransactionInfo.module.scss";
 

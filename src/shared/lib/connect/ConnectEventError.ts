@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/default-param-last */
+ 
 import {
     ConnectEventError as IConnectEventError,
     CONNECT_EVENT_ERROR_CODES,

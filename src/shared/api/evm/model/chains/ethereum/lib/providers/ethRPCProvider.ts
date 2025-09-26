@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { ethers } from "ethers";
 
 const SEPOLIA_BASE_URL = "https://sepolia.infura.io/v3/";

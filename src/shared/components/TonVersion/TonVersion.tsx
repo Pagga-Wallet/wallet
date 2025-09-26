@@ -1,5 +1,5 @@
-import { FC } from "react";
 import { ClassValue, clsx } from "clsx";
+import { FC } from "react";
 
 import { TON_ADDRESS_INTERFACES } from "@/shared/lib/types";
 

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-// eslint-disable-next-line boundaries/element-types
+ 
 import { multichainAccountStore } from "@/entities/multichainAccount";
 import { Emoji } from "@/shared/components";
 import { useAppSelector } from "@/shared/lib";

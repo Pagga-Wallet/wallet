@@ -1,0 +1,277 @@
+// Stellar UI Components Styles
+
+.stellar-send-form, .add-trustline-form, .stellar-account-info
+  padding: 20px
+  border-radius: 12px
+  background: var(--bg-secondary)
+  border: 1px solid var(--border-color)
+
+  .form-header
+    margin-bottom: 20px
+    
+    h3
+      margin: 0 0 8px 0
+      color: var(--text-primary)
+      font-size: 18px
+      font-weight: 600
+    
+    p
+      margin: 0
+      color: var(--text-secondary)
+      font-size: 14px
+
+  .form-group
+    margin-bottom: 16px
+    
+    label
+      display: block
+      margin-bottom: 6px
+      color: var(--text-primary)
+      font-size: 14px
+      font-weight: 500
+      
+      .required
+        color: var(--error-color)
+        margin-left: 4px
+    
+    input
+      width: 100%
+      padding: 12px
+      border: 1px solid var(--border-color)
+      border-radius: 8px
+      background: var(--bg-primary)
+      color: var(--text-primary)
+      font-size: 14px
+      
+      &:focus
+        outline: none
+        border-color: var(--accent-color)
+        box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.1)
+      
+      &.error
+        border-color: var(--error-color)
+        box-shadow: 0 0 0 2px rgba(var(--error-color-rgb), 0.1)
+      
+      &::placeholder
+        color: var(--text-tertiary)
+    
+    .field-hint
+      margin-top: 4px
+      font-size: 12px
+      color: var(--text-tertiary)
+    
+    .amount-input-group
+      display: flex
+      gap: 8px
+      
+      input
+        flex: 1
+      
+      .max-button
+        padding: 12px 16px
+        background: var(--accent-color)
+        color: white
+        border: none
+        border-radius: 8px
+        font-size: 12px
+        font-weight: 600
+        cursor: pointer
+        
+        &:hover:not(:disabled)
+          background: var(--accent-color-hover)
+        
+        &:disabled
+          opacity: 0.5
+          cursor: not-allowed
+    
+    .balance-info
+      margin-top: 8px
+      font-size: 12px
+      color: var(--text-secondary)
+    
+    .memo-counter
+      margin-top: 4px
+      font-size: 12px
+      color: var(--text-tertiary)
+      text-align: right
+
+  .validation-error
+    padding: 12px
+    background: rgba(var(--error-color-rgb), 0.1)
+    border: 1px solid var(--error-color)
+    border-radius: 8px
+    color: var(--error-color)
+    font-size: 14px
+    margin-bottom: 16px
+
+  .submit-button
+    width: 100%
+    padding: 14px
+    background: var(--accent-color)
+    color: white
+    border: none
+    border-radius: 8px
+    font-size: 16px
+    font-weight: 600
+    cursor: pointer
+    
+    &:hover:not(:disabled)
+      background: var(--accent-color-hover)
+    
+    &:disabled
+      opacity: 0.5
+      cursor: not-allowed
+
+  .form-info
+    margin-top: 20px
+    
+    .warning, .info
+      padding: 12px
+      border-radius: 8px
+      font-size: 14px
+      margin-bottom: 12px
+      
+      &:last-child
+        margin-bottom: 0
+      
+      p
+        margin: 0
+    
+    .warning
+      background: rgba(255, 193, 7, 0.1)
+      border: 1px solid #ffc107
+      color: #856404
+    
+    .info
+      background: rgba(13, 202, 240, 0.1)
+      border: 1px solid #0dcaf0
+      color: #055160
+
+// Stellar Account Info specific styles
+.stellar-account-info
+  .account-header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 20px
+    
+    h3
+      margin: 0
+      color: var(--text-primary)
+      font-size: 18px
+      font-weight: 600
+    
+    .refresh-button
+      background: none
+      border: none
+      font-size: 16px
+      cursor: pointer
+      padding: 4px
+      border-radius: 4px
+      
+      &:hover
+        background: var(--bg-tertiary)
+
+  .balance-section
+    margin-bottom: 20px
+    
+    .balance-item
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: 12px 0
+      border-bottom: 1px solid var(--border-color)
+      
+      &:last-child
+        border-bottom: none
+      
+      &.main-balance
+        .balance-value
+          font-size: 18px
+          font-weight: 600
+          color: var(--text-primary)
+      
+      &.available-balance
+        .balance-value
+          color: var(--success-color)
+          font-weight: 500
+      
+      &.minimum-balance
+        .balance-value
+          color: var(--warning-color)
+          font-weight: 500
+      
+      label
+        color: var(--text-secondary)
+        font-size: 14px
+      
+      .balance-value
+        font-size: 16px
+        font-weight: 500
+
+  .account-details
+    margin-bottom: 20px
+    
+    .detail-item
+      display: flex
+      justify-content: space-between
+      align-items: center
+      padding: 8px 0
+      
+      label
+        color: var(--text-secondary)
+        font-size: 14px
+      
+      .address
+        font-family: monospace
+        font-size: 14px
+        color: var(--text-primary)
+        cursor: pointer
+        
+        &:hover
+          color: var(--accent-color)
+
+  .info-section
+    margin-bottom: 20px
+    
+    .info-item
+      padding: 12px
+      background: rgba(13, 202, 240, 0.1)
+      border: 1px solid #0dcaf0
+      border-radius: 8px
+      
+      p
+        margin: 0
+        font-size: 14px
+        color: #055160
+
+  .actions
+    .explorer-button
+      width: 100%
+      padding: 12px
+      background: var(--bg-tertiary)
+      color: var(--text-primary)
+      border: 1px solid var(--border-color)
+      border-radius: 8px
+      font-size: 14px
+      cursor: pointer
+      
+      &:hover
+        background: var(--bg-quaternary)
+
+  .loading, .error, .no-data
+    text-align: center
+    padding: 40px 20px
+    color: var(--text-secondary)
+    
+    .retry-button
+      margin-top: 12px
+      padding: 8px 16px
+      background: var(--accent-color)
+      color: white
+      border: none
+      border-radius: 6px
+      cursor: pointer
+      
+      &:hover
+        background: var(--accent-color-hover)

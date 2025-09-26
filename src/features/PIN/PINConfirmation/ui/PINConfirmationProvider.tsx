@@ -36,7 +36,7 @@ export const PINConfirmationProvider = ({ children }: PINConfirmationProviderPro
     const onChangeState = (state: "success" | "failure" | undefined) => {
         setState({ state });
     };
-    // TODO пофиксить сделать страницу подтвержения
+    // TODO fix and make confirmation page
     return (
         <>
             {isOpen && (

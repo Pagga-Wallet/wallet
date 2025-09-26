@@ -1,7 +1,7 @@
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// eslint-disable-next-line boundaries/element-types
+ 
 import { connectConfirmStore } from "@/features/connect/model/confirmSlice";
 import { useGetConnectionsQuery } from "@/entities/connection";
 import { multichainAccountStore } from "@/entities/multichainAccount";

@@ -1,5 +1,6 @@
 import { HDNodeWallet } from "ethers";
 import { SolanaWalletData } from "../solana/SolanaWalletData";
+import { StellarWalletData } from "../stellar/StellarWalletData";
 import { SuiWalletData } from "../sui/SuiWalletData";
 import { TonWalletData } from "../ton/TonWalletData";
 import { TronWalletData } from "../tron/TronWalletData";
@@ -10,7 +11,8 @@ export enum CHAINS {
     TON = "TON",
     TRON = "TRON",
     SOLANA = "SOLANA",
-    SUI = "SUI"
+    SUI = "SUI",
+    STELLAR = "STELLAR"
 }
 
 export type EVM_CHAINS = CHAINS.ETH | CHAINS.BNB;
@@ -39,6 +41,7 @@ export interface IUserWalletsData {
     tron: TronWalletData;
     solana: SolanaWalletData;
     sui: SuiWalletData;
+    stellar: StellarWalletData;
 }
 
 export interface IMonoWalletData {
@@ -55,7 +58,8 @@ export interface IMultiwallet {
     ETH: IStandartWalletData;
     TRON: IStandartWalletData;
     SOLANA: IMonoWalletData;
-    SUI: IMonoWalletData
+    SUI: IMonoWalletData;
+    STELLAR: IStandartWalletData;
 }
 
 export interface IMultichainAccount {

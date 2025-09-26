@@ -4,6 +4,7 @@ import EthNetwork from "@/shared/lib/images/ethNetwork.png";
 import BNBNetwork from "@/shared/lib/images/network/bnb.png";
 import TronNetwork from "@/shared/lib/images/network/tron.png";
 import SolanaNetwork from "@/shared/lib/images/solanaNetwork.png";
+import StellarNetwork from "@/shared/lib/images/stellarNetwork.png";
 import SuiNetwork from "@/shared/lib/images/suiNetwork.png";
 import TokenImg from "@/shared/lib/images/token.png";
 import TonNetwork from "@/shared/lib/images/tonNetwork.png";
@@ -24,7 +25,8 @@ const icons: Record<CHAINS, string> = {
     [CHAINS.TON]: TonNetwork,
     [CHAINS.TRON]: TronNetwork,
     [CHAINS.SOLANA]: SolanaNetwork,
-    [CHAINS.SUI]: SuiNetwork
+    [CHAINS.SUI]: SuiNetwork,
+    [CHAINS.STELLAR]: StellarNetwork
 };
 
 export const TokenIcon: FC<ITokenIconProps> = ({

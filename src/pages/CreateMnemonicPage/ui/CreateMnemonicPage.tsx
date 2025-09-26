@@ -7,11 +7,11 @@ import { usePINCreation } from "@/features/PIN";
 import { ICreateAccountResult, useCreateAccountMutation } from "@/entities/multichainAccount";
 import { CustomButton, Loader, Text, Title, WordArea } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { sendNotification } from "@/shared/lib/helpers/sendNotification";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib/hooks";
 import s from "./CreateMnemonicPage.module.scss";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const CreateMnemonicPage: FC = () => {
     const [state, setState] = useState<ICreateAccountResult | null>(null);

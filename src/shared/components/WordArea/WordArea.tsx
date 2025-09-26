@@ -1,6 +1,6 @@
+import clsx, { ClassValue } from "clsx";
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import clsx, { ClassValue } from "clsx";
 
 import styles from "./WordArea.module.scss";
 

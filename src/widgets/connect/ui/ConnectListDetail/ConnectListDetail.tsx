@@ -3,15 +3,15 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ConnectItem } from "@/features/connect";
-import { ConnectionType } from "@/shared/lib/types/connect";
 
 import { IConnectionWithWalletName } from "@/entities/connection/model/types";
 import { Emoji, Section, Title } from "@/shared/components";
 
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import { smallAddress } from "@/shared/lib/helpers/smallAddress";
 
+import { ConnectionType } from "@/shared/lib/types/connect";
 import s from "./ConnectListDetail.module.sass";
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 interface ConnectListDetailProps {
     type: ConnectionType | null;

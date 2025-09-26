@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
 import clsx, { ClassValue } from "clsx";
+import React, { useRef } from "react";
 
 import { useTelegramViewportHack } from "../lib/hooks/useTelegramViewportResize";
 

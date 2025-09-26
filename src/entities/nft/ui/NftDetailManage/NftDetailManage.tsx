@@ -5,9 +5,9 @@ import { useFetchNFTDetailsQuery } from "@/entities/nft/model/nftAPI";
 import ArrowUpIcon from "@/shared/assets/arrow-up.svg?react";
 import SearchIcon from "@/shared/assets/search.svg?react";
 import { SkeletonRound } from "@/shared/components/Skeletons";
+import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 import tonLogo from "@/shared/lib/images/tonLogo.png";
 import s from "./NftDetailManage.module.scss";
-import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
 interface NftDetailManageProps {
     address: string;

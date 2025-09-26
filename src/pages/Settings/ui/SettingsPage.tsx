@@ -8,28 +8,28 @@ import {
     useGetUseBiometryQuery,
     useSetUseBiometryMutation
 } from "@/features/PIN/PINConfirmation/model/confirmationService";
-import { telegramStorage } from "@/shared/api/telegramStorage";
-import { Section, Container, Title } from "@/shared/components";
-import { PrivateLayout } from "@/shared/layouts";
-import { useAppSelector, useSetupBackButton } from "@/shared/lib";
 import { multichainAccountStore, useSwitchTonVersionMutation } from "@/entities/multichainAccount";
+import { telegramStorage } from "@/shared/api/telegramStorage";
+import { TonWalletService } from "@/shared/api/ton";
+import { Section, Container, Title } from "@/shared/components";
+import { TonVersion } from "@/shared/components/TonVersion/TonVersion";
+import { PrivateLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
+import { useAppSelector, useSetupBackButton } from "@/shared/lib";
 
 import { SvgSelector } from "@/shared/lib/assets/svg-selector";
 
-import { TON_ADDRESS_INTERFACES } from "@/shared/lib/types";
-
+import { smallAddress } from "@/shared/lib/helpers/smallAddress";
 import BIOMETRY from "@/shared/lib/images/icons/biometry.svg?react";
-import NUMPAD from "@/shared/lib/images/icons/numpad.svg?react";
-import WALLET_CONNECT from "@/shared/lib/images/icons/wallet-connect.svg?react";
-import TON_CONNECT from "@/shared/lib/images/icons/ton-connect.svg?react";
+
 import DELETE from "@/shared/lib/images/icons/delete.svg?react";
 import LOCK from "@/shared/lib/images/icons/lock.svg?react";
+import NUMPAD from "@/shared/lib/images/icons/numpad.svg?react";
+import TON_CONNECT from "@/shared/lib/images/icons/ton-connect.svg?react";
+import WALLET_CONNECT from "@/shared/lib/images/icons/wallet-connect.svg?react";
+import { TON_ADDRESS_INTERFACES } from "@/shared/lib/types";
 
 import s from "./SettingPage.module.sass";
-import { smallAddress } from "@/shared/lib/helpers/smallAddress";
-import { TonWalletService } from "@/shared/api/ton";
-import { TonVersion } from "@/shared/components/TonVersion/TonVersion";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const SettingsPage = () => {
     const {

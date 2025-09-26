@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { ethers } from "ethers";
 
 const TESTNET_BASE_URL = "https://data-seed-prebsc-1-s1.binance.org:8545/";

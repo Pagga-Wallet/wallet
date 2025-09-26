@@ -20,7 +20,8 @@ const platformNames = {
     [CHAINS.TON]: "TON",
     [CHAINS.TRON]: "TRC20",
     [CHAINS.SOLANA]: "SOLANA",
-    [CHAINS.SUI]: "SUI"
+    [CHAINS.SUI]: "SUI",
+    [CHAINS.STELLAR]: "STELLAR"
 };
 
 export const PlatformName: FC<IPlatformNameProps> = ({

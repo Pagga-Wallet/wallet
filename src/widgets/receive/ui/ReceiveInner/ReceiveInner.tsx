@@ -3,9 +3,9 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CopyField, ReceiveMessage, Text, Title } from "@/shared/components";
 import { SkeletonRect } from "@/shared/components/Skeletons";
-import { CHAINS } from "@/shared/lib/types";
 import { BaseLayout } from "@/shared/layouts";
 import { getSelectBlockhainConfig, importList } from "@/shared/lib/consts/import-list";
+import { CHAINS } from "@/shared/lib/types";
 
 import s from "./ReceiveInner.module.sass";
 

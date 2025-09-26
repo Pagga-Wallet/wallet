@@ -2,7 +2,7 @@
 import { initData, useSignal } from "@telegram-apps/sdk-react";
 import { FC, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// eslint-disable-next-line boundaries/element-types
+ 
 import { ConnectWalletModal } from "@/features/modal";
 import {
     multichainAccountStore,

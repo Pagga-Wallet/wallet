@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { v1 } from "uuid";
 
+import { AppItem } from "@/entities/app";
+import { App } from "@/shared/api/apps";
 import { Title } from "@/shared/components";
 
-import { App } from "@/shared/api/apps";
 
-import { AppItem } from "@/entities/app";
 
 import s from "./Apps.module.sass";
 

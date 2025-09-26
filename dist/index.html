@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+        <!-- react-devtools -->
+        <!-- <script src="http://localhost:8097"></script> -->
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <title>Wallet</title>
+      <script type="module" crossorigin src="/assets/index-DtSzSDxc.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/index-oOjfOq9o.css">
+    </head>
+    <body>
+        <script>
+            window.Telegram.WebApp.expand();
+            window.Telegram.WebApp.disableVerticalSwipes();
+
+            function enableFullscreenMode() {
+                const tgWebApp = window.Telegram?.WebApp;
+
+                if (tgWebApp && parseFloat(tgWebApp.version || 0) >= 8) {
+                    const desktopPlatforms = ["tdesktop", "macos", "windows", "unknown"];
+                    const isDesktop = desktopPlatforms.includes(tgWebApp.platform);
+
+                    if (!isDesktop && !tgWebApp.isFullscreen) {
+                        tgWebApp.requestFullscreen();
+                    }
+                }
+            }
+            enableFullscreenMode();
+        </script>
+        <div id="root"></div>
+    </body>
+</html>
+<style>
+    * {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+</style>

@@ -4,15 +4,15 @@ import { useTranslation } from "react-i18next";
 
 import { useNavigate } from "react-router-dom";
 
+import { SuccessTransaction } from "@/widgets/transaction";
 import { multichainAccountStore } from "@/entities/multichainAccount";
 
 import { CustomButton } from "@/shared/components";
 
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { useAppSelector, useSetupBackButton } from "@/shared/lib";
 
-import { SuccessTransaction } from "@/widgets/transaction";
 
-import { WithDecorLayout } from "@/shared/layouts/layouts";
 
 export const ConnectTransactionSuccess = () => {
     const { t } = useTranslation();

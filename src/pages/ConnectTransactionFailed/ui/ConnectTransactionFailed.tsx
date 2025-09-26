@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { FailedTransaction } from "@/widgets/transaction";
 import { CustomButton, Title } from "@/shared/components";
 import { BaseLayout } from "@/shared/layouts";
+import { WithDecorLayout } from "@/shared/layouts/layouts";
 import { useSetupBackButton, useSetupMainButton } from "@/shared/lib";
 import styles from "./ConnectTransactionFailed.module.scss";
-import { WithDecorLayout } from "@/shared/layouts/layouts";
-import { FailedTransaction } from "@/widgets/transaction";
 
 export const ConnectTransactionFailed = () => {
     const { t } = useTranslation();
