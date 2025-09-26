@@ -44,7 +44,7 @@ export const ReceivePage = () => {
         if (!address) return;
         setSendAddress(address);
         setStep(ReceiveSteps.receive);
-    }, [tokenChain]);
+    }, [tokenChain, multichainAccount]);
 
     const onBack = useCallback(() => {
         switch (step) {

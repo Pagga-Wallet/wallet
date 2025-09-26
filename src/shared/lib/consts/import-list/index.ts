@@ -3,6 +3,7 @@ import ETHEREUM from "@/shared/lib/images/network/ethereum.png";
 import POLYGON from "@/shared/lib/images/network/polygon.png";
 import TRON from "@/shared/lib/images/network/tron.png";
 import SUI from "@/shared/lib/images/suiNetwork.png";
+import STELLAR from "@/shared/lib/images/stellarNetwork.png";
 import { CHAINS } from "../../types";
 
 export type SelectBlockhainConfig = Array<{
@@ -51,11 +52,17 @@ export const getSelectBlockhainConfig = (
         chain: CHAINS.SOLANA
     },
     {
-        category: "Solana",
+        category: "Sui",
         previewUrl: SUI,
         disabled: enabledChains ? !enabledChains?.includes(CHAINS.SUI) : false,
         // disabled: true,
         chain: CHAINS.SUI
+    },
+    {
+        category: "Stellar",
+        previewUrl: STELLAR,
+        disabled: enabledChains ? !enabledChains?.includes(CHAINS.STELLAR) : false,
+        chain: CHAINS.STELLAR
     }
     // {
     //     category: "Polygon",
